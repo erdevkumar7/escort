@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminFuncController;
 use App\Http\Controllers\UserAuthController;
 use Illuminate\Support\Facades\Route;
 
@@ -8,7 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-
+// todo: Admin Auth
 Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin_register_form');
     Route::post('/register', [AdminAuthController::class, 'register'])->name('admin_register');
@@ -22,7 +23,15 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+//todo: Admin user Operation Functionality
+Route::prefix('admin')->group(function(){
+    Route::middleware('auth.admin')->group(function(){
+        Route::get('/allusers', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
+    });
+});
 
+
+//todo: User Auth
 Route::get('/register', [UserAuthController::class, 'user_register_form'])->name('user_register_form');
 Route::post('/register', [UserAuthController::class, 'register'])->name('user_register_save');
 
