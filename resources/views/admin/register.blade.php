@@ -2,37 +2,10 @@
 <html lang="en">
 
 <head>
-    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <!-- Meta, title, CSS, favicons, etc. -->
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-
-    <title>Gentelella Alela! | </title>
-
-    <!-- Bootstrap -->
-    <link href="../vendors/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Font Awesome -->
-    <link href="../vendors/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-    <!-- NProgress -->
-    <link href="../vendors/nprogress/nprogress.css" rel="stylesheet">
-    <!-- Animate.css -->
-    <link href="../vendors/animate.css/animate.min.css" rel="stylesheet">
-
-    <!-- Custom Theme Style -->
-    <link href="../build/css/custom.min.css" rel="stylesheet">
+    @include('admin.headerCSS')
 </head>
 
 <body class="login">
-    @if ($errors->any())
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $error)
-                    <li>{{ $error }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
     <div class="login_wrapper">
         <div class="animate form login_form">
             <section class="login_content">
@@ -40,21 +13,29 @@
                     @csrf
                     <h1>Create Account</h1>
                     <div>
-                        <input type="text" name="name" class="form-control" placeholder="Name" required="" />
+                        <input type="text" name="name" class="form-control" placeholder="Name" oninput="removeError('nameError')" />
+                        @error('name')
+                        <span class="text-danger" id="nameError">{{ $message }}</span>
+                         @enderror
                     </div>
                     <div>
-                        <input type="email" name="email" class="form-control" placeholder="Email" required="" />
+                        <input type="email" name="email" class="form-control" placeholder="Email" oninput="removeError('emailError')" />
+                        @error('email')
+                        <span class="text-danger" id="emailError">{{$message}}</span>
+                        @enderror
                     </div>
                     <div>
-                        <input type="text" name="phone" class="form-control" placeholder="Phone" required="" />
+                        <input type="password" name="password" class="form-control" placeholder="Password" oninput="removeError('passwordError')"
+                         />
+                         @error('password')
+                         <span class="text-danger" id="passwordError">{{$message}}</span>
+                         @enderror
                     </div>
                     <div>
-                        <input type="text" name="address" class="form-control" placeholder="Address"
-                            required="" />
-                    </div>
-                    <div>
-                        <input type="password" name="password" class="form-control" placeholder="Password"
-                            required="" />
+                        <input type="password" name="password_confirmation" class="form-control" placeholder="Retype password" oninput="removeError('conf_passwordError')" >
+                        @error('password_confirmation')
+                        <span class="text-danger" id="conf_passwordError">{{$message}}</span>
+                        @enderror
                     </div>
                     <div>
                         <button type="submit" class="btn btn-default">Submit</button>
@@ -64,22 +45,24 @@
 
                     <div class="separator">
                         <p class="change_link">Already a member ?
-                            <a href="#signin" class="to_register"> Log in </a>
+                            <a href="{{ route('admin_login_form') }}" class="to_register"> Log in </a>
                         </p>
 
                         <div class="clearfix"></div>
                         <br />
-
-                        <div>
-                            <h1><i class="fa fa-paw"></i> Gentelella Alela!</h1>
-                            <p>©2016 All Rights Reserved. Gentelella Alela! is a Bootstrap 4 template. Privacy and Terms
-                            </p>
-                        </div>
                     </div>
                 </form>
+
+                <script>
+                    function removeError(id) {
+                        var errElement = document.getElementById(id);
+                        if (errElement) {
+                            errElement.style.display = 'none'
+                        }
+                    }
+                </script>
             </section>
         </div>
-
     </div>
 
 </body>

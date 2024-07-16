@@ -13,7 +13,7 @@ class Admin extends Authenticatable
     use Notifiable;
 
     protected $fillable = [
-        'name', 'email', 'phone','image', 'address', 'password',
+        'name', 'email','image', 'password',
     ];
 
     protected $hidden = [
