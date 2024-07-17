@@ -18,10 +18,8 @@
                             <span class="badge bg-red pull-right">50%</span>
                             <span>Settings</span>
                         </a>
-                        <form action="{{ route('admin_logout') }}" method="POST">
-                            @csrf
-                            <button type="submit" class="pull-right">Log Out</button>
-                        </form>
+                        <a class="dropdown-item" onclick="handleLogOut()"><i class="fa fa-sign-out pull-right"></i> Log
+                            Out</a>
                     </div>
                 </li>
             </ul>

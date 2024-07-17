@@ -9,6 +9,7 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 // todo: Admin Auth
 Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin_register_form');
@@ -27,6 +28,8 @@ Route::prefix('admin')->group(function () {
 Route::prefix('admin')->group(function(){
     Route::middleware('auth.admin')->group(function(){
         Route::get('/allusers', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
+        Route::delete('/user/{id}', [AdminFuncController::class,'delete_user'])->name('admin_delete_user');
+        Route::put('/user/{id}', [AdminFuncController::class,'update_user'])->name('admin_update_user');
     });
 });
 

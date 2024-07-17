@@ -38,3 +38,10 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{asset('../build/js/custom.min.js')}}"></script>
+
+    <script>
+        function handleLogOut() {
+            event.preventDefault();
+            document.getElementById('logout-form').submit();
+        }
+    </script>

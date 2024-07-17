@@ -46,24 +46,41 @@
                                                     <th>Gender</th>
                                                     <th>DOB</th>
                                                     <th>E-mail</th>
+                                                    <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($allusers as $user)
-                                                    <tr>
-                                                        <td>{{ $user->fname }}</td>
-                                                        <td>{{ $user->lname }}</td>
-                                                        <td>{{ $user->phone }}</td>
-                                                        <td>{{ $user->address }}</td>
-                                                        <td>{{ $user->gender }}</td>
-                                                        <td>{{ $user->dob }}</td>
-                                                        <td>{{ $user->email }}</td>
+                                                    <tr id="user-row-{{ $user->id }}">
+                                                        <td class="editable">{{ $user->fname }}</td>
+                                                        <td class="editable">{{ $user->lname }}</td>
+                                                        <td class="editable">{{ $user->phone }}</td>
+                                                        <td class="editable">{{ $user->address }}</td>
+                                                        <td class="editable">{{ $user->gender }}</td>
+                                                        <td class="editable">{{ $user->dob }}</td>
+                                                        <td class="editable">{{ $user->email }}</td>
+                                                        <td style="display: flex">
+                                                            <button class="edit-button" data-user-id="{{ $user->id }}"
+                                                                data-toggle="tooltip" data-placement="top" title="Edit">
+                                                                <i class="fa fa-edit"></i>
+                                                            </button>
+
+                                                            <form id="delete-user"
+                                                                action="{{ route('admin_delete_user', $user->id) }}"
+                                                                method="POST" style="display:inline">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                                <button type="submit" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete">
+                                                                    <i class="fa fa-minus-circle"></i>
+                                                                </button>
+                                                            </form>
+                                                        </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
+
                                         </table>
-
-
                                     </div>
                                 </div>
                             </div>
@@ -75,3 +92,6 @@
     </div>
     <!-- /page content -->
 @endsection
+
+
+
