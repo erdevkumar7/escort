@@ -10,11 +10,34 @@ use Illuminate\Support\Facades\Auth;
 
 class AdminAuthController extends Controller
 {
+    public function showRegistrationForm()
+    {
+        return view("admin.register");
+    }
+    public function register(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|unique:admins',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+        
+        $admin = new Admin();
+        $admin->name = $request->name;
+        $admin->email = $request->email;
+        $admin->password = $request->password;
+        
+        
+        $admin->save();
+        
+        // Auth::guard('admin')->login($admin);
+        
+        return redirect()->intended('/admin/login');
+    }
     public function showLoginForm()
     {
         return view("admin.login");
     }
-
     public function login(Request $request)
     {
         $credential = $request->validate([
@@ -30,44 +53,14 @@ class AdminAuthController extends Controller
             'email' => 'The provided credentials do not match our records.',
          ])->withInput();
     }
-
+    public function dashboard(){
+        return view('admin.dashboard');
+    }  
     public function logout(Request $request)
     {
-        Auth::guard('admin')->logout();
-
-        $request->session()->invalidate();
-
-        $request->session()->regenerateToken();
-
+        Auth::guard('admin')->logout();    
+        $request->session()->invalidate();    
+        $request->session()->regenerateToken();    
         return redirect('/admin/login');
     }
-
-    public function showRegistrationForm()
-    {
-        return view("admin.register");
-    }
-
-
-
-    public function register(Request $request)
-    {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|string|email|unique:admins',
-            'password' => 'required|string|min:8|confirmed',
-        ]);
- 
-        $admin = new Admin();
-        $admin->name = $request->name;
-        $admin->email = $request->email;
-        $admin->password = $request->password;
-       
- 
-        $admin->save();
-
-        // Auth::guard('admin')->login($admin);
-
-        return redirect()->intended('/admin/login');
-    }
-
 }

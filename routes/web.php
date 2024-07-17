@@ -18,12 +18,12 @@ Route::prefix('admin')->group(function () {
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin_login');
 
     Route::middleware('auth.admin')->group(function () {
-        Route::view('dashboard', 'admin.dashboard')->name('admin_dashboard');
+        Route::get('/dashboard', [AdminAuthController::class,'dashboard'])->name('admin_dashboard');
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin_logout');
     });
 });
 
-//todo: Admin user Operation Functionality
+//todo: Admin Functionality
 Route::prefix('admin')->group(function(){
     Route::middleware('auth.admin')->group(function(){
         Route::get('/allusers', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
@@ -40,6 +40,6 @@ Route::post('/login', [UserAuthController::class, 'login'])->name('user_login');
 
 
 Route::group(['middleware' => ['auth:web']], function () {
-    Route::post('/logout', [UserAuthController::class, 'logout'])->name('user_logout');
     Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('user_dashboard');
+    Route::post('/logout', [UserAuthController::class, 'logout'])->name('user_logout');
 });

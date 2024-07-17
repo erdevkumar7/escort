@@ -38,7 +38,7 @@ class UserAuthController extends Controller
 
         $user->save();
         if ($user) {
-            return redirect()->route('user_login_from');
+            return redirect()->route('login');
         }
     }
 
