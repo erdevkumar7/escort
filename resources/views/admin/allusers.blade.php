@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>User <small>Some to get you started</small></h3>
+                    <h3>User <small>that recently register</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -60,11 +60,13 @@
                                                         <td class="editable">{{ $user->dob }}</td>
                                                         <td class="editable">{{ $user->email }}</td>
                                                         <td style="display: flex">
-                                                            <button class="edit-button" data-user-id="{{ $user->id }}"
-                                                                data-toggle="tooltip" data-placement="top" title="Edit">
-                                                                <i class="fa fa-edit"></i>
-                                                            </button>
 
+                                                            <a href="{{ route('admin_edit_user_form', $user->id) }}">
+                                                                <button data-toggle="tooltip" data-placement="top"
+                                                                    title="Edit">
+                                                                    <i class="fa fa-edit"></i>
+                                                                </button>
+                                                            </a>
                                                             <form id="delete-user"
                                                                 action="{{ route('admin_delete_user', $user->id) }}"
                                                                 method="POST" style="display:inline">
@@ -92,6 +94,3 @@
     </div>
     <!-- /page content -->
 @endsection
-
-
-
