@@ -34,6 +34,7 @@
                     <li><a><i class="fa fa-table"></i> Users <span class="fa fa-chevron-down"></span></a>
                         <ul class="nav child_menu">
                             <li><a href="{{ route('admin_allusers') }}">All Users</a></li>
+                            <li><a href="{{ route('admin.escorts') }}">Escorts</a></li>
                         </ul>
                     </li>
                 </ul>

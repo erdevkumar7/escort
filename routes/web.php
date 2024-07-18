@@ -31,6 +31,11 @@ Route::prefix('admin')->group(function(){
         Route::delete('/user/{id}', [AdminFuncController::class,'delete_user'])->name('admin_delete_user');
         Route::get('/user/{id}/edit', [AdminFuncController::class,'edit_user_form'])->name('admin_edit_user_form');
         Route::put('/user/{id}', [AdminFuncController::class,'update_user'])->name('admin_update_user');
+
+        Route::get('/all-escorts', [AdminFuncController::class, 'allescorts'])->name('admin.escorts');
+        Route::get('/add-escorts', [AdminFuncController::class, 'addescorts'])->name('admin.add.escorts');
+        Route::post('/post-escorts', [AdminFuncController::class, 'postescorts'])->name('admin.post.escorts');
+
     });
 });
 
