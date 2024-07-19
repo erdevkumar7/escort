@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>User <small>that recently register</small></h3>
+                    <h3>Escorts <small>that recently register</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -27,7 +27,7 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>All Users<small>Details</small></h2>
+                            <h2>Escorts<small>Details</small></h2>
                             <div class="nav navbar-right panel_toolbox">
                                 <a href="{{ route('admin.add.escorts') }}">
                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add">
@@ -48,36 +48,38 @@
                                             width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>First name</th>
-                                                    <th>Last name</th>
-                                                    <th>Phone</th>
-                                                    <th>Address</th>
-                                                    <th>Gender</th>
-                                                    <th>DOB</th>
-                                                    <th>E-mail</th>
+                                                    <th>Nickname</th>
+                                                    <th>Phone number</th>
+                                                    <th>age</th>
+                                                    <th>Canton</th>
+                                                    <th>City</th>
+                                                    <th>Services</th>
+                                                    <th>Origin</th>
+                                                    <th>Type</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($allusers as $user)
-                                                    <tr id="user-row-{{ $user->id }}">
-                                                        <td class="editable">{{ $user->fname }}</td>
-                                                        <td class="editable">{{ $user->lname }}</td>
-                                                        <td class="editable">{{ $user->phone }}</td>
-                                                        <td class="editable">{{ $user->address }}</td>
-                                                        <td class="editable">{{ $user->gender }}</td>
-                                                        <td class="editable">{{ $user->dob }}</td>
-                                                        <td class="editable">{{ $user->email }}</td>
+                                                @foreach ($allescorts as $escorts)
+                                                    <tr id="escorts-row-{{ $escorts->id }}">
+                                                        <td>{{ $escorts->nickname }}</td>
+                                                        <td>{{ $escorts->phone_number }}</td>
+                                                        <td>{{ $escorts->age }}</td>
+                                                        <td>{{ $escorts->canton }}</td>
+                                                        <td>{{ $escorts->city }}</td>
+                                                        <td>{{ $escorts->services }}</td>
+                                                        <td>{{ $escorts->origin }}</td>
+                                                        <td>{{ $escorts->type }}</td>
                                                         <td style="display: flex">
 
-                                                            <a href="{{ route('admin_edit_user_form', $user->id) }}">
+                                                            <a href="">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
-                                                            <form id="delete-user"
-                                                                action="{{ route('admin_delete_user', $user->id) }}"
+                                                            <form id="delete-escorts"
+                                                                action=""
                                                                 method="POST" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')

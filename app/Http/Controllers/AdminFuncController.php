@@ -12,20 +12,23 @@ use function Symfony\Component\String\b;
 class AdminFuncController extends Controller
 {
     //todo: get all users
-    public function allusers(){
+    public function allusers()
+    {
         $allusers = DB::table("users")->get();
         // return response()->json($allusers);
         return view("admin.allusers", compact('allusers'));
     }
 
     //todo: admin edit_user_form
-    public function edit_user_form($id){
+    public function edit_user_form($id)
+    {
         $user = User::find($id);
         return view('admin.edituser', compact('user'));
     }
 
     //todo: update the user
-    public function update_user(Request $request, $id){
+    public function update_user(Request $request, $id)
+    {
         $user = User::find($id);
 
         $request->validate([
@@ -43,7 +46,7 @@ class AdminFuncController extends Controller
                 Rule::unique('users')->ignore($user->id),
             ],
         ]);
-        
+
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
         $user->gender = $request->input('gender');
@@ -51,108 +54,109 @@ class AdminFuncController extends Controller
         $user->dob = $request->input('dob');
         $user->address = $request->input('address');
         $user->email = $request->input('email');
-        
-        $user->save();
-    
-        return redirect()->route('admin_allusers')->with('success','User Updated');
 
+        $user->save();
+
+        return redirect()->route('admin_allusers')->with('success', 'User Updated');
     }
 
     //todo:: delete user
-    public function delete_user($id){
-        $user = DB::table('users')->where('id',$id)->delete();
-        if($user){
-            return redirect()->route('admin_allusers')->with('success','User deleted successfully');
+    public function delete_user($id)
+    {
+        $user = DB::table('users')->where('id', $id)->delete();
+        if ($user) {
+            return redirect()->route('admin_allusers')->with('success', 'User deleted successfully');
         };
 
-        return redirect()->back()->with('error','user not Deleted');
+        return redirect()->back()->with('error', 'user not Deleted');
     }
 
-    public function allescorts(){
-        $allusers = DB::table("users")->get();
-        // return response()->json($allusers);
-        return view("admin.all-escorts", compact('allusers'));
+    public function allescorts()
+    {
+        $allescorts = DB::table("escorts")->orderBy("created_at","desc")->get();
+        // dd($allescorts);
+        return view("admin.all-escorts", compact('allescorts'));
     }
 
-    
-    public function addescorts(){
-        
+
+    public function addescorts()
+    {
+
         return view("admin.add-escorts");
     }
 
-    public function postescorts(Request $request){
-
-        $request->validate([
-            'nickname' => 'required',
-            'description' => 'required|min:30',
-            'pictures' => 'required',
+    public function postescorts(Request $request)
+    {
+        $validatedData = $request->validate([
+            'nickname' => 'required|unique:escorts,nickname',
+            'pictures' => 'required|array|min:1',
+            'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
             'phone_number' => 'required',
             'age' => 'required',
             'canton' => 'required',
             'city' => 'required',
-            'services' => 'required',
+            'services' => 'required|array|min:1',
             'origin' => 'required',
             'type' => 'required',
-            'height' => 'nullable|numeric',
-            'weight' => 'nullable|numeric',
-            'rates_in_chf' => 'nullable|numeric'
+            'text_description' => 'required|min:30',
+            'video' => 'nullable|array',
+            'hair_color' => 'nullable',
+            'hair_length' => 'nullable',
+            'breast_size' => 'nullable',
+            'height' => 'nullable|integer',
+            'weight' => 'nullable|integer',
+            'build' => 'nullable',
+            'smoker' => 'boolean',
+            'language_spoken' => 'nullable|array',
+            'address' => 'nullable',
+            'outcall' => 'boolean',
+            'incall' => 'boolean',
+            'whatsapp_number' => 'nullable',
+            'availability' => 'nullable|array',
+            'parking' => 'boolean',
+            'disabled' => 'boolean',
+            'accepts_couples' => 'boolean',
+            'elderly' => 'boolean',
+            'air_conditioned' => 'boolean',
+            'rates_in_chf' => 'nullable|numeric',
+            'currencies_accepted' => 'nullable|array',
+            'payment_method' => 'nullable|array',
         ]);
 
-        // Handling file uploads
+        // Handle Image file upload
         $pictures = [];
         if ($request->hasFile('pictures')) {
-            foreach ($request->file('pictures') as $picture) {
-                $pictures[] = $picture->store('pictures', 'public');
+            foreach ($request->file('pictures') as $image) {
+                $originalImageName = $image->getClientOriginalName();
+                $imageName = time() . '_' . $originalImageName;
+                $image->move(public_path('images/escorts_img'), $imageName);
+                $pictures[] = $imageName;
             }
         }
 
-        $videos = [];
-        if ($request->hasFile('videos')) {
-            foreach ($request->file('videos') as $video) {
-                $videos[] = $video->store('videos', 'public');
+
+        // Handle video file upload
+        $video = [];
+        if ($request->hasFile('video')) {
+            foreach ($request->file('video') as $vdo) {
+                $originalVdoName = $vdo->getClientOriginalName();
+                $vdoName = time() . '_' . $originalVdoName;
+                $vdo->move(public_path('videos'), $vdoName);
+                $video[] = $vdoName;
             }
         }
 
-        // Store user data
-        $user = new Escort([
-            'nickname' => $request->nickname,
-            'description' => $request->description,
-            'pictures' => json_encode($pictures),
-            'phone_number' => $request->phone_number,
-            'age' => $request->age,
-            'canton' => $request->canton,
-            'city' => $request->city,
-            'services' => json_encode($request->services),
-            'origin' => $request->origin,
-            'type' => $request->type,
-            'videos' => json_encode($videos),
-            'hair_color' => $request->hair_color,
-            'hair_length' => $request->hair_length,
-            'breast_size' => $request->breast_size,
-            'height' => $request->height,
-            'weight' => $request->weight,
-            'build' => $request->build,
-            'smoker' => $request->smoker ? 1 : 0,
-            'languages_spoken' => json_encode($request->languages_spoken),
-            'address' => $request->address,
-            'outcall' => $request->outcall ? 1 : 0,
-            'incall' => $request->incall ? 1 : 0,
-            'whatsapp_number' => $request->whatsapp_number,
-            'availability' => $request->availability,
-            'parking' => $request->parking ? 1 : 0,
-            'disabled' => $request->disabled ? 1 : 0,
-            'accepts_couples' => $request->accepts_couples ? 1 : 0,
-            'elderly' => $request->elderly ? 1 : 0,
-            'air_conditioned' => $request->air_conditioned ? 1 : 0,
-            'rates_in_chf' => $request->rates_in_chf,
-            'currencies_accepted' => json_encode($request->currencies_accepted),
-            'payment_methods' => json_encode($request->payment_methods),
-        ]);
 
-        $user->save();
+        $validatedData['pictures'] = json_encode($pictures);
+        $validatedData['services'] = json_encode($validatedData['services']);
+        $validatedData['video'] = json_encode($video);
+        $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
+        $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
+        $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
+        $validatedData['payment_method'] = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
 
-        return redirect()->route('admin.escorts')->with('success', 'User profile created successfully!');
-    } 
-    
+        Escort::create($validatedData);
 
+        return redirect()->route('admin.escorts')->with('success', 'Escort added successfully!');
+    }
 }

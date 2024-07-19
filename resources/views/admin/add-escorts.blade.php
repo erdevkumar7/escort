@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>New Escorts</h3>
+                    <h3>New escorts</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -15,6 +15,21 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <br />
+                            @if ($errors->any())
+                                <div>
+                                    <ul>
+                                        @foreach ($errors->all() as $error)
+                                            <li>{{ $error }}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
+
+                            @if (session('success'))
+                                <div>
+                                    {{ session('success') }}
+                                </div>
+                            @endif
                             <form action="{{ route('admin.post.escorts') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <!-- Mandatory Fields -->
@@ -34,9 +49,9 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align"
                                         for="description">Description<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea class="form-control" id="description" name="description"></textarea>
+                                        <textarea class="form-control" id="description" name="text_description"></textarea>
                                     </div>
-                                    @error('description')
+                                    @error('text_description')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -45,7 +60,7 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="pictures">Pictures<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="file" class="form-control" id="pictures" name="pictures[]">
+                                        <input type="file" class="form-control" id="pictures" name="pictures[]" multiple>
                                     </div>
                                     @error('pictures[]')
                                         <span class="text-danger">{{ $message }}</span>
@@ -85,7 +100,10 @@
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="canton" name="canton">
-                                            <option value="first">canton1</option>
+                                            <option value="canton">canton</option>
+                                            <option value="canton2">canton2</option>
+                                            <option value="canton3">canton3</option>
+                                            <option value="canton4">canton4</option>
                                         </select>
                                     </div>
                                     @error('canton')
@@ -99,7 +117,10 @@
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="city" name="city">
                                             <!-- Add options dynamically from the database -->
-                                            <option value="first">city1</option>
+                                            <option value="city">city</option>
+                                            <option value="city2">city2</option>
+                                            <option value="city3">city3</option>
+                                            <option value="city4">city4</option>
                                         </select>
                                     </div>
                                     @error('city')
@@ -112,9 +133,9 @@
                                             class="required">*<span></label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="services" name="services[]" multiple>
-                                            <!-- Add options dynamically from the database -->
-                                            <option>Choose option</option>
-                                            <option>Option one</option>
+                                            <option value="1">One Option</option>
+                                            <option value="2">Two Option</option>
+                                            <option value="3">Third Option</option>
                                         </select>
                                     </div>
                                     @error('services[]')
@@ -159,13 +180,12 @@
 
                                 <!-- Non-Mandatory Fields -->
                                 <div class="item form-group">
-                                    <label for="videos"
+                                    <label for="video"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Videos</label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="file" class="form-control" id="videos" name="videos[]"
-                                            multiple>
+                                        <input type="file" class="form-control" id="video" name="video[]" multiple>
                                     </div>
-                                    @error('videos[]')
+                                    @error('video[]')
                                         <span class="text-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -252,7 +272,8 @@
                                     <label for="smoker"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Smoker</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="checkbox" id="smoker" name="smoker">
+                                        <input type="hidden" name="smoker" value="0">
+                                        <input type="checkbox" id="smoker" name="smoker" value="1">
                                     </div>
                                 </div>
 
@@ -261,7 +282,7 @@
                                         class="col-form-label col-md-3 col-sm-3 label-align">Languages
                                         Spoken</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <select class="form-control" id="languages_spoken" name="languages_spoken[]"
+                                        <select class="form-control" id="language_spoken" name="language_spoken[]"
                                             multiple>
                                             <option value="French">French</option>
                                             <option value="English">English</option>
@@ -289,7 +310,8 @@
                                     <label for="outcall"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Outcall</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="checkbox" id="outcall" name="outcall">
+                                        <input type="hidden" id="outcall" name="outcall" value="0">
+                                        <input type="checkbox" id="outcall" name="outcall" value="1">
                                     </div>
                                 </div>
 
@@ -297,7 +319,8 @@
                                     <label for="incall"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Incall</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="checkbox" id="incall" name="incall">
+                                        <input type="hidden" id="incall" name="incall" value="0">
+                                        <input type="checkbox" id="incall" name="incall" value="1">
                                     </div>
                                 </div>
 
@@ -315,33 +338,42 @@
                                     <label for="availability"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Availability</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="text" class="form-control" id="availability"
-                                            name="availability">
+                                        <select class="form-control" id="language_spoken" name="availability[]"
+                                            multiple>
+                                            <option value="monday">Monday</option>
+                                            <option value="tuesday">Tuesday</option>
+                                            <option value="wednesday">Wednesday</option>
+                                            <option value="thursday">Thursday</option>
+                                            <option value="friday">Friday</option>
+                                            <option value="saturday">Saturday</option>
+                                            
+                                        </select>
                                     </div>
                                 </div>
                                 <div class="container d-flex justify-content-center align-items-center">
                                     <div class="row">
                                         <span class="m-3">
                                             <label for="parking">Parking</label>
-                                            <input type="checkbox" id="parking" name="parking">
+                                            <input type="checkbox" id="parking" name="parking" value="1">
+                                            
                                         </span>
                                         <span class="m-3">
                                             <label for="disabled">Disabled</label>
-                                            <input type="checkbox" id="disabled" name="disabled">
+                                            <input type="checkbox" id="disabled" name="disabled" value="1">
                                         </span>
                                         <span class="m-3">
                                             <label for="accepts_couples">Accepts
                                                 Couples</label>
-                                            <input type="checkbox" id="accepts_couples" name="accepts_couples">
+                                            <input type="checkbox" id="accepts_couples" name="accepts_couples" value="1">
                                         </span>
                                         <span class="m-3">
                                             <label for="elderly">Elderly</label>
-                                            <input type="checkbox" id="elderly" name="elderly">
+                                            <input type="checkbox" id="elderly" name="elderly" value="1">
                                         </span>
                                         <span class="m-3">
                                             <label for="air_conditioned">Air
                                                 Conditioned</label>
-                                            <input type="checkbox" id="air_conditioned" name="air_conditioned">
+                                            <input type="checkbox" id="air_conditioned" name="air_conditioned" value="1">
                                         </span>
                                     </div>
                                 </div>
@@ -351,7 +383,7 @@
                                         in
                                         CHF</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="number" class="form-control" id="rates_in_chf"
+                                        <input type="text" class="form-control" id="rates_in_chf"
                                             name="rates_in_chf">
                                     </div>
                                 </div>
