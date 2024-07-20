@@ -84,7 +84,7 @@
                                                                 </button>
                                                             </a>
                                                             <form id="delete-escorts"
-                                                                action=""
+                                                                action="{{route('admin.delete.escorts', $escorts->id)}}"
                                                                 method="POST" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')

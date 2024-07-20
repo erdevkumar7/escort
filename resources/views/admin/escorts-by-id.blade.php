@@ -122,11 +122,11 @@
                                         <label for="video"
                                             class="col-form-label col-md-3 col-sm-3 label-align">Videos</label>
                                         <div class="col-md-6 col-sm-6 ">
-                                            <video width="600" controls>
-                                                @foreach ($video as $vdo)
+                                            @foreach ($video as $vdo)
+                                                <video width="600" controls>
                                                     <source src="{{ asset('videos') . '/' . $vdo }}" type="video/mp4">
-                                                @endforeach
-                                            </video>
+                                                </video>
+                                            @endforeach
                                         </div>
                                     </div>
                                 @endif

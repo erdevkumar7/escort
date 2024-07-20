@@ -67,13 +67,12 @@ class AdminFuncController extends Controller
         if ($user) {
             return redirect()->route('admin_allusers')->with('success', 'User deleted successfully');
         };
-
         return redirect()->back()->with('error', 'user not Deleted');
     }
 
     public function allescorts()
     {
-        $allescorts = DB::table("escorts")->orderBy("created_at","desc")->get();
+        $allescorts = DB::table("escorts")->orderBy("created_at", "desc")->get();
         // dd($allescorts);
         return view("admin.all-escorts", compact('allescorts'));
     }
@@ -90,7 +89,7 @@ class AdminFuncController extends Controller
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname',
             'pictures' => 'required|array|min:1',
-            'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
             'age' => 'required',
             'canton' => 'required',
@@ -100,6 +99,7 @@ class AdminFuncController extends Controller
             'type' => 'required',
             'text_description' => 'required|min:30',
             'video' => 'nullable|array',
+            'video.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
             'hair_color' => 'nullable',
             'hair_length' => 'nullable',
             'breast_size' => 'nullable',
@@ -160,7 +160,8 @@ class AdminFuncController extends Controller
         return redirect()->route('admin.escorts')->with('success', 'Escort added successfully!');
     }
 
-    public function escorts_by_id($id){
+    public function escorts_by_id($id)
+    {
         $escorts = Escort::find($id);
         $pictures = json_decode($escorts->pictures);
         $video = json_decode($escorts->video);
@@ -169,6 +170,37 @@ class AdminFuncController extends Controller
         $availability = json_decode($escorts->availability, true);
         $currencies_accepted = json_decode($escorts->currencies_accepted, true);
         $payment_method = json_decode($escorts->payment_method, true);
-        return view('admin.escorts-by-id', compact('escorts', 'language_spoken','pictures','video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        return view('admin.escorts-by-id', compact('escorts', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+    }
+
+    //todo: Delete Escorts
+    public function deleteEscorts($id)
+    {
+        $escorts = Escort::find($id);
+        $pictures = json_decode($escorts->pictures);
+        $video = json_decode($escorts->video);
+
+        //delete escorts pics
+        if($pictures){
+            foreach($pictures as $picture){
+                $imagePath = public_path('images/escorts_img') . '/' . $picture;
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+        }
+
+        //Delete Escorts videos
+        if($video){
+            foreach($video as $vdo){
+                $vdoPath = public_path('videos') .'/'. $vdo;
+                if(file_exists( $vdoPath )) {
+                    unlink($vdoPath);
+                }
+            }
+        }
+
+        $escorts->delete();
+        return redirect()->route('admin.escorts')->with('success','Escorts deleted successfully');
     }
 }
