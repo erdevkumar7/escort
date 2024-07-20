@@ -256,6 +256,7 @@
                                         class="col-form-label col-md-3 col-sm-3 label-align">Build</label>
                                     <div class="col-md-6 col-sm-6">
                                         <select class="form-control" id="build" name="build">
+                                            <option value="">Select</option>
                                             <option value="Slim">Slim</option>
                                             <option value="Normal">Normal</option>
                                             <option value="Chubby">Chubby</option>
@@ -343,8 +344,7 @@
                                             <option value="Wednesday">Wednesday</option>
                                             <option value="Thursday">Thursday</option>
                                             <option value="Friday">Friday</option>
-                                            <option value="Saturday">Saturday</option>
-                                            
+                                            <option value="Saturday">Saturday</option>                                            
                                         </select>
                                     </div>
                                 </div>
@@ -401,11 +401,11 @@
                                 </div>
 
                                 <div class="item form-group">
-                                    <label for="payment_methods"
+                                    <label for="payment_method"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Payment
                                         Methods</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <select class="form-control" id="payment_methods" name="payment_methods[]"
+                                        <select class="form-control" id="payment_method" name="payment_method[]"
                                             multiple>
                                             <option value="Cash">Cash</option>
                                             <option value="Credit Card">Credit Card</option>

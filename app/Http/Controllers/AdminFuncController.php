@@ -160,9 +160,24 @@ class AdminFuncController extends Controller
         return redirect()->route('admin.escorts')->with('success', 'Escort added successfully!');
     }
 
+    public function edit_escorts_form($id){
+        $escort = Escort::find($id);
+
+        $pictures = json_decode($escort->pictures);
+        $video = json_decode($escort->video);
+        $language_spoken = json_decode($escort->language_spoken, true);
+        $services = json_decode($escort->services, true);
+        $availability = json_decode($escort->availability, true);
+        $currencies_accepted = json_decode($escort->currencies_accepted, true);
+        $payment_method = json_decode($escort->payment_method, true);
+
+        return view('admin.escorts-edit', compact('escort','pictures','video','services', 'language_spoken','availability', 'currencies_accepted', 'payment_method'));
+    }
+
     public function escorts_by_id($id)
     {
         $escorts = Escort::find($id);
+
         $pictures = json_decode($escorts->pictures);
         $video = json_decode($escorts->video);
         $services = json_decode($escorts->services, true);

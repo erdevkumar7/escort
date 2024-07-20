@@ -77,7 +77,7 @@
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
-                                                            <a href="">
+                                                            <a href="{{route('admin.edit_escorts_form', $escorts->id)}}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>

@@ -346,13 +346,13 @@
 
                                 @if ($payment_method)
                                     <div class="item form-group">
-                                        <label for="payment_methods"
+                                        <label for="payment_method"
                                             class="col-form-label col-md-3 col-sm-3 label-align">Payment
                                             Methods</label>
                                         <div class="col-md-6 col-sm-6">
-                                            <select class="form-control" id="payment_methods" name="payment_methods[]"
+                                            <select class="form-control" id="payment_method" name="payment_method[]"
                                                 multiple>
-                                                @foreach ($payment_methods as $payment)
+                                                @foreach ($payment_method as $payment)
                                                     <option value="{{ $payment }}" disabled>{{ $payment }}
                                                     </option>
                                                 @endforeach

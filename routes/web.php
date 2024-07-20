@@ -28,13 +28,17 @@ Route::prefix('admin')->group(function () {
 Route::prefix('admin')->group(function(){
     Route::middleware('auth.admin')->group(function(){
         Route::get('/allusers', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
-        Route::delete('/user/{id}', [AdminFuncController::class,'delete_user'])->name('admin_delete_user');
+
         Route::get('/user/{id}/edit', [AdminFuncController::class,'edit_user_form'])->name('admin_edit_user_form');
         Route::put('/user/{id}', [AdminFuncController::class,'update_user'])->name('admin_update_user');
+        Route::delete('/user/{id}', [AdminFuncController::class,'delete_user'])->name('admin_delete_user');
 
         Route::get('/all-escorts', [AdminFuncController::class, 'allescorts'])->name('admin.escorts');
+
         Route::get('/add-escorts', [AdminFuncController::class, 'addescorts'])->name('admin.add.escorts');
         Route::post('/post-escorts', [AdminFuncController::class, 'postescorts'])->name('admin.post.escorts');
+
+        Route::get('/escorts/{id}/edit', [AdminFuncController::class,'edit_escorts_form'])->name('admin.edit_escorts_form');
 
         Route::get('/escorts/{id}', [AdminFuncController::class, 'escorts_by_id'])->name('admin.get.scorts');
         Route::delete('/escorts/{id}', [AdminFuncController::class,'deleteEscorts'])->name('admin.delete.escorts');
