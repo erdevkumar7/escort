@@ -133,9 +133,9 @@
                                             class="required">*<span></label>
                                     <div class="col-md-6 col-sm-6 ">
                                         <select class="form-control" id="services" name="services[]" multiple>
-                                            <option value="1">One Option</option>
-                                            <option value="2">Two Option</option>
-                                            <option value="3">Third Option</option>
+                                            <option value="service1">One Option</option>
+                                            <option value="service2">Two Option</option>
+                                            <option value="service3">Third Option</option>
                                         </select>
                                     </div>
                                     @error('services[]')
@@ -256,8 +256,6 @@
                                         class="col-form-label col-md-3 col-sm-3 label-align">Build</label>
                                     <div class="col-md-6 col-sm-6">
                                         <select class="form-control" id="build" name="build">
-
-                                            <option value="">Select</option>
                                             <option value="Slim">Slim</option>
                                             <option value="Normal">Normal</option>
                                             <option value="Chubby">Chubby</option>
@@ -340,12 +338,12 @@
                                     <div class="col-md-6 col-sm-6">
                                         <select class="form-control" id="language_spoken" name="availability[]"
                                             multiple>
-                                            <option value="monday">Monday</option>
-                                            <option value="tuesday">Tuesday</option>
-                                            <option value="wednesday">Wednesday</option>
-                                            <option value="thursday">Thursday</option>
-                                            <option value="friday">Friday</option>
-                                            <option value="saturday">Saturday</option>
+                                            <option value="Monday">Monday</option>
+                                            <option value="Tuesday">Tuesday</option>
+                                            <option value="Wednesday">Wednesday</option>
+                                            <option value="Thursday">Thursday</option>
+                                            <option value="Friday">Friday</option>
+                                            <option value="Saturday">Saturday</option>
                                             
                                         </select>
                                     </div>

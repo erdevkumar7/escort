@@ -162,7 +162,13 @@ class AdminFuncController extends Controller
 
     public function escorts_by_id($id){
         $escorts = Escort::find($id);
+        $pictures = json_decode($escorts->pictures);
+        $video = json_decode($escorts->video);
+        $services = json_decode($escorts->services, true);
         $language_spoken = json_decode($escorts->language_spoken, true);
-        return view('admin.escorts-by-id', compact('escorts', 'language_spoken'));
+        $availability = json_decode($escorts->availability, true);
+        $currencies_accepted = json_decode($escorts->currencies_accepted, true);
+        $payment_method = json_decode($escorts->payment_method, true);
+        return view('admin.escorts-by-id', compact('escorts', 'language_spoken','pictures','video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 }
