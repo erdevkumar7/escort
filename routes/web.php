@@ -36,6 +36,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/add-escorts', [AdminFuncController::class, 'addescorts'])->name('admin.add.escorts');
         Route::post('/post-escorts', [AdminFuncController::class, 'postescorts'])->name('admin.post.escorts');
 
+        Route::get('/escorts/{id}', [AdminFuncController::class, 'escorts_by_id'])->name('admin.get.scorts');
     });
 });
 

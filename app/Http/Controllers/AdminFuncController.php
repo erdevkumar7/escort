@@ -159,4 +159,10 @@ class AdminFuncController extends Controller
 
         return redirect()->route('admin.escorts')->with('success', 'Escort added successfully!');
     }
+
+    public function escorts_by_id($id){
+        $escorts = Escort::find($id);
+        $language_spoken = json_decode($escorts->language_spoken, true);
+        return view('admin.escorts-by-id', compact('escorts', 'language_spoken'));
+    }
 }
