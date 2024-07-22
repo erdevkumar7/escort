@@ -71,14 +71,14 @@
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
-                                                            <a href="">
+                                                            <a href="{{route('admin.edit_agency_form', $agency->id)}}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
                                                             <form id="delete-escorts"
-                                                                action=""
+                                                                action="{{route('admin.delete.agency', $agency->id)}}"
                                                                 method="POST" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')
