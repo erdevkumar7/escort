@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminAgencyController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminFuncController;
 use App\Http\Controllers\UserAuthController;
@@ -32,7 +33,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/user/{id}/edit', [AdminFuncController::class,'edit_user_form'])->name('admin_edit_user_form');
         Route::put('/user/{id}', [AdminFuncController::class,'update_user'])->name('admin_update_user');
         Route::delete('/user/{id}', [AdminFuncController::class,'delete_user'])->name('admin_delete_user');
-
+        //Escorts Operations
         Route::get('/all-escorts', [AdminFuncController::class, 'allescorts'])->name('admin.escorts');
 
         Route::get('/add-escorts', [AdminFuncController::class, 'addescorts'])->name('admin.add.escorts');
@@ -43,6 +44,13 @@ Route::prefix('admin')->group(function(){
 
         Route::get('/escorts/{id}', [AdminFuncController::class, 'escorts_by_id'])->name('admin.get.scorts');
         Route::delete('/escorts/{id}', [AdminFuncController::class,'deleteEscorts'])->name('admin.delete.escorts');
+        //Agency Operations
+        Route::get('/all-agencies', [AdminAgencyController::class,'allagencies'])->name('admin.allagencies');
+
+        Route::get('/add-agency', [AdminAgencyController::class,'addagency_form'])->name('admin.addagency_form');
+        Route::post('/add-agency', [AdminAgencyController::class, 'addagency_form_submit'])->name('admin.addagency_form_submit');
+
+        Route::get('/agency/{id}', [AdminAgencyController::class, 'agency'])->name('admin.agency');
     });
 });
 

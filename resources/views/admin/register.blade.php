@@ -52,15 +52,6 @@
                         <br />
                     </div>
                 </form>
-
-                <script>
-                    function removeError(id) {
-                        var errElement = document.getElementById(id);
-                        if (errElement) {
-                            errElement.style.display = 'none'
-                        }
-                    }
-                </script>
             </section>
         </div>
     </div>

@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Escorts <small>registered</small></h3>
+                    <h3>Agency <small>registered</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -27,9 +27,9 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Escorts<small>Details</small></h2>
+                            <h2>Agency<small>Details</small></h2>
                             <div class="nav navbar-right panel_toolbox">
-                                <a href="{{ route('admin.add.escorts') }}">
+                                <a href="{{ route('admin.addagency_form') }}">
                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add">
                                         Add
                                     </button>
@@ -48,43 +48,37 @@
                                             width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Nickname</th>
+                                                    <th>Agencyname</th>
+                                                    <th>Email</th>
                                                     <th>Phone number</th>
-                                                    <th>age</th>
-                                                    <th>Canton</th>
-                                                    <th>City</th>
-                                                    <th>Description</th>
-                                                    <th>Origin</th>
-                                                    <th>Type</th>
+                                                    <th>Address</th>
+                                                    <th>Counter</th>
                                                     <th>Action</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
-                                                @foreach ($allescorts as $escorts)
-                                                    <tr id="escorts-row-{{ $escorts->id }}">
-                                                        <td>{{ $escorts->nickname }}</td>
-                                                        <td>{{ $escorts->phone_number }}</td>
-                                                        <td>{{ $escorts->age }}</td>
-                                                        <td>{{ $escorts->canton }}</td>
-                                                        <td>{{ $escorts->city }}</td>
-                                                        <td>{{ $escorts->text_description }}</td>
-                                                        <td>{{ $escorts->origin }}</td>
-                                                        <td>{{ $escorts->type }}</td>
+                                             <tbody>
+                                                @foreach ($allagencies as $agency)
+                                                    <tr id="agency-row-{{ $agency->id }}">
+                                                        <td>{{ $agency->name }}</td>
+                                                        <td>{{ $agency->email }}</td>
+                                                        <td>{{ $agency->phone_number }}</td>
+                                                        <td>{{ $agency->address ? $agency->address : 'Not Available' }}</td>
+                                                        <td>{{ $agency->counter ? $agency->counter : 'Not Available' }}</td>
                                                         <td style="display: flex">
-                                                            <a href="{{ route('admin.get.scorts', $escorts->id) }}">
+                                                            <a href="{{route('admin.agency', $agency->id)}}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="view">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
-                                                            <a href="{{route('admin.edit_escorts_form', $escorts->id)}}">
+                                                            <a href="">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
                                                             <form id="delete-escorts"
-                                                                action="{{route('admin.delete.escorts', $escorts->id)}}"
+                                                                action=""
                                                                 method="POST" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -96,7 +90,7 @@
                                                         </td>
                                                     </tr>
                                                 @endforeach
-                                            </tbody>
+                                            </tbody> 
 
                                         </table>
                                     </div>
