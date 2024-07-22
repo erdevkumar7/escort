@@ -39,6 +39,7 @@ Route::prefix('admin')->group(function(){
         Route::post('/post-escorts', [AdminFuncController::class, 'postescorts'])->name('admin.post.escorts');
 
         Route::get('/escorts/{id}/edit', [AdminFuncController::class,'edit_escorts_form'])->name('admin.edit_escorts_form');
+        Route::put('/escorts/{id}', [AdminFuncController::class, 'edit_escorts'])->name('admin.edit_escorts');
 
         Route::get('/escorts/{id}', [AdminFuncController::class, 'escorts_by_id'])->name('admin.get.scorts');
         Route::delete('/escorts/{id}', [AdminFuncController::class,'deleteEscorts'])->name('admin.delete.escorts');

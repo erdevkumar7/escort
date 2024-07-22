@@ -30,7 +30,7 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="" method="POST" enctype="multipart/form-data">
+                            <form action="{{route('admin.edit_escorts', $escort->id)}}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <!-- Mandatory Fields -->
