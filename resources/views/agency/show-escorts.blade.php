@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Agency <small>registered</small></h3>
+                    <h3>{{$agency->name}} <small>escorts</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -27,11 +27,11 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>Agency<small>Details</small></h2>
+                            <h2>Escorts<small>Details</small></h2>
                             <div class="nav navbar-right panel_toolbox">
-                                <a href="{{ route('admin.addagency_form') }}">
+                                <a href="{{ route('admin.agency.add_escorts_form',$agency->id) }}">
                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
-                                        title="Add agency">
+                                        title="Add">
                                         Add
                                     </button>
                                 </a>
@@ -49,38 +49,44 @@
                                             width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Agencyname</th>
-                                                    <th>Email</th>
+                                                    <th>Nickname</th>
                                                     <th>Phone number</th>
-                                                    <th>Address</th>
-                                                    <th>Counter</th>
+                                                    <th>age</th>
+                                                    <th>Canton</th>
+                                                    <th>City</th>
+                                                    {{-- <th>Services</th> --}}
+                                                    <th>Origin</th>
+                                                    <th>Type</th>
                                                     <th>Action</th>
-                                                    <th>Escort View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($allagencies as $agency)
-                                                    <tr id="agency-row-{{ $agency->id }}">
-                                                        <td>{{ $agency->name }}</td>
-                                                        <td>{{ $agency->email }}</td>
-                                                        <td>{{ $agency->phone_number }}</td>
-                                                        <td>{{ $agency->address ? $agency->address : 'Not Available' }}</td>
-                                                        <td>{{ $agency->counter ? $agency->counter : 'Not Available' }}</td>
+                                                @foreach ($allescorts as $escorts)
+                                                    <tr id="escorts-row-{{ $escorts->id }}">
+                                                        <td>{{ $escorts->nickname }}</td>
+                                                        <td>{{ $escorts->phone_number }}</td>
+                                                        <td>{{ $escorts->age }}</td>
+                                                        <td>{{ $escorts->canton }}</td>
+                                                        <td>{{ $escorts->city }}</td>
+                                                        {{-- <td>{{ $escorts->services }}</td> --}}
+                                                        <td>{{ $escorts->origin }}</td>
+                                                        <td>{{ $escorts->type }}</td>
                                                         <td style="display: flex">
-                                                            {{-- <a href="{{route('admin.agency', $agency->id)}}">
+                                                            <a href="{{ route('admin.get.scorts', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="view">
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
-                                                            </a> --}}
-                                                            <a href="{{ route('admin.edit_agency_form', $agency->id) }}">
+                                                            </a>
+                                                            <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
+
                                                             <form id="delete-escorts"
-                                                                action="{{ route('admin.delete.agency', $agency->id) }}"
+                                                                action="{{ route('admin.delete.escorts', $escorts->id) }}"
                                                                 method="POST" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')
@@ -89,11 +95,6 @@
                                                                     <i class="fa fa-minus-circle"></i>
                                                                 </button>
                                                             </form>
-                                                        </td>
-                                                        <td>
-                                                            <a href="{{ route('admin.agency.escorts', $agency->id) }}">
-                                                                <button type="button"
-                                                                    class="btn btn-primary">view</button></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

@@ -75,6 +75,16 @@ class AdminAgencyController extends Controller
 
         return redirect()->route('admin.allagencies')->with('success', 'Agancy Updated');
     }
+    //todo: All escorts of agency
+    public function agency_escorts($id){
+        $allescorts = DB::table("escorts")->where('agency_id',$id)->orderBy("created_at", "desc")->get();
+        $agency = Agency::find($id);
+        return view("agency.show-escorts", compact('allescorts','agency'));
+    }
+
+    public function agency_add_escorts_form($id){
+        return view('agency.add-escorts');
+    }
 
     public function delete_agency($id)
     {

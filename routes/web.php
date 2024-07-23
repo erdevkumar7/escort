@@ -54,6 +54,8 @@ Route::prefix('admin')->group(function(){
         Route::put('/agency/{id}', [AdminAgencyController::class, 'edit_agency'])->name('admin.edit_agency');
 
         Route::get('/agency/{id}/show', [AdminAgencyController::class, 'agency'])->name('admin.agency');
+        Route::get('/agency/{id}/show-escorts', [AdminAgencyController::class,'agency_escorts'])->name('admin.agency.escorts');
+        Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class,'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
         Route::delete('/agency/{id}', [AdminAgencyController::class, 'delete_agency'])->name('admin.delete.agency');
     });
 });
