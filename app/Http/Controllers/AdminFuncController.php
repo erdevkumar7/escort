@@ -73,8 +73,8 @@ class AdminFuncController extends Controller
     public function allescorts()
     {
         $allescorts = DB::table("escorts")->orderBy("created_at", "desc")->get();
-        // dd($allescorts);
-        return view("admin.all-escorts", compact('allescorts'));
+        // $services = json_decode($allescorts->services, true);
+        return view("admin.all-escorts", compact('allescorts',));
     }
 
 

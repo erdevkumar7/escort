@@ -1,7 +1,7 @@
     <!-- footer content -->
     <footer>
         <div class="pull-right">
-            Footer - Scorts <a href="#">Demo</a>
+            Admin<a href="#"></a>
         </div>
         <div class="clearfix"></div>
     </footer>

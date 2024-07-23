@@ -192,7 +192,7 @@
                                         <label for="build"
                                             class="col-form-label col-md-3 col-sm-3 label-align">Build</label>
                                         <div class="col-md-6 col-sm-6">
-                                            <input type="number" class="form-control" id="build" name="build"
+                                            <input type="text" class="form-control" id="build" name="build"
                                                 value="{{ $escorts->build }}" readonly>
                                         </div>
                                     </div>

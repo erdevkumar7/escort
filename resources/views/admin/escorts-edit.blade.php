@@ -563,8 +563,7 @@
                                 {{-- submit button --}}
                                 <div class="item form-group">
                                     <div class="col-md-6 col-sm-6 offset-md-3">
-                                        <button class="btn btn-primary" type="button">Cancel</button>
-                                        <button class="btn btn-primary" type="reset">Reset</button>
+                                        <a href="{{route('admin.escorts')}}"> <button class="btn btn-primary" type="button">Cancel</button></a>
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>

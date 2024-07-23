@@ -15,16 +15,6 @@
                     <div class="x_panel">
                         <div class="x_content">
                             <br />
-                            @if ($errors->any())
-                                <div>
-                                    <ul>
-                                        @foreach ($errors->all() as $error)
-                                            <li>{{ $error }}</li>
-                                        @endforeach
-                                    </ul>
-                                </div>
-                            @endif
-
                             @if (session('success'))
                                 <div>
                                     {{ session('success') }}
@@ -33,56 +23,62 @@
                             <form action="{{ route('admin.post.escorts') }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <!-- Mandatory Fields -->
+                                {{-- nickname --}}
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="nick-name">Nickname
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="nick-name" name="nickname" class="form-control ">
+                                        <input type="text" id="nick-name" name="nickname" class="form-control"
+                                            oninput="removeError('nicknameErr')">
                                     </div>
                                     @error('nickname')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger" id="nicknameErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- deccription --}}
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align"
                                         for="description">Description<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <textarea class="form-control" id="description" name="text_description"></textarea>
+                                        <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')"></textarea>
                                     </div>
                                     @error('text_description')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger" id="descriptionErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- pictures --}}
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="pictures">Pictures<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="file" class="form-control" id="pictures" name="pictures[]" multiple>
+                                        <input type="file" class="form-control" id="pictures" name="pictures[]" multiple
+                                            oninput="removeError('picturesErr')">
                                     </div>
-                                    @error('pictures[]')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    @error('pictures')
+                                        <span class="text-danger" id="picturesErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- phone_number --}}
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone_number">Phone
                                         Number<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" class="form-control" id="phone_number" name="phone_number">
+                                        <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                            oninput="removeError('phoneErr')">
                                     </div>
                                     @error('phone_number')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger" id="phoneErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- age --}}
                                 <div class="item form-group">
                                     <label for="age" class="col-form-label col-md-3 col-sm-3 label-align">Age <span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="age" name="age">
+                                        <select class="form-control" id="age" name="age"
+                                            oninput="removeError('ageErr')">
+                                            <option value="">Select Age</option>
                                             <option value="18-25">18-25</option>
                                             <option value="26-35">26-35</option>
                                             <option value="36-45">36-45</option>
@@ -91,15 +87,17 @@
                                         </select>
                                     </div>
                                     @error('age')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger" id="ageErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- canton --}}
                                 <div class="item form-group">
                                     <label for="canton" class="col-form-label col-md-3 col-sm-3 label-align">Canton<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="canton" name="canton">
+                                        <select class="form-control" id="canton" name="canton"
+                                            oninput="removeError('cantonErr')">
+                                            <option value="">Select Canton</option>
                                             <option value="canton">canton</option>
                                             <option value="canton2">canton2</option>
                                             <option value="canton3">canton3</option>
@@ -107,16 +105,17 @@
                                         </select>
                                     </div>
                                     @error('canton')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger" id="cantonErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- city --}}
                                 <div class="item form-group">
                                     <label for="city" class="col-form-label col-md-3 col-sm-3 label-align">City<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="city" name="city">
-                                            <!-- Add options dynamically from the database -->
+                                        <select class="form-control" id="city" name="city"
+                                            oninput="removeError('cityErr')">
+                                            <option value="">Select City</option>
                                             <option value="city">city</option>
                                             <option value="city2">city2</option>
                                             <option value="city3">city3</option>
@@ -124,30 +123,34 @@
                                         </select>
                                     </div>
                                     @error('city')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger" id="cityErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- services --}}
                                 <div class="item form-group">
-                                    <label for="services" class="col-form-label col-md-3 col-sm-3 label-align">Services<span
+                                    <label for="services"
+                                        class="col-form-label col-md-3 col-sm-3 label-align">Services<span
                                             class="required">*<span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="services" name="services[]" multiple>
+                                        <select class="form-control" id="services" name="services[]" multiple
+                                            oninput="removeError('servicesErr')">
                                             <option value="service1">One Option</option>
                                             <option value="service2">Two Option</option>
                                             <option value="service3">Third Option</option>
                                         </select>
                                     </div>
-                                    @error('services[]')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    @error('services')
+                                        <span class="text-danger" id="servicesErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- origin --}}
                                 <div class="item form-group">
                                     <label for="origin" class="col-form-label col-md-3 col-sm-3 label-align">Origin<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="origin" name="origin">
+                                        <select class="form-control" id="origin" name="origin"
+                                            oninput="removeError('originErr')">
+                                            <option value="">Select Origin</option>
                                             <option value="Caucasian">Caucasian</option>
                                             <option value="Latin">Latin</option>
                                             <option value="Asian">Asian</option>
@@ -157,15 +160,17 @@
                                         </select>
                                     </div>
                                     @error('origin')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger"id="originErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- type --}}
                                 <div class="item form-group">
                                     <label for="type" class="col-form-label col-md-3 col-sm-3 label-align">Type<span
                                             class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <select class="form-control" id="type" name="type" required>
+                                        <select class="form-control" id="type" name="type"
+                                            oninput="removeError('typeErr')">
+                                            <option value="">Selecte Type</option>
                                             <option value="Independent Escort">Independent Escort</option>
                                             <option value="Escort">Escort</option>
                                             <option value="Trans">Trans</option>
@@ -174,22 +179,24 @@
                                         </select>
                                     </div>
                                     @error('type')
-                                        <span class="text-danger">{{ $message }}</span>
+                                        <span class="text-danger" id="typeErr">{{ $message }}</span>
                                     @enderror
                                 </div>
 
                                 <!-- Non-Mandatory Fields -->
+                                {{-- video --}}
                                 <div class="item form-group">
                                     <label for="video"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Videos</label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="file" class="form-control" id="video" name="video[]" multiple>
+                                        <input type="file" class="form-control" id="video" name="video[]"
+                                            multiple>
                                     </div>
-                                    @error('video[]')
-                                        <span class="text-danger">{{ $message }}</span>
+                                    @error('video')
+                                        <span class="text-danger" id="videoErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-
+                                {{-- hair_color --}}
                                 <div class="item form-group">
                                     <label for="hair_color" class="col-form-label col-md-3 col-sm-3 label-align">Hair
                                         Color</label>
@@ -204,11 +211,8 @@
                                             <option value="Other">Other</option>
                                         </select>
                                     </div>
-                                    @error('hair_color')
-                                        <span class="text-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
-
+                                {{-- hair_length --}}
                                 <div class="item form-group">
                                     <label for="hair_length" class="col-form-label col-md-3 col-sm-3 label-align">Hair
                                         Length</label>
@@ -221,7 +225,7 @@
                                         </select>
                                     </div>
                                 </div>
-
+                                {{-- breast_size --}}
                                 <div class="item form-group">
                                     <label for="breast_size" class="col-form-label col-md-3 col-sm-3 label-align">Breast
                                         Size</label>
@@ -337,14 +341,13 @@
                                     <label for="availability"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Availability</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <select class="form-control" id="language_spoken" name="availability[]"
-                                            multiple>
+                                        <select class="form-control" id="language_spoken" name="availability[]" multiple>
                                             <option value="Monday">Monday</option>
                                             <option value="Tuesday">Tuesday</option>
                                             <option value="Wednesday">Wednesday</option>
                                             <option value="Thursday">Thursday</option>
                                             <option value="Friday">Friday</option>
-                                            <option value="Saturday">Saturday</option>                                            
+                                            <option value="Saturday">Saturday</option>
                                         </select>
                                     </div>
                                 </div>
@@ -353,7 +356,7 @@
                                         <span class="m-3">
                                             <label for="parking">Parking</label>
                                             <input type="checkbox" id="parking" name="parking" value="1">
-                                            
+
                                         </span>
                                         <span class="m-3">
                                             <label for="disabled">Disabled</label>
@@ -362,7 +365,8 @@
                                         <span class="m-3">
                                             <label for="accepts_couples">Accepts
                                                 Couples</label>
-                                            <input type="checkbox" id="accepts_couples" name="accepts_couples" value="1">
+                                            <input type="checkbox" id="accepts_couples" name="accepts_couples"
+                                                value="1">
                                         </span>
                                         <span class="m-3">
                                             <label for="elderly">Elderly</label>
@@ -371,7 +375,8 @@
                                         <span class="m-3">
                                             <label for="air_conditioned">Air
                                                 Conditioned</label>
-                                            <input type="checkbox" id="air_conditioned" name="air_conditioned" value="1">
+                                            <input type="checkbox" id="air_conditioned" name="air_conditioned"
+                                                value="1">
                                         </span>
                                     </div>
                                 </div>
@@ -414,7 +419,8 @@
                                 </div>
                                 <div class="item form-group">
                                     <div class="col-md-6 col-sm-6 offset-md-3">
-                                        <button class="btn btn-primary" type="button">Cancel</button>
+                                        <a href="{{ route('admin.escorts') }}"> <button class="btn btn-primary"
+                                                type="button">Cancel</button></a>
                                         <button class="btn btn-primary" type="reset">Reset</button>
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>

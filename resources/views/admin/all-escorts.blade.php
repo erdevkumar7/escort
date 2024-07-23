@@ -30,7 +30,8 @@
                             <h2>Escorts<small>Details</small></h2>
                             <div class="nav navbar-right panel_toolbox">
                                 <a href="{{ route('admin.add.escorts') }}">
-                                    <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add">
+                                    <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                                        title="Add">
                                         Add
                                     </button>
                                 </a>
@@ -53,7 +54,7 @@
                                                     <th>age</th>
                                                     <th>Canton</th>
                                                     <th>City</th>
-                                                    <th>Description</th>
+                                                    {{-- <th>Services</th> --}}
                                                     <th>Origin</th>
                                                     <th>Type</th>
                                                     <th>Action</th>
@@ -67,7 +68,7 @@
                                                         <td>{{ $escorts->age }}</td>
                                                         <td>{{ $escorts->canton }}</td>
                                                         <td>{{ $escorts->city }}</td>
-                                                        <td>{{ $escorts->text_description }}</td>
+                                                        {{-- <td>{{ $escorts->services }}</td> --}}
                                                         <td>{{ $escorts->origin }}</td>
                                                         <td>{{ $escorts->type }}</td>
                                                         <td style="display: flex">
@@ -77,14 +78,15 @@
                                                                     <i class="fa fa-eye"></i>
                                                                 </button>
                                                             </a>
-                                                            <a href="{{route('admin.edit_escorts_form', $escorts->id)}}">
+                                                            <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
+
                                                             <form id="delete-escorts"
-                                                                action="{{route('admin.delete.escorts', $escorts->id)}}"
+                                                                action="{{ route('admin.delete.escorts', $escorts->id) }}"
                                                                 method="POST" style="display:inline">
                                                                 @csrf
                                                                 @method('DELETE')
