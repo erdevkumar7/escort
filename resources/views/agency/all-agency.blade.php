@@ -32,7 +32,7 @@
                                 <a href="{{ route('admin.addagency_form') }}">
                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
                                         title="Add agency">
-                                        Add
+                                        Add agency
                                     </button>
                                 </a>
                             </div>

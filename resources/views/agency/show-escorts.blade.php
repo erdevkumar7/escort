@@ -32,7 +32,7 @@
                                 <a href="{{ route('admin.agency.add_escorts_form',$agency->id) }}">
                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
                                         title="Add">
-                                        Add
+                                        Add escort
                                     </button>
                                 </a>
                             </div>

@@ -238,15 +238,15 @@
                                             <label for="smoker">Smoker</label>
                                             <input type="checkbox" id="smoker" name="smoker" value="1">
                                         </span>
-                                        {{-- accepts_couples --}}
-                                        <span class="m-3">
-                                            <label for="accepts_couples">Accepts Couples</label>
-                                            <input type="checkbox" id="accepts_couples" name="accepts_couples"value="1">
-                                        </span>
                                         {{-- elderly --}}
                                         <span class="m-3">
                                             <label for="elderly">Elderly</label>
                                             <input type="checkbox" id="elderly" name="elderly" value="1">
+                                        </span>
+                                        {{-- parking --}}
+                                        <span class="m-3">
+                                            <label for="parking">Parking</label>
+                                            <input type="checkbox" id="parking" name="parking" value="1">
                                         </span>
                                     </div>
 
@@ -261,17 +261,17 @@
                                             <label for="incall"> Incall </label>
                                             <input type="checkbox" id="incall" name="incall" value="1">
                                         </span>
-                                        {{-- parking --}}
-                                        <span class="m-3">
-                                            <label for="parking">Parking</label>
-                                            <input type="checkbox" id="parking" name="parking" value="1">
-                                        </span>
-                                    </div>
-                                    {{-- disabled --}}
-                                    <div class="col-md-4 col-sm-4">
+                                        {{-- disabled --}}
                                         <span class="m-3">
                                             <label for="disabled">Disabled</label>
                                             <input type="checkbox" id="disabled" name="disabled" value="1">
+                                        </span>
+                                    </div>
+                                    <div class="col-md-4 col-sm-4">
+                                        {{-- accepts_couples --}}
+                                        <span class="m-3">
+                                            <label for="accepts_couples">Accepts Couples</label>
+                                            <input type="checkbox" id="accepts_couples" name="accepts_couples"value="1">
                                         </span>
                                         {{-- air_conditioned --}}
                                         <span class="m-3">
@@ -284,27 +284,6 @@
                                 </div>
 
                                 <div class="item form-group">
-                                    {{-- services --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="services">Services<span class="required">*<span></label>
-                                        <select class="form-control" id="services" name="services[]" multiple
-                                            oninput="removeError('servicesErr')">
-                                            <option value="service1">One Option</option>
-                                            <option value="service2">Two Option</option>
-                                            <option value="service3">Third Option</option>
-                                        </select>
-                                        @error('services')
-                                            <span class="text-danger" id="servicesErr">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    {{-- description --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="description">Description *</label>
-                                        <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')"></textarea>
-                                        @error('text_description')
-                                            <span class="text-danger" id="descriptionErr">{{ $message }}</span>
-                                        @enderror
-                                    </div>
                                     {{-- language_spoken --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="languages_spoken">Languages Spoken</label>
@@ -321,6 +300,27 @@
                                             <option value="Chinese">Chinese</option>
                                             <option value="Other">Other</option>
                                         </select>
+                                    </div>
+                                    {{-- services --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="services">Services *</label>
+                                        <select class="form-control" id="services" name="services[]" multiple
+                                            oninput="removeError('servicesErr')">
+                                            <option value="service1">One Option</option>
+                                            <option value="service2">Two Option</option>
+                                            <option value="service3">Third Option</option>
+                                        </select>
+                                        @error('services')
+                                            <span class="text-danger" id="servicesErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>                                    
+                                    {{-- description --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="description">Description *</label>
+                                        <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')"></textarea>
+                                        @error('text_description')
+                                            <span class="text-danger" id="descriptionErr">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
 

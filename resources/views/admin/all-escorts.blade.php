@@ -32,7 +32,7 @@
                                 <a href="{{ route('admin.add.escorts') }}">
                                     <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
                                         title="Add">
-                                        Add
+                                        Add escort
                                     </button>
                                 </a>
                             </div>

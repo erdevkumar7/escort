@@ -38,17 +38,44 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('../build/js/custom.min.js') }}"></script>
-
+     <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Include Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+    <!--- custome JS -->
     <script>
+        //handleLogOut
         function handleLogOut() {
             event.preventDefault();
             document.getElementById('logout-form').submit();
         }
-
+        // removeError
         function removeError(id) {
             var errElement = document.getElementById(id);
             if (errElement) {
                 errElement.style.display = 'none'
             }
         }
+        // select2
+        $(document).ready(function() {
+            $('#services').select2({
+                placeholder: "Select Services"
+            });
+
+            $('#language_spoken').select2({
+                placeholder: "Select Language"
+            });
+
+            $('#availability').select2({
+                placeholder: "Select Availability"
+            });
+
+            $('#currencies_accepted').select2({
+                placeholder: "Select Currencies"
+            });
+
+            $('#payment_method').select2({
+                placeholder: "Select Payment Methods"
+            });
+        });
     </script>
