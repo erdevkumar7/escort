@@ -41,6 +41,7 @@ class Escort extends Model
         'rates_in_chf',
         'currencies_accepted',
         'payment_method',
+        'agency_id'
     ];
 
     protected $casts = [

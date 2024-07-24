@@ -20,12 +20,12 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="{{ route('admin.post.escorts') }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.agency.add_escorts', $agency->id) }}" method="POST" enctype="multipart/form-data">
                                 @csrf
                                 <div class="item form-group">
                                     {{-- nickname --}}
                                     <div class="col-md-4 col-sm-4 ">
-                                        <label for="nickname">Nickname * </label>
+                                        <label for="nickname">Nickname *</label>
                                         <input type="text" id="nickname" name="nickname" class="form-control"
                                             oninput="removeError('nicknameErr')">
                                         @error('nickname')

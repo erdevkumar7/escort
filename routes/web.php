@@ -11,6 +11,8 @@ Route::get('/', function () {
 });
 
 
+Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin_login_form');
+
 // todo: Admin Auth
 Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin_register_form');
@@ -56,6 +58,7 @@ Route::prefix('admin')->group(function(){
         Route::get('/agency/{id}/show', [AdminAgencyController::class, 'agency'])->name('admin.agency');
         Route::get('/agency/{id}/show-escorts', [AdminAgencyController::class,'agency_escorts'])->name('admin.agency.escorts');
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class,'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
+        Route::post('/agency/{id}/add-escorts', [AdminAgencyController::class,'agency_add_escorts'])->name('admin.agency.add_escorts');
         Route::delete('/agency/{id}', [AdminAgencyController::class, 'delete_agency'])->name('admin.delete.agency');
     });
 });

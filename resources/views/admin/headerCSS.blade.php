@@ -8,6 +8,7 @@
 <title>Scorts Admin</title>
 
 <!-- Bootstrap -->
+{{-- href="{{ url('public/vendors/bootstrap/dist/css/bootstrap.min.css') }}" --}}
 <link href="{{ asset('../vendors/bootstrap/dist/css/bootstrap.min.css') }}" rel="stylesheet">
 <!-- Font Awesome -->
 <link href="{{ asset('../vendors/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
