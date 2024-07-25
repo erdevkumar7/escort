@@ -25,5 +25,11 @@
             </ul>
         </nav>
     </div>
+    {{-- logout form --}}
+    <div>
+        <form id="logout-form" action="{{ route('admin_logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+    </div>
 </div>
 <!-- /top navigation -->
