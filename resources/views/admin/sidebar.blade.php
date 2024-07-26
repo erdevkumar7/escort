@@ -30,14 +30,16 @@
                     <li><a href="{{ route('admin_dashboard') }}"><i class="fa fa-home"></i> Home <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
-                    {{-- Escorts listing --}}
+                    {{-- Escorts --}}
                     <li><a href="{{ route('admin.escorts') }}"><i class="fa fa-table"></i> Escorts <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
-                    <li>
-                        <a href="{{ route('admin.allagencies') }}"><i class="fa fa-sitemap"></i> Agencies <span
+                    <li><a href="{{ route('admin.allagencies') }}"><i class="fa fa-sitemap"></i> Agencies <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
+                    <li><a href="{{route('admin.add.badge_form')}}"><i class="fa fa-gear"></i> Badges <span
+                        class="fa fa-chevron-right"></span></a>
+            </li>
                 </ul>
             </div>
         </div>
