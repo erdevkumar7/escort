@@ -14,6 +14,6 @@ class Badge extends Model
         "how_is_it_applied",
         "hexa_color",
         "description",
-        "design_inspiration",
+        "icon",
     ];
 }

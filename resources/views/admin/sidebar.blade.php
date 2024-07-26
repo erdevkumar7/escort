@@ -34,10 +34,12 @@
                     <li><a href="{{ route('admin.escorts') }}"><i class="fa fa-table"></i> Escorts <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
+                    {{-- Agency --}}
                     <li><a href="{{ route('admin.allagencies') }}"><i class="fa fa-sitemap"></i> Agencies <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
-                    <li><a href="{{route('admin.add.badge_form')}}"><i class="fa fa-gear"></i> Badges <span
+                    {{-- badges --}}
+                    <li><a href="{{route('admin.allbadges')}}"><i class="fa fa-certificate"></i> Badges <span
                         class="fa fa-chevron-right"></span></a>
             </li>
                 </ul>

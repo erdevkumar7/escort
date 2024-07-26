@@ -62,8 +62,13 @@ Route::prefix('admin')->group(function () {
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
         Route::post('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
         //Badges Operation
+        Route::get('all-badges', [BadgeController::class,'allbadges'])->name('admin.allbadges');
         Route::get('/add-badge', [BadgeController::class, 'add_badge_form'])->name('admin.add.badge_form');
         Route::post('/add-badge', [BadgeController::class,'add_badge_form_submit'])->name('admin.add.badge_form_submit');
+
+        Route::get('/badge/{id}/edit', [BadgeController::class, 'badge_edit'])->name('admin.badge_edit');
+        Route::put('/badge/{id}/edit', [BadgeController::class, 'badge_edit_submit'])->name('admin.badge_edit_submit');
+        Route::delete('/badge/{id}', [BadgeController::class, 'badge_delete'])->name('admin.badge_delete');
     });
 });
 

@@ -20,7 +20,8 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="{{route('admin.add.badge_form_submit')}}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.add.badge_form_submit') }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('POST')
                                 <div class="item form-group p-2">
@@ -67,21 +68,6 @@
                                             <span class="text-danger" id="appliedErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- hexa_color --}}
-                                    {{-- <div class="col-md-4 col-sm-4 ">
-                                        <label for="hexa_color">Hex Color *</label>
-                                        <select class="form-control" id="hexa_color" name="hexa_color"
-                                            oninput="removeError('colorErr')">
-                                            <option value="">Select Hexa Color</option>
-                                            <option value="green(#00FF00)"
-                                                {{ old('hexa_color') == 'green(#00FF00)' ? 'selected' : '' }}>Green
-                                                (#00FF00)
-                                            </option>
-                                            <select>
-                                                @error('hexa_color')
-                                                    <span class="text-danger" id="colorErr">{{ $message }}</span>
-                                                @enderror
-                                    </div> --}}
                                 </div>
 
                                 <div class="item form-group p-2">
@@ -108,11 +94,16 @@
                                             <span class="text-danger" id="colorErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- design_inspiration --}}
+                                    {{-- icon --}}
                                     <div class="col-md-6 col-sm-6 ">
-                                        <label for="design_inspiration"> Design Inspiration </label>
-                                        <input type="text" class="form-control" name="design_inspiration" value="{{ old('design_inspiration') }}">
+                                        <label for="icon"> Badge Icon </label>
+                                        <input type="file" class="form-control" name="icon"
+                                            oninput="removeError('iconErr')">
+                                        @error('icon')
+                                            <span class="text-danger" id="iconErr">{{ $message }}</span>
+                                        @enderror
                                     </div>
+
                                 </div>
 
                                 <div class="item form-group p-2">
@@ -128,7 +119,8 @@
                                 {{-- Submit --}}
                                 <div class="item form-group">
                                     <div class="col-md-4 col-sm-4 offset-md-3">
-                                        <a href=""> <button class="btn btn-primary" type="button">Cancel</button></a>
+                                        <a href=""> <button class="btn btn-primary"
+                                                type="button">Cancel</button></a>
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
                                 </div>
