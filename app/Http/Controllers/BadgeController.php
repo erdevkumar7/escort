@@ -13,9 +13,10 @@ class BadgeController extends Controller
         $allbadges = DB::table("badges")->get();
         return view('badges.all', compact('allbadges'));
     }
+    // add_badge_form
     public function add_badge_form()
-    {
-        return view("badges.add");
+    {   $allbadges = DB::table("badges")->get();
+        return view("badges.add", compact("allbadges"));
     }
 
     public function add_badge_form_submit(Request $request)
@@ -81,6 +82,11 @@ class BadgeController extends Controller
         $badge->update($data);
 
         return redirect()->route('admin.allbadges')->with('success', 'Badge Update successfully.');
+    }
+    // show badge-by-id
+    public function show($id){
+        $badge = Badge::find($id);
+        return view('badges.show', compact('badge'));
     }
 
     public function badge_delete($id)

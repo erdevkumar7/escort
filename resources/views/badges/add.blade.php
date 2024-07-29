@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>ADD BADGE</h3>
+                    <h3>Add Badge</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -31,19 +31,26 @@
                                         <select class="form-control" id="name" name="name"
                                             oninput="removeError('nameErr')">
                                             <option value="">Select Badge</option>
-                                            <option value="certified" {{ old('name') == 'certified' ? 'selected' : '' }}>
+                                            <option value="Certified" {{ old('name') == 'Certified' ? 'selected' : '' }}
+                                                {{ $allbadges->contains('name', 'Certified') ? 'disabled' : '' }}>
                                                 Certified
                                             </option>
-                                            <option value="new" {{ old('name') == 'new' ? 'selected' : '' }}>New
+                                            <option value="New" {{ old('name') == 'New' ? 'selected' : '' }}
+                                                {{ $allbadges->contains('name', 'New') ? 'disabled' : '' }}>New
                                             </option>
-                                            <option value="premium" {{ old('name') == 'premium' ? 'selected' : '' }}>Premium
+                                            <option value="Premium" {{ old('name') == 'Premium' ? 'selected' : '' }}
+                                                {{ $allbadges->contains('name', 'Premium') ? 'disabled' : '' }}>Premium
                                             </option>
-                                            <option value="video" {{ old('name') == 'video' ? 'selected' : '' }}>Video
+                                            <option value="Video" {{ old('name') == 'Video' ? 'selected' : '' }}
+                                                {{ $allbadges->contains('name', 'Video') ? 'disabled' : '' }}>Video
                                             </option>
-                                            <option value="new pictures"
-                                                {{ old('name') == 'new pictures' ? 'selected' : '' }}>New pictures
+                                            <option value="New pictures"
+                                                {{ old('name') == 'New pictures' ? 'selected' : '' }}
+                                                {{ $allbadges->contains('name', 'New pictures') ? 'disabled' : '' }}>New
+                                                pictures
                                             </option>
-                                            <option value="caution" {{ old('name') == 'caution' ? 'selected' : '' }}>Caution
+                                            <option value="Caution" {{ old('name') == 'Caution' ? 'selected' : '' }}
+                                                {{ $allbadges->contains('name', 'Caution') ? 'disabled' : '' }}>Caution
                                             </option>
                                         </select>
                                         @error('name')
@@ -56,11 +63,11 @@
                                         <select class="form-control" id="how_is_it_applied" name="how_is_it_applied"
                                             oninput="removeError('appliedErr')">
                                             <option value="">Select Applied</option>
-                                            <option value="manually"
-                                                {{ old('how_is_it_applied') == 'manually' ? 'selected' : '' }}>Manually
+                                            <option value="Manually"
+                                                {{ old('how_is_it_applied') == 'Manually' ? 'selected' : '' }}>Manually
                                             </option>
-                                            <option value="automatically"
-                                                {{ old('how_is_it_applied') == 'automatically' ? 'selected' : '' }}>
+                                            <option value="Automatically"
+                                                {{ old('how_is_it_applied') == 'Automatically' ? 'selected' : '' }}>
                                                 Automatically
                                             </option>
                                         </select>
@@ -96,7 +103,7 @@
                                     </div>
                                     {{-- icon --}}
                                     <div class="col-md-6 col-sm-6 ">
-                                        <label for="icon"> Badge Icon </label>
+                                        <label for="icon"> Badge Icon *</label>
                                         <input type="file" class="form-control" name="icon"
                                             oninput="removeError('iconErr')">
                                         @error('icon')

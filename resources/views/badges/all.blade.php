@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>ALL BADGES</h3>
+                    <h3>Badges</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -43,6 +43,7 @@
                                                     <th>Description</th>
                                                     <th>Badge Icon</th>
                                                     <th>Action</th>
+                                                    <th>Badge View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -63,9 +64,14 @@
                                                             </a>
                                                             <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                                                 data-toggle="tooltip" data-placement="top" title="Delete"
-                                                                data-badge-id="{{ $badge->id }}">
+                                                                data-deleted-id="{{ $badge->id }}">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('admin.badge.show', $badge->id) }}">
+                                                                <button type="button"
+                                                                    class="btn btn-primary">view</button></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
@@ -81,44 +87,18 @@
             </div>
         </div>
     </div>
-    <!-- Delete Badge Confirm Modal -->
-    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
-        aria-labelledby="staticBackdropLabel" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p class="modal-title fs-5" id="staticBackdropLabel">Confirm Delete</p>
-                    <button type="button" class="fa fa-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <h5> Are you sure you want to delete ?</h5>
-                </div>
-                <div class="modal-footer">
-                    {{-- <form id="deleteBadgeForm" action="" method="POST">
-                        
-                        <form> --}}
-                    <form id="deleteBadgeForm" method="POST" style="display:inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                        <button type="submit" class="btn btn-danger">Delete</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-    </div>
 
+    {{-- delete confirm modal script --}}
     <script>
-        // Add event listener to the delete buttons to set the form action in the modal
         document.addEventListener('DOMContentLoaded', function() {
             const deleteButtons = document.querySelectorAll(
                 '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
-            const deleteForm = document.getElementById('deleteBadgeForm');
+            const deleteForm = document.getElementById('deleteConfirmForm');
 
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
-                    const badgeId = this.getAttribute('data-badge-id');
-                    deleteForm.action = `/admin/badge/${badgeId}`;
+                    const deleteId = this.getAttribute('data-deleted-id');
+                    deleteForm.action = `/admin/badge/${deleteId}`;
                 });
             });
         });

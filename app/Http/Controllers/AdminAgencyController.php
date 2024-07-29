@@ -16,11 +16,12 @@ class AdminAgencyController extends Controller
         $allagencies = DB::table("agencies")->orderBy('created_at', 'desc')->get();
         return view("agency.all-agency", compact("allagencies"));
     }
+    // addagency_form
     public function addagency_form()
     {
         return view("agency.add-agency");
     }
-
+    // addagency_form_submit
     public function addagency_form_submit(Request $request)
     {
         $request->validate([
@@ -42,18 +43,19 @@ class AdminAgencyController extends Controller
 
         return redirect()->route('admin.allagencies')->with('success', 'Agency added successfully');
     }
-
+    // agency-by-id
     public function agency($id)
     {
         $agency = Agency::find($id);
         return view('agency.show', compact('agency'));
     }
+    // edit_agency_form
     public function edit_agency_form($id)
     {
         $agency = Agency::find($id);
         return view('agency.edit', compact('agency'));
     }
-
+    // edit_agency
     public function edit_agency(Request $request, $id)
     {
         $agency = Agency::find($id);
@@ -82,12 +84,12 @@ class AdminAgencyController extends Controller
         $agency = Agency::find($id);
         return view("agency.show-escorts", compact('allescorts','agency'));
     }
-
+    // agency_add_escorts_form
     public function agency_add_escorts_form($id){
         $agency = Agency::find($id);
         return view('agency.add-escorts', compact('agency'));
     }
-
+    // agency_add_escorts
     public function agency_add_escorts(Request $request, $id)
     {
         $validatedData = $request->validate([
@@ -163,7 +165,7 @@ class AdminAgencyController extends Controller
 
         return redirect()->route('admin.agency.escorts', $id)->with('success', 'Escort added successfully!');
     }
-
+    // delete_agency
     public function delete_agency($id)
     {
         $agency = Agency::find($id);

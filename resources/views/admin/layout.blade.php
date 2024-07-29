@@ -6,6 +6,15 @@
 </head>
 
 <body class="nav-md">
+    {{-- @if ($errors->any())
+        <div class="alert alert-danger">
+            <ul>
+                @foreach ($errors->all() as $error)
+                    <li>{{ $error }}</li>
+                @endforeach
+            </ul>
+        </div>
+    @endif --}}
     <div class="container body">
         <div class="main_container">
             <!-- main sidebar -->

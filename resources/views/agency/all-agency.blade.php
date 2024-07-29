@@ -79,16 +79,11 @@
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
-                                                            <form id="delete-escorts"
-                                                                action="{{ route('admin.delete.agency', $agency->id) }}"
-                                                                method="POST" style="display:inline">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" data-toggle="tooltip"
-                                                                    data-placement="top" title="Delete">
-                                                                    <i class="fa fa-minus-circle"></i>
-                                                                </button>
-                                                            </form>
+                                                            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                                                data-toggle="tooltip" data-placement="top" title="Delete"
+                                                                data-deleted-id="{{ $agency->id }}">
+                                                                <i class="fa fa-minus-circle"></i>
+                                                            </button>
                                                         </td>
                                                         <td>
                                                             <a href="{{ route('admin.agency.escorts', $agency->id) }}">
@@ -109,5 +104,20 @@
             </div>
         </div>
     </div>
+    {{-- delete confirm modal script --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll(
+                '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
+            const deleteForm = document.getElementById('deleteConfirmForm');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const deleteId = this.getAttribute('data-deleted-id');
+                    deleteForm.action = `/admin/agency/${deleteId}`;
+                });
+            });
+        });
+    </script>
     <!-- /page content -->
 @endsection

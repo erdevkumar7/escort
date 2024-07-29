@@ -69,6 +69,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/badge/{id}/edit', [BadgeController::class, 'badge_edit'])->name('admin.badge_edit');
         Route::put('/badge/{id}/edit', [BadgeController::class, 'badge_edit_submit'])->name('admin.badge_edit_submit');
         Route::delete('/badge/{id}', [BadgeController::class, 'badge_delete'])->name('admin.badge_delete');
+        Route::get('/badge/{id}/show', [BadgeController::class, 'show'])->name('admin.badge.show');
     });
 });
 
