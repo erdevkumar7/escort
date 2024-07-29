@@ -53,7 +53,7 @@
                                                         <td>{{ $badge->how_is_it_applied }}</td>
                                                         <td>{{ $badge->hexa_color }}</td>
                                                         <td>{{ $badge->description }}</td>
-                                                        <td><img src="{{ asset('/images/badge_icons') . '/' . $badge->icon }}"
+                                                        <td><img src="{{ asset('/public/images/badge_icons') . '/' . $badge->icon }}"
                                                                 width="40px" height="30px" alt="Icon"></td>
                                                         <td style="display: flex">
                                                             <a href="{{ route('admin.badge_edit', $badge->id) }}">

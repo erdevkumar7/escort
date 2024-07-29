@@ -54,10 +54,10 @@
                                                     <th>age</th>
                                                     <th>Canton</th>
                                                     <th>City</th>
-                                                    {{-- <th>Services</th> --}}
                                                     <th>Origin</th>
                                                     <th>Type</th>
                                                     <th>Action</th>
+                                                    <th>Escort View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -71,12 +71,6 @@
                                                         <td>{{ $escorts->origin }}</td>
                                                         <td>{{ $escorts->type }}</td>
                                                         <td style="display: flex">
-                                                            <a href="{{ route('admin.get.scorts', $escorts->id) }}">
-                                                                <button data-toggle="tooltip" data-placement="top"
-                                                                    title="view">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </button>
-                                                            </a>
                                                             <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
@@ -88,6 +82,11 @@
                                                                 data-deleted-id="{{ $escorts->id }}">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{ route('admin.get.scorts', $escorts->id) }}">
+                                                                <button type="button"
+                                                                    class="btn btn-primary">view</button></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach

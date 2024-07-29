@@ -6,12 +6,10 @@ use App\Http\Controllers\AdminEscortsController;
 use App\Http\Controllers\AdminFuncController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\UserAuthController;
+use App\Http\Controllers\UserEscortsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
+Route::get('/', [UserEscortsController::class,'index'])->name('index');
 
 Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin_login_form');
 

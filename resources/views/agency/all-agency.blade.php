@@ -55,7 +55,7 @@
                                                     <th>Address</th>
                                                     <th>Counter</th>
                                                     <th>Action</th>
-                                                    <th>Escort View</th>
+                                                    <th>Agency View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -67,12 +67,6 @@
                                                         <td>{{ $agency->address ? $agency->address : 'Not Available' }}</td>
                                                         <td>{{ $agency->counter ? $agency->counter : 'Not Available' }}</td>
                                                         <td style="display: flex">
-                                                            {{-- <a href="{{route('admin.agency', $agency->id)}}">
-                                                                <button data-toggle="tooltip" data-placement="top"
-                                                                    title="view">
-                                                                    <i class="fa fa-eye"></i>
-                                                                </button>
-                                                            </a> --}}
                                                             <a href="{{ route('admin.edit_agency_form', $agency->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
