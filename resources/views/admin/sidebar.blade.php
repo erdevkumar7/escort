@@ -9,7 +9,7 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="{{ asset('images/profile_img') . '/' . Auth::guard('admin')->user()->image }}" alt="..."
+                <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('admin')->user()->image }}" alt="..."
                     class="img-circle profile_img">
             </div>
             <div class="profile_info">

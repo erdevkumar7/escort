@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AdminAgencyController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\AdminEscortsController;
 use App\Http\Controllers\AdminFuncController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\UserAuthController;
@@ -31,22 +32,23 @@ Route::prefix('admin')->group(function () {
 //todo: Admin Functionality
 Route::prefix('admin')->group(function () {
     Route::middleware('auth.admin')->group(function () {
+        //User Operations
         Route::get('/allusers', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
 
         Route::get('/user/{id}/edit', [AdminFuncController::class, 'edit_user_form'])->name('admin_edit_user_form');
         Route::put('/user/{id}', [AdminFuncController::class, 'update_user'])->name('admin_update_user');
         Route::delete('/user/{id}', [AdminFuncController::class, 'delete_user'])->name('admin_delete_user');
         //Escorts Operations
-        Route::get('/all-escorts', [AdminFuncController::class, 'allescorts'])->name('admin.escorts');
+        Route::get('/all-escorts', [AdminEscortsController::class, 'allescorts'])->name('admin.escorts');
 
-        Route::get('/add-escorts', [AdminFuncController::class, 'addescorts'])->name('admin.add.escorts');
-        Route::post('/post-escorts', [AdminFuncController::class, 'postescorts'])->name('admin.post.escorts');
+        Route::get('/add-escorts', [AdminEscortsController::class, 'addescorts'])->name('admin.add.escorts');
+        Route::post('/post-escorts', [AdminEscortsController::class, 'postescorts'])->name('admin.post.escorts');
 
-        Route::get('/escorts/{id}/edit', [AdminFuncController::class, 'edit_escorts_form'])->name('admin.edit_escorts_form');
-        Route::put('/escorts/{id}', [AdminFuncController::class, 'edit_escorts'])->name('admin.edit_escorts');
+        Route::get('/escorts/{id}/edit', [AdminEscortsController::class, 'edit_escorts_form'])->name('admin.edit_escorts_form');
+        Route::put('/escorts/{id}', [AdminEscortsController::class, 'edit_escorts'])->name('admin.edit_escorts');
 
-        Route::get('/escorts/{id}', [AdminFuncController::class, 'escorts_by_id'])->name('admin.get.scorts');
-        Route::delete('/escorts/{id}', [AdminFuncController::class, 'deleteEscorts'])->name('admin.delete.escorts');
+        Route::get('/escorts/{id}', [AdminEscortsController::class, 'escorts_by_id'])->name('admin.get.scorts');
+        Route::delete('/escorts/{id}', [AdminEscortsController::class, 'deleteEscorts'])->name('admin.delete.escorts');
         //Agency Operations
         Route::get('/all-agencies', [AdminAgencyController::class, 'allagencies'])->name('admin.allagencies');
 

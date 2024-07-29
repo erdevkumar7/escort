@@ -113,7 +113,7 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/admin/escorts/${deleteId}`;
+                    deleteForm.action = `/my_project/escorts/admin/escorts/${deleteId}`;
                 });
             });
         });
