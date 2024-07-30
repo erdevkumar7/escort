@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>ADD BADGE</h3>
+                    <h3>Add Badge</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -100,7 +100,7 @@
                                 {{-- Submit --}}
                                 <div class="item form-group">
                                     <div class="col-md-4 col-sm-4 offset-md-3">
-                                        <a href=""> <button class="btn btn-primary"
+                                        <a href="{{route('admin.allbadges')}}"> <button class="btn btn-primary"
                                                 type="button">Cancel</button></a>
                                         <button type="submit" class="btn btn-success">Submit</button>
                                     </div>
