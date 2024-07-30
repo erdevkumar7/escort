@@ -1,131 +1,135 @@
-@include('admin.headerCSS')
-<div class="row">
-    <div class="col-md-12 col-sm-12 ">
-        <div class="x_panel">
-            <div class="x_title">
-                <h2>User Register</h2>
-                <div class="clearfix"></div>
-            </div>
-            <div class="x_content">
-                <br />
-                <form action="{{ route('user_register_save') }}" method="POST">
-                    @csrf
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="first-name">First Name <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input type="text" id="first-name" name="fname" class="form-control ">
-                        </div>
-                        @error('fname')
-                        <span class="text-danger">{{$message}}</span>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    @include('user.headerCSS')
+</head>
+<body>
+    <!-- nav  -->
+    @include('user.topNav')
+
+    <section>
+        <div class="container mt-3 escort-register">
+            <form action="{{ route('escorts.register_submit') }}" method="POST" enctype="multipart/form-data">
+                @csrf
+                <div class="row jumbotron box8">
+                    <div class="col-sm-12 mx-t3 mb-4">
+                        <h2 class="text-center text-info">Escort-Register</h2>
+                    </div>
+                    {{-- nickname --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="nickname">Nickname *</label>
+                        <input type="text" class="form-control" name="nickname" id="nickname"
+                            value="{{ old('nickname') }}" placeholder="Enter your Nickname."
+                            oninput="removeError('nicknameErr')">
+                        @error('nickname')
+                            <span class="text-danger" id="nicknameErr">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="last-name">Last Name <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input type="text" id="last-name" name="lname" class="form-control">
-                        </div>
-                        @error('lname')
-                        <span class="text-danger">{{$message}}</span>
+                    {{-- phone_number --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="phone_number">Phone Number *</label>
+                        <input type="text" class="form-control" name="phone_number" id="phone_number"
+                            placeholder="Enter Your Contact Number." value="{{ old('phone_number') }}"
+                            oninput="removeError('phoneErr')">
+                        @error('phone_number')
+                            <span class="text-danger" id="phoneErr">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="email">Email <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input type="email" id="email" name="email" class="form-control ">
-                        </div>
+                    {{-- email --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="email">Email *</label>
+                        <input type="email" class="form-control" name="email" id="email"
+                            value="{{ old('email') }}" placeholder="Enter your email."
+                            oninput="removeError('emailErr')">
                         @error('email')
-                        <span class="text-danger">{{$message}}</span>
+                            <span class="text-danger" id="emailErr">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone">Phone <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input type="text" id="phone" name="phone" class="form-control ">
-                        </div>
-                        @error('phone')
-                        <span class="text-danger">{{$message}}</span>
+                    {{-- address --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="address">Address</label>
+                        <input type="address" class="form-control" name="address" id="address"
+                            value="{{ old('address') }}" placeholder="Enter Your Address">
+                    </div>
+                    {{-- city --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="city">City *</label>
+                        <select id="city" name="city" class="form-control browser-default custom-select"
+                            oninput="removeError('cityErr')">
+                            <option value="">Select City</option>
+                            <option value="city1" {{ old('city') == 'city1' ? 'selected' : '' }}>city1
+                            </option>
+                            <option value="city2" {{ old('city') == 'city2' ? 'selected' : '' }}>city2
+                            </option>
+                            <option value="city3" {{ old('city') == 'city3' ? 'selected' : '' }}>city3
+                            </option>
+                            <option value="city4" {{ old('city') == 'city4' ? 'selected' : '' }}>city4
+                            </option>
+                        </select>
+                        @error('city')
+                            <span class="text-danger" id="cityErr">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="address">Address <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input type="text" id="address" name="address" class="form-control ">
-                        </div>
-                        @error('address')
-                        <span class="text-danger">{{$message}}</span>
+                    {{-- age --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="age">Age *</label>
+                        <select id="age" name="age" class="form-control browser-default custom-select"
+                            oninput="removeError('ageErr')">
+                            <option value="">Select Age</option>
+                            <option value="18-25" {{ old('age') == '18-25' ? 'selected' : '' }}>18-25
+                            </option>
+                            <option value="26-35" {{ old('age') == '26-35' ? 'selected' : '' }}>26-35
+                            </option>
+                            <option value="36-45" {{ old('age') == '36-45' ? 'selected' : '' }}>36-45
+                            </option>
+                            <option value="45-55" {{ old('age') == '45-55' ? 'selected' : '' }}>45-55
+                            </option>
+                            <option value="56+" {{ old('age') == '56+' ? 'selected' : '' }}>56+</option>
+                        </select>
+                        @error('age')
+                            <span class="text-danger" id="ageErr">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align">Gender</label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <select class="form-control" name="gender">
-                                <option value="male">Male</option>
-                                <option value="female">Female</option>
-                                <option value="other">Other</option>
-                            </select>
-                        </div>
-                        @error('gender')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align">Date Of Birth <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input id="birthday" class="date-picker form-control" placeholder="dd-mm-yyyy"
-                                type="text" name="dob" type="text" onfocus="this.type='date'"
-                                onmouseover="this.type='date'" onclick="this.type='date'" onblur="this.type='text'"
-                                onmouseout="timeFunctionLong(this)">
-                            <script>
-                                function timeFunctionLong(input) {
-                                    setTimeout(function() {
-                                        input.type = 'text';
-                                    }, 60000);
-                                }
-                            </script>
-                        </div>
-                        @error('dob')
-                        <span class="text-danger">{{$message}}</span>
-                        @enderror
-                    </div>
-                    <div class="item form-group">
-                        <label class="col-form-label col-md-3 col-sm-3 label-align" for="password">Password <span
-                                class="required">*</span>
-                        </label>
-                        <div class="col-md-6 col-sm-6 ">
-                            <input type="password" id="password" name="password" class="form-control ">
-                        </div>
+                    {{-- password --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="pass">Password</label>
+                        <input type="Password" name="password" class="form-control" id="pass"
+                            placeholder="Enter your password." oninput="removeError('PasswordErr')">
                         @error('password')
-                        <span class="text-danger">{{$message}}</span>
+                            <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="ln_solid"></div>
-                    <div class="item form-group">
-                        <div class="col-md-6 col-sm-6 offset-md-3">
-                            <button class="btn btn-primary" type="button">Cancel</button>
-                            <button class="btn btn-primary" type="reset">Reset</button>
-                            <button type="submit" class="btn btn-success">Submit</button>
-                        </div>
+                    {{-- password_confirmation --}}
+                    <div class="col-sm-6 form-group">
+                        <label for="password_confirmation">Confirm Password</label>
+                        <input type="password" name="password_confirmation" id="password_confirmation"
+                            class="form-control" placeholder="Re-enter your password."
+                            oninput="removeError('C_PasswordErr')">
+                    </div>
+                    @error('password_confirmation')
+                        <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
+                    @enderror
+
+                    <div class="col-sm-12">
+                        <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="{{route('login')}}"
+                            class="fw-bold text-body"><u>Login here</u></a></p>
                     </div>
 
-                </form>
-                <script>
-                    function removeErr(id) {
 
-                    }
-                </script>
-            </div>
+                    <div class="col-sm-12 form-group mb-0">
+                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                    </div>
+
+                </div>
+            </form>
         </div>
-    </div>
-</div>
+    </section>
+    <!-- footer -->
+    @include('user.footer')
+    <!-- footerJS -->
+    @include('user.footerJS')
+
+</body>
+
+</html>

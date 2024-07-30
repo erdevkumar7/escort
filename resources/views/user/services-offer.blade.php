@@ -10,7 +10,7 @@
                 <h3>Total number of ads online</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                     labore aliqua.</p>
-                <a href="#"><button class="btn">VIEW NOW</button></a>
+                <a href="#">VIEW NOW</a>
             </div>
 
             <div class="services-offer-card">
@@ -18,21 +18,21 @@
                     of cities</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                     labore aliqua.</p>
-                <a href="#"><button class="btn">VIEW NOW</button></a>
+                <a href="#">VIEW CITIES</a>
             </div>
 
             <div class="services-offer-card">
                 <h3>Total number of reviews</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                     labore aliqua.</p>
-                <a href="#"><button class="btn">VIEW NOW</button></a>
+                <a href="#">VIEW REVIEWS</a>
             </div>
 
             <div class="services-offer-card">
                 <h3>Become a member now</h3>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                     labore aliqua.</p>
-                <a href="#"><button class="btn">VIEW NOW</button></a>
+                <a href="#">RAGISTER NOW</a>
             </div>
         </div>
     </div>

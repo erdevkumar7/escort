@@ -1,4 +1,8 @@
 <section class="disclaimer">
+<div class="inner-disc">
+    <br>
+    <br>
+    <br>
     <div class="disclaimer-inner-text text-white">
         <h2 class="fw-bold">Disclaimer</h2>
         <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
@@ -64,7 +68,7 @@
             </form>
         </div>
     </div>
-
+</div>
 </section>
 <section class="footer-escorts">
     <div class="container-fluid">

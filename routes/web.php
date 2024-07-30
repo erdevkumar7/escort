@@ -5,13 +5,14 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminEscortsController;
 use App\Http\Controllers\AdminFuncController;
 use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\EscortsAuthController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserEscortsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserEscortsController::class,'index'])->name('index');
 
-Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin_login_form');
+// Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin_login_form');
 
 // todo: Admin Auth
 Route::prefix('admin')->group(function () {
@@ -73,16 +74,30 @@ Route::prefix('admin')->group(function () {
     });
 });
 
+//todo: Escort Auth
+ Route::get('/register', [EscortsAuthController::class, 'escort_register_form'])->name('escorts.register_form');
+ Route::post('/register', [EscortsAuthController::class, 'escort_register_form_submit'])->name('escorts.register_submit');
+ Route::get('/login', [EscortsAuthController::class, 'escort_login_form'])->name('login');
+ Route::post('/login', [EscortsAuthController::class, 'login'])->name('escorts_login');
 
-//todo: User Auth
-Route::get('/register', [UserAuthController::class, 'user_register_form'])->name('user_register_form');
-Route::post('/register', [UserAuthController::class, 'register'])->name('user_register_save');
-
-Route::get('/login', [UserAuthController::class, 'user_login_form'])->name('login');
-Route::post('/login', [UserAuthController::class, 'login'])->name('user_login');
-
-
-Route::group(['middleware' => ['auth:web']], function () {
-    Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('user_dashboard');
-    Route::post('/logout', [UserAuthController::class, 'logout'])->name('user_logout');
+ Route::group(['middleware' => ['auth:web']], function () {
+    Route::get('/profile', [EscortsAuthController::class, 'profile'])->name('escorts.profile');
+    Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
+
+
+
+// --------------------------------------------------------------------------------------
+// Route::get('/register', [UserAuthController::class, 'user_register_form'])->name('user_register_form');
+// Route::post('/register', [UserAuthController::class, 'register'])->name('user_register_save');
+
+// Route::get('/login', [UserAuthController::class, 'user_login_form'])->name('login');
+// Route::post('/login', [UserAuthController::class, 'login'])->name('user_login');
+
+
+// Route::group(['middleware' => ['auth:web']], function () {
+//     Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('user_dashboard');
+//     Route::post('/logout', [UserAuthController::class, 'logout'])->name('user_logout');
+// });
+
+

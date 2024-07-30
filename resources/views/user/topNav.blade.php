@@ -48,7 +48,7 @@
                     <a class="nav-link" href="#"><img src="{{asset('/public/images/static_img/shop-icon.png')}}"></a>
                 </li>
                 <li class="nav-item inner-icons">
-                    <a class="nav-link" href="#"><img src="{{asset('/public/images/static_img/frame.png')}}"></a>
+                    <a class="nav-link" href="{{route('escorts.register_form')}}"><img src="{{asset('/public/images/static_img/frame.png')}}"></a>
                 </li>
             </div>
         </div>

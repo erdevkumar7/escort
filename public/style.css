@@ -38,6 +38,43 @@
     src: url('./font-family/Urbanist-master/Urbanist-SemiBold.otf');
 }
 
+.escort-register label {
+    font-weight: 600;
+    color: #666;
+}
+
+.escort-register .box8 {
+    box-shadow: 0px 0px 5px 1px #999;
+}
+
+.escort-register .mx-t3 {
+    margin-top: -3rem;
+}
+
+
+.escort-login-form label {
+    font-weight: 600;
+    color: #666;
+}
+
+.escort-login-form .box8 {
+    box-shadow: 0px 0px 5px 1px #999;
+}
+
+.escort-login-form .mx-t3 {
+    margin-top: -3rem;
+}
+.escort-login-form .form-group {
+margin: auto;
+margin-top: 20px;
+}
+
+.escort-login-form .jumbotron.box8 {
+gap: 3px;
+}
+
+
+
 h1 {
     font-size: 48px;
 }
@@ -223,8 +260,8 @@ nav.navbar img.img-fluid {
 .we-help-growth {
     background-color: #232e48;
     padding: 60px 90px;
+    padding-bottom: 80px;
 }
-
 .we-help-growth h1.your-growth-text {
     font-size: 64px;
     color: #fff;
@@ -296,8 +333,8 @@ section.we-help-growth .container {
     background-color: #111624;
     padding: 60px 75px;
     position: relative;
+    padding-bottom: 90px;
 }
-
 .premium-ads .owl-prev:after {
     content: '';
     background: url('./images/static_img/button-left.png');
@@ -312,11 +349,11 @@ section.we-help-growth .container {
 .premium-ads .owl-next:before {
     content: '';
     background: url('./images/static_img/button-right.png');
-    width: 100px;
+    width: 70px;
     height: 100px;
     position: absolute;
     background-repeat: no-repeat;
-    right: 40px;
+    right: 72px;
     top: -135px;
 }
 
@@ -339,9 +376,12 @@ section.we-help-growth .container {
     color: #999999;
     margin-bottom: 0px;
     width: 70%;
-    font-family: Urbanist-Medium;
+    font-family: 'Montserrat-Regular';
 }
-
+p.featured-text {
+    font-family: 'Montserrat-Regular';
+    font-size: 15px;
+}
 .premium-ads div#card-carousel {
     display: inline-block;
 }
@@ -456,19 +496,23 @@ section.we-help-growth .container {
     width: 75%;
     margin: auto;
     padding: 11px 0;
-    font-family: 'Urbanist-Medium';
+    font-family: 'Montserrat-Regular';
+    font-size: 15px;
 }
 
 .services-offer-card {
     background-color: #000000;
     color: #fff;
     text-align: center;
-    padding: 35px 25px 20px 25px;
+    padding: 35px 25px 45px 25px;
     width: 23%;
     margin: 10px;
     margin-top: 40px;
     border: solid 2px #EC8CCC;
     border-radius: 18px;
+}
+.services-offer-card:hover a {
+    background-color: black;
 }
 
 .services-offer-card h3 {
@@ -479,7 +523,8 @@ section.we-help-growth .container {
 
 .services-offer-card p {
     font-size: 15px;
-    font-family: 'Urbanist-Medium';
+    padding-bottom: 18px;
+    font-family: 'Montserrat-Regular';
 }
 
 .services-offer-card button {
@@ -504,14 +549,22 @@ section.we-help-growth .container {
     box-shadow: none;
 }
 
-.services-offer-card a button.btn {
-    font-weight: 500;
+.services-offer-card a {
+    background-color: #EC8CCC;
+    border: none;
+    padding: 10px 25px 10px 25px;
+    border-radius: 50px;
+    font-size: 14px;
+    margin-top: 11px;
     color: #fff;
+    font-weight: 500;
+    text-decoration: none;
 }
 
-.services-offer-card a button.btn:hover {
-    color: #fff;
+.services-offer-card a:hover {
+    background-color: black !important;
 }
+
 
 section.services-offer .container-fluid {
     width: 90%;
@@ -523,6 +576,8 @@ section.services-offer .container-fluid {
     display: block;
     width: 95%;
     margin-bottom: 8px;
+    border: solid 2px #5CE1E6;
+    border-radius: 100%;
 }
 
 .profile-moment .owl-prev {
@@ -536,11 +591,11 @@ section.services-offer .container-fluid {
 .profile-moment .owl-next:after {
     content: '';
     background: url('./images/static_img/button-right.png');
-    width: 100px;
+    width: 70px;
     height: 100px;
     position: absolute;
     background-repeat: no-repeat;
-    right: 40px;
+    right: 72px;
     top: -135px;
 }
 
@@ -564,7 +619,7 @@ section.services-offer .container-fluid {
 .profile-moment p.featured-text {
     width: 72%;
     padding: 11px 0;
-    font-family: 'Urbanist-Medium';
+    font-family: 'Montserrat-Regular';
 }
 
 .profile-moment h4 {
@@ -583,9 +638,34 @@ section.services-offer .container-fluid {
 
 /* six section css */
 
+.featured-categories .card.card-first {
+    border: solid 2px #EC8CCC;
+    border-radius: 15px;
+}
+.featured-categories .card.card-second {
+    border: solid 2px #24344C;
+    border-radius: 15px;
+}
+
+
+.featured-categories .card.card-third {
+    border: solid 2px #228B22;
+    border-radius: 15px;
+}
+
+
+
+.featured-categories .card.card-fourth {
+    border: solid 2px #FFD700;
+    border-radius: 15px;
+    height: 100%;
+}
+
+
 .featured-categories {
     background-color: #232e48;
     padding: 60px 0;
+    padding-bottom: 90px;
 }
 
 .featured-categories h1 {
@@ -601,9 +681,8 @@ section.services-offer .container-fluid {
     width: 63%;
     margin: auto;
     padding: 15px 0;
-    font-family: 'Urbanist-Medium';
+    font-family: 'Montserrat-Regular';
 }
-
 
 .featured-categories .card {
     background: none;
@@ -618,16 +697,12 @@ section.services-offer .container-fluid {
     position: relative;
 }
 
-.featured-categories img.card-img-top {
-    width: 320px;
-}
 
 .featured-categories .card-body {
     position: absolute;
-    bottom: 56px;
-    left: calc(32% - 60px);
     text-align: center;
     width: 100%;
+    bottom: 0;
 }
 
 .featured-categories button {
@@ -665,11 +740,11 @@ section.services-offer .container-fluid {
 .new-escorts .owl-next:before {
     content: '';
     background: url('./images/static_img/button-right.png');
-    width: 80px;
+    width: 70px;
     height: 100px;
     position: absolute;
     background-repeat: no-repeat;
-    right: 68px;
+    right: 72px;
     top: -135px;
 }
 
@@ -684,7 +759,7 @@ section.services-offer .container-fluid {
 .new-escorts .card p {
     margin-bottom: 5px;
     color: #999999;
-    font-family: 'Urbanist-Medium';
+    font-family: 'Montserrat-Regular';
 }
 
 .escorts-first-content p {
@@ -702,10 +777,9 @@ section.services-offer .container-fluid {
 .new-escorts {
     background-color: #111624;
     padding: 60px 80px;
-    padding-bottom: 11px;
     position: relative;
+    padding-bottom: 90px;
 }
-
 .new-escorts .col-carousel {
     padding-left: 0;
 }
@@ -730,7 +804,7 @@ section.services-offer .container-fluid {
 .new-escorts .featured-text {
     padding: 11px 0;
     width: 70%;
-    font-family: 'Urbanist-Medium';
+    font-family: 'Montserrat-Regular';
 }
 
 .new-escorts .card {
@@ -751,12 +825,14 @@ section.disclaimer {
     margin: auto;
     background-color: #00000066;
     padding: 60px 40px;
-    padding-bottom: 5px;
+    padding-bottom: 35px;
+    margin-bottom: 60px;
+    padding-top: 35px;
 }
 
 .disclaimer-inner-text p {
-    font-family: Montserrat-SemiBold;
     line-height: 1.6;
+    font-family: 'Montserrat-Regular';
 }
 
 .disclaimer-inner-text h2 {
@@ -921,6 +997,7 @@ section.disclaimer {
     .premium-ads article.thumbnail.item {
         padding: 18px;
     }
+
 
     .services-offer h1 {
         font-size: 40px;
@@ -1167,7 +1244,9 @@ section.disclaimer {
     nav.navbar .input-group {
         width: 400px;
     }
-
+.featured-categories .card.card-fourth {
+    height: auto;
+}
 
 }
 
@@ -1179,6 +1258,10 @@ section.disclaimer {
     .services-offer-card h3 {
         font-size: 27px;
     }
+
+.featured-categories .card.card-fourth {
+    height: auto;
+}
 
     div#navbarScroll {
         position: relative;
@@ -1360,11 +1443,12 @@ section.disclaimer {
         bottom: 89px;
     }
 
-    .featured-categories {
-        padding: 40px 0;
-        padding-bottom: 0;
-    }
-
+ .featured-categories {
+    padding: 40px 0;
+    padding-bottom: 0;
+    padding-left: 15px;
+    padding-right: 15px;
+}
     .new-escorts {
         padding: 40px 24px;
         padding-bottom: 95px;
@@ -1385,12 +1469,13 @@ section.disclaimer {
         width: 100%;
     }
 
-    .disclaimer-inner-text {
-        width: 100%;
-        padding: 40px 25px;
-        text-align: center;
-        padding-bottom: 8px;
-    }
+  .disclaimer-inner-text {
+    width: 100%;
+    padding: 40px 25px;
+    text-align: center;
+    padding-bottom: 8px;
+    padding-top: 0;
+}
 
     .stay-upto-date {
         width: 90%;
@@ -1398,7 +1483,7 @@ section.disclaimer {
     }
 
     .featured-categories .card-deck .card {
-        margin-bottom: 0;
+        margin-bottom: 25px;
     }
 
     .we-help-img img {
@@ -1544,6 +1629,7 @@ section.disclaimer {
 
     .profile-moment .owl-carousel .owl-item img {
         width: 100%;
+        border-radius: 100%;
     }
 
     nav.navbar i.fa.fa-search {
