@@ -33,9 +33,11 @@
                         <label for="pass">Password</label>
                         <input type="Password" name="password" class="form-control" id="pass"
                             placeholder="Enter your password." oninput="removeError('PasswordErr')">
+
                         @error('password')
                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                         @enderror
+                        <a href="{{route('password.request')}}" class="fw-bold text-body float-right m-1">Forgot Password</a>
                     </div>
 
 

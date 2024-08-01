@@ -10,7 +10,7 @@ use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserEscortsController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [UserEscortsController::class,'index'])->name('index');
+Route::get('/', [UserEscortsController::class, 'index'])->name('index');
 
 // Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin_login_form');
 
@@ -63,9 +63,9 @@ Route::prefix('admin')->group(function () {
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
         Route::post('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
         //Badges Operation
-        Route::get('all-badges', [BadgeController::class,'allbadges'])->name('admin.allbadges');
+        Route::get('all-badges', [BadgeController::class, 'allbadges'])->name('admin.allbadges');
         Route::get('/add-badge', [BadgeController::class, 'add_badge_form'])->name('admin.add.badge_form');
-        Route::post('/add-badge', [BadgeController::class,'add_badge_form_submit'])->name('admin.add.badge_form_submit');
+        Route::post('/add-badge', [BadgeController::class, 'add_badge_form_submit'])->name('admin.add.badge_form_submit');
 
         Route::get('/badge/{id}/edit', [BadgeController::class, 'badge_edit'])->name('admin.badge_edit');
         Route::put('/badge/{id}/edit', [BadgeController::class, 'badge_edit_submit'])->name('admin.badge_edit_submit');
@@ -75,12 +75,20 @@ Route::prefix('admin')->group(function () {
 });
 
 //todo: Escort Auth
- Route::get('/register', [EscortsAuthController::class, 'escort_register_form'])->name('escorts.register_form');
- Route::post('/register', [EscortsAuthController::class, 'escort_register_form_submit'])->name('escorts.register_submit');
- Route::get('/login', [EscortsAuthController::class, 'escort_login_form'])->name('login');
- Route::post('/login', [EscortsAuthController::class, 'login'])->name('escorts_login');
+Route::get('/register', [EscortsAuthController::class, 'escort_register_form'])->name('escorts.register_form');
+Route::post('/register', [EscortsAuthController::class, 'escort_register_form_submit'])->name('escorts.register_submit');
+Route::get('/login', [EscortsAuthController::class, 'escort_login_form'])->name('login');
+Route::post('/login', [EscortsAuthController::class, 'login'])->name('escorts_login');
 
- Route::group(['middleware' => ['auth:web']], function () {
+// Forgot Password
+Route::get('/forgot-password', [EscortsAuthController::class, 'showForgotPasswordForm'])->name('password.request');
+Route::post('/forgot-password', [EscortsAuthController::class, 'sendResetLinkEmail'])->name('password.email');
+// Reset Password
+Route::get('/reset-password/{token}', [EscortsAuthController::class, 'showResetPasswordForm'])->name('password.reset');
+Route::post('/reset-password', [EscortsAuthController::class, 'resetPassword'])->name('password.update');
+
+
+Route::group(['middleware' => ['auth:escort']], function () {
     Route::get('/profile', [EscortsAuthController::class, 'profile'])->name('escorts.profile');
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
@@ -99,5 +107,3 @@ Route::prefix('admin')->group(function () {
 //     Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('user_dashboard');
 //     Route::post('/logout', [UserAuthController::class, 'logout'])->name('user_logout');
 // });
-
-

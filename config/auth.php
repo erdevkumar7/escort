@@ -58,6 +58,12 @@ return [
             'expire' => 60,
             'throttle' => 60,
         ],
+        'escorts' => [
+            'provider' => 'escorts',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
     ],
 
 

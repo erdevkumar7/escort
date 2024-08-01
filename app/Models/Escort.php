@@ -4,10 +4,15 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use Illuminate\Auth\Passwords\CanResetPassword;
+use Illuminate\Notifications\Notifiable;
 
-class Escort extends Model
+class Escort extends Authenticatable implements CanResetPasswordContract
 {
-    use HasFactory;
+    use  CanResetPassword, Notifiable;
+    // use HasFactory;
     protected $fillable = [
         'nickname',
         'pictures',
@@ -60,5 +65,8 @@ class Escort extends Model
         'accepts_couples' => 'boolean',
         'elderly' => 'boolean',
         'air_conditioned' => 'boolean',
+    ];
+    protected $hidden = [
+        'password', 'remember_token',
     ];
 }
