@@ -57,7 +57,7 @@
                                         <label for="city">City *</label>
                                         <select class="form-control" id="city" name="city">
                                             <!-- Add options dynamically from the database -->
-                                            <option value="city" {{ $escort->city == 'city' ? 'selected' : '' }}>city
+                                            <option value="city1" {{ $escort->city == 'city1' ? 'selected' : '' }}>city1
                                             </option>
                                             <option value="city2" {{ $escort->city == 'city2' ? 'selected' : '' }}>city2
                                             </option>
@@ -375,20 +375,24 @@
                                     {{-- services --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="services">Services *</label>
-                                        <select class="form-control" id="services" name="services[]" multiple>
-                                            <option value="service1"
-                                                {{ in_array('service1', $services) ? 'selected' : '' }}>One Option
-                                            </option>
-                                            <option value="service2"
-                                                {{ in_array('service2', $services) ? 'selected' : '' }}>Two Option
-                                            </option>
-                                            <option value="service3"
-                                                {{ in_array('service3', $services) ? 'selected' : '' }}>Third Option
-                                            </option>
-                                        </select>
+                                        @if ($services)
+                                            <select class="form-control" id="services" name="services[]" multiple>
+                                                <option value="service1"
+                                                    {{ in_array('service1', $services) ? 'selected' : '' }}>One Option
+                                                </option>
+                                                <option value="service2"
+                                                    {{ in_array('service2', $services) ? 'selected' : '' }}>Two Option
+                                                </option>
+                                                <option value="service3"
+                                                    {{ in_array('service3', $services) ? 'selected' : '' }}>Third Option
+                                                </option>
+                                            </select>
+                                        @else
+                                            <input type="text" class="form-control" value="Not Selected" readonly>
+                                        @endif
                                     </div>
-                                      {{-- availability --}}
-                                      <div class="col-md-4 col-sm-4">
+                                    {{-- availability --}}
+                                    <div class="col-md-4 col-sm-4">
                                         <label for="availability">Availability</label>
                                         @if ($availability)
                                             <select class="form-control" id="availability" name="availability[]"
@@ -426,7 +430,7 @@
                                     </div>
                                 </div>
 
-                                <div class="item form-group">                                  
+                                <div class="item form-group">
                                     {{-- currencies_accepted --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="currencies_accepted">Currencies Accepted</label>
@@ -480,10 +484,14 @@
                                     {{-- pictures --}}
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="pictures">Pictures *</label></div>
-                                        @foreach ($pictures as $picture)
-                                            <img src="{{ asset('/public/images/escorts_img/') . '/' . $picture }}" alt="..."
-                                                width="200px" height="200px">
-                                        @endforeach
+                                        @if ($pictures)
+                                            @foreach ($pictures as $picture)
+                                                <img src="{{ asset('/public/images/escorts_img/') . '/' . $picture }}"
+                                                    alt="..." width="200px" height="200px">
+                                            @endforeach
+                                        @else
+                                            <div></div>
+                                        @endif
                                         <input type="file" class="form-control" id="pictures" name="pictures[]"
                                             multiple>
                                         @error('pictures')
@@ -496,7 +504,8 @@
                                         @if ($video)
                                             @foreach ($video as $vdo)
                                                 <video width="300" controls>
-                                                    <source src="{{ asset('/public/videos') . '/' . $vdo }}" type="video/mp4">
+                                                    <source src="{{ asset('/public/videos') . '/' . $vdo }}"
+                                                        type="video/mp4">
                                                 </video>
                                             @endforeach
                                         @endif

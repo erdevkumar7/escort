@@ -1,12 +1,15 @@
    <!-- nav section start -->
-   <div class="top-text">
-       <div class="first-order">
-           <p>Sign up and get 20% off to your first order. <a href="#">Sign Up Now</a></p>
+   @if (!Auth::guard('escort')->user())
+       <div class="top-text">
+           <div class="first-order">
+               <p>Sign up and get 20% off to your first order. <a href="{{ route('escorts.register_form') }}">Sign Up
+                       Now</a></p>
+           </div>
+           <div class="first-order-img">
+               <a href="#"><img src="{{ asset('/public/images/static_img/vector.png') }}"></a>
+           </div>
        </div>
-       <div class="first-order-img">
-           <a href="#"><img src="{{ asset('/public/images/static_img/vector.png') }}"></a>
-       </div>
-   </div>
+   @endif
    <nav class="navbar navbar-expand-lg">
        <div class="container-fluid">
            <a class="navbar-brand" href="#"><img src="{{ asset('/public/images/static_img/logo.png') }}"
@@ -65,7 +68,8 @@
            </div>
            {{-- logout form --}}
            <div>
-               <form id="escort-logout-form" action="{{ route('escorts.logout') }}" method="POST" style="display: none;">
+               <form id="escort-logout-form" action="{{ route('escorts.logout') }}" method="POST"
+                   style="display: none;">
                    @csrf
                </form>
            </div>
