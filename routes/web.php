@@ -74,7 +74,7 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-//todo: Escort Auth
+//todo: Escort Authentication Functionality
 Route::get('/register', [EscortsAuthController::class, 'escort_register_form'])->name('escorts.register_form');
 Route::post('/register', [EscortsAuthController::class, 'escort_register_form_submit'])->name('escorts.register_submit');
 Route::get('/login', [EscortsAuthController::class, 'escort_login_form'])->name('login');
@@ -87,23 +87,10 @@ Route::post('/forgot-password', [EscortsAuthController::class, 'sendResetLinkEma
 Route::get('/reset-password/{token}', [EscortsAuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [EscortsAuthController::class, 'resetPassword'])->name('password.update');
 
-
+//todo: Escort Operation Functionality
 Route::group(['middleware' => ['auth:escort']], function () {
-    Route::get('/profile', [EscortsAuthController::class, 'profile'])->name('escorts.profile');
+    Route::get('/{id}/profile', [UserEscortsController::class, 'profile'])->name('escorts.profile');
+
+
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
-
-
-
-// --------------------------------------------------------------------------------------
-// Route::get('/register', [UserAuthController::class, 'user_register_form'])->name('user_register_form');
-// Route::post('/register', [UserAuthController::class, 'register'])->name('user_register_save');
-
-// Route::get('/login', [UserAuthController::class, 'user_login_form'])->name('login');
-// Route::post('/login', [UserAuthController::class, 'login'])->name('user_login');
-
-
-// Route::group(['middleware' => ['auth:web']], function () {
-//     Route::get('/dashboard', [UserAuthController::class, 'dashboard'])->name('user_dashboard');
-//     Route::post('/logout', [UserAuthController::class, 'logout'])->name('user_logout');
-// });

@@ -59,18 +59,15 @@ class EscortsAuthController extends Controller
         ]);
 
         if (Auth::guard('escort')->attempt($credential)) {
-            return redirect()->route('escorts.profile');
+            $escort = Escort::find(Auth::guard('escort')->user()->id);
+            return redirect()->route('escorts.profile', $escort->id);
         }
         // Authentication failed...
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
-
-    public function profile()
-    {
-        return view('user.profile');
-    }
+  
     public function showForgotPasswordForm()
     {
         return view('auth.forgot-password');

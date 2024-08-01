@@ -174,4 +174,9 @@
             errElement.style.display = 'none'
         }
     }
+    //handleLogOut
+    function handleLogOut() {
+        event.preventDefault();
+        document.getElementById('escort-logout-form').submit();
+    }
 </script>
