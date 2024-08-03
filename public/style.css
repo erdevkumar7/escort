@@ -73,6 +73,39 @@ margin-top: 20px;
 gap: 3px;
 }
 
+/* nav.navbar.navbar-expand-lg {
+    width: 1349px;
+    margin: auto;
+}
+
+
+nav.navbar.navbar-expand-lg {
+    width: 1349px;
+    margin: auto;
+}
+
+.slider-section {
+    width: 1349px;
+    margin: auto;
+}
+section{
+    width: 1349px;
+    margin: auto;
+} */
+
+nav.navbar.navbar-expand-lg {
+    background-color: #232e48;
+    padding: 24px 24px;
+    width: 1349px;
+    margin: auto;
+}
+
+.slider-section {
+    width: 1349px;
+    margin: auto;
+}
+
+
 
 
 h1 {
@@ -133,7 +166,7 @@ nav.navbar ul.navbar-nav {
 }
 
 nav.navbar .input-group {
-    width: 500px;
+    width: 480px;
     position: relative;
     margin-right: 40px;
 }
@@ -261,6 +294,8 @@ nav.navbar img.img-fluid {
     background-color: #232e48;
     padding: 60px 90px;
     padding-bottom: 80px;
+    width: 1349px;
+    margin: auto;
 }
 .we-help-growth h1.your-growth-text {
     font-size: 64px;
@@ -334,6 +369,8 @@ section.we-help-growth .container {
     padding: 60px 75px;
     position: relative;
     padding-bottom: 90px;
+    width: 1349px;
+    margin: auto;
 }
 .premium-ads .owl-prev:after {
     content: '';
@@ -485,6 +522,8 @@ p.featured-text {
     background-color: #232E48;
     padding-top: 60px;
     padding-bottom: 90px;
+    width: 1349px;
+    margin: auto;
 }
 
 .services-offer h1 {
@@ -614,6 +653,8 @@ section.services-offer .container-fluid {
     background-color: #111624;
     padding: 60px 75px;
     position: relative;
+    width: 1349px;
+    margin: auto;
 }
 
 .profile-moment p.featured-text {
@@ -661,11 +702,12 @@ section.services-offer .container-fluid {
     height: 100%;
 }
 
-
 .featured-categories {
     background-color: #232e48;
     padding: 60px 0;
     padding-bottom: 90px;
+    width: 1349px;
+    margin: auto;
 }
 
 .featured-categories h1 {
@@ -779,6 +821,8 @@ section.services-offer .container-fluid {
     padding: 60px 80px;
     position: relative;
     padding-bottom: 90px;
+    width: 1349px;
+    margin: auto;
 }
 .new-escorts .col-carousel {
     padding-left: 0;
@@ -815,9 +859,10 @@ section.services-offer .container-fluid {
 }
 
 /* eight section css */
-
 section.disclaimer {
     background: url('./images/static_img/disclaimer-bg.png');
+    width: 1349px;
+    margin: auto;
 }
 
 .disclaimer-inner-text {
@@ -906,8 +951,10 @@ section.disclaimer {
     background-color: #232e48;
     padding: 150px 0;
     color: #fff;
-    margin-top: -90px;
     padding-bottom: 5px;
+    width: 1349px;
+    margin: auto;
+    margin-top: -90px;
 }
 
 .quick-links ul {
@@ -949,6 +996,17 @@ section.disclaimer {
     display: flex;
     gap: 14px;
 }
+
+div#navbarScroll button {
+    border-radius: 20px;
+    border: none;
+    background-color: #fff;
+    padding: 5px 15px 5px 15px;
+    color: black;
+    font-family: 'Montserrat-SemiBold';
+    font-size: 15px;
+}
+
 
 @media (min-width:768px) and (max-width:1024px) {
 
@@ -998,6 +1056,13 @@ section.disclaimer {
         padding: 18px;
     }
 
+    .toggle-bar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+
 
     .services-offer h1 {
         font-size: 40px;
@@ -1036,16 +1101,22 @@ section.disclaimer {
         width: 89%;
     }
 
+
     .featured-categories .card-deck {
         display: block;
-        width: 100%;
+        width: 40%;
+        margin: auto;
         margin-left: 0px;
         margin-top: 25px;
     }
 
     .featured-categories img.card-img-top {
-        width: 400px;
+        width: 100%;
         margin: auto;
+    }
+    .featured-categories .card {
+        background: none;
+        margin-bottom: 30px;
     }
 
     .featured-categories .card-body {
@@ -1252,11 +1323,71 @@ section.disclaimer {
 
 @media only screen and (max-width: 767px) {
 
+    nav.navbar.navbar-expand-lg {
+        width: 100%;
+        margin: auto;
+    }
+
+    .slider-section {
+        width: 100%;
+        margin: auto;
+    }
+
+
+    .we-help-growth {
+        width: 100%;
+        margin: auto;
+    }
+
+    .premium-ads {
+        width: 100%;
+        margin: auto;
+    }
+
+    .toggle-bar {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        align-items: center;
+    }
+
+    .services-offer {
+        width: 100%;
+        margin: auto;
+    }
+
+    .profile-moment {
+        width: 100%;
+        margin: auto;
+    }
+
+    .new-escorts {
+        width: 100%;
+        margin: auto;
+    }
+
+    section.disclaimer {
+        width: 100%;
+        margin: auto;
+    }
+
+    .featured-categories {
+        width: 100%;
+        margin: auto;
+    }
+
+
     span.navbar-toggler-icon i.fa.fa-bars {
         font-size: 30px;
     }
     .services-offer-card h3 {
         font-size: 27px;
+    }
+
+    .footer-escorts {
+        width: 100%;
+        margin: auto;
+        margin-top: -90px;
     }
 
 .featured-categories .card.card-fourth {

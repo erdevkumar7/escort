@@ -42,7 +42,7 @@ class EscortsAuthController extends Controller
         // Send welcome email
         Mail::to($escort->email)->send(new WelcomeEscortMail($escort));
         if ($escort) {
-            return redirect()->route('login');
+            return redirect()->route('login')->with('success', 'Register successfully!');
         }
     }
 
@@ -60,7 +60,7 @@ class EscortsAuthController extends Controller
 
         if (Auth::guard('escort')->attempt($credential)) {
             $escort = Escort::find(Auth::guard('escort')->user()->id);
-            return redirect()->route('escorts.profile', $escort->id);
+            return redirect()->route('escorts.profile', $escort->id)->with('success', 'Login successfully!');;
         }
         // Authentication failed...
         return back()->withErrors([
@@ -82,7 +82,7 @@ class EscortsAuthController extends Controller
         );
 
         return $status === Password::RESET_LINK_SENT
-            ?  redirect()->route('login')->with('status', __($status))
+            ?  redirect()->route('login')->with('success', __($status))
             : back()->withErrors(['email' => __($status)]);
     }
 
@@ -111,7 +111,7 @@ class EscortsAuthController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('login')->with('status', __($status))
+            ? redirect()->route('login')->with('success', __($status))
             : back()->withErrors(['email' => [__($status)]]);
     }
 
@@ -121,6 +121,6 @@ class EscortsAuthController extends Controller
         Auth::logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
-        return redirect()->route('login');
+        return redirect()->route('login')->with('success', 'Logged out successfully!');
     }
 }

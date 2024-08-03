@@ -1,6 +1,7 @@
   <!-- first section slider start -->
 
   <div class="slider-section">
+
     <div id="card-carousel" class="owl-carousel pmd-card-carousel outside-dots owl-theme text-center">
         <div class="item">
             <div class="card pmd-card">
@@ -87,6 +88,7 @@
             </div>
         </div>
     </div>
+
 </div>
 
 <!--first section slider end-->

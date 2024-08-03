@@ -165,6 +165,32 @@
     })
 </script>
 <script src="script.js"></script>
+<!-- Include Select2 JS -->
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+<script>
+    // select2
+    $(document).ready(function() {
+        $('#services').select2({
+            placeholder: "Select Services"
+        });
+
+        $('#language_spoken').select2({
+            placeholder: "Select Language"
+        });
+
+        $('#availability').select2({
+            placeholder: "Select Availability"
+        });
+
+        $('#currencies_accepted').select2({
+            placeholder: "Select Currencies"
+        });
+
+        $('#payment_method').select2({
+            placeholder: "Select Payment Methods"
+        });
+    });
+</script>
 
 <script>
     // removeError
@@ -179,4 +205,23 @@
         event.preventDefault();
         document.getElementById('escort-logout-form').submit();
     }
+</script>
+{{-- toaster message script --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    @if(Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+    @endif
+
+    @if(Session::has('error'))
+        toastr.error("{{ Session::get('error') }}");
+    @endif
+
+    @if(Session::has('info'))
+        toastr.info("{{ Session::get('info') }}");
+    @endif
+
+    @if(Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+    @endif
 </script>
