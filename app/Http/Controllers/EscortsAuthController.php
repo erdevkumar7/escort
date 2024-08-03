@@ -15,7 +15,7 @@ class EscortsAuthController extends Controller
     //todo: Register Escort
     public function escort_register_form()
     {
-        return view("user.register");
+        return view("user-escort.register");
     }
     public function escort_register_form_submit(Request $request)
     {
@@ -48,7 +48,7 @@ class EscortsAuthController extends Controller
 
     public function escort_login_form(Request $request)
     {
-        return view('user.login');
+        return view('user-escort.login');
     }
 
     public function login(Request $request)

@@ -1,14 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('user.headerCSS')
-</head>
-
-<body>
-    <!-- nav  -->
-    @include('user.topNav')
-
+@extends('user.layout')
+@section('page_content')
     <section>
         <div class="container mt-3 escort-login-form">
             <form action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
@@ -37,7 +28,8 @@
                         @error('password')
                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                         @enderror
-                        <a href="{{route('password.request')}}" class="fw-bold text-body float-right m-1">Forgot Password</a>
+                        <a href="{{ route('password.request') }}" class="fw-bold text-body float-right m-1">Forgot
+                            Password</a>
                     </div>
 
 
@@ -56,11 +48,4 @@
             </form>
         </div>
     </section>
-    <!-- footer -->
-    @include('user.footer')
-    <!-- footerJS -->
-    @include('user.footerJS')
-
-</body>
-
-</html>
+@endsection

@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('user.headerCSS')
-</head>
-
-<body>
-    <!-- nav  -->
-    @include('user.topNav')
+@extends('user.layout')
+@section('page_content')
     <section>
         <div class="container mt-3 escort-register">
             @if ($errors->any())
@@ -62,8 +54,7 @@
                     {{-- whatsapp_number --}}
                     <div class="col-sm-4 form-group">
                         <label for="whatsapp_number">WhatsApp Number </label>
-                        <input type="text" class="form-control"
-                            value="{{ $escort->whatsapp_number ?? 'Not Selected' }}">
+                        <input type="text" class="form-control" value="{{ $escort->whatsapp_number ?? 'Not Selected' }}">
                     </div>
                     {{-- address --}}
                     <div class="col-sm-4 form-group">
@@ -385,8 +376,8 @@
                                 <option value="Tuesday" {{ in_array('Tuesday', $availability) ? 'selected' : '' }}>
                                     Tuesday
                                 </option>
-                                <option value="Wednesday"
-                                    {{ in_array('Wednesday', $availability) ? 'selected' : '' }}>Wednesday
+                                <option value="Wednesday" {{ in_array('Wednesday', $availability) ? 'selected' : '' }}>
+                                    Wednesday
                                 </option>
                                 <option value="Thursday" {{ in_array('Thursday', $availability) ? 'selected' : '' }}>
                                     Thursday
@@ -419,8 +410,7 @@
                     <div class="col-sm-4 form-group">
                         <label for="currencies_accepted">Currencies Accepted</label>
                         @if ($currencies_accepted)
-                            <select class="form-control" id="currencies_accepted" name="currencies_accepted[]"
-                                multiple>
+                            <select class="form-control" id="currencies_accepted" name="currencies_accepted[]" multiple>
                                 <option value="CHF" {{ in_array('CHF', $currencies_accepted) ? 'selected' : '' }}>
                                     CHF
                                 </option>
@@ -432,8 +422,7 @@
                                 </option>
                             </select>
                         @else
-                            <select class="form-control" id="currencies_accepted" name="currencies_accepted[]"
-                                multiple>
+                            <select class="form-control" id="currencies_accepted" name="currencies_accepted[]" multiple>
                                 <option value="CHF">CHF</option>
                                 <option value="EUR">EUR</option>
                                 <option value="USD">USD</option>
@@ -464,9 +453,5 @@
             </form>
         </div>
     </section>
-    <!-- footer -->
-    @include('user.footer')
-    <!-- footerJS -->
-    @include('user.footerJS')
-</body>
-</html>
+
+@endsection

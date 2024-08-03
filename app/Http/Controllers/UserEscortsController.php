@@ -5,11 +5,14 @@ namespace App\Http\Controllers;
 use App\Models\Escort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserEscortsController extends Controller
 {
-    public function index(){
-        return view("user.landing");
+    public function index()
+    {
+        $allescorts = DB::table("escorts")->orderBy("created_at", "desc")->get();    
+        return view("user-escort.index", compact('allescorts'));
     }
     //todo: Escort Profile
     public function profile()
@@ -23,28 +26,29 @@ class UserEscortsController extends Controller
         $availability = json_decode($escort->availability, true);
         $currencies_accepted = json_decode($escort->currencies_accepted, true);
         $payment_method = json_decode($escort->payment_method, true);
-      
-        return view('user-escort.profile', compact('escort','language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+
+        return view('user-escort.profile', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 
     // profileEditForm
-   public function profileEditForm($id){
-    $escort = Escort::find($id);
-    $pictures = json_decode($escort->pictures);
-    $video = json_decode($escort->video);
-    $services = json_decode($escort->services, true);
-    $language_spoken = json_decode($escort->language_spoken, true);
-    $availability = json_decode($escort->availability, true);
-    $currencies_accepted = json_decode($escort->currencies_accepted, true);
-    $payment_method = json_decode($escort->payment_method, true);
+    public function profileEditForm($id)
+    {
+        $escort = Escort::find($id);
+        $pictures = json_decode($escort->pictures);
+        $video = json_decode($escort->video);
+        $services = json_decode($escort->services, true);
+        $language_spoken = json_decode($escort->language_spoken, true);
+        $availability = json_decode($escort->availability, true);
+        $currencies_accepted = json_decode($escort->currencies_accepted, true);
+        $payment_method = json_decode($escort->payment_method, true);
 
-    return view('user-escort.profile-edit',compact('escort','language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        return view('user-escort.profile-edit', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
     // update_profile
     public function update_profile(Request $request, $id)
     {
         $escort = Escort::findOrFail($id);
-    
+
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname,' . $escort->id,
             'pictures' => 'nullable|array|min:1',
@@ -81,7 +85,7 @@ class UserEscortsController extends Controller
             'currencies_accepted' => 'nullable|array',
             'payment_method' => 'nullable|array',
         ]);
-    
+
         // Handle Image file upload
         $pictures = json_decode($escort->pictures, true) ?? [];
         if ($request->hasFile('pictures')) {
@@ -92,7 +96,7 @@ class UserEscortsController extends Controller
                 $pictures[] = $imageName;
             }
         }
-    
+
         // Handle video file upload
         $videos = json_decode($escort->video, true) ?? [];
         if ($request->hasFile('video')) {
@@ -103,7 +107,7 @@ class UserEscortsController extends Controller
                 $videos[] = $vdoName;
             }
         }
-    
+
         $validatedData['pictures'] = json_encode($pictures);
         $validatedData['services'] = json_encode($validatedData['services']);
         $validatedData['video'] = json_encode($videos);
@@ -111,9 +115,9 @@ class UserEscortsController extends Controller
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
         $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
         $validatedData['payment_method'] = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
-    
+
         $escort->update($validatedData);
-    
-        return redirect()->route('escorts.profile',$escort->id )->with('success', 'Escort updated successfully!');
+
+        return redirect()->route('escorts.profile', $escort->id)->with('success', 'Escort updated successfully!');
     }
 }

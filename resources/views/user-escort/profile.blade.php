@@ -1,12 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    @include('user.headerCSS')
-</head>
-
-<body>
-    <!-- nav  -->
-    @include('user.topNav')
+@extends('user.layout')
+@section('page_content')
     <section>
         <div class="container mt-3 escort-register">
             <form >
@@ -319,11 +312,4 @@
             </form>
         </div>
     </section>
-    <!-- footer -->
-    @include('user.footer')
-    <!-- footerJS -->
-    @include('user.footerJS')
-
-</body>
-
-</html>
+@endsection

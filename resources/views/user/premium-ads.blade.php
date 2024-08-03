@@ -9,105 +9,22 @@
         </p>
         <div class="container-fluid">
             <div id="owl-demo-2" class="owl-carousel owl-theme">
-
-                <article class="thumbnail item">
-                    <a href="#">
-                        <img src="{{asset('/public/images/static_img/adrina.png')}}" class="img-responsive" />
-                    </a>
-                    <div class="caption">
-                        <h3 class="text-white">Adrina<img src="{{asset('/public/images/static_img/vip-img.png')}}"></h4>
-                            <p>City: Switzerland</p>
-                            <p>Category:</p>
-                            <p>Last update:</p>
-                            <p>Status:</p>
-                            <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
-                    </div>
-                </article>
-
-                <article class="thumbnail item">
-                    <a href="#">
-                        <img src="{{asset('/public/images/static_img/nicole.png')}}" class="img-responsive" />
-                    </a>
-                    <div class="caption">
-                        <h3 class="text-white">Nicole<img src="{{asset('/public/images/static_img/vip-img.png')}}"></h4>
-                            <p>City: Switzerland</p>
-                            <p>Category:</p>
-                            <p>Last update:</p>
-                            <p>Status:</p>
-                            <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
-                    </div>
-                </article>
-
-                <article class="thumbnail item">
-                    <a href="#!">
-                        <img src="{{asset('/public/images/static_img/kendra.png')}}" class="img-responsive" />
-                    </a>
-                    <div class="caption">
-                        <h3 class="text-white">Kendra<img src="{{asset('/public/images/static_img/vip-img.png')}}"></h4>
-                            <p>City: Switzerland</p>
-                            <p>Category:</p>
-                            <p>Last update:</p>
-                            <p>Status:</p>
-                            <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
-                    </div>
-                </article>
-
-                <article class="thumbnail item">
-                    <a href="#!">
-                        <img src="{{asset('/public/images/static_img/valetina.png')}}" class="img-responsive" />
-                    </a>
-                    <div class="caption">
-                        <h3 class="text-white">Valetina<img src="{{asset('/public/images/static_img/vip-img.png')}}"></h4>
-                            <p>City: Switzerland</p>
-                            <p>Category:</p>
-                            <p>Last update:</p>
-                            <p>Status:</p>
-                            <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
-                    </div>
-                </article>
-
-                <article class="thumbnail item">
-                    <a href="#!">
-                        <img src="{{asset('/public/images/static_img/adrina.png')}}" class="img-responsive" />
-                    </a>
-                    <div class="caption">
-                        <h3 class="text-white">Adrina<img src="{{asset('/public/images/static_img/vip-img.png')}}"></h4>
-                            <p>City: Switzerland</p>
-                            <p>Category:</p>
-                            <p>Last update:</p>
-                            <p>Status:</p>
-                            <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
-                    </div>
-                </article>
-
-                <article class="thumbnail item">
-                    <a href="#!">
-                        <img src="{{asset('/public/images/static_img/kendra.png')}}" class="img-responsive" />
-                    </a>
-                    <div class="caption">
-                        <h3 class="text-white">Kendra<img src="{{asset('/public/images/static_img/vip-img.png')}}"></h4>
-                            <p>City: Switzerland</p>
-                            <p>Category:</p>
-                            <p>Last update:</p>
-                            <p>Status:</p>
-                            <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
-                    </div>
-                </article>
-
-                <article class="thumbnail item">
-                    <a href="#!">
-                        <img src="{{asset('/public/images/static_img/nicole.png')}}" class="img-responsive" />
-                    </a>
-                    <div class="caption">
-                        <h3 class="text-white">Nicole<img src="{{asset('/public/images/static_img/vip-img.png')}}"></h4>
-                            <p>City: Switzerland</p>
-                            <p>Category:</p>
-                            <p>Last update:</p>
-                            <p>Status:</p>
-                            <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
-                    </div>
-                </article>
-
+                @foreach ($allescorts as $escort)                 
+                    <article class="thumbnail item">
+                        <a href="#">  
+                            <img src="{{ asset('/public/images/static_img/adrina.png') }}" class="img-responsive" />
+                        </a>
+                        <div class="caption">
+                            <h3 class="text-white">{{ $escort->nickname }}<img
+                                    src="{{ asset('/public/images/static_img/vip-img.png') }}"></h4>
+                                <p>City: {{ $escort->city }}</p>
+                                <p>Phone:{{ $escort->phone_number }}</p>
+                                <p>Origin: {{ $escort->origin }}</p>
+                                <p>Rates in CHF: {{ $escort->rates_in_chf }}</p>
+                                <a href="#" class="btn btn-primary btn-block">VIEW DETAILS</a>
+                        </div>
+                    </article>
+                @endforeach
             </div>
         </div>
     </section>

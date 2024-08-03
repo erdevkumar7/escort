@@ -1,13 +1,5 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('user.headerCSS')
-</head>
-<body>
-    <!-- nav  -->
-    @include('user.topNav')
-
+@extends('user.layout')
+@section('page_content')
     <section>
         <div class="container mt-3 escort-register">
             <form action="{{ route('escorts.register_submit') }}" method="POST" enctype="multipart/form-data">
@@ -39,9 +31,8 @@
                     {{-- email --}}
                     <div class="col-sm-6 form-group">
                         <label for="email">Email *</label>
-                        <input type="email" class="form-control" name="email" id="email"
-                            value="{{ old('email') }}" placeholder="Enter your email."
-                            oninput="removeError('emailErr')">
+                        <input type="email" class="form-control" name="email" id="email" value="{{ old('email') }}"
+                            placeholder="Enter your email." oninput="removeError('emailErr')">
                         @error('email')
                             <span class="text-danger" id="emailErr">{{ $message }}</span>
                         @enderror
@@ -103,17 +94,16 @@
                     {{-- password_confirmation --}}
                     <div class="col-sm-6 form-group">
                         <label for="password_confirmation">Confirm Password</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            class="form-control" placeholder="Re-enter your password."
-                            oninput="removeError('C_PasswordErr')">
+                        <input type="password" name="password_confirmation" id="password_confirmation" class="form-control"
+                            placeholder="Re-enter your password." oninput="removeError('C_PasswordErr')">
                     </div>
                     @error('password_confirmation')
                         <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
                     @enderror
 
                     <div class="col-sm-12">
-                        <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="{{route('login')}}"
-                            class="fw-bold text-body"><u>Login here</u></a></p>
+                        <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="{{ route('login') }}"
+                                class="fw-bold text-body"><u>Login here</u></a></p>
                     </div>
 
 
@@ -125,11 +115,4 @@
             </form>
         </div>
     </section>
-    <!-- footer -->
-    @include('user.footer')
-    <!-- footerJS -->
-    @include('user.footerJS')
-
-</body>
-
-</html>
+@endsection
