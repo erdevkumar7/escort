@@ -4,10 +4,10 @@
         <div class="container mt-3 escort-register">
             <form action="{{ route('escorts.register_submit') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="row jumbotron box8">
-                    <div class="col-sm-12 mx-t3 mb-4">
-                        <h2 class="text-center text-info">Escort-Register</h2>
-                    </div>
+                <h2 class="text-center text-info">Escort-Register</h2>
+
+                <div class="row jumbotron box8 register-inner-content">
+               
                     {{-- nickname --}}
                     <div class="col-sm-6 form-group">
                         <label for="nickname">Nickname *</label>
@@ -44,7 +44,7 @@
                             value="{{ old('address') }}" placeholder="Enter Your Address">
                     </div>
                     {{-- city --}}
-                    <div class="col-sm-6 form-group">
+                    <div class="col-sm-6 form-group city-select">
                         <label for="city">City *</label>
                         <select id="city" name="city" class="form-control browser-default custom-select"
                             oninput="removeError('cityErr')">
@@ -63,7 +63,7 @@
                         @enderror
                     </div>
                     {{-- age --}}
-                    <div class="col-sm-6 form-group">
+                    <div class="col-sm-6 form-group age-select">
                         <label for="age">Age *</label>
                         <select id="age" name="age" class="form-control browser-default custom-select"
                             oninput="removeError('ageErr')">
@@ -108,7 +108,7 @@
 
 
                     <div class="col-sm-12 form-group mb-0">
-                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
 
                 </div>

@@ -719,7 +719,7 @@ section.services-offer .container-fluid {
 /* eight section css */
 
 section.disclaimer {
-    background: url('./images/disclaimer-bg.png');
+    background: url('./images/static_img/disclaimer-bg.png');
 }
 
 .disclaimer-inner-text {
@@ -1006,6 +1006,115 @@ section.profile-moment.new-moment i.fa.fa-search {
     top: 68px;
     background-size: 21%;
 }
+
+/*login page css*/
+
+
+.escort-login-form .form-control {
+    display: block;
+    width: 100%;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #495057;
+    background-clip: padding-box;
+    border: none;
+    border-radius: .25rem;
+    transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+    height: 50px;
+    border-radius: 5px;
+}
+
+.escort-login-form .form-control:focus {
+    box-shadow: none !important;
+}
+.escort-login-form .box8 {
+    box-shadow: none;
+}
+.login-inner-part {
+    display: block;
+}
+.escort-login-form .box8 {
+    box-shadow: none;
+    width: 50%;
+    margin: auto;
+    margin-bottom: 50px;
+    margin-top: 25px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+.escort-login-form h2.text-info {
+    padding-top: 25px;
+}
+.escort-login-form .form-group {
+    width: 100% !important;
+    max-width: none;
+}
+
+.escort-login-form button.btn.btn-primary {
+    display: flex;
+    margin: auto;
+    margin-top: 35px;
+    width: 60%;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font-weight: 500;
+    text-transform: math-auto;
+}
+
+.escort-register {
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.escort-register .form-control {
+    height: 50px;
+    border-radius: 5px;
+    border: none;
+}
+.city-select select {
+    height: 50px !important;
+    background-color: #fff !important;
+}
+.age-select select#age {
+    height: 50px;
+    border-radius: 5px;
+    background-color: #fff;
+}
+
+.escort-register .form-control:focus {
+    box-shadow: none;
+    border: none;
+}
+
+.register-inner-content {
+    margin-top: 25px;
+    padding-top: 30px;
+    padding-bottom: 40px;
+}
+
+.register-inner-content button.btn.btn-primary {
+    display: flex;
+    margin: auto;
+    margin-top: 35px;
+    width: 30%;
+    align-items: center;
+    justify-content: center;
+    padding: 12px;
+    font-weight: 500;
+    text-transform: math-auto;
+}
+
+
+
+
+
+
+
+
+
 
 
 @media (min-width:768px) and (max-width:1024px) {

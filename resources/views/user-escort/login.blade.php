@@ -4,11 +4,9 @@
         <div class="container mt-3 escort-login-form">
             <form action="{{ route('login') }}" method="POST" enctype="multipart/form-data">
                 @csrf
-                <div class="row jumbotron box8 ">
-                    <div class="col-sm-12 mx-t3 mb-4">
-                        <h2 class="text-center text-info">Escort-Login</h2>
-                    </div>
-
+                <h2 class="text-center text-info">Escort-Login</h2>
+                <div class="row jumbotron box8 login-inner-part">
+                 
                     {{-- email --}}
                     <div class="col-sm-6 form-group">
                         <label for="email">Email *</label>
@@ -41,7 +39,7 @@
 
 
                     <div class="col-sm-12 form-group mb-0">
-                        <button type="submit" class="btn btn-primary float-right">Submit</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
 
                 </div>
