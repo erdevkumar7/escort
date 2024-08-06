@@ -2,7 +2,6 @@
 
 @section('page_content')
       @include('user.slider')
-      @include('user.profile-moment')
       @include('user.escort-listing')
 
       {{-- @include('user.help-growth')
