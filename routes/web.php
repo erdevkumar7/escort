@@ -95,3 +95,6 @@ Route::group(['middleware' => ['auth:escort']], function () {
 
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
+
+
+Route::get('/{id}/escort-details', [UserEscortsController::class, 'escort_by_id'])->name('escort.detail_by_id');

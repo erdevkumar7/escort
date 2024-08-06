@@ -70,12 +70,15 @@
     <div class="container">
         <table class="inner-list-img">
             <tr>
+                @foreach ($allescorts as $escort)                    
                 <td>
                     <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
+                    <h3>{{$escort->nickname}} <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
+                    <p>Category:{{$escort->origin}}</p>
+                    <a href="{{route('escort.detail_by_id', $escort->id)}}"><p>view</p></a>
                 </td>
-                <td>
+                @endforeach
+                {{-- <td>
                     <img src="{{asset('/public/images/static_img/liza.png')}}">
                     <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
                     <p>Category:</p>
@@ -90,6 +93,29 @@
                     <img src="{{asset('/public/images/static_img/liza.png')}}">
                     <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
                     <p>Category:</p>
+                </td> --}}
+            </tr>
+
+            {{-- <tr>
+                <td>
+                    <img src="{{asset('/public/images/static_img/liza.png')}}">
+                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
+                    <p>Category:</p>
+                </td>
+                <td>
+                    <img src="{{asset('/public/images/static_img/liza.png')}}">
+                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
+                    <p>Category:</p>
+                </td>
+                <td>
+                    <img src="{{asset('/public/images/static_img/liza.png')}}">
+                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
+                    <p>Category:</p>
+                </td>
+                <td>
+                    <img src="{{asset('/public/images/static_img/liza.png')}}">
+                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
+                    <p>Category:</p>
                 </td>
             </tr>
 
@@ -137,30 +163,7 @@
                     <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
                     <p>Category:</p>
                 </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-            </tr>
+            </tr> --}}
 
         </table>
     </div>

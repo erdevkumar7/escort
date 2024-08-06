@@ -120,4 +120,8 @@ class UserEscortsController extends Controller
 
         return redirect()->route('escorts.profile', $escort->id)->with('success', 'Escort updated successfully!');
     }
+
+    public function escort_by_id($id){
+        return view('user-escort.escort-by-id');
+    }
 }
