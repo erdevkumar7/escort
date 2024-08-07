@@ -9,11 +9,25 @@ use Illuminate\Support\Facades\DB;
 
 class UserEscortsController extends Controller
 {
-    public function index()
-    {
-        $allescorts = DB::table("escorts")->orderBy("created_at", "desc")->get();    
+    public function index(Request $request) {
+        $query = DB::table("escorts")->orderBy("created_at", "desc");
+    
+        if ($request->has('search')) {
+            $search = $request->input('search');
+            $query->where('nickname', 'like', '%' . $search . '%');
+        }
+    
+        $allescorts = $query->get();
+    
+        if ($request->ajax()) {
+            return view('user-escort.partials-escort-list', compact('allescorts'))->render();
+        }
+    
         return view("user-escort.index", compact('allescorts'));
     }
+    
+
+
     //todo: Escort Profile
     public function profile()
     {
@@ -121,7 +135,8 @@ class UserEscortsController extends Controller
         return redirect()->route('escorts.profile', $escort->id)->with('success', 'Escort updated successfully!');
     }
 
-    public function escort_by_id($id){
+    public function escort_by_id($id)
+    {
         return view('user-escort.escort-by-id');
     }
 }

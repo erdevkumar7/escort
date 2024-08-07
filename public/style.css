@@ -53,6 +53,8 @@ h1 {
     height: 38px;
     font-family: Montserrat;
     font-weight: bold;
+    width: 1349px;
+    margin: auto;
 }
 
 .top-text p {
@@ -78,8 +80,9 @@ h1 {
 nav.navbar.navbar-expand-lg {
     background-color: #232e48;
     padding: 24px 24px;
+    width: 1349px;
+    margin: auto;
 }
-
 div#navbarScroll a.nav-link {
     color: #fff;
     font-weight: 500;
@@ -806,8 +809,10 @@ section.disclaimer {
     background-color: #232e48;
     padding: 150px 0;
     color: #fff;
-    margin-top: -90px;
     padding-bottom: 5px;
+    width: 1349px;
+    margin: auto;
+    margin-top: -90px;
 }
 
 .quick-links ul {
@@ -1108,11 +1113,131 @@ section.profile-moment.new-moment i.fa.fa-search {
 }
 
 
+section.disclaimer {
+    background: url('./images/static_img/disclaimer-bg.png');
+    width: 1349px;
+    margin: auto;
+}
+.slider-section {
+    width: 1349px;
+    margin: auto;
+}
+
+/*details page css*/
+
+.escort-details h1.bemy-text {
+    font-family: fantasy;
+    text-align: center;
+    margin-top: -18px;
+}
+
+section.escort-details {
+    padding: 30px 0;
+}
+
+.first-details-content a {
+    color: #010e1380;
+}
+
+.detials-icons {
+    display: flex;
+    justify-content: center;
+    gap: 35px;
+    align-items: center;
+}
+
+.second-details-content {
+    text-align: center;
+}
+.members-count {
+    display: flex;
+    gap: 30px;
+}
+
+.members-count span {
+    color: rgba(1, 14, 19, .3);
+    padding-left: 5px;
+}
+
+.second-members-content {
+    text-align: center;
+    position: relative;
+}
 
 
+.second-members-content img {
+    border-radius: 100%;
+    width: 50%;
+}
+.second-members-content button {
+    padding-top: 3px;
+    padding-bottom: 3px;
+    border: none;
+    color: #3cb2f6;
+    font-size: 11px;
+    border-radius: 25px;
+    position: absolute;
+    left: 150px;
+    font-family: 'Montserrat-Regular';
+    top: 164px;
+}
+.second-members-content h3 {
+    padding-top: 40px;
+    margin-bottom: 0;
+    font-family: 'Montserrat-Bold';
+}   
+.second-members-content h3 {
+    padding-top: 40px;
+    margin-bottom: 0;
+}
 
+.members-inner-content i.fas.fa-arrow-left {
+    font-size: 18px;
+    color: #232e48;
+}
 
+.experience-inner-part p {
+    margin-bottom: 0;
+}
 
+.experience-inner-part span {
+    color: gray;
+}
+
+.contact-btn {
+    margin-top: 25px;
+}
+.experience-inner-part {
+    padding: 18px;
+    border-radius: 5px;
+    font-size: 14px;
+    font-family: 'Montserrat-Regular';
+        text-align: left;
+    background-color: #f4f5f6;
+}
+.contact-btn a.follow-btn {
+    background-color: #f4f5f6;
+    padding: 5px 21px;
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+}
+.contact-btn a.contact-btn {
+    background-color: #3cb2f6;
+    padding: 5px 21px;
+    border-radius: 4px;
+    color: #fff;
+    text-decoration: none;
+    margin-left: 8px;
+}
+
+.select-gallary {
+    margin-top: 40px;
+}
+
+.select-gallary hr {
+    height: 0;
+}
 
 
 
