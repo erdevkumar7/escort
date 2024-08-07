@@ -70,15 +70,21 @@
             <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
                 <div class="tab-pane fade active show" id="menu-starters">
                     <div class="row gy-5" id="escort-list">
-                        @foreach ($allescorts as $escort)
-                            <div class="col-lg-3 menu-item">
-                                <a href="{{ route('escort.detail_by_id', $escort->id) }}" class="glightbox"><img
-                                        src="{{ asset('/public/images/static_img/liza.png') }}"
-                                        class="menu-img img-fluid" alt=""></a>
-                                <h4>{{ $escort->nickname }}</h4>
-                                <p class="ingredients">{{ $escort->origin }}</p>
+                        @if ($allescorts->isEmpty())
+                            <div class="col-12">
+                                <p>No Data Available</p>
                             </div>
-                        @endforeach
+                        @else
+                            @foreach ($allescorts as $escort)
+                                <div class="col-lg-3 menu-item">
+                                    <a href="{{ route('escort.detail_by_id', $escort->id) }}" class="glightbox"><img
+                                            src="{{ asset('/public/images/static_img/liza.png') }}"
+                                            class="menu-img img-fluid" alt=""></a>
+                                    <h4>{{ $escort->nickname }}</h4>
+                                    <p class="ingredients">{{ $escort->origin }}</p>
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
             </div>

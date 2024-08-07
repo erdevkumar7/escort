@@ -12,14 +12,14 @@
    @endif
    <nav class="navbar navbar-expand-lg">
        <div class="container-fluid">
-        <div class="toggle-bar">
-           <a class="navbar-brand" href="{{route('index')}}"><img src="{{ asset('/public/images/static_img/logo.png') }}"
-                   class="img-fluid" alt="..."></a>
-           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
-               aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
-               <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
-           </button>
-        </div>
+           <div class="toggle-bar">
+               <a class="navbar-brand" href="{{ route('index') }}"><img
+                       src="{{ asset('/public/images/static_img/logo.png') }}" class="img-fluid" alt="..."></a>
+               <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                   aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                   <span class="navbar-toggler-icon"><i class="fa fa-bars"></i></span>
+               </button>
+           </div>
            <div class="collapse navbar-collapse" id="navbarScroll">
                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
                    <li class="nav-item dropdown">
@@ -48,6 +48,8 @@
                        <i class="fa fa-search"></i>
                        <input class="form-control" type="search" placeholder="Search for escots"
                            id="example-search-input">
+                       {{-- <input type="text" id="search" class="form-control" placeholder="Search escort"
+                           value="{{ request()->input('search') }}"> --}}
                        <span class="input-group-append"></span>
                    </div>
                    <li class="nav-item inner-icons">

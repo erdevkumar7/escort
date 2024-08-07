@@ -1,9 +1,9 @@
 <section class="profile-moment">
-    <!-- <h1 class="text-white">HOT profiles of the moment</h1> -->
-    <!-- <p class="text-white pb-5 featured-text">
+     <h1 class="text-white">HOT profiles of the moment</h1> 
+     <p class="text-white pb-5 featured-text">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
         dolore magna
-        aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex. </p> -->
+        aliqua. Ut enim ad minim veniam,quis nostrud exercitation ullamco laboris nisi ut aliquip ex. </p> 
 
     <div class="container">
         <div class="row align-items-center">
@@ -64,106 +64,6 @@
         </div>
     </div>
 
-<!-- listing page start -->
 
-<div class="table-list">
-    <div class="container">
-        <table class="inner-list-img">
-            <tr>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                    <span class="city-text">New photo</span>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-            </tr>
-
-            <tr>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-                <td>
-                    <img src="{{asset('/public/images/static_img/liza.png')}}">
-                    <h3>Natasha <img src="{{asset('/public/images/static_img/right-check.png')}}"></h3>
-                    <p>Category:</p>
-                </td>
-            </tr>
-
-        </table>
-    </div>
-</div>
 
 </section>
