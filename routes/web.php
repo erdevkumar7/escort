@@ -11,8 +11,9 @@ use App\Http\Controllers\UserEscortsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserEscortsController::class, 'index'])->name('index');
+Route::get('escort-list', [UserEscortsController::class,'escort_list'])->name('escort.list');
+Route::get('/{id}/escort-detail', [UserEscortsController::class, 'escort_detail'])->name('escort.detail_by_id');
 
-// Route::get('/login', [AdminAuthController::class, 'showLoginForm'])->name('admin_login_form');
 
 // todo: Admin Auth
 Route::prefix('admin')->group(function () {
@@ -97,4 +98,3 @@ Route::group(['middleware' => ['auth:escort']], function () {
 });
 
 
-Route::get('/{id}/escort-details', [UserEscortsController::class, 'escort_by_id'])->name('escort.detail_by_id');
