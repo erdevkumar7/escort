@@ -36,9 +36,7 @@
                                             {{ $escort->origin ? $escort->origin : 'Not Available' }}</p>
                                         <p class="ingredients"> Call:
                                             {{ $escort->phone_number ? $escort->phone_number : 'Not Available' }}</p>
-                                        <?php
-                                        $getServices;
-                                        ?>
+                                         <a href="{{ route('escort.detail_by_id', $escort->id) }}" class="btn btn-primary btn-block">VIEW DETAILS</a>
 
                                     </div>
                                 @endforeach

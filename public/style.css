@@ -1107,7 +1107,49 @@ div#navbarScroll button {
 }
 
 
+.table-list .menu-item img {
+    height: 250px;
+    width: 100%;
+}
 
+.table-list h4 {
+    font-family: 'Urbanist-SemiBold';
+    color: #fff;
+    padding-top: 11px;
+}
+
+.table-list p {
+    font-family: 'Urbanist-SemiBold';
+    color: #999999;
+}
+.table-list a.btn.btn-primary.btn-block {
+    background-color: #4541FF;
+    border: none;
+    color: #fff;
+    border-radius: 25px;
+    width: 100%;
+    font-size: 14px;
+    padding: 11px 0px;
+    margin: auto;
+    margin-top: 25px;
+    margin-bottom: 20px;
+    font-family: 'Urbanist-Medium';
+}
+.table-list .menu-item {
+    background-color: #232E48;
+    padding: 28px;
+    border: solid 2px #FFBF00;
+    border-radius: 15px;
+    margin: 9px;
+    flex: 22%;
+}
+.table-list a.glightbox {
+    text-decoration: none;
+}
+.table-list {
+    margin: 50px 0;
+    margin-bottom: 0;
+}
 
 @media (min-width:768px) and (max-width:1024px) {
 
@@ -1116,6 +1158,7 @@ div#navbarScroll button {
     }
     .we-help-growth {
         padding: 40px 40px;
+        width: 100%;
     }
 
     .we-help-growth h1.your-growth-text {
@@ -1151,6 +1194,8 @@ div#navbarScroll button {
 
     .premium-ads {
         padding: 40px 40px;
+        width: 100%;
+        margin:auto;
     }
 
     .premium-ads article.thumbnail.item {
@@ -1181,14 +1226,16 @@ div#navbarScroll button {
         padding: 25px 25px 25px 25px;
     }
 
-    .services-offer {
-        padding-top: 40px;
-        padding-bottom: 40px;
-    }
+.services-offer {
+    padding-top: 40px;
+    padding-bottom: 40px;
+    width: 100%;
+}
 
-    .profile-moment {
-        padding: 40px 40px;
-    }
+   .profile-moment {
+    padding: 40px 40px;
+    width: 100%;
+}
 
     .profile-moment h1 {
         font-size: 40px;
@@ -1207,7 +1254,7 @@ div#navbarScroll button {
         display: block;
         width: 40%;
         margin: auto;
-        margin-left: 0px;
+        margin-left: auto;
         margin-top: 25px;
     }
 
@@ -1226,18 +1273,20 @@ div#navbarScroll button {
         width: 100%;
     }
 
-    .featured-categories {
-        padding: 40px 0;
-        padding-bottom: 0;
-    }
+.featured-categories {
+    padding: 40px 0;
+    padding-bottom: 5px;
+    width: 100%;
+}
 
     .new-escorts h1 {
         font-size: 36px;
     }
 
-    .new-escorts {
-        padding: 40px 40px;
-    }
+  .new-escorts {
+    padding: 40px 40px;
+    width: 100%;
+}
 
     .new-escorts .featured-text {
         width: 100%;
@@ -1369,7 +1418,7 @@ div#navbarScroll button {
     .services-offer-card p {
         width: 85%;
         margin: auto;
-        padding-bottom: 8px;
+        padding-bottom: 18px;
     }
 
     nav.navbar .show:before {
@@ -1419,6 +1468,26 @@ div#navbarScroll button {
 .featured-categories .card.card-fourth {
     height: auto;
 }
+
+nav.navbar.navbar-expand-lg {
+    width: 100%;
+    margin: auto;
+}
+.slider-section {
+    width: 100%;
+    margin: auto;
+}
+
+
+section.disclaimer {
+    width: 100%;
+}
+
+.footer-escorts {
+    width: 100%;
+}
+
+
 
 }
 
