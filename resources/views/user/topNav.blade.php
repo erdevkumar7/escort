@@ -34,8 +34,8 @@
                        </ul>
                    </li>
                    <li class="nav-item">
-                    <a class="nav-link" href="{{route('escort.list')}}">Escorts</a>
-                </li>
+                       <a class="nav-link" href="{{ route('escort.list') }}">Escorts</a>
+                   </li>
                    <li class="nav-item">
                        <a class="nav-link" href="#">Transex</a>
                    </li>

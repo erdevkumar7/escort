@@ -63,13 +63,13 @@
                                             <tbody>
                                                 @foreach ($allescorts as $escorts)
                                                     <tr id="escorts-row-{{ $escorts->id }}">
-                                                        <td>{{ $escorts->nickname }}</td>
-                                                        <td>{{ $escorts->phone_number }}</td>
-                                                        <td>{{ $escorts->age }}</td>
-                                                        <td>{{ $escorts->canton }}</td>
-                                                        <td>{{ $escorts->city }}</td>
-                                                        <td>{{ $escorts->origin }}</td>
-                                                        <td>{{ $escorts->type }}</td>
+                                                        <td>{{ $escorts->nickname ?? 'Not Available' }}</td>
+                                                        <td>{{ $escorts->phone_number ?? 'Not Available' }}</td>
+                                                        <td>{{ $escorts->age ?? 'Not Available' }}</td>
+                                                        <td>{{ $escorts->canton ?? 'Not Available'}}</td>
+                                                        <td>{{ $escorts->city ?? 'Not Available'}}</td>
+                                                        <td>{{ $escorts->origin ?? 'Not Available' }}</td>
+                                                        <td>{{ $escorts->type ?? 'Not Available'}}</td>
                                                         <td style="display: flex">
                                                             <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
