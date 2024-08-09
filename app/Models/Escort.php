@@ -17,6 +17,7 @@ class Escort extends Authenticatable implements CanResetPasswordContract
         'nickname',
         'pictures',
         'phone_number',
+        'email',
         'age',
         'canton',
         'city',

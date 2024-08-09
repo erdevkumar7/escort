@@ -13,7 +13,7 @@
 
                 <div class="col-md-4 threee-details-content">
                     <div class="detials-icons">
-                        <i class="fa fa-wechat"></i>
+                        <a href="#"><i class="bi bi-chat-right-dots"></i></a>
                         <a href="#"><i class='fas fa-book-open'></i></a>
                         <a href="#"><i class="fa fa-shopping-bag"></i></a>
                         <a href="#"><i class='far fa-user-circle'></i></a>
@@ -29,7 +29,7 @@
         <div class="container">
             <div class="row members-inner-content">
                 <div class="col-md-4 first-members-content">
-                    <a href="#"><i class='fas fa-arrow-left'></i></a>
+                    <a href="{{ route('escort.list') }}"><i class='fas fa-arrow-left'></i></a>
                 </div>
 
                 <div class="col-md-4 second-members-content">
@@ -40,9 +40,9 @@
                             alt="Default Profile Picture">
                     @endif
 
-                    <button>Private apart..</button>
-                    <h3>{{ $escort->nickname ?? 'Not Available' }}<span><img src=""></span></h3>
-                    <p>Origin: {{ $escort->origin ?? 'Not Available' }}</p>
+                    <!--  <button>Private apart..</button> -->
+                    <h3>{{ $escort->nickname ?? 'Not Available' }}</h3>
+                    <p>Call: {{ $escort->phone_number ?? 'Not Available' }}</p>
 
                     <div class="experience-inner-part">
                         <p>
@@ -55,8 +55,12 @@
                             @if ($escort->type)
                                 {{ $escort->type }}
                             @endif
-                            💃✨
-                            {{ $escort->text_description }}🔥
+                            @if ($escort->text_description)
+                                <div class="escort-dec">
+                                    💃✨
+                                    {{ $escort->text_description }}🔥
+                                </div>
+                            @endif
                         </p>
                     </div>
 
@@ -69,9 +73,19 @@
 
                 <div class="col-md-4 three-members-content">
                     <div class="members-count">
-                        <p>15 <span>Photos</span></p>
-                        <p>2 <span>Videos</span></p>
-                        <p>62 <span>Members</span></p>
+                        @if (!empty($pictures) && is_array($pictures) && count($pictures) > 0)
+                            <p>{{ count($pictures) }} <span>Photos</span></p>
+                        @else
+                            <p> 0 <span>Photos</span></p>
+                        @endif
+
+                        @if (!empty($video) && is_array($video) && count($video) > 0)
+                            <p>{{ count($video) }} <span>Videos</span></p>
+                        @else
+                            <p> 0 <span>Videos</span></p>
+                        @endif
+
+                        <p> 0 <span>Members</span></p>
 
                     </div>
                 </div>
@@ -88,8 +102,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="media-profile">
-                        <a><i class="fak fa-c-medias"></i></a>
-                        <a href="#"><i class='fas fa-video'></i></a>
+                        <a href="#escort-detail"><i class="fa-solid fa-image"></i></a>
+                        <a href="#escort-videos"><i class='fas fa-video'></i></a>
                         <a href="#"><i class='fas fa-lock'></i></a>
                         <a href="#"><i class='fas fa-file-contract'></i></a>
                         <a href="#"><i class='fas fa-mars-double'></i></a>
@@ -97,9 +111,42 @@
                     </div>
                 </div>
             </div>
+            <div class="tab-content" data-aos="fade-up" data-aos-delay="200">
+                <div class="tab-pane fade active show" id="menu-starters">
+                    <!-- Pictures Section -->
+                    <div class="row gy-5 " id="escort-detail">
+                        @if ($pictures)
+                            @foreach ($pictures as $picture)
+                                <div class="col-lg-3 menu-item">
+                                    <img src="{{ asset('/public/images/escorts_img') . '/' . $picture }}"
+                                        class="menu-img img-fluid" alt="Picture">
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="col-12">
+                                
+                            </div>
+                        @endif
+                    </div>
+
+                    <!-- Videos Section -->
+                    {{-- <div class="row gy-5 " id="escort-videos">
+                        @if ($video)
+                            @foreach ($video as $vdo)
+                                <div class="col-lg-3 menu-item">
+                                    <video width="100%" height="340" controls>
+                                        <source src="{{ asset('/public/videos') . '/' . $vdo }}" type="video/mp4">
+                                    </video>
+                                </div>
+                            @endforeach
+                        @else
+                            <div class="col-12">
+                                
+                            </div>
+                        @endif
+                    </div> --}}
+                </div>
+            </div>
         </div>
-
-
-
     </section>
 @endsection

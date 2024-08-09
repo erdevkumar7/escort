@@ -29,6 +29,7 @@ class AdminEscortsController extends Controller
             'pictures' => 'required|array|min:1',
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
+            'email' => 'required|email|unique:escorts',
             'age' => 'required',
             'canton' => 'required',
             'city' => 'required',

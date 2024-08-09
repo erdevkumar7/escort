@@ -41,15 +41,30 @@
                                             <span class="text-danger" id="phoneErr">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    {{-- email --}}
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <label for="email">Email *</label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            value="{{ old('email') }}" oninput="removeError('emailErr')">
+                                        @error('email')
+                                            <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    {{-- whatsapp_number --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="whatsapp_number">WhatsApp Number</label>
+                                        <input type="text" class="form-control" id="whatsapp_number"
+                                            name="whatsapp_number" value="{{ old('whatsapp_number') }}">
+                                    </div>
                                     {{-- address --}}
                                     <div class="col-md-4 col-sm-4 ">
                                         <label for="address">Address </label>
                                         <input type="text" class="form-control" id="address" name="address"
                                             value="{{ old('address') }}">
                                     </div>
-                                </div>
-
-                                <div class="item form-group">
                                     {{-- city --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="city">City *</label>
@@ -70,6 +85,9 @@
                                         @enderror
                                     </div>
 
+                                </div>
+
+                                <div class="item form-group">
                                     {{-- age --}}
                                     <div class="col-md-4 col-sm-4 ">
                                         <label for="age">Age <span class="required">*</span></label>
@@ -113,9 +131,6 @@
                                             <span class="text-danger"id="originErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                </div>
-
-                                <div class="item form-group">
                                     {{-- type --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="type">Type<span class="required"> *</span></label>
@@ -137,6 +152,40 @@
                                             <span class="text-danger" id="typeErr">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    {{-- build --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="build">Build</label>
+                                        <select class="form-control" id="build" name="build">
+                                            <option value="">Select</option>
+                                            <option value="Slim" {{ old('build') == 'Slim' ? 'selected' : '' }}>Slim
+                                            </option>
+                                            <option value="Normal" {{ old('build') == 'Normal' ? 'selected' : '' }}>Normal
+                                            </option>
+                                            <option value="Chubby" {{ old('build') == 'Chubby' ? 'selected' : '' }}>Chubby
+                                            </option>
+                                            <option value="Large" {{ old('build') == 'Large' ? 'selected' : '' }}>Large
+                                            </option>
+                                            <option value="Muscular" {{ old('build') == 'Muscular' ? 'selected' : '' }}>
+                                                Muscular</option>
+                                        </select>
+                                    </div>
+                                    {{-- breast_size --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="breast_size">Breast
+                                            Size</label>
+                                        <select class="form-control" id="breast_size" name="breast_size">
+                                            <option value="">Select</option>
+                                            <option value="Small"{{ old('breast_size') == 'Small' ? 'selected' : '' }}>
+                                                Small</option>
+                                            <option value="Medium"{{ old('breast_size') == 'Medium' ? 'selected' : '' }}>
+                                                Medium</option>
+                                            <option value="Large"{{ old('breast_size') == 'Large' ? 'selected' : '' }}>
+                                                Large</option>
+                                        </select>
+                                    </div>
                                     {{-- canton --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="canton">Canton *</label>
@@ -156,40 +205,9 @@
                                             <span class="text-danger" id="cantonErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- build --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="build">Build</label>
-                                        <select class="form-control" id="build" name="build">
-                                            <option value="">Select</option>
-                                            <option value="Slim" {{ old('build') == 'Slim' ? 'selected' : '' }}>Slim
-                                            </option>
-                                            <option value="Normal" {{ old('build') == 'Normal' ? 'selected' : '' }}>Normal
-                                            </option>
-                                            <option value="Chubby" {{ old('build') == 'Chubby' ? 'selected' : '' }}>Chubby
-                                            </option>
-                                            <option value="Large" {{ old('build') == 'Large' ? 'selected' : '' }}>Large
-                                            </option>
-                                            <option value="Muscular" {{ old('build') == 'Muscular' ? 'selected' : '' }}>
-                                                Muscular</option>
-                                        </select>
-                                    </div>
                                 </div>
 
                                 <div class="item form-group">
-                                    {{-- breast_size --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="breast_size">Breast
-                                            Size</label>
-                                        <select class="form-control" id="breast_size" name="breast_size">
-                                            <option value="">Select</option>
-                                            <option value="Small"{{ old('breast_size') == 'Small' ? 'selected' : '' }}>
-                                                Small</option>
-                                            <option value="Medium"{{ old('breast_size') == 'Medium' ? 'selected' : '' }}>
-                                                Medium</option>
-                                            <option value="Large"{{ old('breast_size') == 'Large' ? 'selected' : '' }}>
-                                                Large</option>
-                                        </select>
-                                    </div>
                                     {{-- hair_color --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="hair_color">Hair Color</label>
@@ -223,6 +241,15 @@
                                                 Long</option>
                                         </select>
                                     </div>
+                                    {{-- pictures --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="pictures">Pictures<span class="required">*</span></label>
+                                        <input type="file" class="form-control" id="pictures" name="pictures[]"
+                                            multiple oninput="removeError('picturesErr')">
+                                        @error('pictures')
+                                            <span class="text-danger" id="picturesErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                 </div>
 
                                 <div class="item form-group">
@@ -240,37 +267,30 @@
                                         <input type="number" class="form-control" id="weight" name="weight"
                                             value="{{ old('weight') }}">
                                     </div>
-                                    {{-- pictures --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="pictures">Pictures<span class="required">*</span></label>
-                                        <input type="file" class="form-control" id="pictures" name="pictures[]"
-                                            multiple oninput="removeError('picturesErr')">
-                                        @error('pictures')
-                                            <span class="text-danger" id="picturesErr">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
-                                    {{-- whatsapp_number --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="whatsapp_number">WhatsApp Number</label>
-                                        <input type="text" class="form-control" id="whatsapp_number"
-                                            name="whatsapp_number" value="{{ old('whatsapp_number') }}">
-                                    </div>
-                                    {{-- rates_in_chf --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="rates_in_chf">Rates in CHF</label>
-                                        <input type="text" class="form-control" id="rates_in_chf" name="rates_in_chf"
-                                            value="{{ old('rates_in_chf') }}">
-                                    </div>
-
+                                    {{-- video --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="video">Videos</label>
                                         <input type="file" class="form-control" id="video" name="video[]"
                                             multiple>
                                         @error('video')
                                             <span class="text-danger" id="videoErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    {{-- rates_in_chf --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="rates_in_chf">Rates in CHF</label>
+                                        <input type="text" class="form-control" id="rates_in_chf" name="rates_in_chf"
+                                            value="{{ old('rates_in_chf') }}">
+                                    </div>
+                                    {{-- description --}}
+                                    <div class="col-md-8 col-sm-8">
+                                        <label for="description">Description *</label>
+                                        <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')">{{ old('text_description') }}</textarea>
+                                        @error('text_description')
+                                            <span class="text-danger" id="descriptionErr">{{ $message }}</span>
                                         @enderror
                                     </div>
                                 </div>
@@ -391,51 +411,66 @@
                                             <span class="text-danger" id="servicesErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- description --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="description">Description *</label>
-                                        <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')">{{old('text_description')}}</textarea>
-                                        @error('text_description')
-                                            <span class="text-danger" id="descriptionErr">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                </div>
-
-                                <div class="item form-group">
                                     {{-- availability --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="availability">Availability</label>
                                         <select class="form-control" id="availability" name="availability[]" multiple>
-                                            <option value="Monday" {{ in_array('Monday', old('availability', [])) ? 'selected' : '' }}>Monday</option>
-                                            <option value="Tuesday" {{ in_array('Tuesday', old('availability', [])) ? 'selected' : '' }}>Tuesday</option>
-                                            <option value="Wednesday" {{ in_array('Wednesday', old('availability', [])) ? 'selected' : '' }}>Wednesday</option>
-                                            <option value="Thursday" {{ in_array('Thursday', old('availability', [])) ? 'selected' : '' }}>Thursday</option>
-                                            <option value="Friday" {{ in_array('Friday', old('availability', [])) ? 'selected' : '' }}>Friday</option>
-                                            <option value="Saturday" {{ in_array('Saturday', old('availability', [])) ? 'selected' : '' }}>Saturday</option>
+                                            <option value="Monday"
+                                                {{ in_array('Monday', old('availability', [])) ? 'selected' : '' }}>Monday
+                                            </option>
+                                            <option value="Tuesday"
+                                                {{ in_array('Tuesday', old('availability', [])) ? 'selected' : '' }}>
+                                                Tuesday</option>
+                                            <option value="Wednesday"
+                                                {{ in_array('Wednesday', old('availability', [])) ? 'selected' : '' }}>
+                                                Wednesday</option>
+                                            <option value="Thursday"
+                                                {{ in_array('Thursday', old('availability', [])) ? 'selected' : '' }}>
+                                                Thursday</option>
+                                            <option value="Friday"
+                                                {{ in_array('Friday', old('availability', [])) ? 'selected' : '' }}>Friday
+                                            </option>
+                                            <option value="Saturday"
+                                                {{ in_array('Saturday', old('availability', [])) ? 'selected' : '' }}>
+                                                Saturday</option>
                                         </select>
                                     </div>
+                                </div>
+
+                                <div class="item form-group">
                                     {{-- currencies_accepted --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="currencies_accepted">Currencies Accepted</label>
                                         <select class="form-control" id="currencies_accepted"
                                             name="currencies_accepted[]" multiple>
-                                            <option value="CHF" {{ in_array('CHF', old('currencies_accepted', [])) ? 'selected' : '' }}>CHF</option>
-                                            <option value="EUR" {{ in_array('EUR', old('currencies_accepted', [])) ? 'selected' : '' }}>EUR</option>
-                                            <option value="USD" {{ in_array('USD', old('currencies_accepted', [])) ? 'selected' : '' }}>USD</option>
+                                            <option value="CHF"
+                                                {{ in_array('CHF', old('currencies_accepted', [])) ? 'selected' : '' }}>CHF
+                                            </option>
+                                            <option value="EUR"
+                                                {{ in_array('EUR', old('currencies_accepted', [])) ? 'selected' : '' }}>EUR
+                                            </option>
+                                            <option value="USD"
+                                                {{ in_array('USD', old('currencies_accepted', [])) ? 'selected' : '' }}>USD
+                                            </option>
                                         </select>
                                     </div>
-
+                                    {{-- payment_method --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="payment_method">Payment Methods</label>
                                         <select class="form-control" id="payment_method" name="payment_method[]"
                                             multiple>
-                                            <option value="Cash" {{ in_array('Cash', old('payment_method', [])) ? 'selected' : '' }}>Cash</option>
-                                            <option value="Credit Card" {{ in_array('Credit Card', old('payment_method', [])) ? 'selected' : '' }}>Credit Card</option>
+                                            <option value="Cash"
+                                                {{ in_array('Cash', old('payment_method', [])) ? 'selected' : '' }}>Cash
+                                            </option>
+                                            <option value="Credit Card"
+                                                {{ in_array('Credit Card', old('payment_method', [])) ? 'selected' : '' }}>
+                                                Credit Card</option>
                                         </select>
                                     </div>
                                 </div>
+                                {{-- submit --}}
                                 <div class="item form-group">
-                                    <div class="col-md-4 col-sm-4 offset-md-3">
+                                    <div class="col-md-4 col-sm-4 offset-md-4">
                                         <a href="{{ route('admin.escorts') }}"> <button class="btn btn-primary"
                                                 type="button">Cancel</button></a>
                                         <button class="btn btn-primary" type="reset">Reset</button>
