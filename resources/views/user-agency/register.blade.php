@@ -63,7 +63,7 @@
                     @enderror
 
                     <div class="col-sm-12">
-                        <p class="text-center text-muted mt-3 mb-0">Have already an agency? <a href=""
+                        <p class="text-center text-muted mt-3 mb-0">Have already an agency? <a href="{{route('agency.login')}}"
                                 class="fw-bold text-body"><u>Login here</u></a></p>
                     </div>
 

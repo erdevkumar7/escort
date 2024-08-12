@@ -11,6 +11,10 @@ return [
 
 
     'guards' => [
+        'agency' => [
+            'driver' => 'session',
+            'provider' => 'agencies',
+        ],
         'escort' => [
             'driver' => 'session',
             'provider' => 'escorts',
@@ -34,6 +38,10 @@ return [
 
 
     'providers' => [
+        'agencies' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Agency::class,
+        ],
         'escorts' => [
             'driver' => 'eloquent',
             'model' => App\Models\Escort::class,
@@ -60,6 +68,12 @@ return [
         ],
         'escorts' => [
             'provider' => 'escorts',
+            'table' => 'password_resets',
+            'expire' => 60,
+            'throttle' => 60,
+        ],
+        'agencies' => [
+            'provider' => 'agencies',
             'table' => 'password_resets',
             'expire' => 60,
             'throttle' => 60,

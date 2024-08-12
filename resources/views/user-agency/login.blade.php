@@ -2,14 +2,14 @@
 @section('page_content')
     <section>
         <div class="container mt-3 escort-login-form">
-            <form action="" method="POST" enctype="multipart/form-data">
+            <form action="{{ route('agency.login_submit') }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 <h2 class="text-center text-info">Agency-Login</h2>
                 <div class="row jumbotron box8 login-inner-part">
-                 
+
                     {{-- email --}}
                     <div class="col-sm-6 form-group">
-                        <label for="email">Email *</label>
+                        <label for="email">Agency Email *</label>
                         <input type="email" class="form-control" name="email" id="email"
                             placeholder="Enter your email." oninput="removeError('emailErr')">
                         @error('email')
@@ -26,14 +26,14 @@
                         @error('password')
                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                         @enderror
-                        <a href="{{ route('password.request') }}" class="fw-bold text-body float-right m-1">Forgot
+                        <a href="{{ route('agency.password.request') }}" class="fw-bold text-body float-right m-1">Forgot
                             Password</a>
                     </div>
 
 
                     <div class="col-sm-12">
-                        <p class="text-center text-muted mt-3 mb-0">Don't have an account? <a
-                                href="" class="fw-bold text-body"><u>Register
+                        <p class="text-center text-muted mt-3 mb-0">Don't have an agency? <a
+                                href="{{ route('agency.register_form') }}" class="fw-bold text-body"><u>Register
                                     here</u></a></p>
                     </div>
 

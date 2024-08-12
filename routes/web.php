@@ -12,14 +12,30 @@ use App\Http\Controllers\UserEscortsController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [UserEscortsController::class, 'index'])->name('index');
-Route::get('escort-list', [UserEscortsController::class,'escort_list'])->name('escort.list');
+Route::get('escort-list', [UserEscortsController::class, 'escort_list'])->name('escort.list');
 Route::get('/{id}/escort-detail', [UserEscortsController::class, 'escort_detail'])->name('escort.detail_by_id');
 
-Route::get('/register-agency', [AgencyController::class, 'agency_regiser_from'])->name('agency.register_form');
-Route::post('/register-agency', [AgencyController::class, 'agency_regiser_from_submit'])->name('agency.register.form_submit');
 
-Route::get('/agency-login', [AgencyController::class, 'agency_login_form'])->name('agency.login');
+Route::prefix('agency')->group(function () {
+    Route::get('/register', [AgencyController::class, 'agency_regiser_from'])->name('agency.register_form');
+    Route::post('/register', [AgencyController::class, 'agency_regiser_from_submit'])->name('agency.register.form_submit');
 
+    Route::get('/login', [AgencyController::class, 'agency_login_form'])->name('agency.login');
+    Route::post('/login', [AgencyController::class, 'agency_login_form_submit'])->name('agency.login_submit');
+
+    // Agency Forgot Password
+    Route::get('/forgot-password', [AgencyController::class, 'showForgotPasswordForm'])->name('agency.password.request');
+    Route::post('/forgot-password', [AgencyController::class, 'sendResetLinkEmail'])->name('agency.password.email');
+    // Agency Reset Password
+    Route::get('/reset-password/{token}', [AgencyController::class, 'showResetPasswordForm'])->name('agency.password.reset');
+    Route::post('/reset-password', [AgencyController::class, 'resetPassword'])->name('agency.password.update');
+
+    //Protected Agency Routes
+    Route::middleware(['auth:agency'])->group(function () {
+        Route::get('/{id}/agency-detail', [AgencyController::class, 'agency_detail'])->name('agency.detail');
+        Route::post('/logout', [AgencyController::class, 'agency_logout'])->name('agency.logout');
+    });
+});
 
 // todo: Admin Auth
 Route::prefix('admin')->group(function () {
@@ -102,5 +118,3 @@ Route::group(['middleware' => ['auth:escort']], function () {
 
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
-
-
