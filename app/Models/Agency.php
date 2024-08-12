@@ -13,6 +13,7 @@ class Agency extends Model
         "email",
         "phone_number",
         "address",
+        "password",
         "counter",
         ] ;
 }

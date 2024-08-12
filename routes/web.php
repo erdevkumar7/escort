@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminAgencyController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminEscortsController;
 use App\Http\Controllers\AdminFuncController;
+use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\EscortsAuthController;
 use App\Http\Controllers\UserAuthController;
@@ -13,6 +14,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [UserEscortsController::class, 'index'])->name('index');
 Route::get('escort-list', [UserEscortsController::class,'escort_list'])->name('escort.list');
 Route::get('/{id}/escort-detail', [UserEscortsController::class, 'escort_detail'])->name('escort.detail_by_id');
+
+Route::get('/register-agency', [AgencyController::class, 'agency_regiser_from'])->name('agency.register_form');
+Route::post('/register-agency', [AgencyController::class, 'agency_regiser_from_submit'])->name('agency.register.form_submit');
+
+Route::get('/agency-login', [AgencyController::class, 'agency_login_form'])->name('agency.login');
 
 
 // todo: Admin Auth

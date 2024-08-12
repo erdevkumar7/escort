@@ -1,6 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Montserrat");
 @import "https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css";
-@import "http://fonts.googleapis.com/icon?family=Material+Icons";
+/*@import "http://fonts.googleapis.com/icon?family=Material+Icons";*/
 @import "https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.2.1/assets/owl.carousel.min.css";
 
 @font-face {
@@ -1164,13 +1164,13 @@ div#navbarScroll button {
     color: #ec8ccc;
 }
 
-
+/*
 .escort-dec {
     display: -webkit-box;
     -webkit-box-orient: vertical;
     -webkit-line-clamp: 10;
     overflow: hidden;
-}
+}*/
 
 .escort-details h1.bemy-text {
     font-family: fantasy;
@@ -1199,6 +1199,7 @@ section.escort-details {
 .members-count {
     display: flex;
     gap: 30px;
+    justify-content: flex-end;
 }
 
 .members-count span {
@@ -1209,8 +1210,8 @@ section.escort-details {
 .second-members-content {
     text-align: center;
     position: relative;
+    margin-top: 40px;
 }
-
 
 
 .second-members-content button {
@@ -1249,26 +1250,27 @@ section.escort-details {
 }
 
 .contact-btn {
-    margin-top: 25px;
+    margin-top: 40px;
 }
 .experience-inner-part {
     padding: 18px;
     border-radius: 5px;
     font-size: 14px;
     font-family: 'Montserrat-Regular';
-        text-align: left;
     background-color: #f4f5f6;
+    text-align: center;
+    line-height: 1.8;
 }
 .contact-btn a.follow-btn {
     background-color: #f4f5f6;
-    padding: 5px 21px;
+    padding: 9px 35px;
     border-radius: 4px;
     color: black;
     text-decoration: none;
 }
 .contact-btn a.contact-btn {
     background-color: #3cb2f6;
-    padding: 5px 21px;
+    padding: 9px 30px;
     border-radius: 4px;
     color: #fff;
     text-decoration: none;
@@ -1299,14 +1301,15 @@ div#escort-detail .menu-item img {
 }
 div#escort-detail {
     margin-bottom: 0;
+    padding-bottom: 50px;
 }
 section.members-content {
     padding-bottom: 40px;
 }
 .second-members-content img {
     border-radius: 100%;
-    width: 40%;
-    height: 30%;
+    width: 140px;
+    height: 140px;
 }
 
 .detials-icons a {
@@ -1315,7 +1318,17 @@ section.members-content {
 
 section.select-gallary {
     background-color: #111624;
+    padding-bottom: 40px;
 }
+
+div#escort-videos video {
+    width: 100%;
+    border: solid 1px #FFBF00;
+    height: 340px;
+    border-radius: 15px;
+}
+
+
 
 
 @media (min-width:768px) and (max-width:1024px) {
