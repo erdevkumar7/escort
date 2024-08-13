@@ -209,19 +209,36 @@
 {{-- toaster message script --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
-    @if(Session::has('success'))
+    @if (Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
     @endif
 
-    @if(Session::has('error'))
+    @if (Session::has('error'))
         toastr.error("{{ Session::get('error') }}");
     @endif
 
-    @if(Session::has('info'))
+    @if (Session::has('info'))
         toastr.info("{{ Session::get('info') }}");
     @endif
 
-    @if(Session::has('warning'))
+    @if (Session::has('warning'))
         toastr.warning("{{ Session::get('warning') }}");
     @endif
+</script>
+
+{{-- datatables --}}
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js">
+</script>
+<script>
+    $(document).ready(function() {
+        $('#new-table').DataTable({
+            "paging": true, // Enable pagination
+            "lengthChange": true, // Allow user to change the number of rows shown
+            "searching": true, // Enable search functionality
+            "ordering": true, // Enable sorting
+            "info": true, // Display table information
+            "autoWidth": false // Auto-adjust column widths
+        });
+    });
 </script>

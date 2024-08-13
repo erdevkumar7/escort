@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use App\Notifications\AgencyResetPasswordNotification;
+use Illuminate\Support\Facades\DB;
 
 class AgencyController extends Controller
 {
@@ -67,11 +68,13 @@ class AgencyController extends Controller
 
     public function dashboard($id)
     {
+        
         $agency = Agency::find(Auth::guard('agency')->user()->id);
+        $allescorts = DB::table("escorts")->where('agency_id',Auth::guard('agency')->user()->id)->orderBy("created_at", "desc")->get();
         // if ($agency->id != $id) {
         //     return redirect()->route('agency.dashboard')->with('error', 'You are not authorized to access this page.');
         // }
-        return view('user-agency.dashboard', compact('agency'));
+        return view('user-agency.dashboard', compact('agency','allescorts'));
     }
 
     public function showForgotPasswordForm()
