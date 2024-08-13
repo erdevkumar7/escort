@@ -62,7 +62,11 @@
 
                    @if (Auth::guard('escort')->user())
                        <li class="nav-item inner-icons">
-                           <button onclick="handleLogOut()">Logout</button>
+                           <button onclick="handleLogOut('escort')">Logout</button>
+                       </li>
+                   @elseif (Auth::guard('agency')->check())
+                       <li class="nav-item inner-icons">
+                           <button onclick="handleLogOut('agency')">Logout</button>
                        </li>
                    @else
                        <li class="nav-item inner-icons">
@@ -79,6 +83,11 @@
                    style="display: none;">
                    @csrf
                </form>
+
+               <form id="agency-logout-form" action="{{ route('agency.logout') }}" method="POST"
+               style="display: none;">
+               @csrf
+           </form>
            </div>
        </div>
    </nav>

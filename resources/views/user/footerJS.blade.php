@@ -201,9 +201,14 @@
         }
     }
     //handleLogOut
-    function handleLogOut() {
-        event.preventDefault();
-        document.getElementById('escort-logout-form').submit();
+    function handleLogOut(user) {
+        if (user === 'escort') {
+            event.preventDefault();
+            document.getElementById('escort-logout-form').submit();
+        } else if (user === 'agency') {            
+            event.preventDefault();
+            document.getElementById('agency-logout-form').submit();
+        }
     }
 </script>
 {{-- toaster message script --}}

@@ -39,7 +39,8 @@
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/public/build/js/custom.min.js') }}"></script>
      <!-- jquery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+     {{-- This jQuery give side effect on admin toggle for mobile view and i applied for Select2 JS --}}
+    {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <!-- Include Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
     <!-- Bootstrap -->
