@@ -1,11 +1,13 @@
-<h1>Agency Detail</h1>
-<h4>{{$agency->name}}</h4>
-
-  {{-- logout form --}}
-  <div>
+@extends('user.layout')
+@section('page_content')
+<h1>Agency Dashboard</h1>
+  {{-- logout form  --}}
+   {{-- <div>
     <form id="escort-logout-form" action="{{ route('agency.logout') }}" method="POST"
         >
         @csrf
         <button type="submit">Logout</button>
     </form>
-</div>
+</div> --}}
+
+@endsection

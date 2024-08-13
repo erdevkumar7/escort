@@ -57,7 +57,7 @@ class AgencyController extends Controller
 
         if (Auth::guard('agency')->attempt($credential)) {
             $agency = Agency::find(Auth::guard('agency')->user()->id);
-            return redirect()->route('agency.detail', $agency->id)->with('success', 'Login successfully!');;
+            return redirect()->route('agency.dashboard', $agency->id)->with('success', 'Login successfully!');;
         }
         // Authentication failed...
         return back()->withErrors([
@@ -65,13 +65,13 @@ class AgencyController extends Controller
         ])->withInput();
     }
 
-    public function agency_detail($id)
+    public function dashboard($id)
     {
         $agency = Agency::find(Auth::guard('agency')->user()->id);
         // if ($agency->id != $id) {
         //     return redirect()->route('agency.dashboard')->with('error', 'You are not authorized to access this page.');
         // }
-        return view('user-agency.detail', compact('agency'));
+        return view('user-agency.dashboard', compact('agency'));
     }
 
     public function showForgotPasswordForm()
