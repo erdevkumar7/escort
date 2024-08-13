@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Notifications\AgencyResetPasswordNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -12,8 +13,8 @@ use Laravel\Sanctum\HasApiTokens;
 
 class Agency extends Authenticatable implements CanResetPasswordContract
 {
-    use  CanResetPassword,HasApiTokens, Notifiable;
-    // use HasFactory;
+    use  CanResetPassword, Notifiable;
+    // use HasFactory, HasApiTokens;
     protected $fillable = [
         "name",
         "email",
@@ -22,4 +23,9 @@ class Agency extends Authenticatable implements CanResetPasswordContract
         "password",
         "counter",
         ] ;
+
+        public function sendPasswordResetNotification($token)
+        {
+            $this->notify(new AgencyResetPasswordNotification($token));
+        }
 }

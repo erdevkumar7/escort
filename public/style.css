@@ -1164,13 +1164,13 @@ div#navbarScroll button {
     color: #ec8ccc;
 }
 
-/*
+
 .escort-dec {
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 10;
+    -webkit-line-clamp: 15;
     overflow: hidden;
-}*/
+}
 
 .escort-details h1.bemy-text {
     font-family: fantasy;
@@ -1667,12 +1667,39 @@ section.disclaimer {
     width: 100%;
 }
 
+div#escort-detail .menu-item img {
+    width: 50%;
+    display: flex;
+    margin: auto;
+}
+
+.media-profile {
+    margin-bottom: 40px;
+}
+
+.table-list .menu-item {
+    flex: 32%;
+    text-align: center;
+}
+
+.table-list .menu-item img {
+    height: 300px;
+    width: 100%;
+}
+
+.dropdown-item {
+    line-height: 1.9;
+}
+
 
 
 }
 
 @media only screen and (max-width: 767px) {
 
+.dropdown-item {
+    line-height: 1.9;
+}
     nav.navbar.navbar-expand-lg {
         width: 100%;
         margin: auto;
@@ -2120,6 +2147,44 @@ section.disclaimer {
     .escorts-first-content .icons img {
         width: 38px;
     }
+
+
+.members-count {
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.media-profile {
+    margin-bottom: 35px;
+}
+div#escort-detail .menu-item img {
+    width: 90%;
+    display: flex;
+    margin: auto;
+}
+
+section.select-gallary {
+    padding-bottom: 0px;
+}
+
+div#escort-list {
+    display: block;
+}
+
+.table-list a.btn.btn-primary.btn-block {
+    margin-bottom: 0;
+}
+
+.table-list .menu-item {
+    margin-bottom: 20px;
+    margin-left: 0;
+}
+
+.table-list .menu-item img {
+    height: 300px;
+    width: 100%;
+}
+
 
 
 }

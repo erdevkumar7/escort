@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
+use App\Notifications\AgencyResetPasswordNotification;
 
 class AgencyController extends Controller
 {
@@ -89,6 +90,28 @@ class AgencyController extends Controller
         return $status === Password::RESET_LINK_SENT
             ? redirect()->route('agency.login')->with('success', __($status))
             : back()->withErrors(['email' => __($status)]);
+
+        // $request->validate(['email' => 'required|email']);
+
+        // $response = Password::broker('agencies')->sendResetLink(
+        //     $request->only('email')
+        // );
+
+        // // Check if the password reset link was sent successfully
+        // if ($response === Password::RESET_LINK_SENT) {
+        //     // Fetch the agency by email
+        //     $agency = \App\Models\Agency::where('email', $request->email)->first();
+
+        //     if ($agency) {
+        //         // Send custom reset password notification
+        //         $agency->notify(new AgencyResetPasswordNotification($response));
+        //     }
+
+        //     return redirect()->route('agency.login')->with('success', __('passwords.sent'));
+        // }
+
+        // // If there's an error, return back with errors
+        // return back()->withErrors(['email' => __($response)]);
     }
 
     public function showResetPasswordForm(Request $request, $token)
@@ -101,42 +124,23 @@ class AgencyController extends Controller
 
     public function resetPassword(Request $request)
     {
-        dd($request);
-        // $request->validate([
-        //     'token' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required|confirmed|min:8',
-        // ]);
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
 
-        // $status = Password::broker('escorts')->reset(
-        //     $request->only('email', 'password', 'password_confirmation', 'token'),
-        //     function ($escort, $password) {
-        //         $escort->password = Hash::make($password);
-        //         $escort->save();
-        //     }
-        // );
+        $status = Password::broker('agencies')->reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($agency, $password) {
+                $agency->password = Hash::make($password);
+                $agency->save();
+            }
+        );
 
-        // return $status === Password::PASSWORD_RESET
-        //     ? redirect()->route('login')->with('success', __($status))
-        //     : back()->withErrors(['email' => [__($status)]]);
-
-        // $request->validate([
-        //     'token' => 'required',
-        //     'email' => 'required|email',
-        //     'password' => 'required|min:8|confirmed',
-        // ]);      
-
-        // $status = Password::broker('agencies')->reset(
-        //     $request->only('email', 'password', 'password_confirmation', 'token'),
-        //     function ($agency, $password) {
-        //         $agency->password = Hash::make($password);
-        //         $agency->save();
-        //     }
-        // );
-
-        // return $status === Password::PASSWORD_RESET
-        //     ? redirect()->route('agency.login')->with('status', __($status))
-        //     : back()->withErrors(['email' => [__($status)]]);
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('agency.login')->with('success', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
     }
 
     public function agency_logout(Request $request)
