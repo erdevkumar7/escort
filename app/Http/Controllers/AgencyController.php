@@ -77,6 +77,10 @@ class AgencyController extends Controller
         return view('user-agency.dashboard', compact('agency','allescorts'));
     }
 
+    public function agency_escort_detail($id, $escort_id){
+        dd($escort_id);
+    }
+
     public function showForgotPasswordForm()
     {
         return view('auth.agency-forgot-password');

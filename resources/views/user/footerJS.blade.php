@@ -164,7 +164,7 @@
 
     })
 </script>
-<script src="script.js"></script>
+{{-- <script src="script.js"></script> --}}
 <!-- Include Select2 JS -->
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <script>
@@ -205,7 +205,7 @@
         if (user === 'escort') {
             event.preventDefault();
             document.getElementById('escort-logout-form').submit();
-        } else if (user === 'agency') {            
+        } else if (user === 'agency') {
             event.preventDefault();
             document.getElementById('agency-logout-form').submit();
         }
@@ -231,19 +231,18 @@
     @endif
 </script>
 
-{{-- datatables --}}
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.3/js/jquery.dataTables.min.js">
-</script>
+<!-- DataTables JS -->
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+
 <script>
     $(document).ready(function() {
-        $('#new-table').DataTable({
+        $('#agencies_escort').DataTable({
+            // Optional configurations
             "paging": true, // Enable pagination
-            "lengthChange": true, // Allow user to change the number of rows shown
-            "searching": true, // Enable search functionality
+            "searching": true, // Enable search
             "ordering": true, // Enable sorting
-            "info": true, // Display table information
-            "autoWidth": false // Auto-adjust column widths
+            "info": true, // Show table information
+            "autoWidth": false // Auto adjust column width
         });
     });
 </script>

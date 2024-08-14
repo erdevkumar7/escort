@@ -2,8 +2,6 @@
 
 @section('page_content')
       @include('user.slider')
-      {{-- @include('user-escort.escort-listing') --}}
-
       @include('user.help-growth')
       @include('user.premium-ads')
       @include('user.services-offer')

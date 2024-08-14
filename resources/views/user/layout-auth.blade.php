@@ -9,10 +9,9 @@
     @include('user.topNav')
 
     <!-- page content -->
-    @yield('page_content')
+    @yield('auth_content')
     <!-- /page content -->
     
-    @include('user.disclaimer')
     @include('user.footer')
     @include('user.footerJS')
 </body>

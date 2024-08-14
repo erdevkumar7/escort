@@ -11,11 +11,12 @@ use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserEscortsController;
 use Illuminate\Support\Facades\Route;
 
+//Public routes ***************************************************************
 Route::get('/', [UserEscortsController::class, 'index'])->name('index');
 Route::get('escort-list', [UserEscortsController::class, 'escort_list'])->name('escort.list');
 Route::get('/{id}/escort-detail', [UserEscortsController::class, 'escort_detail'])->name('escort.detail_by_id');
 
-
+//Agency routes ****************************************************************
 Route::prefix('agency')->group(function () {
     Route::get('/register', [AgencyController::class, 'agency_regiser_from'])->name('agency.register_form');
     Route::post('/register', [AgencyController::class, 'agency_regiser_from_submit'])->name('agency.register.form_submit');
@@ -33,11 +34,13 @@ Route::prefix('agency')->group(function () {
     //Protected Agency Routes
     Route::middleware(['auth:agency'])->group(function () {
         Route::get('/{id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
+        Route::get('/{id}/escort-detail/{escort_id}/show', [AgencyController::class, 'agency_escort_detail'])->name('agency.escort.detail');
+
         Route::post('/logout', [AgencyController::class, 'agency_logout'])->name('agency.logout');
     });
 });
 
-// todo: Admin Auth
+// todo: Admin Auth *************************************************************************
 Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin_register_form');
     Route::post('/register', [AdminAuthController::class, 'register'])->name('admin_register');
