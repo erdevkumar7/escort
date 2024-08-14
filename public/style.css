@@ -403,10 +403,12 @@ section.we-help-growth .container {
     width: 70%;
     font-family: 'Montserrat-Regular';
 }
+
 p.featured-text {
     font-family: 'Montserrat-Regular';
     font-size: 15px;
 }
+
 .premium-ads div#card-carousel {
     display: inline-block;
 }
@@ -904,7 +906,7 @@ section.disclaimer {
     padding-left: 50px;
     font-family: 'Montserrat-Regular';
 }
-
+    
 .stay-upto-right button {
     display: flex;
     margin: auto;
@@ -988,8 +990,6 @@ div#navbarScroll button {
     font-family: 'Montserrat-SemiBold';
     font-size: 15px;
 }
-
-
 
 .escort-login-form .form-control {
     display: block;
@@ -1153,13 +1153,11 @@ div#navbarScroll button {
     margin-bottom: 0;
 }
 
-
 /*details page css*/
 
 .media-profile a:hover {
     color: #ec8ccc;
 }
-
 
 .escort-dec {
     display: -webkit-box;
@@ -1208,7 +1206,6 @@ section.escort-details {
     position: relative;
     margin-top: 40px;
 }
-
 
 .second-members-content button {
     padding-top: 3px;
@@ -1273,11 +1270,9 @@ section.escort-details {
     margin-left: 8px;
 }
 
-
 .select-gallary hr {
     height: 0;
 }
-
 
 .media-profile {
     text-align: center;
@@ -1323,8 +1318,64 @@ div#escort-videos video {
     height: 340px;
     border-radius: 15px;
 }
+.container-login100-form-btn a {
+    text-decoration: none;
+}
+/*register css*/
 
+.register-form .form-group input {
+    display: block;
+    width: 100%;
+    background: transparent;
+    font-family: Montserrat-Regular;
+    font-size: 14px;
+    color: #555555;
+    line-height: 1.2;
+    padding: 0 10px;
+    height: 46px;
+}
+.register-form .form-control:focus {
+    color: #495057;
+    border: none;
+    outline: 0;
+    box-shadow: none;
+    border: 1px solid #4541FF;
+    border-radius: 5px;
+}
 
+.register-form .city-select select {
+    background-color: #f7f7f7 !important;
+    height: 46px !important;
+    font-size: 14px;
+    color: #555555;
+    background: transparent;
+    font-family: Montserrat-Regular;
+}
+  .register-form .age-select select#age {
+    background-color: #f7f7f7 !important;
+    height: 46px !important;
+    font-size: 14px;
+    color: #555555;
+    background: transparent;
+    font-family: Montserrat-Regular;
+}
+
+  .register-form .container-login100-form-btn {
+    margin-top: 25px;
+}
+
+span#emailPasswordErr {
+    font-size: 13px;
+    margin-bottom: 10px;
+}
+
+  .register-form .form-group {
+    margin-bottom: 10px;
+}
+
+.already-account p {
+    font-family: Montserrat-Regular;
+}
 
 
 @media (min-width:768px) and (max-width:1024px) {
@@ -1693,6 +1744,21 @@ div#escort-detail .menu-item img {
 
 @media only screen and (max-width: 767px) {
 
+.form-login .wrap-login100 {
+    display: flex;
+}
+
+.form-login .login100-more {
+    height: 480px;
+    width: 100% !important;
+}
+
+
+.form-login .login100-form {
+    display: block;
+    padding: 30px 25px 55px 25px !important;
+    min-height: 0px !important;
+}
 .dropdown-item {
     line-height: 1.9;
 }
@@ -2376,35 +2442,7 @@ textarea {
 }
 
 
-@media (max-width: 992px) {
-  .form-login .login100-form {
-    width: 50%;
-    padding-left: 30px;
-    padding-right: 30px;
-  }
 
-  .form-login .login100-more {
-    width: 50%;
-  }
-}
-
-@media (max-width: 768px) {
-  .form-login .login100-form {
-    width: 100%;
-  }
-
-  .form-login .login100-more {
-    display: none;
-  }
-}
-
-@media (max-width: 576px) {
-  .form-login .login100-form {
-    padding-left: 15px;
-    padding-right: 15px;
-    padding-top: 70px;
-  }
-}
 
 .form-login .validate-input {
   position: relative;

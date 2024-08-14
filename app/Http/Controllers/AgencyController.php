@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Mail\WelcomeAgencyMail;
 use App\Models\Agency;
+use App\Models\Escort;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -66,19 +67,30 @@ class AgencyController extends Controller
         ])->withInput();
     }
 
-    public function dashboard($id)
+    public function dashboard($agency_id)
     {
         
         $agency = Agency::find(Auth::guard('agency')->user()->id);
         $allescorts = DB::table("escorts")->where('agency_id',Auth::guard('agency')->user()->id)->orderBy("created_at", "desc")->get();
-        // if ($agency->id != $id) {
-        //     return redirect()->route('agency.dashboard')->with('error', 'You are not authorized to access this page.');
-        // }
+       
+        if (Auth::guard('agency')->user()->id != $agency_id) {
+            return redirect()->route('agency.dashboard', Auth::guard('agency')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
         return view('user-agency.dashboard', compact('agency','allescorts'));
     }
 
-    public function agency_escort_detail($id, $escort_id){
-        dd($escort_id);
+    public function agency_escort_detail($agency_id, $escort_id){
+        $escort = Escort::find($escort_id);
+        $pictures = json_decode($escort->pictures);
+        $video = json_decode($escort->video);
+        $services = json_decode($escort->services, true);
+        $language_spoken = json_decode($escort->language_spoken, true);
+        $availability = json_decode($escort->availability, true);
+        $currencies_accepted = json_decode($escort->currencies_accepted, true);
+        $payment_method = json_decode($escort->payment_method, true);
+
+        return view('user-agency.agency-escort-detail',compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 
     public function showForgotPasswordForm()
