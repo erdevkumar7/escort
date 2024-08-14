@@ -57,8 +57,10 @@ class EscortsAuthController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
+       
+        $remember = $request->has('remember');
 
-        if (Auth::guard('escort')->attempt($credential)) {
+        if (Auth::guard('escort')->attempt($credential, $remember)) {
             $escort = Escort::find(Auth::guard('escort')->user()->id);
             return redirect()->route('escorts.profile', $escort->id)->with('success', 'Login successfully!');;
         }

@@ -10,12 +10,12 @@
                         Escort Login
                     </span>
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="email" id="email"
+                        <input class="input100" type="text" name="email" id="email" value="{{ old('email') }}"
                             placeholder="Enter your email..." oninput="removeError('emailPasswordErr')">
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="password" placeholder="Enter your password..."
+                        <input class="input100" type="password" name="password"  value="{{ old('password') }}" placeholder="Enter your password..."
                             oninput="removeError('emailPasswordErr')">
                     </div>
                     @if ($errors->has('email') || $errors->has('password'))
@@ -26,7 +26,7 @@
 
                     <div class="flex-sb-m w-full p-t-3 p-b-32">
                         <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
                             <label class="label-checkbox100" for="ckb1">
                                 Remember me
                             </label>
