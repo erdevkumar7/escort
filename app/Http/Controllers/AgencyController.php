@@ -52,10 +52,13 @@ class AgencyController extends Controller
 
     public function agency_login_form_submit(Request $request)
     {
-        $credential = $request->validate([
+        $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
+
+        $credential = $request->only('email', 'password');
 
         if (Auth::guard('agency')->attempt($credential)) {
             $agency = Agency::find(Auth::guard('agency')->user()->id);

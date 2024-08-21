@@ -155,7 +155,7 @@ nav.navbar ul.navbar-nav {
 }
 
 nav.navbar .input-group {
-    width: 440px;
+    width: 414px;
     position: relative;
     margin-right: 40px;
 }
@@ -1414,7 +1414,7 @@ span#emailPasswordErr {
 }
 
 .register-form.form-login .login100-form {
-    padding: 90px 55px 55px 55px;
+    padding: 60px 55px 55px 55px;
 }
 
 nav.navbar .input-group>.form-control:focus {
@@ -1422,6 +1422,11 @@ nav.navbar .input-group>.form-control:focus {
     outline: none !important;
     transition: none !important;
     box-shadow: none !important;
+}
+
+div#navbarScroll button:hover {
+    background-color: #EC8CCC;
+    color: #fff;
 }
 
 
@@ -2497,7 +2502,7 @@ textarea {
     min-height: 100vh;
     display: block;
     background-color: #f7f7f7;
-    padding: 125px 55px 55px 55px;
+    padding: 60px 55px 55px 55px;
 }
 
 .form-login .login100-form-title {
@@ -2699,12 +2704,14 @@ textarea {
     -moz-transition: all .4s;
     transition: all .4s;
     margin-bottom: 15px;
+    margin-top: 25px;
 }
 
 .form-login button.login100-form-btn:hover {
-    background: #000000;
-    border: 1px solid #000000;
+    border: 1px solid #232e48;
+    background-color: #232e48;
 }
+
 
 .form-login button.signup-btn {
     border: 1px solid #5CE1E6;
@@ -2733,8 +2740,8 @@ textarea {
 }
 
 .form-login button.signup-btn:hover {
-    background: #000000;
-    border: 1px solid #000000;
+    border: 1px solid #232e48;
+    background-color: #232e48;
 }
 
 .form-login span.txt2 {
@@ -2751,6 +2758,7 @@ textarea {
 .form-login .contact100-form-checkbox label {
     margin-bottom: 0px;
     font-size: 14px;
+    font-family: Montserrat-Regular;
 }
 
 .form-login input.input100:focus {
@@ -2761,4 +2769,5 @@ textarea {
 .form-login a.txt1 {
     color: #000000;
     font-size: 14px;
+    font-family: Montserrat-Regular;
 }
