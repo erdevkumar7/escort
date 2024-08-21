@@ -61,10 +61,13 @@ class EscortsAuthController extends Controller
         ]);
 
         $credential = $request->only('email', 'password');
-       
         $remember = $request->has('remember');
 
-        if (Auth::guard('escort')->attempt($credential, $remember)) {
+        if (Auth::guard('escort')->attempt($credential)) {
+            if ($remember) {
+                setcookie('email', $request->email, time() + 3600);
+                setcookie('password', $request->password, time() + 3600);
+            }
             $escort = Escort::find(Auth::guard('escort')->user()->id);
             return redirect()->route('escorts.profile', $escort->id)->with('success', 'Login successfully!');;
         }
@@ -73,7 +76,7 @@ class EscortsAuthController extends Controller
             'email' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
-  
+
     public function showForgotPasswordForm()
     {
         return view('auth.forgot-password');

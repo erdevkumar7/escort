@@ -10,12 +10,14 @@
                         Escort Login
                     </span>
                     <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
-                        <input class="input100" type="text" name="email" id="email" value="{{ old('email') }}"
+                        <input class="input100" type="text" name="email" id="email"
+                            @if (isset($_COOKIE['email'])) value="{{ $_COOKIE['email'] }}" @endif
                             placeholder="Enter your email..." oninput="removeError('emailPasswordErr')">
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="password" value="{{ old('password') }}"
+                        <input class="input100" type="password" name="password"
+                            @if (isset($_COOKIE['password'])) value="{{ $_COOKIE['password'] }}" @endif
                             placeholder="Enter your password..." oninput="removeError('emailPasswordErr')">
                     </div>
                     @if ($errors->has('email') || $errors->has('password'))
@@ -56,13 +58,13 @@
                             </button></a>
                     </div>
                     <!--<div class="login100-form-social flex-c-m">
-                                        <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                                        <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                                        </a>
-                                        <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                                        <i class="fa fa-twitter" aria-hidden="true"></i>
-                                        </a>
-                                        </div>-->
+                                            <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+                                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                                            </a>
+                                            <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+                                            <i class="fa fa-twitter" aria-hidden="true"></i>
+                                            </a>
+                                            </div>-->
                 </form>
                 <div class="login100-more"
                     style="background-image: url('https://votivelaravel.in/escorts/public/images/static_img/loginform-pic.jpg');">
