@@ -246,3 +246,16 @@
         });
     });
 </script>
+
+
+<!-- google  reCAPTCHA !-->
+{{-- <script src="https://www.google.com/recaptcha/api.js"></script> --}}
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+<script>
+    function removeRecaptchaError() {
+        const recaptchaErrorElement = document.getElementById('g_recaptcha_id');
+        if (recaptchaErrorElement) {
+            recaptchaErrorElement.style.display = 'none';
+        }
+    }
+</script>

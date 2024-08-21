@@ -27,6 +27,7 @@ class EscortsAuthController extends Controller
             'address' => 'required',
             'city' => 'required',
             'password' => 'required|string|min:8|confirmed',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         $escort = new Escort();
