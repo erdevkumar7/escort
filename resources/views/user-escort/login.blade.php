@@ -1,5 +1,5 @@
 @extends('user.layout-auth')
-@section('auth_content') 
+@section('auth_content')
     <div class="form-login">
         <div class="container-login100">
             <div class="wrap-login100">
@@ -15,8 +15,8 @@
                     </div>
 
                     <div class="wrap-input100 validate-input" data-validate="Password is required">
-                        <input class="input100" type="password" name="password"  value="{{ old('password') }}" placeholder="Enter your password..."
-                            oninput="removeError('emailPasswordErr')">
+                        <input class="input100" type="password" name="password" value="{{ old('password') }}"
+                            placeholder="Enter your password..." oninput="removeError('emailPasswordErr')">
                     </div>
                     @if ($errors->has('email') || $errors->has('password'))
                         <span class="text-danger input100" id="emailPasswordErr">
@@ -26,7 +26,8 @@
 
                     <div class="flex-sb-m w-full p-t-3 p-b-32">
                         <div class="contact100-form-checkbox">
-                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember" {{ old('remember') ? 'checked' : '' }}>
+                            <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember"
+                                {{ old('remember') ? 'checked' : '' }}>
                             <label class="label-checkbox100" for="ckb1">
                                 Remember me
                             </label>
@@ -37,6 +38,14 @@
                             </a>
                         </div>
                     </div>
+                    {{-- g-recaptcha --}}
+                    <div class="g-recaptcha" data-sitekey="6LepGisqAAAAAHoBrq14Bfdc9Zn81TrSv6M-5iST"
+                        data-callback="removeRecaptchaError"></div>
+
+                    @error('g-recaptcha-response')
+                        <span class="text-danger input100" id="g_recaptcha_id">{{ $message }}</span>
+                    @enderror
+
                     <div class="container-login100-form-btn">
                         <button type="submit" class="login100-form-btn">
                             Login
@@ -47,13 +56,13 @@
                             </button></a>
                     </div>
                     <!--<div class="login100-form-social flex-c-m">
-                                    <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                                    <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                                    </a>
-                                    <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                                    <i class="fa fa-twitter" aria-hidden="true"></i>
-                                    </a>
-                                    </div>-->
+                                        <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
+                                        <i class="fa fa-facebook-f" aria-hidden="true"></i>
+                                        </a>
+                                        <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
+                                        <i class="fa fa-twitter" aria-hidden="true"></i>
+                                        </a>
+                                        </div>-->
                 </form>
                 <div class="login100-more"
                     style="background-image: url('https://votivelaravel.in/escorts/public/images/static_img/loginform-pic.jpg');">

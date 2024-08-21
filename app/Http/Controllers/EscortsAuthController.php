@@ -54,10 +54,13 @@ class EscortsAuthController extends Controller
 
     public function login(Request $request)
     {
-        $credential = $request->validate([
+        $request->validate([
             'email' => 'required|email',
-            'password' => 'required'
+            'password' => 'required',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
+
+        $credential = $request->only('email', 'password');
        
         $remember = $request->has('remember');
 
