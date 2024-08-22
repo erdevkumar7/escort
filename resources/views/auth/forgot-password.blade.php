@@ -22,7 +22,7 @@
                         </button>
 
                         <p class="text-center text-muted mt-3 mb-0"> <a
-                            href="{{route('login')}}" class="fw-bold text-body"><u>Back To Login</u></a></p>
+                            href="{{route('login')}}" class="fw-bold text-body"><u class="agency-login-back">Back To Login</u></a></p>
                     </div>
                 </form>
                 <div class="login100-more"

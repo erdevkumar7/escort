@@ -7,7 +7,7 @@
                     enctype="multipart/form-data">
                     @csrf
                     <span class="login100-form-title p-b-43">
-                        Escort Register
+                        Escort-Register
                     </span>
 
                     <div class="row">

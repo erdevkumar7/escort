@@ -112,6 +112,10 @@ class AgencyController extends Controller
         return view('user-agency.agency-add-escort');
     }
 
+    public function agency_add_escort_form_submit(Request $request, $agency_id){
+        dd($agency_id);
+    }
+
     //Agency Auth Functionality start ***********************************************************
     public function showForgotPasswordForm()
     {
