@@ -1,6 +1,11 @@
-@extends('user.layout')
-@section('page_content')
+@extends('user.layout-auth')
+@section('auth_content')
     <div class="container" style="margin-top:10px; margin-bottom:100px;">
+        <div class="add-agency-escort">
+            <h3>Escorts Detail</h3>
+            <a href="{{route('agency.add.escortform', Auth::guard('agency')->user()->id)}}" ><button type="button" class="btn btn-success" >Add escort</button></a>
+        </div>
+
         <table id="agencies_escort" class="display">
             <thead>
                 <tr>
@@ -50,4 +55,5 @@
             </tfoot>
         </table>
     </div>
+
 @endsection

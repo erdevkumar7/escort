@@ -103,6 +103,16 @@ class AgencyController extends Controller
         return view('user-agency.agency-escort-detail', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 
+    public function agency_add_escort_form($agency_id)
+    {
+        if (Auth::guard('agency')->user()->id != $agency_id) {
+            return redirect()->route('agency.add.escortform', Auth::guard('agency')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        return view('user-agency.agency-add-escort');
+    }
+
+    //Agency Auth Functionality start ***********************************************************
     public function showForgotPasswordForm()
     {
         return view('auth.agency-forgot-password');
@@ -179,4 +189,6 @@ class AgencyController extends Controller
         $request->session()->regenerateToken();
         return redirect()->route('agency.login')->with('success', 'Logged out successfully!');
     }
+
+    //Agency Auth Functionality End **********************************************************
 }

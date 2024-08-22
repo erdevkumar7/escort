@@ -1,13 +1,13 @@
    <!-- nav section start -->
-   @if (!Auth::guard('escort')->user())
+   @if (!Auth::guard()->user())
        <div class="top-text">
            <div class="first-order">
                <p>Sign up and get 20% off to your first order. <a href="{{ route('escorts.register_form') }}">Sign Up
                        Now</a></p>
            </div>
-           <div class="first-order-img">
+           {{-- <div class="first-order-img">
                <a href="#"><img src="{{ asset('/public/images/static_img/vector.png') }}"></a>
-           </div>
+           </div> --}}
        </div>
    @endif
    <nav class="navbar navbar-expand-lg">
@@ -56,8 +56,7 @@
                        <span class="input-group-append"></span>
                    </div>
                    <li class="nav-item inner-icons">
-                       <a class="nav-link" href="#"><img
-                               src="{{ asset('/public/images/static_img/shop-icon.png') }}"></a>
+                       <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                    </li>
 
                    @if (Auth::guard('escort')->user())
@@ -70,8 +69,7 @@
                        </li>
                    @else
                        <li class="nav-item inner-icons">
-                           <a class="nav-link" href="{{ route('login') }}"><img
-                                   src="{{ asset('/public/images/static_img/frame.png') }}"></a>
+                           <a class="nav-link" href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
                        </li>
                    @endif
 

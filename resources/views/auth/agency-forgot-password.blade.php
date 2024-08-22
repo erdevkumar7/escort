@@ -1,51 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    @include('user.headerCSS')
-</head>
-
-<body>
-    <!-- nav  -->
-    @include('user.topNav')
-    <section>
-        <div class="container mt-3 escort-login-form">
-            <form action="{{ route('agency.password.email') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <div class="row jumbotron box8 ">
-                    <div class="col-sm-12 mx-t3 mb-4">
-                        <h2 class="text-center text-info">Forgot-Password</h2>
-                    </div>
-
-                    {{-- email --}}
-                    <div class="col-sm-6 form-group">
-                        <label for="email">Agency Email *</label>
-                        <input type="email" class="form-control" name="email" id="email"
-                            placeholder="Enter your email." oninput="removeError('emailErr')">
+@extends('user.layout-auth')
+@section('auth_content')
+    <div class="form-login forgot-agency-form" id="forgot-agency-form-id">
+        <div class="container-login100">
+            <div class="wrap-login100">
+                <form class="login100-form validate-form" action="{{ route('agency.password.email') }}" method="POST"
+                    enctype="multipart/form-data">
+                    @csrf
+                    <span class="login100-form-title p-b-43">
+                        Forgot-Password
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Valid email is required: ex@abc.xyz">
+                        <input class="input100" type="text" name="email" id="email"
+                            placeholder="Enter agency email..." oninput="removeError('emailErr')">
                         @error('email')
-                            <span class="text-danger" id="emailErr">{{ $message }}</span>
+                            <span class="text-danger input100" id="emailErr">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <div class="col-sm-12">
-                        <p class="text-center text-muted mt-3 mb-0"> <a
-                                href="{{route('agency.login')}}" class="fw-bold text-body"><u>Back To Login</u></a></p>
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">
+                            Send Password Reset Link
+                        </button>
+
+                        <p class="text-center text-muted mt-3 mb-0"> <a href="{{ route('agency.login') }}"
+                                class="fw-bold text-body"><u>Back To Login</u></a></p>
                     </div>
-
-
-                    <div class="col-sm-12 form-group mb-0 text-center">
-                        <button type="submit" class="btn btn-primary ">Send Password Reset Link</button>
-                    </div>
-
+                </form>
+                <div class="login100-more"
+                    style="background-image: url('https://votivelaravel.in/escorts/public/images/static_img/loginform-pic.jpg');">
                 </div>
-            </form>
+            </div>
         </div>
-    </section>
-    <!-- footer -->
-    @include('user.footer')
-    <!-- footerJS -->
-    @include('user.footerJS')
-
-</body>
-
-</html>
+    </div>
+@endsection

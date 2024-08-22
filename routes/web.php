@@ -35,6 +35,7 @@ Route::prefix('agency')->group(function () {
     Route::middleware(['auth:agency'])->group(function () {
         Route::get('/{agency_id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
         Route::get('/{agency_id}/escort-detail/{escort_id}/show', [AgencyController::class, 'agency_escort_detail'])->name('agency.escort.detail');
+        Route::get('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form"])->name('agency.add.escortform');
 
         Route::post('/logout', [AgencyController::class, 'agency_logout'])->name('agency.logout');
     });
