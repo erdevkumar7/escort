@@ -87,11 +87,6 @@ div#navbarScroll a.nav-link:hover {
     color: #ec8ccc;
 }
 
-nav.navbar.navbar-expand-lg {
-    background-color: #232e48;
-    padding: 24px 24px;
-    margin: auto;
-}
 
 .slider-section {
     margin: auto;
@@ -117,8 +112,8 @@ h1 {
 .top-text p {
     margin-bottom: 0;
     font-size: 14px;
-    padding-left: 15%;
     font-family: 'Montserrat-Bold';
+    text-align: center;
 }
 
 .top-text a {
@@ -137,8 +132,11 @@ h1 {
 nav.navbar.navbar-expand-lg {
     background-color: #232e48;
     padding: 24px 24px;
+    position: sticky !important;
+    top: 0;
+    z-index: 999;
+    margin: auto;
 }
-
 div#navbarScroll a.nav-link {
     color: #fff;
     font-weight: 500;
@@ -940,11 +938,11 @@ section.disclaimer {
 
 .footer-escorts {
     background-color: #232e48;
-    padding: 150px 0;
+    padding: 90px 0;
     color: #fff;
     padding-bottom: 5px;
     margin: auto;
-    margin-top: -90px;
+    margin-top: -24px;
 }
 
 .quick-links ul {
@@ -1427,6 +1425,53 @@ nav.navbar .input-group>.form-control:focus {
 div#navbarScroll button:hover {
     background-color: #EC8CCC;
     color: #fff;
+}
+i.fa-solid.fa-cart-shopping {
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+i.fa-solid.fa-user {
+    font-size: 18px;
+    padding-top: 5px;
+}
+
+.forgot-escort-form button.login100-form-btn {
+    margin-top: 40px !important;
+}
+.forgot-escort-form span#emailErr {
+    padding-top: 9px;
+}
+
+
+.forgot-escort-form .container-login100 {
+    min-height: 69vh !important;
+}
+
+.forgot-escort-form .login100-form {
+    min-height: 69vh !important;
+}
+
+.forgot-agency-form .container-login100 {
+    min-height: 69vh !important;
+}
+
+.forgot-agency-form .login100-form {
+    min-height: 69vh !important;
+}
+
+.add-agency-escort button.btn.btn-success {
+    float: right;
+    margin-bottom: 25px;
+    margin-top: -18px;
+}
+
+.forgot-agency-form button.login100-form-btn {
+    margin-top: 40px !important;
+}
+
+.forgot-agency-form span#emailErr {
+    padding-top: 9px;
 }
 
 
@@ -1930,12 +1975,12 @@ div#navbarScroll button:hover {
         font-size: 27px;
     }
 
-    .footer-escorts {
-        width: 100%;
-        margin: auto;
-        margin-top: -90px;
-    }
-
+.footer-escorts {
+    width: 100%;
+    margin: auto;
+    margin-top: 0px;
+    padding: 40px 0;
+}
     .featured-categories .card.card-fourth {
         height: auto;
     }
@@ -2006,7 +2051,7 @@ div#navbarScroll button:hover {
 
     .top-text p {
         font-size: 16px;
-        padding-left: 5%;
+        padding-left: 0px;
     }
 
     section.members-content {
@@ -2427,6 +2472,14 @@ div#navbarScroll button:hover {
     .escort-register h2.text-center.text-info {
         padding-top: 0;
     }
+
+    .form-login button.signup-btn {
+      height: 42px !important; 
+    }
+.form-login button.login100-form-btn {
+    height: 42px !important ;
+}
+
 
 }
 

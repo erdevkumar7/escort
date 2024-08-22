@@ -1,68 +1,44 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('user.layout-auth')
+@section('auth_content')
+    <div class="form-login reset-escort">
+        <div class="container-login100">
+            <div class="wrap-login100">
 
-<head>
-    @include('user.headerCSS')
-</head>
+                <form class="login100-form validate-form reset-escort-form" id="reset-escort-form-id"
+                    action="{{ route('password.update') }}" method="POST" enctype="multipart/form-data">
+                    @csrf
+                    <input type="hidden" name="token" value="{{ $token }}">
+                    <input type="hidden" name="email" value="{{ $email }}">
+                    <span class="login100-form-title p-b-43">
+                        Reset-Password
+                    </span>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
 
-<body>
-    <!-- nav  -->
-    @include('user.topNav')
+                        <input class="input100" type="Password" name="password" id="pass"
+                            placeholder="Enter your password." oninput="removeError('CpassPassErr')">
+                    </div>
 
-    <section>
-        <div class="container mt-3 escort-login-form">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
+                    <div class="wrap-input100 validate-input" data-validate="Password is required">
+                        <input class="input100" type="password" name="password_confirmation" id="password_confirmation"
+                            placeholder="Re-enter your password." oninput="removeError('CpassPassErr')">
+                    </div>
+
+                    @if ($errors->has('password_confirmation') || $errors->has('password'))
+                        <span class="text-danger input100" id="CpassPassErr">
+                            {{ $errors->first('email') ?: $errors->first('password') }}
+                        </span>
+                    @endif
+
+                    <div class="container-login100-form-btn">
+                        <button type="submit" class="login100-form-btn">
+                            Submit
+                        </button>
+                    </div>
+                </form>
+                <div class="login100-more"
+                    style="background-image: url('https://votivelaravel.in/escorts/public/images/static_img/loginform-pic.jpg');">
                 </div>
-            @endif
-            <form action="{{ route('password.update') }}" method="POST" enctype="multipart/form-data">
-                @csrf
-                <input type="hidden" name="token" value="{{ $token }}">
-                <input type="hidden" name="email" value="{{ $email }}">
-                <div class="row jumbotron box8 ">
-                    <div class="col-sm-12 mx-t3 mb-4">
-                        <h2 class="text-center text-info">Reset-Password</h2>
-                    </div>
-                    {{-- password --}}
-                    <div class="col-sm-6 form-group ">
-                        <label for="pass">New Password</label>
-                        <input type="Password" name="password" class="form-control" id="pass"
-                            placeholder="Enter your password." oninput="removeError('PasswordErr')">
-
-                        @error('password')
-                            <span class="text-danger" id="PasswordErr">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    {{-- password_confirmation --}}
-                    <div class="col-sm-6 form-group">
-                        <label for="password_confirmation">Confirm New Password</label>
-                        <input type="password" name="password_confirmation" id="password_confirmation"
-                            class="form-control" placeholder="Re-enter your password."
-                            oninput="removeError('C_PasswordErr')">
-                    </div>
-                    @error('password_confirmation')
-                        <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
-                    @enderror
-
-                    <div class="col-sm-12 form-group mb-0 text-center">
-                        <button type="submit" class="btn btn-primary">Submit</button>
-                    </div>
-
-                </div>
-            </form>
+            </div>
         </div>
-    </section>
-    <!-- footer -->
-    @include('user.footer')
-    <!-- footerJS -->
-    @include('user.footerJS')
-
-</body>
-
-</html>
+    </div>
+@endsection

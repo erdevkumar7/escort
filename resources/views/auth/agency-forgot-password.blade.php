@@ -19,7 +19,7 @@
 
                     <div class="container-login100-form-btn">
                         <button type="submit" class="login100-form-btn">
-                            Send Password Reset Link
+                            Send Reset Link
                         </button>
 
                         <p class="text-center text-muted mt-3 mb-0"> <a href="{{ route('agency.login') }}"
