@@ -28,6 +28,7 @@ class AgencyController extends Controller
             'phone_number' => 'required',
             'address' => 'nullable|string',
             'password' => 'required|string|min:8|confirmed',
+            'g-recaptcha-response' => 'required|captcha',
         ]);
 
         $agency = new Agency();
