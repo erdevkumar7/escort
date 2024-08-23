@@ -47,7 +47,8 @@ class Escort extends Authenticatable implements CanResetPasswordContract
         'rates_in_chf',
         'currencies_accepted',
         'payment_method',
-        'agency_id'
+        'agency_id',
+        'profile_pic',
     ];
 
     protected $casts = [

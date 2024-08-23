@@ -114,6 +114,7 @@ class UserEscortsController extends Controller
 
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname,' . $escort->id,
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
             'pictures' => 'nullable|array|min:1',
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
@@ -160,6 +161,23 @@ class UserEscortsController extends Controller
             }
         }
 
+        // Handle Profile_pic Image file upload
+        if ($request->hasFile('profile_pic')) {
+            // Delete the old image if it exists
+            if ($escort->profile_pic) {
+                $oldImagePath = public_path('images/profile_img') . '/' . $escort->profile_pic;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            // Upload the new image
+            $image = $request->file('profile_pic');
+            $originalImageName = $image->getClientOriginalName();
+            $profileName = time() . '_' . $originalImageName;
+            $image->move(public_path('images/profile_img'), $profileName);
+        }
+
         // Handle video file upload
         $videos = json_decode($escort->video, true) ?? [];
         if ($request->hasFile('video')) {
@@ -171,6 +189,7 @@ class UserEscortsController extends Controller
             }
         }
 
+        $validatedData['profile_pic'] = $profileName;
         $validatedData['pictures'] = json_encode($pictures);
         $validatedData['services'] = json_encode($validatedData['services']);
         $validatedData['video'] = json_encode($videos);
@@ -195,6 +214,6 @@ class UserEscortsController extends Controller
         $currencies_accepted = json_decode($escort->currencies_accepted, true);
         $payment_method = json_decode($escort->payment_method, true);
 
-        return view('user-escort.escort-detail',compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        return view('user-escort.escort-detail', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 }

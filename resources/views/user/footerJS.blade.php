@@ -214,6 +214,15 @@
 {{-- toaster message script --}}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
 <script>
+    // Configure Toastr options
+    toastr.options = {
+        "closeButton": true, // Enable close button
+        "progressBar": true, // Optional: show a progress bar
+        "timeOut": "3000", // Optional: duration in milliseconds
+        "extendedTimeOut": "1000", // Optional: additional time after mouse over
+        "positionClass": "toast-top-right" // Optional: set position
+    };
+
     @if (Session::has('success'))
         toastr.success("{{ Session::get('success') }}");
     @endif

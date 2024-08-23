@@ -2,7 +2,7 @@
 @section('page_content')
     <section>
         <div class="container mt-3 escort-register">
-            @if ($errors->any())
+            {{-- @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
                         @foreach ($errors->all() as $error)
@@ -10,7 +10,7 @@
                         @endforeach
                     </ul>
                 </div>
-            @endif
+            @endif --}}
             <form action="{{ route('escorts.update.profile', $escort->id) }}" method="POST" enctype="multipart/form-data">
                 @csrf
                 @method('PUT')
@@ -362,7 +362,21 @@
                                 </option>
                             </select>
                         @else
-                            <input type="text" class="form-control" value="Not Selected" readonly>
+                            <select class="form-control" id="services" name="services[]" multiple
+                                oninput="removeError('servicesErr')">
+                                <option value="service1"
+                                    {{ in_array('service1', old('services', [])) ? 'selected' : '' }}>One
+                                    Option</option>
+                                <option value="service2"
+                                    {{ in_array('service2', old('services', [])) ? 'selected' : '' }}>Two
+                                    Option</option>
+                                <option value="service3"
+                                    {{ in_array('service3', old('services', [])) ? 'selected' : '' }}>Third
+                                    Option</option>
+                            </select>
+                            @error('services')
+                                <span class="text-danger" id="servicesErr">{{ $message }}</span>
+                            @enderror
                         @endif
                     </div>
                     {{-- availability --}}
@@ -449,9 +463,17 @@
                             </select>
                         @endif
                     </div>
+                    {{-- profile_pic --}}
+                    <div class="col-sm-4 form-group">
+                        <label for="profile_pic">Profile picture *</span></label>
+                        <input type="file" class="form-control" id="profile_pic" name="profile_pic"
+                            oninput="removeError('profile_picErr')">
+                        @error('profile_pic')
+                            <span class="text-danger" id="profile_picErr">{{ $message }}</span>
+                        @enderror
+                    </div>
                 </div>
             </form>
         </div>
     </section>
-
 @endsection
