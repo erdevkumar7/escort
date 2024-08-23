@@ -64,8 +64,8 @@ class AgencyController extends Controller
 
         if (Auth::guard('agency')->attempt($credential)) {
             if ($remember) {
-                setcookie('email', $request->email, time() + 3600);
-                setcookie('password', $request->password, time() + 3600);
+                setcookie('email', $request->email, time() + 3600 * 24 * 3);
+                setcookie('password', $request->password, time() + 3600 * 24 * 3);
             }
             $agency = Agency::find(Auth::guard('agency')->user()->id);
             return redirect()->route('agency.dashboard', $agency->id)->with('success', 'Login successfully!');;
@@ -112,7 +112,8 @@ class AgencyController extends Controller
         return view('user-agency.agency-add-escort');
     }
 
-    public function agency_add_escort_form_submit(Request $request, $agency_id){
+    public function agency_add_escort_form_submit(Request $request, $agency_id)
+    {
         dd($agency_id);
     }
 

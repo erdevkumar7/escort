@@ -65,8 +65,8 @@ class EscortsAuthController extends Controller
 
         if (Auth::guard('escort')->attempt($credential)) {
             if ($remember) {
-                setcookie('email', $request->email, time() + 3600);
-                setcookie('password', $request->password, time() + 3600);
+                setcookie('email', $request->email, time() + 3600 * 24 * 3);
+                setcookie('password', $request->password, time() + 3600 * 24 * 3);
             }
             $escort = Escort::find(Auth::guard('escort')->user()->id);
             return redirect()->route('escorts.profile', $escort->id)->with('success', 'Login successfully!');;

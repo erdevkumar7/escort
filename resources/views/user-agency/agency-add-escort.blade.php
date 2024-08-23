@@ -1,6 +1,6 @@
 @extends('user.layout-auth')
 @section('auth_content')
-    <div class="agency-add-escort-containt">
+    <div class="container agency-add-escort-containt">
         <div class="agency-add-escort-title">
             <h3>Add Escort</h3>
             <button type="button" class="btn btn-success">Back</button>
