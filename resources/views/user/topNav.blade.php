@@ -61,11 +61,11 @@
 
                    @if (Auth::guard('escort')->user())
                        <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                               <img src="{{ asset('/public/images/profile_img/default_escort.png') }}"
-                                       width="32px" height="32px" alt="">
-                                    
+                           <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               <img src="{{ asset('/public/images/profile_img/default_escort.png') }}" width="32px"
+                                   height="32px" alt="">
+
                                {{-- @if ($escort->profile_pic)
                                    <img src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}"
                                        width="32px" height="32px" alt="">
@@ -84,10 +84,10 @@
                        </li>
                    @elseif (Auth::guard('agency')->check())
                        <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown" role="button"
-                               data-bs-toggle="dropdown" aria-expanded="false">
-                               <img src="{{ asset('/public/images/profile_img/default_agency.png') }}"
-                                       width="32px" height="32px" alt="">
+                           <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               <img src="{{ asset('/public/images/profile_img/default_agency.png') }}" width="32px"
+                                   height="32px" alt="">
                                {{-- @if ($agency->profile_pic)
                                    <img src="{{ asset('/public/images/profile_img') . '/' . $agency->profile_pic }}"
                                        width="32px" height="32px" alt="">
@@ -101,8 +101,7 @@
                                <li><a class="dropdown-item"
                                        href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}">Profile</a>
                                </li>
-                               <li><a class="dropdown-item" href="#"
-                                       onclick="handleLogOut('agency')">Logout</a>
+                               <li><a class="dropdown-item" href="#" onclick="handleLogOut('agency')">Logout</a>
                                </li>
                            </ul>
                        </li>
@@ -110,6 +109,20 @@
                        <li class="nav-item inner-icons">
                            <a class="nav-link" href="{{ route('login') }}"><i class="fa-solid fa-user"></i></a>
                        </li>
+                       {{-- <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle active escort-agency-menu" href="#"
+                               id="escortAgencyDropdown" role="button" data-bs-toggle="dropdown"
+                               aria-expanded="false">
+                               <i class="fa-solid fa-user"></i>
+                           </a>
+
+                           <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
+                               <li><a class="dropdown-item" href="{{ route('login') }}"> Escort Login</a>
+                               </li>
+                               <li><a class="dropdown-item" href="{{ route('agency.login') }}"> Agency Login </a>
+                               </li>
+                           </ul>
+                       </li> --}}
                    @endif
 
                </div>
