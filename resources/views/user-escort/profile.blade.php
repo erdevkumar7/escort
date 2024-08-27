@@ -1,14 +1,12 @@
 @extends('user.layout-auth')
 @section('auth_content')
-    <div class="container escort-profile">
+    <div class="escort-profile">
 
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
                 <a class="nav-link active ms-0" href="#">Profile</a>
-                <a class="nav-link" href="#">Billing</a>
-                <a class="nav-link" href="#">Security</a>
-                <a class="nav-link" href="#">Notifications</a>
+                <a class="nav-link" href="#">My Pictures</a>                
             </nav>
             <hr class="mt-0 mb-4">
             <div class="row">
@@ -25,11 +23,12 @@
                             <img class="img-account-profile rounded-circle mb-2"
                             src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg" alt="avatar">
                             @endif
-
+                            
+                            <i class="fa-regular fa-pen-to-square"></i>
                             <!-- Profile picture help block-->
                             <div class="name-text">{{$escort->nickname}}</div>
                             <!-- Profile picture upload button-->
-                            <button class="btn btn-primary uplode-btn" type="button">Upload new image</button>
+                            {{-- <button class="btn btn-primary uplode-btn" type="button">Upload new image</button> --}}
                         </div>
                     </div>
                 </div>
@@ -377,11 +376,6 @@
                 </div>
             </div>
         </div>
-
-
-
-
-
 
     </div>
 @endsection

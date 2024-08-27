@@ -33,6 +33,9 @@ Route::prefix('agency')->group(function () {
 
     //Protected Agency Routes
     Route::middleware(['auth:agency'])->group(function () {
+        Route::get('/{agency_id}/profile', [AgencyController::class, 'profile'])->name('agency.profile');
+        Route::get('/{agency_id}/escort-listing', [AgencyController::class, 'escort_listing'])->name('agency.escort_listing');
+        
         Route::get('/{agency_id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
         Route::get('/{agency_id}/escort-detail/{escort_id}/show', [AgencyController::class, 'agency_escort_detail'])->name('agency.escort.detail');
         Route::get('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form"])->name('agency.add.escortform');

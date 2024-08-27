@@ -76,6 +76,31 @@ class AgencyController extends Controller
         ])->withInput();
     }
 
+
+    public function profile($agency_id)
+    {
+
+        $agency = Agency::find(Auth::guard('agency')->user()->id);       
+
+        if (Auth::guard('agency')->user()->id != $agency_id) {
+            return redirect()->route('agency.profile', Auth::guard('agency')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        return view('user-agency.profile', compact('agency'));
+    }
+    
+    public function escort_listing($agency_id)
+    {
+
+        $agency = Agency::find(Auth::guard('agency')->user()->id);
+        $allescorts = DB::table("escorts")->where('agency_id', Auth::guard('agency')->user()->id)->orderBy("created_at", "desc")->get();
+
+        if (Auth::guard('agency')->user()->id != $agency_id) {
+            return redirect()->route('agency.escort_listing', Auth::guard('agency')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        return view('user-agency.escort-listing', compact('agency', 'allescorts'));
+    }
     public function dashboard($agency_id)
     {
 
