@@ -67,14 +67,15 @@
 
             </nav>
             <hr class="mt-0 mb-4">
-            <div class="row">
+            <div class="row agency-escort-list">
                 <div class="card mb-4">
-                    {{-- <div class="add-agency-escort">
-                        <a href="{{route('agency.add.escortform', Auth::guard('agency')->user()->id)}}" ><button type="button" class="btn btn-success" >Add escort</button></a>
-                    </div> --}}
-                    <div class="card-header">
+                    <div class="agency-add-escort-title">
+                        <h3>Escort-Listing</h3>
                         <a href="{{route('agency.add.escortform', Auth::guard('agency')->user()->id)}}" ><button type="button" class="btn btn-primary" >Add escort</button></a>
                     </div>
+                    {{-- <div class="card-header">
+                        <a href="{{route('agency.add.escortform', Auth::guard('agency')->user()->id)}}" ><button type="button" class="btn btn-primary" >Add escort</button></a>
+                    </div> --}}
                     <div class="card-body p-0">
                         <!-- Billing history table-->
                         <div class="table-responsive table-billing-history">
