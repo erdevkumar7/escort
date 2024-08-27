@@ -1,5 +1,4 @@
-
-select.form-control:not([size]):not([multiple]) {
+.escort-profile select.form-control:not([size]):not([multiple]) {
     height: 48px;
 }
 
@@ -24,7 +23,8 @@ select.form-control:not([size]):not([multiple]) {
     background-color: rgba(33, 40, 50, 0.03);
     border-bottom: 1px solid rgba(33, 40, 50, 0.125);
 }
-.escort-profile .form-control, .dataTable-input {
+.escort-profile .form-control,
+.dataTable-input {
     display: block;
     width: 100%;
     padding: 0.875rem 1.125rem;
@@ -60,19 +60,19 @@ select.form-control:not([size]):not([multiple]) {
 }
 
 .left-content .name-text {
-	font-size: 24px;
+    font-size: 24px;
 }
 
 .uplode-btn {
-	margin-top: 11px;
+    margin-top: 11px;
 }
 .escort-profile {
-	font-family: Montserrat-Regular;
-	margin-bottom: 60px;
+    font-family: Montserrat-Regular;
+    margin-bottom: 60px;
 }
 
 .escort-profile .card-header {
-	font-size: 20px;
+    font-size: 20px;
 }
 
 .select2-container--default.select2-container--disabled .select2-selection--multiple {
@@ -95,35 +95,115 @@ span.select2-selection.select2-selection--multiple {
     max-width: 1244px;
 }
 
-
-@media (min-width:768px) and (max-width:1024px){
-
-
-
-
-
+.agency-escort-list .card {
+    padding: 30px;
 }
+
+.add-agency-escort .card {
+    padding: 30px;
+}
+
+.add-agency-escort .btn.btn-success {
+    margin-top: 0px !important;
+}
+
+.cancel-reset-submit-button {
+    margin-top: 45px;
+}
+
+.cancel-reset-submit-button .col-md-4 {
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+}
+.cancel-reset-submit-button .btn {
+    width: 100%;
+    margin-bottom: 0px !important;
+}
+.cancel-reset-submit-button .btn {
+    margin-right: 11px;
+    width: 150px;
+}
+
+
+.check-boxes-smoker-oncall-etc {
+    padding: 0px !important;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.cancel-reset-submit-button button {
+    border:none;
+}
+
+.cancel-reset-submit-button button.btn.btn-success.btn-two {
+    background-color: #5CE1E6;
+}
+
+.cancel-reset-submit-button button.btn.btn-danger {
+    background: #EC8CCC;
+}
+
 
 
 @media only screen and (max-width: 767px) {
+    .escort-profile .right-content label {
+        padding-top: 5px;
+    }
+    .escort-profile .right-content textarea#description {
+        height: 100px;
+    }
 
+ .escort-profile .rounded-circle {
+    width: 80px;
+    height: 80px;
+}
+    .escort-profile .right-content button.btn.btn-primary {
+        margin-top: 8px;
+        width: 100%;
+        height: 40px;
+    }
 
+.add-agency-escort .card {
+    padding: 15px;
+}
 
-.escort-profile .right-content label {
+.agency-escort-list h3 {
+    font-size: 21px;
+}
+
+.agency-add-escort-title {
+    margin-bottom: 15px;
+    padding-top: 0;
+}
+.cancel-reset-submit-button {
+    margin-top: 25px;
+}
+
+.check-boxes-smoker-oncall-etc {
+    padding: 0px !important;
+    padding-top: 10px !important;
+    margin: -35px;
+    margin-top: 0;
+    margin-bottom: 3px;
+}
+
+.add-agency-escort label {
     padding-top: 5px;
 }
-.escort-profile .right-content textarea#description {
-    height: 100px;
-}
-
-.escort-profile .rounded-circle {
-    width: 35%;
-    height: 35%;
-}
-.escort-profile .right-content button.btn.btn-primary {
-    margin-top: 8px;
+.cancel-reset-submit-button .btn {
+    margin-right: 11px;
+    width: 118px;
+    height: 40px;
 }
 
 
 
+
+
 }
+    

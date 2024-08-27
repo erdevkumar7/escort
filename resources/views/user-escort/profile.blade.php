@@ -6,7 +6,7 @@
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
                 <a class="nav-link active ms-0" href="#">Profile</a>
-                <a class="nav-link" href="#">My Pictures</a>                
+                <a class="nav-link" href="#">My Pictures</a>
             </nav>
             <hr class="mt-0 mb-4">
             <div class="row">
@@ -17,18 +17,22 @@
                         <div class="card-body text-center">
                             <!-- Profile picture image-->
                             @if ($escort->profile_pic)
-                            <img class="img-account-profile rounded-circle mb-2"
-                            src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}" alt="avatar">
+                                <img class="img-account-profile rounded-circle mb-2"
+                                    src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}"
+                                    alt="avatar">
                             @else
-                            <img class="img-account-profile rounded-circle mb-2"
-                            src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg" alt="avatar">
+                                <img class="img-account-profile rounded-circle mb-2"
+                                    src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
+                                    alt="avatar">
                             @endif
-                            
-                            <i class="fa-regular fa-pen-to-square"></i>
+                            <!-- Hidden file input for profile picture upload -->
+                            <input type="file" id="profilePicInput" accept="image/*" style="display: none;"
+                                onchange="uploadFile(this)">
+                            <i class="fa-regular fa-pen-to-square"
+                                onclick="document.getElementById('profilePicInput').click();"></i>
+
                             <!-- Profile picture help block-->
-                            <div class="name-text">{{$escort->nickname}}</div>
-                            <!-- Profile picture upload button-->
-                            {{-- <button class="btn btn-primary uplode-btn" type="button">Upload new image</button> --}}
+                            <div class="name-text">{{ $escort->nickname }}</div>
                         </div>
                     </div>
                 </div>
@@ -369,7 +373,7 @@
                                 </div>
 
                                 <!-- Save changes button-->
-                               <!-- <button class="btn btn-primary" type="button">Save changes</button> -->
+                                <!-- <button class="btn btn-primary" type="button">Save changes</button> -->
                             </form>
                         </div>
                     </div>
@@ -378,4 +382,39 @@
         </div>
 
     </div>
+
+    <!-- JavaScript function to handle the file upload using AJAX -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for AJAX -->
+<script>
+    function uploadFile(input) {
+        if (input.files && input.files[0]) {
+            let formData = new FormData();
+            formData.append('profile_pic', input.files[0]);
+
+            $.ajax({
+                url: '',  // Laravel route to handle upload
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                headers: {
+                    'X-CSRF-TOKEN': '{{ csrf_token() }}'  // CSRF token for security
+                },
+                success: function(response) {
+                    if (response.success) {
+                        // Update the image source to show the new profile picture
+                        $('.img-account-profile').attr('src', response.imagePath);
+                        alert('Profile picture updated successfully!');
+                    } else {
+                        alert('An error occurred while uploading the file.');
+                    }
+                },
+                error: function(xhr) {
+                    console.error(xhr.responseText);
+                    alert('An error occurred while uploading the file.');
+                }
+            });
+        }
+    }
+</script>
 @endsection

@@ -276,7 +276,7 @@
                             </div>
                         </div>
 
-                        <div class="row p-3">
+                        <div class="row p-3 check-boxes-smoker-oncall-etc">
                             <div class="col-md-4 col-sm-4">
                                 {{-- smoker --}}
                                 <span class="m-3">
@@ -461,12 +461,12 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row cancel-reset-submit-button">
                             <div class="col-md-4 col-sm-4 offset-md-3">
                                 <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"> <button
-                                        class="btn btn-primary" type="button">Cancel</button></a>
+                                        class="btn btn-danger" type="button">Cancel</button></a>
                                 <button class="btn btn-primary" type="reset">Reset</button>
-                                <button type="submit" class="btn btn-success">Submit</button>
+                                <button type="submit" class="btn btn-success btn-two">Submit</button>
                             </div>
                         </div>
                     </form>
