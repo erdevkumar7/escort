@@ -114,7 +114,7 @@ class UserEscortsController extends Controller
 
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname,' . $escort->id,
-            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'profile_pic' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
             'pictures' => 'nullable|array|min:1',
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
@@ -176,6 +176,8 @@ class UserEscortsController extends Controller
             $originalImageName = $image->getClientOriginalName();
             $profileName = time() . '_' . $originalImageName;
             $image->move(public_path('images/profile_img'), $profileName);
+        } else {
+            $profileName = null;
         }
 
         // Handle video file upload

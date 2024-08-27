@@ -1,3 +1,113 @@
-.profile-heading{
-    color: red;
+
+select.form-control:not([size]):not([multiple]) {
+    height: 48px;
+}
+
+.escort-profile .img-account-profile {
+    height: 10rem;
+}
+.escort-profile .rounded-circle {
+    border-radius: 50% !important;
+}
+.escort-profile .card {
+    box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
+}
+.escort-profile .card .card-header {
+    font-weight: 500;
+}
+.escort-profile .card-header:first-child {
+    border-radius: 0.35rem 0.35rem 0 0;
+}
+.escort-profile .card-header {
+    padding: 1rem 1.35rem;
+    margin-bottom: 0;
+    background-color: rgba(33, 40, 50, 0.03);
+    border-bottom: 1px solid rgba(33, 40, 50, 0.125);
+}
+.escort-profile .form-control, .dataTable-input {
+    display: block;
+    width: 100%;
+    padding: 0.875rem 1.125rem;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 1;
+    color: #69707a;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #c5ccd6;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    border-radius: 0.35rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.escort-profile .nav-borders .nav-link.active {
+    color: #0061f2;
+    border-bottom-color: #0061f2;
+}
+.escort-profile .nav-borders .nav-link {
+    color: #69707a;
+    border-bottom-width: 0.125rem;
+    border-bottom-style: solid;
+    border-bottom-color: transparent;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    padding-left: 0;
+    padding-right: 0;
+    margin-left: 1rem;
+    margin-right: 1rem;
+}
+
+.left-content .name-text {
+	font-size: 24px;
+}
+
+.uplode-btn {
+	margin-top: 11px;
+}
+.escort-profile {
+	font-family: Montserrat-Regular;
+	margin-bottom: 60px;
+}
+
+.escort-profile .card-header {
+	font-size: 20px;
+}
+
+.select2-container--default.select2-container--disabled .select2-selection--multiple {
+    background-color: #f8f8f9;
+    cursor: default;
+    height: 48px;
+    padding-top: 5px;
+}
+
+
+@media only screen and (max-width: 767px) {
+
+
+.escort-profile .container-xl {
+    padding: 0px !important;
+}
+.escort-profile .right-content label {
+    padding-top: 5px;
+}
+.escort-profile .right-content textarea#description {
+    height: 100px;
+}
+
+.escort-profile .right-content .select2-container--default.select2-container--disabled .select2-selection--multiple {
+    height: 48px;
+}
+
+.escort-profile .right-content .select2-container--default .select2-selection--multiple .select2-selection__choice {
+    margin-top: 10px;
+}
+
+.escort-profile .rounded-circle {
+    width: 35%;
+    height: 35%;
+}
+
+
 }
