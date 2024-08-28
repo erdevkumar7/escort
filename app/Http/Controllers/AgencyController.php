@@ -88,6 +88,37 @@ class AgencyController extends Controller
 
         return view('user-agency.profile', compact('agency'));
     }
+
+    public function profile_pic_update(Request $request, $agency_id)
+    {
+        $agency = Agency::findOrFail($agency_id);
+        $validatedData = $request->validate([
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        // Handle Profile_pic Image file upload
+        if ($request->hasFile('profile_pic')) {
+            // Delete the old image if it exists
+            if ($agency->profile_pic) {
+                $oldImagePath = public_path('images/profile_img') . '/' . $agency->profile_pic;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            // Upload the new image
+            $image = $request->file('profile_pic');
+            $originalImageName = $image->getClientOriginalName();
+            $profileName = time() . '_' . $originalImageName;
+            $image->move(public_path('images/profile_img'), $profileName);
+        } else {
+            $profileName = null;
+        }
+
+        $validatedData['profile_pic'] = $profileName;
+        $agency->update($validatedData);
+
+        return redirect()->route('agency.profile', $agency->id)->with('success', 'Profile picture update!');
+    }
     
     public function escort_listing($agency_id)
     {

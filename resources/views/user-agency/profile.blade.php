@@ -5,9 +5,9 @@
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
-                <a class="nav-link ms-0" href="{{route('agency.dashboard', $agency->id)}}">Dashboard</a>
+                <a class="nav-link ms-0" href="{{ route('agency.dashboard', $agency->id) }}">Dashboard</a>
                 <a class="nav-link active" href="#">Profile</a>
-                <a class="nav-link" href="{{route('agency.escort_listing', $agency->id)}}">My Listing</a>
+                <a class="nav-link" href="{{ route('agency.escort_listing', $agency->id) }}">My Listing</a>
 
             </nav>
             <hr class="mt-0 mb-4">
@@ -16,24 +16,31 @@
                     <!-- Profile picture card-->
                     <div class="card mb-4 mb-xl-0">
                         <div class="card-header">Profile Picture</div>
-                        <div class="card-body text-center">
-                            <!-- Profile picture image-->
-                            @if ($agency->profile_pic)
-                                <img class="img-account-profile rounded-circle mb-2"
-                                    src="{{ asset('/public/images/profile_img') . '/' . $agency->profile_pic }}"
-                                    alt="avatar">
-                            @else
-                                <img class="img-account-profile rounded-circle mb-2"
-                                    src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
-                                    alt="avatar">
-                            @endif
+                        <form action="{{ route('agency.profilePic.update', $agency->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body text-center">
+                                <!-- Profile picture image-->
+                                @if ($agency->profile_pic)
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="{{ asset('/public/images/profile_img') . '/' . $agency->profile_pic }}"
+                                        alt="avatar">
+                                @else
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
+                                        alt="avatar">
+                                @endif
+                                {{-- <i class="fa-regular fa-pen-to-square"></i> --}}
+                                <input type="file" id="profilePicInput" accept="image/*" name="profile_pic"
+                                    style="display: none;" onchange="this.form.submit()">
 
-                            <i class="fa-regular fa-pen-to-square"></i>
-                            <!-- Profile picture help block-->
-                            <div class="name-text">{{ $agency->name }}</div>
-                            <!-- Profile picture upload button-->
-                            {{-- <button class="btn btn-primary uplode-btn" type="button">Upload new image</button> --}}
-                        </div>
+                                <i class="fa-regular fa-pen-to-square"
+                                    onclick="document.getElementById('profilePicInput').click();"
+                                    style="cursor: pointer;"></i>
+                                <div class="name-text">{{ $agency->name }}</div>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="col-xl-9 right-content">

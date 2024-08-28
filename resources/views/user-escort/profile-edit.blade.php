@@ -50,7 +50,7 @@
                                 </ul>
                             </div>
                         @endif
-                        <div class="card-body">
+                        <div class="card-body account-details">
                             <form action="{{ route('escorts.update.profile', $escort->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -551,10 +551,12 @@
                                 </div>
 
                                 <!-- Save changes button-->
-                                <button class="btn btn-primary" type="submit">Save changes</button>
+                                <div class="save-changes-btn-part">
+                                <button class="btn save-changes-btn" type="submit">Save changes</button>
 
                                 <a href="{{ route('escorts.profile', $escort->id) }}">
-                                    <button type="button" class="btn btn-primary">Cancel</button></a>
+                                    <button type="button" class="btn cencel-btn">Cancel</button></a>
+                                </div>
                             </form>
                         </div>
                     </div>

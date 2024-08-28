@@ -22,6 +22,7 @@ class Agency extends Authenticatable implements CanResetPasswordContract
         "address",
         "password",
         "counter",
+        "profile_pic"
         ] ;
 
         public function sendPasswordResetNotification($token)
