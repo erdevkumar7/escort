@@ -7,8 +7,10 @@
 }
 .escort-profile .rounded-circle {
     border-radius: 50% !important;
+    width: 150px;
+    height: 150px;
 }
-.escort-profile .card {
+escort-profile .card {
     box-shadow: 0 0.15rem 1.75rem 0 rgb(33 40 50 / 15%);
 }
 .escort-profile .card .card-header {
@@ -47,7 +49,7 @@
     border-bottom-color: #0061f2;
 }
 .escort-profile .nav-borders .nav-link {
-    color: #69707a;
+    color: #232e48;
     border-bottom-width: 0.125rem;
     border-bottom-style: solid;
     border-bottom-color: transparent;
@@ -55,10 +57,13 @@
     padding-bottom: 0.5rem;
     padding-left: 0;
     padding-right: 0;
-    margin-left: 1rem;
     margin-right: 1rem;
+    font-family: 'Montserrat-Bold';
 }
 
+.escort-profile nav.nav.nav-borders {
+    gap: 30px;
+}
 .left-content .name-text {
     font-size: 24px;
 }
@@ -147,7 +152,7 @@ span.select2-selection.select2-selection--multiple {
 
 .cancel-reset-submit-button button.btn.btn-one {
     background: #007bff;
-    width: 230px;
+    width: 250px;
     height: 45px;
     color: #fff;
 }
@@ -155,14 +160,14 @@ span.select2-selection.select2-selection--multiple {
     box-shadow: none;
 }
 .cancel-reset-submit-button button.btn.btn-three {
-    width: 230px;
+    width: 250px;
     height: 45px;
     background-color: #EC8CCC;
     color: #fff;
 }
 .cancel-reset-submit-button button.btn.btn-two {
     background-color: #5CE1E6;
-    width: 230px;
+    width: 250px;
     height: 45px;
     color: #fff;
 }
@@ -178,6 +183,7 @@ span.select2-selection.select2-selection--multiple {
 }
 table#agencies_escort button.btn.btn-primary {
     font-size: 14px;
+    background-color: #007bff;
 }
 
 .right-content button.btn.float-right:focus {
@@ -197,6 +203,34 @@ table#agencies_escort button.btn.btn-primary {
     color: #fff;
     margin-right: 10px;
 }
+
+.save-changes-btn-part button.btn.save-changes-btn:hover {
+    border: 1px solid #232e48;
+    background-color: #232e48;
+}
+.save-changes-btn-part button.btn.cencel-btn:hover {
+    border: 1px solid #232e48;
+    background-color: #232e48;
+}
+
+.cancel-reset-submit-button button.btn.btn-one:hover {
+    border: 1px solid #232e48;
+    background-color: #232e48;
+}
+
+.cancel-reset-submit-button button.btn.btn-three:hover {
+    border: 1px solid #232e48;
+    background-color: #232e48;
+}
+
+.cancel-reset-submit-button button.btn.btn-two:hover {
+    border: 1px solid #232e48;
+    background-color: #232e48;
+}
+.all-btn-design:hover {
+    border: 1px solid #232e48;
+    background-color: #232e48 !important;
+}
 .save-changes-btn-part button.btn.cencel-btn {
     width: 230px;
     height: 45px;
@@ -213,6 +247,66 @@ table#agencies_escort button.btn.btn-primary {
 .account-details {
     padding: 30px;
 }
+
+.all-btn-design {
+    background-color: #5CE1E6;
+    width: 50%;
+    height: 45px;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    align-items: center;
+    margin-bottom: 40px;
+}
+.all-btn-design:hover {
+    background-color: #5CE1E6;
+    color: #fff;
+}
+
+.all-btn-design:focus {
+    box-shadow: none;
+}
+
+.all-btn-design:focus-visible {
+    background-color: #5CE1E6;
+    color: #fff;
+    border: none;
+}
+
+.all-btn-design .btn:not(:disabled):not(.disabled).active, .btn:not(:disabled):not(.disabled):active {
+    background-color: #5CE1E6;
+    color: #fff;
+    border: none;
+}
+
+.agency-add-escort-title button {
+    background-color: #007bff;
+}
+.add-agency-escort .agency-add-escort-title button:hover {
+    background-color: #ec8ccc;
+    border: none;
+}   
+.agency-add-escort-title button:hover {
+    background-color: #ec8ccc;
+    border: none;
+}
+.escort-profile .nav-borders .nav-link:hover {
+    color: #ec8ccc;
+}
+
+.escort-profile hr.mt-0.mb-4 {
+    display: none;
+}
+
+.escort-profile nav.nav.nav-borders {
+    margin-bottom: 40px;
+}
+
+.right-content button.float-right:hover {
+    background-color: #ec8ccc;
+}
+
 
 @media only screen and (max-width: 767px) {
 
@@ -258,7 +352,7 @@ table#agencies_escort button.btn.btn-primary {
 }
 
 .add-agency-escort label {
-    padding-top: 5px;
+    padding-top: 11px;
 }
 .cancel-reset-submit-button .btn {
     margin-right: 11px;
@@ -285,7 +379,10 @@ table#agencies_escort button.btn.btn-primary {
     width: 100%;
     height: 50px;
 }
-
+.all-btn-design {
+    width: 88%;
+    height: 50px;
+}
 
 }
     

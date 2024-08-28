@@ -96,6 +96,26 @@ h1 {
     font-size: 48px;
 }
 
+
+ul.dropdown-menu.show .dropdown-item.active, .dropdown-item:active {
+    color: #fff;
+    text-decoration: none;
+    background-color: #5ce1e6;
+    border: none;
+}
+
+.profile-login-logout .logout-user.show {
+    left: -30px;
+    top: 35px;
+}
+
+nav.navbar ul.dropdown-menu.show .dropdown-item:hover {
+    color: #fff;
+    background-color: #5ce1e6;
+    border: none;
+    border-radius: 0;
+}
+
 .top-text {
     background-color: #EC8CCC;
     text-align: center;
@@ -1506,6 +1526,10 @@ i.fa-solid.fa-user {
 .agency-add-escort-title button:focus {
     box-shadow: none;
 }
+.agency-add-escort-containt label {
+    padding-top: 11px;
+    margin-bottom: 2px;
+}
 
 /*add-escort-css*/
 
@@ -1931,7 +1955,11 @@ i.fa-solid.fa-user {
     nav.navbar.navbar-expand-lg button.navbar-toggler {
         height: 45px;
     }
-
+    
+    .profile-login-logout .logout-user.show {
+        left: -90px;
+        top: 40px;
+    }
 
     .form-login .login100-more {
         height: 480px;

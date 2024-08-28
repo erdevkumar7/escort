@@ -81,7 +81,7 @@ class AgencyController extends Controller
     public function profile($agency_id)
     {
 
-        $agency = Agency::find(Auth::guard('agency')->user()->id);       
+        $agency = Agency::find(Auth::guard('agency')->user()->id);
 
         if (Auth::guard('agency')->user()->id != $agency_id) {
             return redirect()->route('agency.profile', Auth::guard('agency')->user()->id)->with('error', 'You are not authorized to access this page.');
@@ -90,8 +90,9 @@ class AgencyController extends Controller
         return view('user-agency.profile', compact('agency'));
     }
 
-    public function profileEditForm($agency_id){
-        $agency = Agency::find(Auth::guard('agency')->user()->id);     
+    public function profileEditForm($agency_id)
+    {
+        $agency = Agency::find(Auth::guard('agency')->user()->id);
 
         if (Auth::guard('agency')->user()->id != $agency_id) {
             return redirect()->route('agency.profileEditForm', Auth::guard('agency')->user()->id)->with('error', 'You are not authorized to access this page.');
@@ -119,7 +120,7 @@ class AgencyController extends Controller
 
         $agency->update($valideData);
 
-        return redirect()->route('agency.profile', $agency->id )->with('success', 'Agancy Updated');
+        return redirect()->route('agency.profile', $agency->id)->with('success', 'Agancy Updated');
     }
 
     public function profile_pic_update(Request $request, $agency_id)
@@ -152,7 +153,7 @@ class AgencyController extends Controller
 
         return redirect()->route('agency.profile', $agency->id)->with('success', 'Profile picture update!');
     }
-    
+
     public function escort_listing($agency_id)
     {
 
@@ -276,6 +277,26 @@ class AgencyController extends Controller
         Escort::create($validatedData);
 
         return redirect()->route('agency.escort_listing', $agency_id)->with('success', 'Escort added successfully!');
+    }
+
+    public function edit_escorts_form($agency_id, $id)
+    {
+         $agency = Agency::find(Auth::guard('agency')->user()->id);
+        if (Auth::guard('agency')->user()->id != $agency_id) {
+            return redirect()->route('agency.edit_escorts_form',['agency_id' => Auth::guard('agency')->user()->id, 'id' => $id])->with('error', 'You are not authorized to access this page.');
+        }
+
+        $escort = Escort::find($id);
+
+        $pictures = json_decode($escort->pictures);
+        $video = json_decode($escort->video);
+        $language_spoken = json_decode($escort->language_spoken, true);
+        $services = json_decode($escort->services, true);
+        $availability = json_decode($escort->availability, true);
+        $currencies_accepted = json_decode($escort->currencies_accepted, true);
+        $payment_method = json_decode($escort->payment_method, true);
+
+        return view('user-agency.agency-edit-escort', compact('escort', 'pictures', 'video', 'services', 'language_spoken', 'availability', 'currencies_accepted', 'payment_method'));
     }
 
     //Agency Auth Functionality start ***********************************************************

@@ -61,7 +61,7 @@
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
-                <a class="nav-link ms-0" href="{{route('agency.dashboard', $agency->id)}}">Dashboard</a>
+                <a class="nav-link ms-0" href="{{ route('agency.dashboard', $agency->id) }}">Dashboard</a>
                 <a class="nav-link" href="{{ route('agency.profile', $agency->id) }}">Profile</a>
                 <a class="nav-link active" href="#">My Listing</a>
 
@@ -71,7 +71,8 @@
                 <div class="card mb-4">
                     <div class="agency-add-escort-title">
                         <h3>Escort-Listing</h3>
-                        <a href="{{route('agency.add.escortform', Auth::guard('agency')->user()->id)}}" ><button type="button" class="btn btn-primary" >Add escort</button></a>
+                        <a href="{{ route('agency.add.escortform', Auth::guard('agency')->user()->id) }}"><button
+                                type="button" class="btn btn-primary">Add escort</button></a>
                     </div>
                     {{-- <div class="card-header">
                         <a href="{{route('agency.add.escortform', Auth::guard('agency')->user()->id)}}" ><button type="button" class="btn btn-primary" >Add escort</button></a>
@@ -108,7 +109,8 @@
                                         <th>Origin</th>
                                         <th>City</th>
                                         <th>Type</th>
-                                       
+                                        <th>Status</th>
+                                        <th>Action</th>
                                         <th>View escort</th>
                                     </tr>
                                 </thead>
@@ -122,15 +124,30 @@
                                             <td>{{ $escort->origin ?? 'Not Available' }}</td>
                                             <td>{{ $escort->city ?? 'Not Available' }}</td>
                                             <td>{{ $escort->type ?? 'Not Available' }}</td>
-                                          
+                                            <td>{{ $escort->status == 1 ? 'Active' : 'Not-Active' }}</td>
+                                            <td style="display: flex">
+                                                <a  href="{{ route('agency.edit_escorts_form', ['agency_id' => Auth::guard('agency')->user()->id, 'id' => $escort->id]) }}">
+                                                    <button data-toggle="tooltip" data-placement="top" title="Edit">
+                                                        <i class="fa-solid fa-pen-to-square"></i>
+                                                    </button>
+                                                </a>
+
+                                                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                                    data-toggle="tooltip" data-placement="top" title="Delete"
+                                                    data-deleted-id="{{ $agency->id }}">
+                                                    <i class="fa-solid fa-trash"></i>
+                                                </button>
+
+                                            </td>
                                             <td>
-                                                <a href="{{ route('agency.escort.detail', ['agency_id' => Auth::guard('agency')->user()->id, 'escort_id' => $escort->id]) }}">
+                                                <a
+                                                    href="{{ route('agency.escort.detail', ['agency_id' => Auth::guard('agency')->user()->id, 'escort_id' => $escort->id]) }}">
                                                     <button type="button" class="btn btn-primary">view</button></a>
                                             </td>
                                         </tr>
                                     @endforeach
-                    
-                    
+
+
                                 </tbody>
                                 <tfoot>
                                     <tr>
@@ -141,7 +158,8 @@
                                         <th>Origin</th>
                                         <th>City</th>
                                         <th>Type</th>
-                                    
+                                        <th>Status</th>
+                                        <th>Action</th>
                                         <th>View escort</th>
                                     </tr>
                                 </tfoot>
