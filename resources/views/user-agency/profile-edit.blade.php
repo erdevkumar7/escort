@@ -47,26 +47,36 @@
                     <!-- Account details card-->
                     <div class="card mb-4">
                         <div class="card-header">
-                            Account Details
-                            <a href="{{route('agency.profileEditForm', $agency->id)}}">
-                                <button type="button" class="btn btn-default float-right">Edit Profile</button></a>
+                            Update Account Details
+                            <a href="{{ Route('agency.profile', $agency->id) }}">
+                                <button type="button" class="btn btn-default float-right">Back</button></a>
                         </div>
                         <div class="card-body">
-                            <form>
+                            <form action="{{ route('agency.edit_agency', $agency->id) }}" method="POST"
+                                enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
                                 <!-- Form Row-->
                                 <div class="row gx-3 mb-3">
                                     <!-- Form Group nickname)-->
                                     <div class="col-md-6">
                                         <label for="name">Agency Name *</label>
                                         <input class="form-control " type="text" id="name" name="name"
-                                            value="{{ $agency->name ?? 'Not Selected' }}" disabled>
+                                            value="{{ $agency->name ?? 'Not Selected' }}" oninput="removeError('nameErr')">
+                                        @error('name')
+                                            <span class="text-danger" id="nameErr">{{ $message }}</span>
+                                        @enderror
                                     </div>
 
                                     <!-- Form Group email-->
                                     <div class="col-md-6">
                                         <label for="email">Email *</label>
                                         <input type="email" class="form-control" name="email" id="email"
-                                            value="{{ $agency->email ?? 'Not Selected' }}" disabled>
+                                            value="{{ $agency->email ?? 'Not Selected' }}"
+                                            oninput="removeError('emailErr')">
+                                        @error('email')
+                                            <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                 </div>
                                 <!-- Form Row        -->
@@ -75,19 +85,23 @@
                                     <div class="col-md-6">
                                         <label for="phone_number">Phone Number *</label>
                                         <input type="text" class="form-control" name="phone_number" id="phone_number"
-                                            value="{{ $agency->phone_number ?? 'Not Selected' }}" disabled>
+                                            value="{{ $agency->phone_number ?? 'Not Selected' }}"
+                                            oninput="removeError('phoneErr')">
+                                        @error('phone_number')
+                                            <span class="text-danger" id="phoneErr">{{ $message }}</span>
+                                        @enderror
                                     </div>
                                     <!-- Form Group (address)-->
                                     <div class="col-md-6">
                                         <label for="address">Address</label>
                                         <input type="address" class="form-control" name="address" id="address"
-                                            value="{{ $agency->address ?? 'Not Selected' }}" disabled>
+                                            value="{{ $agency->address ?? 'Not Selected' }}">
                                     </div>
                                 </div>
                         </div>
 
                         <!-- Save changes button-->
-                        <!-- <button class="btn btn-primary" type="button">Save changes</button> -->
+                        <button class="btn new-save-change-btn" type="submit">Save changes</button>
                         </form>
                     </div>
                 </div>

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Password;
 use App\Notifications\AgencyResetPasswordNotification;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\Rule;
 
 class AgencyController extends Controller
 {
@@ -87,6 +88,38 @@ class AgencyController extends Controller
         }
 
         return view('user-agency.profile', compact('agency'));
+    }
+
+    public function profileEditForm($agency_id){
+        $agency = Agency::find(Auth::guard('agency')->user()->id);     
+
+        if (Auth::guard('agency')->user()->id != $agency_id) {
+            return redirect()->route('agency.profileEditForm', Auth::guard('agency')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        return view('user-agency.profile-edit', compact('agency'));
+    }
+
+    public function edit_agency(Request $request, $agency_id)
+    {
+        $agency = Agency::find($agency_id);
+
+        $valideData = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => [
+                'required',
+                'string',
+                'email',
+                'max:255',
+                Rule::unique('agencies')->ignore($agency->id),
+            ],
+            'phone_number' => 'required|numeric',
+            'address' => 'nullable|string',
+        ]);
+
+        $agency->update($valideData);
+
+        return redirect()->route('agency.profile', $agency->id )->with('success', 'Agancy Updated');
     }
 
     public function profile_pic_update(Request $request, $agency_id)
