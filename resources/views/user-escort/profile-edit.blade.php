@@ -6,7 +6,7 @@
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
                 <a class="nav-link active ms-0" href="#">Profile</a>
-                <a class="nav-link" href="#">My Pictures</a> 
+                <a class="nav-link" href="#">My Pictures</a>
             </nav>
             <hr class="mt-0 mb-4">
             <div class="row">
@@ -14,34 +14,43 @@
                     <!-- Profile picture card-->
                     <div class="card mb-4 mb-xl-0">
                         <div class="card-header">Profile Picture</div>
-                        <div class="card-body text-center">
-                            <!-- Profile picture image-->
-                            @if ($escort->profile_pic)
-                                <img class="img-account-profile rounded-circle mb-2"
-                                    src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}"
-                                    alt="avatar">
-                            @else
-                                <img class="img-account-profile rounded-circle mb-2"
-                                    src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
-                                    alt="avatar">
-                            @endif
+                        <form action="{{ route('escorts.profilePic.update', $escort->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body text-center">
+                                <!-- Profile picture image-->
+                                @if ($escort->profile_pic)
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}"
+                                        alt="avatar">
+                                @else
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
+                                        alt="avatar">
+                                @endif
+                                {{-- <i class="fa-regular fa-pen-to-square"></i> --}}
+                                <input type="file" id="profilePicInput" accept="image/*" name="profile_pic"
+                                    style="display: none;" onchange="this.form.submit()">
 
-                            <i class="fa-regular fa-pen-to-square"></i>
-                            
-                            <!-- Profile picture help block-->
-                            <div class="name-text">{{ $escort->nickname }}</div>
-                            <!-- Profile picture upload button-->
-                            {{-- <button class="btn btn-primary uplode-btn" type="button">Upload new image</button> --}}
-                        </div>
+                                <i class="fa-regular fa-pen-to-square"
+                                    onclick="document.getElementById('profilePicInput').click();"
+                                    style="cursor: pointer;"></i>
+                                <div class="name-text">{{ $escort->nickname }}</div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
                 <div class="col-xl-9 right-content">
                     <!-- Account details card-->
                     <div class="card mb-4">
                         <div class="card-header">
-                            Account Details
+                            Update Account Details
+                            <a href="{{ route('escorts.profile', $escort->id) }}">
+                                <button type="button" class="btn btn-default float-right">Back</button></a>
                         </div>
-                        @if ($errors->any())
+                        {{-- @if ($errors->any())
                             <div class="alert alert-danger">
                                 <ul>
                                     @foreach ($errors->all() as $error)
@@ -49,7 +58,7 @@
                                     @endforeach
                                 </ul>
                             </div>
-                        @endif
+                        @endif --}}
                         <div class="card-body account-details">
                             <form action="{{ route('escorts.update.profile', $escort->id) }}" method="POST"
                                 enctype="multipart/form-data">
@@ -550,12 +559,33 @@
                                     </div>
                                 </div>
 
+                                <!-- Form Row-->
+                                <div class="row gx-3 mb-3">
+                                    <div class="col-md-6">
+                                        <label for="pictures">Pictures<span class="required">*</span></label>
+                                        <input type="file" class="form-control" id="pictures" name="pictures[]"
+                                            multiple oninput="removeError('picturesErr')">
+                                        @error('pictures')
+                                            <span class="text-danger" id="picturesErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <label for="video">Videos</label>
+                                        <input type="file" class="form-control" id="video" name="video[]"
+                                            multiple>
+                                        @error('video')
+                                            <span class="text-danger" id="videoErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
                                 <!-- Save changes button-->
                                 <div class="save-changes-btn-part">
-                                <button class="btn save-changes-btn" type="submit">Save changes</button>
+                                    <button class="btn save-changes-btn" type="submit">Save changes</button>
 
-                                <a href="{{ route('escorts.profile', $escort->id) }}">
-                                    <button type="button" class="btn cencel-btn">Cancel</button></a>
+                                    <a href="{{ route('escorts.profile', $escort->id) }}">
+                                        <button type="button" class="btn cencel-btn">Cancel</button></a>
                                 </div>
                             </form>
                         </div>
