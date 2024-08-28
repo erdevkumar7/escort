@@ -101,7 +101,7 @@
                         </div>
 
                         <!-- Save changes button-->
-                        <button class="btn new-save-change-btn" type="submit">Save changes</button>
+                        <button class="btn all-btn-design" type="submit">Save changes</button>
                         </form>
                     </div>
                 </div>
