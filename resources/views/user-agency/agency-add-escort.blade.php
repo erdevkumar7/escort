@@ -462,11 +462,11 @@
                             </div>
                         </div>
                         <div class="row cancel-reset-submit-button">
-                            <div class="col-md-4 col-sm-4 offset-md-3">
+                            <div class="col-md-4 col-sm-4 offset-md-3 route-listing-btn">
                                 <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"> <button
-                                        class="btn btn-danger" type="button">Cancel</button></a>
-                                <button class="btn btn-primary" type="reset">Reset</button>
-                                <button type="submit" class="btn btn-success btn-two">Submit</button>
+                                        class="btn btn-one" type="button">Cancel</button></a>
+                                <button class="btn btn-three" type="reset">Reset</button>
+                                <button type="submit" class="btn btn-two">Submit</button>
                             </div>
                         </div>
                     </form>

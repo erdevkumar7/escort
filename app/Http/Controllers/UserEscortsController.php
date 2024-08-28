@@ -205,6 +205,37 @@ class UserEscortsController extends Controller
         return redirect()->route('escorts.profile', $escort->id)->with('success', 'Escort updated successfully!');
     }
 
+    public function profile_pic_update(Request $request, $id)
+    {
+        $escort = Escort::findOrFail($id);
+        $validatedData = $request->validate([
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+        // Handle Profile_pic Image file upload
+        if ($request->hasFile('profile_pic')) {
+            // Delete the old image if it exists
+            if ($escort->profile_pic) {
+                $oldImagePath = public_path('images/profile_img') . '/' . $escort->profile_pic;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            // Upload the new image
+            $image = $request->file('profile_pic');
+            $originalImageName = $image->getClientOriginalName();
+            $profileName = time() . '_' . $originalImageName;
+            $image->move(public_path('images/profile_img'), $profileName);
+        } else {
+            $profileName = null;
+        }
+
+        $validatedData['profile_pic'] = $profileName;
+        $escort->update($validatedData);
+
+        return redirect()->route('escorts.profile', $escort->id)->with('success', 'Profile picture update!');
+    }
+
     public function escort_detail($id)
     {
         $escort = Escort::find($id);

@@ -13,27 +13,33 @@
                 <div class="col-xl-3 left-content">
                     <!-- Profile picture card-->
                     <div class="card mb-4 mb-xl-0">
-                        <div class="card-header">Profile Picture</div>
-                        <div class="card-body text-center">
-                            <!-- Profile picture image-->
-                            @if ($escort->profile_pic)
-                                <img class="img-account-profile rounded-circle mb-2"
-                                    src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}"
-                                    alt="avatar">
-                            @else
-                                <img class="img-account-profile rounded-circle mb-2"
-                                    src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
-                                    alt="avatar">
-                            @endif
-                            <!-- Hidden file input for profile picture upload -->
-                            <input type="file" id="profilePicInput" accept="image/*" style="display: none;"
-                                onchange="uploadFile(this)">
-                            <i class="fa-regular fa-pen-to-square"
-                                onclick="document.getElementById('profilePicInput').click();"></i>
+                        <div class="card-header">Profile Picture</div>                       
+                        <form action="{{ route('escorts.profilePic.update', $escort->id) }}" method="POST"
+                            enctype="multipart/form-data">
+                            @csrf
+                            @method('PUT')
+                            <div class="card-body text-center">
+                                <!-- Profile picture image-->
+                                @if ($escort->profile_pic)
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}"
+                                        alt="avatar">
+                                @else
+                                    <img class="img-account-profile rounded-circle mb-2"
+                                        src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
+                                        alt="avatar">
+                                @endif
+                                 {{-- <i class="fa-regular fa-pen-to-square"></i> --}}
+                                <input type="file" id="profilePicInput" accept="image/*" name="profile_pic"
+                                    style="display: none;" onchange="this.form.submit()">
 
-                            <!-- Profile picture help block-->
-                            <div class="name-text">{{ $escort->nickname }}</div>
-                        </div>
+                                <i class="fa-regular fa-pen-to-square"
+                                    onclick="document.getElementById('profilePicInput').click();"
+                                    style="cursor: pointer;"></i>
+                                <div class="name-text">{{ $escort->nickname }}</div>
+                            </div>
+                        </form>
+
                     </div>
                 </div>
                 <div class="col-xl-9 right-content">
@@ -382,39 +388,4 @@
         </div>
 
     </div>
-
-    <!-- JavaScript function to handle the file upload using AJAX -->
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> <!-- jQuery for AJAX -->
-<script>
-    function uploadFile(input) {
-        if (input.files && input.files[0]) {
-            let formData = new FormData();
-            formData.append('profile_pic', input.files[0]);
-
-            $.ajax({
-                url: '',  // Laravel route to handle upload
-                type: 'POST',
-                data: formData,
-                processData: false,
-                contentType: false,
-                headers: {
-                    'X-CSRF-TOKEN': '{{ csrf_token() }}'  // CSRF token for security
-                },
-                success: function(response) {
-                    if (response.success) {
-                        // Update the image source to show the new profile picture
-                        $('.img-account-profile').attr('src', response.imagePath);
-                        alert('Profile picture updated successfully!');
-                    } else {
-                        alert('An error occurred while uploading the file.');
-                    }
-                },
-                error: function(xhr) {
-                    console.error(xhr.responseText);
-                    alert('An error occurred while uploading the file.');
-                }
-            });
-        }
-    }
-</script>
 @endsection
