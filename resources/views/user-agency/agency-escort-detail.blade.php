@@ -29,7 +29,7 @@
         <div class="container">
             <div class="row members-inner-content">
                 <div class="col-md-6 first-members-content">
-                    <a href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}"><i class='fas fa-arrow-left'></i></a>
+                    <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"><i class='fas fa-arrow-left'></i></a>
                 </div>
 
          

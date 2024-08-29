@@ -100,8 +100,11 @@
 
                            <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
                                <li><a class="dropdown-item"
-                                       href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}">Profile</a>
+                                       href="{{ route('agency.profile', Auth::guard('agency')->user()->id) }}">Profile</a>
                                </li>
+                               <li><a class="dropdown-item"
+                                href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}">Dashboard</a>
+                        </li>
                                <li><a class="dropdown-item" href="#"
                                        onclick="handleLogOut('agency')">Logout</a>
                                </li>

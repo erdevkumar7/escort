@@ -33,21 +33,24 @@ Route::prefix('agency')->group(function () {
 
     //Protected Agency Routes
     Route::middleware(['auth:agency'])->group(function () {
-        Route::get('/{agency_id}/profile', [AgencyController::class, 'profile'])->name('agency.profile');
-        Route::get('/{agency_id}/profile-edit', [AgencyController::class, 'profileEditForm'])->name('agency.profileEditForm');
-        Route::put('/{agency_id}', [AgencyController::class, 'edit_agency'])->name('agency.edit_agency');
-        
-        Route::get('/{agency_id}/escorts/{id}/escort-edit', [AgencyController::class, 'edit_escorts_form'])->name('agency.edit_escorts_form');
-
-        Route::put('/profile/{agency_id}/profile-pic-update', [AgencyController::class, 'profile_pic_update'])->name('agency.profilePic.update');
+        Route::get('/{agency_id}/profile', [AgencyController::class, 'profile'])->name('agency.profile');      
+        Route::get('/{agency_id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
         Route::get('/{agency_id}/escort-listing', [AgencyController::class, 'escort_listing'])->name('agency.escort_listing');
         
-        Route::get('/{agency_id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
+        Route::get('/{agency_id}/profile-edit', [AgencyController::class, 'profileEditForm'])->name('agency.profileEditForm');
+        Route::put('/{agency_id}', [AgencyController::class, 'edit_agency'])->name('agency.edit_agency');        
+        Route::put('/profile/{agency_id}/profile-pic-update', [AgencyController::class, 'profile_pic_update'])->name('agency.profilePic.update');
+        
         Route::get('/{agency_id}/escort-detail/{escort_id}/show', [AgencyController::class, 'agency_escort_detail'])->name('agency.escort.detail');
         Route::get('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form"])->name('agency.add.escortform');
         Route::post('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form_submit"])->name('agency.add.escortFormSubmit');
+       
+        Route::get('/{agency_id}/escorts/{id}/escort-edit', [AgencyController::class, 'edit_escorts_form'])->name('agency.edit_escorts_form');
+        Route::put('/escorts/{id}', [AgencyController::class, 'edit_escorts'])->name('agency.edit_escorts');
 
         Route::post('/logout', [AgencyController::class, 'agency_logout'])->name('agency.logout');
+        
+
     });
 });
 
