@@ -126,18 +126,16 @@
                                             <td>{{ $escort->type ?? 'Not Available' }}</td>
                                             <td>{{ $escort->status == 1 ? 'Active' : 'Not-Active' }}</td>
                                             <td style="display: flex">
-                                                <a  href="{{ route('agency.edit_escorts_form', ['agency_id' => Auth::guard('agency')->user()->id, 'id' => $escort->id]) }}">
+                                                <a
+                                                    href="{{ route('agency.edit_escorts_form', ['agency_id' => Auth::guard('agency')->user()->id, 'id' => $escort->id]) }}">
                                                     <button data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </a>
-
-                                                <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                    data-toggle="tooltip" data-placement="top" title="Delete"
-                                                    data-deleted-id="{{ $agency->id }}">
+                                                <button type="button" onclick="confirmDelete({{ $escort->id }})"
+                                                    data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
-
                                             </td>
                                             <td>
                                                 <a
@@ -170,4 +168,38 @@
             </div>
         </div>
     </div>
+    <!-- Delete Confirmation Modal -->
+    <div class="modal fade" id="deleteConfirmationModal" tabindex="-1" aria-labelledby="deleteConfirmationModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="deleteConfirmationModalLabel">Confirm Deletion</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Are you sure you want to delete this escort?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <form id="deleteForm" method="POST" action="">
+                        @csrf
+                        @method('DELETE')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function confirmDelete(escortId) {
+            // Set the action URL for the delete form with the escort ID
+            const url = '{{ route('agency.delete.escorts', ['id' => '__id__']) }}'.replace('__id__', escortId);
+            document.getElementById('deleteForm').action = url;
+
+            // Show the modal
+            var deleteModal = new bootstrap.Modal(document.getElementById('deleteConfirmationModal'), {});
+            deleteModal.show();
+        }
+    </script>
 @endsection

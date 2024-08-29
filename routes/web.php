@@ -48,6 +48,8 @@ Route::prefix('agency')->group(function () {
         Route::get('/{agency_id}/escorts/{id}/escort-edit', [AgencyController::class, 'edit_escorts_form'])->name('agency.edit_escorts_form');
         Route::put('/escorts/{id}', [AgencyController::class, 'edit_escorts'])->name('agency.edit_escorts');
 
+        Route::delete('/escorts/{id}', [AgencyController::class, 'deleteEscorts'])->name('agency.delete.escorts');
+
         Route::post('/logout', [AgencyController::class, 'agency_logout'])->name('agency.logout');
         
 

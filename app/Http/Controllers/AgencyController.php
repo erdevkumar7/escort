@@ -387,6 +387,36 @@ class AgencyController extends Controller
         return redirect()->route('agency.escort_listing', Auth::guard('agency')->user()->id)->with('success', 'Escort updated successfully!');
     }
 
+    public function deleteEscorts($id)
+    {
+        $escorts = Escort::find($id);
+        $pictures = json_decode($escorts->pictures);
+        $video = json_decode($escorts->video);
+
+        //delete escorts pics
+        if ($pictures) {
+            foreach ($pictures as $picture) {
+                $imagePath = public_path('images/escorts_img') . '/' . $picture;
+                if (file_exists($imagePath)) {
+                    unlink($imagePath);
+                }
+            }
+        }
+
+        //Delete Escorts videos
+        if ($video) {
+            foreach ($video as $vdo) {
+                $vdoPath = public_path('videos') . '/' . $vdo;
+                if (file_exists($vdoPath)) {
+                    unlink($vdoPath);
+                }
+            }
+        }
+
+        $escorts->delete();
+        return redirect()->route('agency.escort_listing', Auth::guard('agency')->user()->id)->with('success', 'Escorts deleted successfully');
+    }
+
     //Agency Auth Functionality start ***********************************************************
     public function showForgotPasswordForm()
     {
