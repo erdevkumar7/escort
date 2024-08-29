@@ -7,7 +7,7 @@
             <nav class="nav nav-borders">
                 <a class="nav-link ms-0" href="{{route('escorts.dashboard', Auth::guard('escort')->user()->id)}}">Dashboard</a>
                 <a class="nav-link active" href="#">Profile</a>
-                <a class="nav-link" href="#">My Pictures</a>
+                <a class="nav-link" href="{{ route('escorts.myPictures', Auth::guard('escort')->user()->id) }}">My Pictures</a>
             </nav>
            
             <div class="row">

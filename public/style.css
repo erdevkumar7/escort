@@ -96,7 +96,6 @@ h1 {
     font-size: 48px;
 }
 
-
 ul.dropdown-menu.show .dropdown-item.active, .dropdown-item:active {
     color: #fff;
     text-decoration: none;
@@ -157,14 +156,17 @@ nav.navbar.navbar-expand-lg {
     z-index: 999;
     margin: auto;
 }
-
+ul.dropdown-menu.show li a {
+    font-size: 15px;
+    color: #232e48;
+}
 div#navbarScroll a.nav-link {
     color: #fff;
     font-weight: 500;
     width: 100%;
-    padding: 0 16px;
+    padding: 0 15px;
     font-family: 'Montserrat-Bold';
-    font-size: 14px;
+    font-size: 15px;
 }
 
 nav.navbar ul.navbar-nav {
