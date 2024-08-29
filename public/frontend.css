@@ -183,7 +183,7 @@ span.select2-selection.select2-selection--multiple {
 }
 table#agencies_escort button.btn.btn-primary {
     font-size: 14px;
-    background-color: #007bff;
+    border: none;
 }
 
 .right-content button.btn.float-right:focus {
@@ -307,6 +307,21 @@ table#agencies_escort button.btn.btn-primary {
     background-color: #ec8ccc;
 }
 
+.agency-escort-view-button:hover {
+    background-color: #ec8ccc !important;
+}
+button.agency-escort-delete-button {
+    border: none;
+    background-color: red;
+    color: #fff;
+}
+
+button.agency-escort-edit-button {
+    border: none;
+    background-color: #5CE1E6;
+    color: #fff;
+}
+
 
 @media only screen and (max-width: 767px) {
 
@@ -383,6 +398,11 @@ table#agencies_escort button.btn.btn-primary {
     width: 88%;
     height: 50px;
 }
+.escort-profile nav.nav.nav-borders {
+    gap: 18px;
+}
+
+
 
 }
     

@@ -131,6 +131,7 @@ Route::post('/reset-password', [EscortsAuthController::class, 'resetPassword'])-
 //todo: Escort Operation Functionality
 Route::group(['middleware' => ['auth:escort']], function () {
     Route::get('/{id}/profile', [UserEscortsController::class, 'profile'])->name('escorts.profile');
+    Route::get('/{id}/dashboard', [UserEscortsController::class, 'dashboard'])->name('escorts.dashboard');
 
     Route::get('/{id}/profile-edit', [UserEscortsController::class, 'profileEditForm'])->name('escorts.profileEditForm');
     Route::put('/profile/{id}/profile-edit', [UserEscortsController::class, 'update_profile'])->name('escorts.update.profile');

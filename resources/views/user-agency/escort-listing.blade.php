@@ -99,7 +99,7 @@
                                   
                                 </tbody>
                             </table> --}}
-                            <table id="agencies_escort" class="display table mb-0">
+                            <table id="agencies_escort" class="display table mb-0 agency-escort-listing">
                                 <thead>
                                     <tr>
                                         <th>#</th>
@@ -125,14 +125,14 @@
                                             <td>{{ $escort->city ?? 'Not Available' }}</td>
                                             <td>{{ $escort->type ?? 'Not Available' }}</td>
                                             <td>{{ $escort->status == 1 ? 'Active' : 'Not-Active' }}</td>
-                                            <td style="display: flex">
+                                            <td>
                                                 <a
                                                     href="{{ route('agency.edit_escorts_form', ['agency_id' => Auth::guard('agency')->user()->id, 'id' => $escort->id]) }}">
-                                                    <button data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <button class="agency-escort-edit-button" data-toggle="tooltip" data-placement="top" title="Edit">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </a>
-                                                <button type="button" onclick="confirmDelete({{ $escort->id }})"
+                                                <button class="agency-escort-delete-button" type="button" onclick="confirmDelete({{ $escort->id }})"
                                                     data-toggle="tooltip" data-placement="top" title="Delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
@@ -140,7 +140,7 @@
                                             <td>
                                                 <a
                                                     href="{{ route('agency.escort.detail', ['agency_id' => Auth::guard('agency')->user()->id, 'escort_id' => $escort->id]) }}">
-                                                    <button type="button" class="btn btn-primary">view</button></a>
+                                                    <button type="button" class="btn btn-primary agency-escort-view-button">view</button></a>
                                             </td>
                                         </tr>
                                     @endforeach

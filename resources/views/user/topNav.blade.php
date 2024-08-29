@@ -78,6 +78,9 @@
                                <li><a class="dropdown-item"
                                        href="{{ route('escorts.profile', Auth::guard('escort')->user()->id) }}">Profile</a>
                                </li>
+                               <li><a class="dropdown-item"
+                                       href="{{ route('escorts.dashboard', Auth::guard('escort')->user()->id) }}">Dashboard</a>
+                               </li>
                                <li><a class="dropdown-item" href="#" onclick="handleLogOut('escort')">Logout</a>
                                </li>
                            </ul>
@@ -93,8 +96,8 @@
                                    <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('agency')->user()->profile_pic }}"
                                        width="32px" height="32px" alt="" style="border-radius: 50%">
                                @else
-                                   <img src="{{ asset('/public/images/profile_img/avatar.jpg') }}"
-                                       width="32px" height="32px" alt="" style="border-radius: 50%">
+                                   <img src="{{ asset('/public/images/profile_img/avatar.jpg') }}" width="32px"
+                                       height="32px" alt="" style="border-radius: 50%">
                                @endif
                            </a>
 
@@ -103,8 +106,8 @@
                                        href="{{ route('agency.profile', Auth::guard('agency')->user()->id) }}">Profile</a>
                                </li>
                                <li><a class="dropdown-item"
-                                href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}">Dashboard</a>
-                        </li>
+                                       href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}">Dashboard</a>
+                               </li>
                                <li><a class="dropdown-item" href="#"
                                        onclick="handleLogOut('agency')">Logout</a>
                                </li>

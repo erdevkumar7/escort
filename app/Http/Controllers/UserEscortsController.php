@@ -78,8 +78,11 @@ class UserEscortsController extends Controller
 
 
     //todo: Escort Profile
-    public function profile()
+    public function profile($id)
     {
+        if (Auth::guard('escort')->user()->id != $id) {
+            return redirect()->route('escorts.profile', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
         $escort = Escort::find(Auth::guard('escort')->user()->id);
         // $escort = Escort::find(Auth::guard('escort')->user()->id);
         $pictures = json_decode($escort->pictures, true);
@@ -91,6 +94,25 @@ class UserEscortsController extends Controller
         $payment_method = json_decode($escort->payment_method, true);
 
         return view('user-escort.profile', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+    }
+
+    public function dashboard($id){       
+
+        if (Auth::guard('escort')->user()->id != $id) {
+            return redirect()->route('escorts.dashboard', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        $escort = Escort::find(Auth::guard('escort')->user()->id);
+        // $escort = Escort::find(Auth::guard('escort')->user()->id);
+        $pictures = json_decode($escort->pictures, true);
+        $video = json_decode($escort->video, true);
+        $services = json_decode($escort->services, true);
+        $language_spoken = json_decode($escort->language_spoken, true);
+        $availability = json_decode($escort->availability, true);
+        $currencies_accepted = json_decode($escort->currencies_accepted, true);
+        $payment_method = json_decode($escort->payment_method, true);
+
+        return view('user-escort.dashboard', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 
     // profileEditForm

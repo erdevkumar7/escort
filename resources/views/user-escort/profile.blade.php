@@ -5,10 +5,11 @@
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
-                <a class="nav-link active ms-0" href="#">Profile</a>
+                <a class="nav-link ms-0" href="{{route('escorts.dashboard', Auth::guard('escort')->user()->id)}}">Dashboard</a>
+                <a class="nav-link active" href="#">Profile</a>
                 <a class="nav-link" href="#">My Pictures</a>
             </nav>
-            <hr class="mt-0 mb-4">
+           
             <div class="row">
                 <div class="col-xl-3 left-content">
                     <!-- Profile picture card-->
