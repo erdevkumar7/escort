@@ -43,7 +43,7 @@
                                 class="fa fa-chevron-right"></span></a>
                     </li>
                     {{-- ads --}}
-                    <li><a href=""><i class="fa fa-diamond" aria-hidden="true"></i> Manage Ads <span
+                    <li><a href="{{route('admin.allAds')}}"><i class="fa fa-diamond" aria-hidden="true"></i> Manage Ads <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
                     {{-- <i class="fa fa-briefcase" aria-hidden="true"></i> --}}

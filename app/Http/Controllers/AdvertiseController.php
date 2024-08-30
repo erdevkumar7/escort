@@ -8,7 +8,8 @@ use Illuminate\Http\Request;
 class AdvertiseController extends Controller
 {
     public function index(){
-        $advertises = Advertise::all();
+        $advertises = Advertise::all(); // Retrieve all advertisements
+        return view('ads.all-ads', compact('advertises'));
     }
 
     public function create()
