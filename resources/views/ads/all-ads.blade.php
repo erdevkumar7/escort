@@ -47,7 +47,7 @@
                                                     <th>Ads View</th>
                                                 </tr>
                                             </thead>
-                                            <tbody>
+                                            <tbody>                                                                                        
                                                 @foreach ($advertises as $ads)
                                                     <tr>
                                                         <td>{{ $loop->iteration }}</td>
@@ -57,7 +57,7 @@
                                                         <td>{{ $ads->description }}</td>
 
                                                         <td style="display: flex">
-                                                            <a href="">
+                                                            <a href="{{route('admin.ads_edit', $ads->id)}}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>
@@ -65,12 +65,12 @@
                                                             </a>
                                                             <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
                                                                 data-toggle="tooltip" data-placement="top" title="Delete"
-                                                                data-deleted-id="">
+                                                                data-deleted-id="{{ $ads->id }}">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
                                                         </td>
                                                         <td>
-                                                            <a href="">
+                                                            <a href="{{route('admin.ads.show', $ads->id)}}">
                                                                 <button type="button"
                                                                     class="btn btn-primary">view</button></a>
                                                         </td>
@@ -90,7 +90,7 @@
     </div>
 
     {{-- delete confirm modal script --}}
-    {{-- <script>
+    <script>
         document.addEventListener('DOMContentLoaded', function() {
             const deleteButtons = document.querySelectorAll(
                 '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
@@ -99,10 +99,10 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/my_project/escorts/admin/badge/${deleteId}`;
+                    deleteForm.action = `/my_project/escorts/admin/ads/${deleteId}`;
                 });
             });
         });
-    </script> --}}
+    </script>
     <!-- /page content -->
 @endsection

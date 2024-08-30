@@ -104,7 +104,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/agency/{id}/show-escorts', [AdminAgencyController::class, 'agency_escorts'])->name('admin.agency.escorts');
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
         Route::post('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
-        //Badges Operation
+        //Badges Operations
         Route::get('all-badges', [BadgeController::class, 'allbadges'])->name('admin.allbadges');
         Route::get('/add-badge', [BadgeController::class, 'add_badge_form'])->name('admin.add.badge_form');
         Route::post('/add-badge', [BadgeController::class, 'add_badge_form_submit'])->name('admin.add.badge_form_submit');
@@ -113,10 +113,15 @@ Route::prefix('admin')->group(function () {
         Route::put('/badge/{id}/edit', [BadgeController::class, 'badge_edit_submit'])->name('admin.badge_edit_submit');
         Route::delete('/badge/{id}', [BadgeController::class, 'badge_delete'])->name('admin.badge_delete');
         Route::get('/badge/{id}/show', [BadgeController::class, 'show'])->name('admin.badge.show');
-        //Ads
+        //Ads Operations
         Route::get('/all-ads', [AdvertiseController::class, 'index'])->name('admin.allAds');
         Route::get('/create-ads', [AdvertiseController::class, 'create'])->name('admin.ads.create');
         Route::post('/create-ads', [AdvertiseController::class, 'store'])->name('admin.ads.store');
+
+        Route::get('/ads/{id}/show', [AdvertiseController::class, 'show'])->name('admin.ads.show');
+        Route::get('/ads/{id}/edit', [AdvertiseController::class, 'ads_edit'])->name('admin.ads_edit');
+        Route::put('/ads/{id}/edit', [AdvertiseController::class, 'ads_edit_submit'])->name('admin.ads_edit_submit');
+        Route::delete('/ads/{id}', [AdvertiseController::class, 'ads_delete'])->name('admin.ads_delete');
     });
 });
 
