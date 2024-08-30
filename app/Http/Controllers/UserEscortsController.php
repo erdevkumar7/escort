@@ -121,9 +121,9 @@ class UserEscortsController extends Controller
             return redirect()->route('escorts.myPictures', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
         }
         $escort = Escort::find(Auth::guard('escort')->user()->id);
-        if($escort->pictures){
+        if ($escort->pictures) {
             $pictures = json_decode($escort->pictures, true);
-        }else{
+        } else {
             $pictures = [];
         }
 
@@ -240,6 +240,31 @@ class UserEscortsController extends Controller
         $escort->update($validatedData);
 
         return redirect()->route('escorts.profile', $escort->id)->with('success', 'Escort updated successfully!');
+    }
+
+    public function escort_pictures_update(Request $request, $id)
+    {
+        $escort = Escort::findOrFail($id);
+        $validatedData = $request->validate([
+            'pictures' => 'nullable|array|min:1',
+            'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
+        ]);
+
+        // Handle Image file upload
+        $pictures = json_decode($escort->pictures, true) ?? [];
+        if ($request->hasFile('pictures')) {
+            foreach ($request->file('pictures') as $image) {
+                $originalImageName = $image->getClientOriginalName();
+                $imageName = time() . '_' . $originalImageName;
+                $image->move(public_path('images/escorts_img'), $imageName);
+                $pictures[] = $imageName;
+            }
+        }
+
+        $validatedData['pictures'] = json_encode($pictures);
+
+        $escort->update($validatedData);
+        return redirect()->route('escorts.myPictures', $escort->id)->with('success', 'Pictures Added successfully!');
     }
 
     public function profile_pic_update(Request $request, $id)
