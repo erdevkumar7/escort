@@ -4,6 +4,7 @@ use App\Http\Controllers\AdminAgencyController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\AdminEscortsController;
 use App\Http\Controllers\AdminFuncController;
+use App\Http\Controllers\AdvertiseController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\EscortsAuthController;
@@ -112,6 +113,10 @@ Route::prefix('admin')->group(function () {
         Route::put('/badge/{id}/edit', [BadgeController::class, 'badge_edit_submit'])->name('admin.badge_edit_submit');
         Route::delete('/badge/{id}', [BadgeController::class, 'badge_delete'])->name('admin.badge_delete');
         Route::get('/badge/{id}/show', [BadgeController::class, 'show'])->name('admin.badge.show');
+        //Ads
+        Route::get('/all-ads', [AdvertiseController::class, 'index'])->name('admin.allAds');
+        Route::get('/create-ads', [AdvertiseController::class, 'create'])->name('admin.ads.create');
+        Route::post('/create-ads', [AdvertiseController::class, 'store'])->name('admin.ads.store');
     });
 });
 
