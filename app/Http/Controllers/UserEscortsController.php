@@ -264,8 +264,49 @@ class UserEscortsController extends Controller
         $validatedData['pictures'] = json_encode($pictures);
 
         $escort->update($validatedData);
+        
         return redirect()->route('escorts.myPictures', $escort->id)->with('success', 'Pictures Added successfully!');
     }
+
+
+    public function escort_pictures_delete(Request $request, $id)
+    {
+        $escort = Escort::findOrFail($id);
+
+        // Validate the request to ensure the image name is provided
+        $validatedData = $request->validate([
+            'image_name' => 'required|string',
+        ]);
+
+        $imageToDelete = $validatedData['image_name'];
+
+        // Decode the JSON field to get the current array of pictures
+        $pictures = json_decode($escort->pictures, true) ?? [];
+
+        // Check if the image exists in the array
+        if (($key = array_search($imageToDelete, $pictures)) !== false) {
+            // Remove the image from the array
+            unset($pictures[$key]);
+
+            // Re-index the array to ensure it's a valid JSON array
+            $pictures = array_values($pictures);
+
+            // Update the pictures field in the database
+            $escort->pictures = json_encode($pictures);
+            $escort->save();
+
+            // Optional: Delete the image file from the server
+            $imagePath = public_path('images/escorts_img') . '/' . $imageToDelete;
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
+            return redirect()->route('escorts.myPictures', $escort->id)->with('success', 'Picture deleted successfully!');
+        } else {
+            return redirect()->route('escorts.myPictures', $escort->id)->with('error', 'Picture not found!');
+        }
+    }
+
 
     public function profile_pic_update(Request $request, $id)
     {

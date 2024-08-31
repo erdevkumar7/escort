@@ -70,7 +70,7 @@
                                    <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('escort')->user()->profile_pic }}"
                                        width="32px" height="32px" alt="" style="border-radius: 50%">
                                @else
-                                   <img src="{{ asset('/public/images/profile_img/avatar.jpg') }}" width="32px"
+                                   <img src="{{ asset('/public/images/profile_img/default_profile.png') }}" width="32px"
                                        height="32px" alt="" style="border-radius: 50%">
                                @endif
                            </a>

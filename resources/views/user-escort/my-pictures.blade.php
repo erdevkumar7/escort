@@ -52,14 +52,18 @@
                 @else
                     @foreach ($pictures as $picture)
                         <div class="col-lg-3 menu-item escort-image">
-                            <span class="cross-escort-button">
-                                <a href="#">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </a>
+                            <span class="cross-escort-button">                               
+                                <form action="{{ route('escorts.pictures.delete', Auth::guard('escort')->user()->id) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('PUT')
+                                    <input type="hidden" name="image_name" value="{{ $picture }}">
+                                    <button type="submit" class="btn btn-danger"><i class="fa-solid fa-xmark"></i></button>
+                                </form>
                             </span>
                             <img src="{{ asset('/public/images/escorts_img/' . ($picture ?? 'escort_profile.png')) }}"
                                 class="menu-img img-fluid" alt="Picture">
-                         
+
                         </div>
                     @endforeach
                     <!-- Add default image icon for adding more images -->

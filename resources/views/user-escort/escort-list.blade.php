@@ -22,19 +22,25 @@
                                     <div class="col-lg-3 menu-item">
                                         <a href="{{ route('escort.detail_by_id', $escort->id) }}" class="glightbox">
                                             @if ($escort->profile_pic)
-                                                <img src="{{ asset('/public/images/profile_img/' . $escort->profile_pic) }}" class="menu-img img-fluid" alt="Profile_Picture">
+                                                <img src="{{ asset('/public/images/profile_img/' . $escort->profile_pic) }}"
+                                                    class="menu-img img-fluid" alt="Profile_Picture">
                                             @else
-                                                <img src="{{ asset('/public/images/profile_img/default_profile.png') }}" class="menu-img img-fluid" alt="Profile_Picture">
+                                                <img src="{{ asset('/public/images/profile_img/default_profile.png') }}"
+                                                    class="menu-img img-fluid" alt="Profile_Picture">
                                             @endif
                                             <h4>{{ $escort->nickname }}</h4>
                                         </a>
-                                        
+
                                         <p class="ingredients"> Categoty:
                                             {{ $escort->type ? $escort->type : 'Not Available' }}</p>
                                         <p class="ingredients"> City:
                                             {{ $escort->city ? $escort->city : 'Not Available' }}</p>
+                                            <p class="ingredients">
+                                                Last update: 
+                                                {{ $escort->updated_at ? \Carbon\Carbon::parse($escort->updated_at)->format('m-d-Y') : 'Not Available' }}
+                                            </p>
                                         <p class="ingredients"> Status:
-                                            {{ $escort->status === 1 ? 'Active' : 'In-Active' }}</p>                                    
+                                            {{ $escort->status === 1 ? 'Active' : 'In-Active' }}</p>
                                         <a href="{{ route('escort.detail_by_id', $escort->id) }}"
                                             class="btn btn-primary btn-block">VIEW DETAILS</a>
 

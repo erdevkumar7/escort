@@ -27,7 +27,7 @@
                                         alt="avatar">
                                 @else
                                     <img class="img-account-profile rounded-circle mb-2"
-                                        src="https://votivelaravel.in/escorts/public/images/profile_img/avatar.jpg"
+                                        src="{{ asset('/public/images/profile_img/default_profile.png') }}"
                                         alt="avatar">
                                 @endif
                                 {{-- <i class="fa-regular fa-pen-to-square"></i> --}}
