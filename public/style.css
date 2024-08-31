@@ -38,12 +38,10 @@
     src: url('./font-family/Urbanist-master/Urbanist-SemiBold.otf');
 }
 
-
 .escort-register label {
     font-weight: 600;
     color: #232e48;
 }
-
 .escort-register .mx-t3 {
     margin-top: -3rem;
 }
@@ -86,7 +84,6 @@ div#navbarScroll a.nav-link:hover {
 .detials-icons a:hover {
     color: #ec8ccc;
 }
-
 
 .slider-section {
     margin: auto;
@@ -1806,7 +1803,7 @@ i.fa-solid.fa-user {
     }
 
     nav.navbar .show:before {
-        right: 87px !important;
+        right: 62px !important;
     }
 
     nav.navbar a#categoriesDropdown:before {
@@ -1869,10 +1866,10 @@ i.fa-solid.fa-user {
         width: 100%;
     }
 
-  .footer-escorts {
-    width: 100%;
-    padding: 60px 0;
-}
+      .footer-escorts {
+        width: 100%;
+        padding: 60px 0;
+    }
 
     .tab-content .menu-item {
         display: flex;
@@ -1941,6 +1938,7 @@ i.fa-solid.fa-user {
 
 
 @media only screen and (max-width: 767px) {
+
 
     .form-login .wrap-login100 {
         display: flex;
@@ -2071,7 +2069,7 @@ i.fa-solid.fa-user {
     }
 
     nav.navbar .show:before {
-        right: 87px !important;
+        right: 73px !important;
     }
 
     nav.navbar a#categoriesDropdown:before {
@@ -2792,8 +2790,8 @@ i.fa-solid.fa-user {
     }
 
     .form-login .alert-validate:hover:before {
-        visibility: visible;
-        opacity: 1;
+          visibility: visible;
+          opacity: 1;
     }
 
     @media (max-width: 992px) {
@@ -2859,7 +2857,6 @@ i.fa-solid.fa-user {
         border: 1px solid #232e48;
         background-color: #232e48;
     }
-
 
     .form-login button.signup-btn {
         border: 1px solid #5CE1E6;

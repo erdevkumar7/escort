@@ -23,7 +23,7 @@ class EscortsAuthController extends Controller
             'nickname' => 'required|unique:escorts',
             'email' => 'required|email|unique:escorts',
             'phone_number' => 'required',
-            'age' => 'required',
+            'type' => 'required',
             'address' => 'required',
             'city' => 'required',
             'password' => 'required|string|min:8|confirmed',
@@ -35,7 +35,7 @@ class EscortsAuthController extends Controller
         $escort->email = $validated['email'];
         $escort->password = Hash::make($validated['password']);
         $escort->phone_number = $validated['phone_number'];
-        $escort->age = $validated['age'];
+        $escort->type = $validated['type'];
         $escort->address = $validated['address'];
         $escort->city = $validated['city'];
         $escort->save();

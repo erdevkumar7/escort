@@ -23,8 +23,7 @@
                                         <a href="{{ route('escort.detail_by_id', $escort->id) }}" class="glightbox">
                                             @if ($escort->pictures)
                                                 <img src="{{ asset('/public/images/escorts_img') . '/' . $escort->pictures[0] }}"
-                                                    class="menu-img img-fluid"
-                                                    alt="Picture">
+                                                    class="menu-img img-fluid" alt="Picture">
                                             @else
                                                 <img src="{{ asset('/public/images/escorts_img') . '/' . 'escort_profile.png' }}"
                                                     class="menu-img img-fluid" alt="Picture">
@@ -32,11 +31,14 @@
 
                                             <h4>{{ $escort->nickname }}</h4>
                                         </a>
-                                        <p class="ingredients"> Origin:
-                                            {{ $escort->origin ? $escort->origin : 'Not Available' }}</p>
-                                        <p class="ingredients"> Call:
-                                            {{ $escort->phone_number ? $escort->phone_number : 'Not Available' }}</p>
-                                         <a href="{{ route('escort.detail_by_id', $escort->id) }}" class="btn btn-primary btn-block">VIEW DETAILS</a>
+                                        <p class="ingredients"> Categoty:
+                                            {{ $escort->type ? $escort->type : 'Not Available' }}</p>
+                                        <p class="ingredients"> City:
+                                            {{ $escort->city ? $escort->city : 'Not Available' }}</p>
+                                        <p class="ingredients"> Status:
+                                            {{ $escort->status === 1 ? 'Active' : 'In-Active' }}</p>                                    
+                                        <a href="{{ route('escort.detail_by_id', $escort->id) }}"
+                                            class="btn btn-primary btn-block">VIEW DETAILS</a>
 
                                     </div>
                                 @endforeach

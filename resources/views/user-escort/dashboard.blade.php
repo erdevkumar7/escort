@@ -49,8 +49,8 @@
                                     <p> <span>Photos</span> 0 </p>
                                 @endif
                             </div>
-                            <a class="text-arrow-icon small" href="">
-                                View All Photos
+                            <a class="text-arrow-icon small" href="{{route('escorts.myPictures', Auth::guard('escort')->user()->id)}}">
+                                View all photos
                             </a>
                         </div>
                     </div>

@@ -68,17 +68,22 @@
 
                         {{-- age --}}
                         <div class="col-sm-6 form-group age-select">
-                            <select id="age" name="age" class="form-control browser-default custom-select"
-                                oninput="removeError('ageErr')">
-                                <option value="">Select age</option>
-                                <option value="18-25" {{ old('age') == '18-25' ? 'selected' : '' }}>18-25</option>
-                                <option value="26-35" {{ old('age') == '26-35' ? 'selected' : '' }}>26-35</option>
-                                <option value="36-45" {{ old('age') == '36-45' ? 'selected' : '' }}>36-45</option>
-                                <option value="45-55" {{ old('age') == '45-55' ? 'selected' : '' }}>45-55</option>
-                                <option value="56+" {{ old('age') == '56+' ? 'selected' : '' }}>56+</option>
+                            <select id="age" name="type" class="form-control browser-default custom-select"
+                                oninput="removeError('typeErr')">
+                                <option value="">Select Categoty Type</option>
+                                <option value="Independent Escort"
+                                    {{ old('type') == 'Independent Escort' ? 'selected' : '' }}>Independent
+                                    Escort</option>
+                                <option value="Escort" {{ old('type') == 'Escort' ? 'selected' : '' }}>Escort
+                                </option>
+                                <option value="Trans" {{ old('type') == 'Trans' ? 'selected' : '' }}>Trans
+                                </option>
+                                <option value="SM" {{ old('type') == 'SM' ? 'selected' : '' }}>SM</option>
+                                <option value="Salon" {{ old('type') == 'Salon' ? 'selected' : '' }}>Salon
+                                </option>
                             </select>
-                            @error('age')
-                                <span class="text-danger" id="ageErr">{{ $message }}</span>
+                            @error('type')
+                                <span class="text-danger" id="typeErr">{{ $message }}</span>
                             @enderror
                         </div>
                     </div>
@@ -106,18 +111,18 @@
                     @enderror
 
                     <!--         <div class="flex-sb-m w-full p-t-3 p-b-32">
-                                                       <div class="contact100-form-checkbox">
-                                                          <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
-                                                          <label class="label-checkbox100" for="ckb1">
-                                                          Remember me
-                                                          </label>
-                                                       </div>
-                                                       <div>
-                                                          <a href="#" class="txt1">
-                                                          Forgot Password?
-                                                          </a>
-                                                       </div>
-                                                    </div -->
+                                                           <div class="contact100-form-checkbox">
+                                                              <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                                                              <label class="label-checkbox100" for="ckb1">
+                                                              Remember me
+                                                              </label>
+                                                           </div>
+                                                           <div>
+                                                              <a href="#" class="txt1">
+                                                              Forgot Password?
+                                                              </a>
+                                                           </div>
+                                                        </div -->
                     {{-- ------------------------------------------------------------------------ --}}
 
                     {{-- {!! NoCaptcha::renderJs() !!}

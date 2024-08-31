@@ -142,13 +142,16 @@ Route::post('/reset-password', [EscortsAuthController::class, 'resetPassword'])-
 Route::group(['middleware' => ['auth:escort']], function () {
     Route::get('/{id}/profile', [UserEscortsController::class, 'profile'])->name('escorts.profile');
     Route::get('/{id}/dashboard', [UserEscortsController::class, 'dashboard'])->name('escorts.dashboard');
+    
     Route::get('/{id}/my-pictures',[UserEscortsController::class, 'escort_myPictures'])->name('escorts.myPictures');
+    Route::put('/{id}/pictures-update', [UserEscortsController::class, 'escort_pictures_update'])->name('escorts.pictures.update');
+    //Note: in real the picture will unlinked and the picture json will changes 
+    Route::put('/{id}/picture-delete', [UserEscortsController::class, 'escort_pictures_delete'])->name('escorts.pictures.delete');
 
     Route::get('/{id}/profile-edit', [UserEscortsController::class, 'profileEditForm'])->name('escorts.profileEditForm');
     Route::put('/profile/{id}/profile-edit', [UserEscortsController::class, 'update_profile'])->name('escorts.update.profile');
    
     Route::put('/profile/{id}/profile-pic-update', [UserEscortsController::class, 'profile_pic_update'])->name('escorts.profilePic.update');
-    Route::put('/profile/{id}/pictures-update', [UserEscortsController::class, 'escort_pictures_update'])->name('escorts.pictures.update');
 
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
