@@ -21,16 +21,14 @@
                                 @foreach ($allescorts as $escort)
                                     <div class="col-lg-3 menu-item">
                                         <a href="{{ route('escort.detail_by_id', $escort->id) }}" class="glightbox">
-                                            @if ($escort->pictures)
-                                                <img src="{{ asset('/public/images/escorts_img') . '/' . $escort->pictures[0] }}"
-                                                    class="menu-img img-fluid" alt="Picture">
+                                            @if ($escort->profile_pic)
+                                                <img src="{{ asset('/public/images/profile_img/' . $escort->profile_pic) }}" class="menu-img img-fluid" alt="Profile_Picture">
                                             @else
-                                                <img src="{{ asset('/public/images/escorts_img') . '/' . 'escort_profile.png' }}"
-                                                    class="menu-img img-fluid" alt="Picture">
+                                                <img src="{{ asset('/public/images/profile_img/default_profile.png') }}" class="menu-img img-fluid" alt="Profile_Picture">
                                             @endif
-
                                             <h4>{{ $escort->nickname }}</h4>
                                         </a>
+                                        
                                         <p class="ingredients"> Categoty:
                                             {{ $escort->type ? $escort->type : 'Not Available' }}</p>
                                         <p class="ingredients"> City:
