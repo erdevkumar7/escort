@@ -23,8 +23,8 @@ class UserEscortsController extends Controller
         // Two time Decode must for data endcoding
         foreach ($allescorts as $escort) {
             $escort->services = json_decode($escort->services, true);
-            $escort->pictures = json_decode($escort->pictures, true);
-            $escort->video = json_decode($escort->video, true);
+            // $escort->pictures = json_decode($escort->pictures, true);
+            // $escort->video = json_decode($escort->video, true);
             $escort->language_spoken = json_decode($escort->language_spoken, true);
             $escort->availability = json_decode($escort->availability, true);
             $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);

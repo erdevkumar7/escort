@@ -486,7 +486,7 @@
                                         <div><label for="pictures">Pictures *</label></div>
                                         @if ($pictures)
                                             @foreach ($pictures as $picture)
-                                                <img src="{{ asset('/public/images/escorts_img/') . '/' . $picture }}"
+                                                <img src="{{ asset('/public/images/escorts_img/') . '/' . $picture->name }}"
                                                     alt="..." width="200px" height="200px">
                                             @endforeach
                                         @else
@@ -494,6 +494,7 @@
                                         @endif
                                         <input type="file" class="form-control" id="pictures" name="pictures[]"
                                             multiple>
+                                        <input type="hidden" name="image_type" value="image">
                                         @error('pictures')
                                             <span class="text-danger" id="picturesErr">{{ $message }}</span>
                                         @enderror
@@ -501,17 +502,18 @@
                                     {{-- video --}}
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="video">Videos</label></div>
-                                        @if ($video)
-                                            @foreach ($video as $vdo)
+                                        @if ($videos)
+                                            @foreach ($videos as $vdo)
                                                 <video width="300" controls>
-                                                    <source src="{{ asset('/public/videos') . '/' . $vdo }}"
+                                                    <source src="{{ asset('/public/videos') . '/' . $vdo->name }}"
                                                         type="video/mp4">
                                                 </video>
                                             @endforeach
                                         @endif
-                                        <input type="file" class="form-control" id="video" name="video[]"
+                                        <input type="file" class="form-control" id="videos" name="videos[]"
                                             multiple>
-                                        @error('video')
+                                        <input type="hidden" name="video_type" value="video">
+                                        @error('videos')
                                             <span class="text-danger" id="videoErr">{{ $message }}</span>
                                         @enderror
                                     </div>

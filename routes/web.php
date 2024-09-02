@@ -87,9 +87,9 @@ Route::prefix('admin')->group(function () {
         Route::post('/post-escorts', [AdminEscortsController::class, 'postescorts'])->name('admin.post.escorts');
 
         Route::get('/escorts/{id}/edit', [AdminEscortsController::class, 'edit_escorts_form'])->name('admin.edit_escorts_form');
-        Route::put('/escorts/{id}', [AdminEscortsController::class, 'edit_escorts'])->name('admin.edit_escorts');
+        Route::put('/escorts/{id}/edit', [AdminEscortsController::class, 'edit_escorts'])->name('admin.edit_escorts');
 
-        Route::get('/escorts/{id}', [AdminEscortsController::class, 'escorts_by_id'])->name('admin.get.scorts');
+        Route::get('/escorts/{id}/view', [AdminEscortsController::class, 'escorts_by_id'])->name('admin.get.scorts');
         Route::delete('/escorts/{id}', [AdminEscortsController::class, 'deleteEscorts'])->name('admin.delete.escorts');
         //Agency Operations
         Route::get('/all-agencies', [AdminAgencyController::class, 'allagencies'])->name('admin.allagencies');
