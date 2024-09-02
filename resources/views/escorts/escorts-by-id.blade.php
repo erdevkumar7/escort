@@ -338,10 +338,11 @@
 
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="pictures">Pictures *</label></div>
+                                       
                                         @if ($pictures)
                                             @foreach ($pictures as $picture)
-                                                <img src="{{ asset('/public/images/escorts_img') . '/' . $picture }}"
-                                                    alt="" width="200px" height="200px" />
+                                                <img src="{{ asset('/public/images/escorts_img') . '/' . $picture->name }}"
+                                                    alt="" width="200px" height="200px" />                                                  
                                             @endforeach
                                         @else
                                             <div></div>
@@ -351,10 +352,10 @@
                                     {{-- video --}}
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="video">Videos</label></div>
-                                        @if ($video)
-                                            @foreach ($video as $vdo)
+                                        @if ($videos)
+                                            @foreach ($videos as $vdo)
                                                 <video width="300" controls>
-                                                    <source src="{{ asset('/public/videos') . '/' . $vdo }}"
+                                                    <source src="{{ asset('/public/videos') . '/' . $vdo->name }}"
                                                         type="video/mp4">
                                                 </video>
                                             @endforeach

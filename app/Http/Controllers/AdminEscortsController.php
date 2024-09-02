@@ -231,14 +231,15 @@ class AdminEscortsController extends Controller
     {
         $escorts = Escort::find($id);
 
-        $pictures = json_decode($escorts->pictures);
-        $video = json_decode($escorts->video);
+        $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
+        $videos = Media::where('escort_id', $id)->where('type', 'video')->get();
+
         $services = json_decode($escorts->services, true);
         $language_spoken = json_decode($escorts->language_spoken, true);
         $availability = json_decode($escorts->availability, true);
         $currencies_accepted = json_decode($escorts->currencies_accepted, true);
         $payment_method = json_decode($escorts->payment_method, true);
-        return view('escorts.escorts-by-id', compact('escorts', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        return view('escorts.escorts-by-id', compact('escorts', 'language_spoken', 'pictures', 'videos', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 
     //todo: Delete Escorts
