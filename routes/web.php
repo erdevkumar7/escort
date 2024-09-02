@@ -8,6 +8,7 @@ use App\Http\Controllers\AdvertiseController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\BadgeController;
 use App\Http\Controllers\EscortsAuthController;
+use App\Http\Controllers\MediaController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserEscortsController;
 use Illuminate\Support\Facades\Route;
@@ -142,11 +143,19 @@ Route::post('/reset-password', [EscortsAuthController::class, 'resetPassword'])-
 Route::group(['middleware' => ['auth:escort']], function () {
     Route::get('/{id}/profile', [UserEscortsController::class, 'profile'])->name('escorts.profile');
     Route::get('/{id}/dashboard', [UserEscortsController::class, 'dashboard'])->name('escorts.dashboard');
-    
+    // My-pictures
     Route::get('/{id}/my-pictures',[UserEscortsController::class, 'escort_myPictures'])->name('escorts.myPictures');
+    Route::post('/{escort_id}/add-media-myPictures', [MediaController::class, 'add_escorts_myPictures'])->name('escort.add.media.myPictures');
+    // my-videos
+    Route::get('/{id}/my-videos',[UserEscortsController::class, 'escort_myVideos'])->name('escorts.myVideos');
+    Route::post('/{escort_id}/add-media-myVideos', [MediaController::class, 'add_escorts_myVideos'])->name('escort.add.media.myVideos');
+
     Route::put('/{id}/pictures-update', [UserEscortsController::class, 'escort_pictures_update'])->name('escorts.pictures.update');
     //Note: in real the picture will unlinked and the picture json will changes 
     Route::put('/{id}/picture-delete', [UserEscortsController::class, 'escort_pictures_delete'])->name('escorts.pictures.delete');
+
+    Route::delete('/{escort_id}/delete-media/{media_id}', [MediaController::class, 'delete_media'])->name('escorts.deleteMedia');
+    // Route::delete('/escorts/media/{escort_id}/{media_id}', [MediaController::class, 'delete_media'])->name('escorts.deleteMedia');
 
     Route::get('/{id}/profile-edit', [UserEscortsController::class, 'profileEditForm'])->name('escorts.profileEditForm');
     Route::put('/profile/{id}/profile-edit', [UserEscortsController::class, 'update_profile'])->name('escorts.update.profile');

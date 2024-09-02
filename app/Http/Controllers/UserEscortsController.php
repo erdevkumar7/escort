@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escort;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -120,14 +121,31 @@ class UserEscortsController extends Controller
         if (Auth::guard('escort')->user()->id != $id) {
             return redirect()->route('escorts.myPictures', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
         }
-        $escort = Escort::find(Auth::guard('escort')->user()->id);
-        if ($escort->pictures) {
-            $pictures = json_decode($escort->pictures, true);
-        } else {
-            $pictures = [];
-        }
+        // $escort = Escort::find(Auth::guard('escort')->user()->id);
+        // if ($escort->pictures) {
+        //     $pictures = json_decode($escort->pictures, true);
+        // } else {
+        //     $pictures = [];
+        // }
+        $pictures = Media::where('type', 'image')
+        ->where('escort_id', Auth::guard('escort')->user()->id)
+        ->get();
 
         return view('user-escort.my-pictures', compact('pictures'));
+    }
+
+    
+    public function escort_myVideos($id)
+    {
+        if (Auth::guard('escort')->user()->id != $id) {
+            return redirect()->route('escorts.myVideos', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+    
+        $videos = Media::where('type', 'video')
+        ->where('escort_id', Auth::guard('escort')->user()->id)
+        ->get();
+
+        return view('user-escort.my-videos', compact('videos'));
     }
 
     // profileEditForm
