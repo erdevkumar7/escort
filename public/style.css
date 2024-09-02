@@ -1142,6 +1142,7 @@ div#navbarScroll button {
     font-family: 'Montserrat-Regular';
     padding-top: 11px;
     margin-bottom: 0;
+    font-size: 14px;
 }
 
 .table-list h4 {
@@ -1171,7 +1172,7 @@ div#navbarScroll button {
 
 .table-list .menu-item {
     background-color: #232E48;
-    padding: 28px;
+    padding: 25px;
     border: solid 2px #FFBF00;
     border-radius: 15px;
     margin: 9px;

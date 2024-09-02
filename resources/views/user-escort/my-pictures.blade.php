@@ -12,43 +12,14 @@
                 <a class="nav-link " href="{{ route('escorts.myVideos', Auth::guard('escort')->user()->id) }}">My Videos</a>
             </nav>
 
-            {{-- <div class="row escort-pictures">
-                @if (empty($pictures))
-                    <div class="escort-no-pic-heading">
-                        <h4>No Pictures Available</h4>
-                    </div>
-                @else
-                    @foreach ($pictures as $picture)
-                        <div class="col-lg-3 menu-item escort-image-cross">
-                            <img src="{{ asset('/public/images/escorts_img/' . ($picture ?? 'escort_profile.png')) }}"
-                                class="menu-img img-fluid" alt="Picture">
-                            <span class="cross-escort-button">
-                                <a href="#">
-                                    <i class="fa-solid fa-xmark"></i>
-                                </a>
-                            </span>
-                        </div>
-                    @endforeach
-                @endif
-            </div> --}}
-
+         
             <div class="row escort-pictures">
                 @if (empty($pictures))
-                <form action="{{ route('escort.add.media.myPictures', Auth::guard('escort')->user()->id) }}" method="POST"
-                    enctype="multipart/form-data">
-                    @csrf
-                    @method('POST')
+                    <form action="{{ route('escort.add.media.myPictures', Auth::guard('escort')->user()->id) }}"
+                        method="POST" enctype="multipart/form-data">
+                        @csrf
+                        @method('POST')
                         <h4 class="no-pic">No Pictures Available</h4>
-                        {{-- <div class="col-lg-3 menu-item escort-add-more-pic">
-                            <span onclick="document.getElementById('addImageInput').click();">
-                                <img src="{{ asset('/public/images/static_img/add_more_pic1.png') }}"
-                                    class="menu-img img-fluid" alt="Add Image">
-                                <p>Add More</p>
-                            </span>
-                            <!-- Hidden file input for adding images -->
-                            <input type="file" id="addImageInput" accept="image/*" name="pictures[]" multiple
-                                style="display: none;" onchange="this.form.submit()">
-                        </div> --}}
 
                         <div class="col-lg-3 menu-item escort-add-more-pic">
                             <span onclick="document.getElementById('addImageInput').click();">
@@ -65,7 +36,8 @@
                     @foreach ($pictures as $picture)
                         <div class="col-lg-3 menu-item escort-image">
                             <span class="cross-escort-button">
-                                <form action="{{route('escorts.deleteMedia', ['escort_id' => Auth::guard('escort')->user()->id, 'media_id' => $picture->id])}}"
+                                <form
+                                    action="{{ route('escorts.deleteMedia', ['escort_id' => Auth::guard('escort')->user()->id, 'media_id' => $picture->id]) }}"
                                     method="POST">
                                     @csrf
                                     @method('DELETE')
@@ -79,31 +51,12 @@
                                 class="menu-img img-fluid" alt="Picture">
                         </div>
                     @endforeach
-                    {{-- <form action="{{ route('escorts.pictures.update', Auth::guard('escort')->user()->id) }}" method="POST"
-                        enctype="multipart/form-data">
-                        @csrf
-                        @method('PUT')
 
-                        <div class="col-lg-3 menu-item escort-add-more-pic">
-                            <span onclick="document.getElementById('addImageInput').click();">
-                                <img src="{{ asset('/public/images/static_img/add_more_pic1.png') }}"
-                                    class="menu-img img-fluid" alt="Add Image">
-                                <p>Add More</p>
-                            </span>
-                            <!-- Hidden file input for adding images -->
-                            <input type="file" id="addImageInput" accept="image/*" name="pictures[]" multiple
-                                style="display: none;" onchange="this.form.submit()">
-                        </div>
-                    </form> --}}
 
-                    <form action="{{ route('escort.add.media.myPictures', Auth::guard('escort')->user()->id) }}" method="POST"
-                        enctype="multipart/form-data">
+                    <form action="{{ route('escort.add.media.myPictures', Auth::guard('escort')->user()->id) }}"
+                        method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('POST')
-                        {{-- <input type="file" id="name" name="name[]" multiple class="form-control">
-                        <input type="hidden" name="type" value="image">
-                        <button type="submit" class="btn btn-primary">Upload</button> --}}
-
                         <div class="col-lg-3 menu-item escort-add-more-pic">
                             <span onclick="document.getElementById('addImageInput').click();">
                                 <img src="{{ asset('/public/images/static_img/add_more_pic1.png') }}"
@@ -116,7 +69,6 @@
                         </div>
 
                     </form>
-
                 @endif
             </div>
 

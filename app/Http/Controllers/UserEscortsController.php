@@ -20,6 +20,19 @@ class UserEscortsController extends Controller
         }
 
         $allescorts = $query->get();
+
+        foreach ($allescorts as $escort) {
+            // Fetch images for the current escort
+            $escort->pictures = Media::where('escort_id', $escort->id)
+                ->where('type', 'image')
+                ->get();
+
+            // Fetch videos for the current escort
+            $escort->video = Media::where('escort_id', $escort->id)
+                ->where('type', 'video')
+                ->get();
+        }
+
         // Two time Decode must for data endcoding
         foreach ($allescorts as $escort) {
             $escort->services = json_decode($escort->services, true);
@@ -33,8 +46,8 @@ class UserEscortsController extends Controller
 
         foreach ($allescorts as $escort) {
             $escort->services = json_decode($escort->services, true);
-            $escort->pictures = json_decode($escort->pictures, true);
-            $escort->video = json_decode($escort->video, true);
+            // $escort->pictures = json_decode($escort->pictures, true);
+            // $escort->video = json_decode($escort->video, true);
             $escort->language_spoken = json_decode($escort->language_spoken, true);
             $escort->availability = json_decode($escort->availability, true);
             $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
@@ -53,11 +66,24 @@ class UserEscortsController extends Controller
         $query = DB::table("escorts")->orderBy("created_at", "desc");
 
         $allescorts = $query->get();
+        foreach ($allescorts as $escort) {
+            // Fetch images for the current escort
+            $escort->pictures = Media::where('escort_id', $escort->id)
+                ->where('type', 'image')
+                ->get();
+
+            // Fetch videos for the current escort
+            $escort->video = Media::where('escort_id', $escort->id)
+                ->where('type', 'video')
+                ->get();
+        }
+
+
         // Two time Decode must for data endcoding
         foreach ($allescorts as $escort) {
             $escort->services = json_decode($escort->services, true);
-            $escort->pictures = json_decode($escort->pictures, true);
-            $escort->video = json_decode($escort->video, true);
+            // $escort->pictures = json_decode($escort->pictures, true);
+            // $escort->video = json_decode($escort->video, true);
             $escort->language_spoken = json_decode($escort->language_spoken, true);
             $escort->availability = json_decode($escort->availability, true);
             $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
@@ -66,14 +92,16 @@ class UserEscortsController extends Controller
 
         foreach ($allescorts as $escort) {
             $escort->services = json_decode($escort->services, true);
-            $escort->pictures = json_decode($escort->pictures, true);
-            $escort->video = json_decode($escort->video, true);
+            // $escort->pictures = json_decode($escort->pictures, true);
+            // $escort->video = json_decode($escort->video, true);
             $escort->language_spoken = json_decode($escort->language_spoken, true);
             $escort->availability = json_decode($escort->availability, true);
             $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
             $escort->payment_method = json_decode($escort->payment_method, true);
         }
-        // dd( $allescorts[1]->services);
+
+
+
         return view('user-escort.escort-list', compact('allescorts'));
     }
 
@@ -104,16 +132,16 @@ class UserEscortsController extends Controller
         }
 
         $escort = Escort::find(Auth::guard('escort')->user()->id);
-        // $escort = Escort::find(Auth::guard('escort')->user()->id);
-        $pictures = json_decode($escort->pictures, true);
-        $video = json_decode($escort->video, true);
+
+        $pictures = Media::where('escort_id', $escort->id)->where('type', 'image')->get();
+        $videos = Media::where('escort_id', $escort->id)->where('type', 'video')->get();    
         $services = json_decode($escort->services, true);
         $language_spoken = json_decode($escort->language_spoken, true);
         $availability = json_decode($escort->availability, true);
         $currencies_accepted = json_decode($escort->currencies_accepted, true);
         $payment_method = json_decode($escort->payment_method, true);
 
-        return view('user-escort.dashboard', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        return view('user-escort.dashboard', compact('escort', 'language_spoken', 'pictures', 'videos', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 
     public function escort_myPictures($id)
@@ -128,22 +156,22 @@ class UserEscortsController extends Controller
         //     $pictures = [];
         // }
         $pictures = Media::where('type', 'image')
-        ->where('escort_id', Auth::guard('escort')->user()->id)
-        ->get();
+            ->where('escort_id', Auth::guard('escort')->user()->id)
+            ->get();
 
         return view('user-escort.my-pictures', compact('pictures'));
     }
 
-    
+
     public function escort_myVideos($id)
     {
         if (Auth::guard('escort')->user()->id != $id) {
             return redirect()->route('escorts.myVideos', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
         }
-    
+
         $videos = Media::where('type', 'video')
-        ->where('escort_id', Auth::guard('escort')->user()->id)
-        ->get();
+            ->where('escort_id', Auth::guard('escort')->user()->id)
+            ->get();
 
         return view('user-escort.my-videos', compact('videos'));
     }
@@ -282,7 +310,7 @@ class UserEscortsController extends Controller
         $validatedData['pictures'] = json_encode($pictures);
 
         $escort->update($validatedData);
-        
+
         return redirect()->route('escorts.myPictures', $escort->id)->with('success', 'Pictures Added successfully!');
     }
 

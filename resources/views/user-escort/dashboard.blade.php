@@ -7,7 +7,8 @@
             <nav class="nav nav-borders">
                 <a class="nav-link active ms-0" href="#">Dashboard</a>
                 <a class="nav-link " href="{{ route('escorts.profile', Auth::guard('escort')->user()->id) }}">Profile</a>
-                <a class="nav-link" href="{{ route('escorts.myPictures', Auth::guard('escort')->user()->id) }}">My Pictures</a>
+                <a class="nav-link" href="{{ route('escorts.myPictures', Auth::guard('escort')->user()->id) }}">My
+                    Pictures</a>
                 <a class="nav-link " href="{{ route('escorts.myVideos', Auth::guard('escort')->user()->id) }}">My Videos</a>
             </nav>
 
@@ -44,13 +45,15 @@
                         <div class="card-body">
                             <div class="small text-muted">Total Photos</div>
                             <div class="h3">
-                                @if (!empty($pictures) && is_array($pictures) && count($pictures) > 0)
+                                @if ($pictures)
                                     <p> <span>Photos</span> {{ count($pictures) }} </p>
                                 @else
                                     <p> <span>Photos</span> 0 </p>
                                 @endif
+                                {{-- <p>Total Images: {{ $pictures }}</p> --}}
                             </div>
-                            <a class="text-arrow-icon small" href="{{route('escorts.myPictures', Auth::guard('escort')->user()->id)}}">
+                            <a class="text-arrow-icon small"
+                                href="{{ route('escorts.myPictures', Auth::guard('escort')->user()->id) }}">
                                 View all photos
                             </a>
                         </div>
