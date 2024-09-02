@@ -8,6 +8,7 @@
                 <a class="nav-link ms-0" href="{{route('escorts.dashboard', Auth::guard('escort')->user()->id)}}">Dashboard</a>
                 <a class="nav-link active" href="#">Profile</a>
                 <a class="nav-link" href="{{ route('escorts.myPictures', Auth::guard('escort')->user()->id) }}">My Pictures</a>
+                <a class="nav-link " href="{{ route('escorts.myVideos', Auth::guard('escort')->user()->id) }}">My Videos</a>
             </nav>
            
             <div class="row">
