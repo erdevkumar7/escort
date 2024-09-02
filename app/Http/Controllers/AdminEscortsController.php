@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Escort;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -37,8 +38,8 @@ class AdminEscortsController extends Controller
             'origin' => 'required',
             'type' => 'required',
             'text_description' => 'required|min:30',
-            'video' => 'nullable|array',
-            'video.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
+            'videos' => 'nullable|array',
+            'videos.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
             'hair_color' => 'nullable',
             'hair_length' => 'nullable',
             'breast_size' => 'nullable',
@@ -60,41 +61,75 @@ class AdminEscortsController extends Controller
             'rates_in_chf' => 'nullable|numeric',
             'currencies_accepted' => 'nullable|array',
             'payment_method' => 'nullable|array',
+            'image_type' => 'nullable|string',
+            'video_type' => 'nullable|string',
         ]);
 
-        // Handle Image file upload
-        $pictures = [];
-        if ($request->hasFile('pictures')) {
-            foreach ($request->file('pictures') as $image) {
-                $originalImageName = $image->getClientOriginalName();
-                $imageName = time() . '_' . $originalImageName;
-                $image->move(public_path('images/escorts_img'), $imageName);
-                $pictures[] = $imageName;
-            }
-        }
 
-
-        // Handle video file upload
-        $video = [];
-        if ($request->hasFile('video')) {
-            foreach ($request->file('video') as $vdo) {
-                $originalVdoName = $vdo->getClientOriginalName();
-                $vdoName = time() . '_' . $originalVdoName;
-                $vdo->move(public_path('videos'), $vdoName);
-                $video[] = $vdoName;
-            }
-        }
-
-
-        $validatedData['pictures'] = json_encode($pictures);
         $validatedData['services'] = json_encode($validatedData['services']);
-        $validatedData['video'] = json_encode($video);
         $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
         $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
         $validatedData['payment_method'] = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
 
-        Escort::create($validatedData);
+        $escort =  Escort::create($validatedData);
+
+        $escort_id = $escort->id;
+        if ($escort_id) {
+            // Pictures upload in media table
+            if (is_array($request->file('pictures'))) {
+                // Handle multiple files
+                foreach ($request->file('pictures') as $image) {
+                    $originalImageName = $image->getClientOriginalName();
+                    $imageName = time() . '_' . $originalImageName;
+                    $image->move(public_path('images/escorts_img'), $imageName);
+                    Media::create([
+                        'name' => $imageName,
+                        'type' => $request->image_type,
+                        'escort_id' => $escort_id,
+                    ]);
+                }
+            } else {
+                // Handle single file
+                $image = $request->file('name');
+                $originalImageName = $image->getClientOriginalName();
+                $imgName = time() . '_' . $originalImageName;
+                $image->move(public_path('images/escorts_img'), $imgName);
+
+                Media::create([
+                    'name' => $imgName,
+                    'type' => $request->image_type,
+                    'escort_id' => $escort_id,
+                ]);
+            }
+
+
+            // Videos upload in media table
+            if (is_array($request->file('videos'))) {
+                // Handle multiple files
+                foreach ($request->file('videos') as $vdo) {
+                    $originalVdoName = $vdo->getClientOriginalName();
+                    $vdoName = time() . '_' . $originalVdoName;
+                    $vdo->move(public_path('videos'), $vdoName);
+                    Media::create([
+                        'name' => $vdoName,
+                        'type' => $request->video_type,
+                        'escort_id' => $escort_id,
+                    ]);
+                }
+            } else {
+                // Handle single file
+                $vdo = $request->file('name');
+                $originalVdoName = $vdo->getClientOriginalName();
+                $vdoName = time() . '_' . $originalVdoName;
+                $vdo->move(public_path('videos'), $vdoName);
+                Media::create([
+                    'name' => $vdoName,
+                    'type' => $request->video_type,
+                    'escort_id' => $escort_id,
+                ]);
+            }
+        }
 
         return redirect()->route('admin.escorts')->with('success', 'Escort added successfully!');
     }
@@ -117,7 +152,7 @@ class AdminEscortsController extends Controller
     public function edit_escorts(Request $request, $id)
     {
         $escort = Escort::findOrFail($id);
-    
+
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname,' . $escort->id,
             'pictures' => 'nullable|array|min:1',
@@ -154,7 +189,7 @@ class AdminEscortsController extends Controller
             'currencies_accepted' => 'nullable|array',
             'payment_method' => 'nullable|array',
         ]);
-    
+
         // Handle Image file upload
         $pictures = json_decode($escort->pictures, true) ?? [];
         if ($request->hasFile('pictures')) {
@@ -165,7 +200,7 @@ class AdminEscortsController extends Controller
                 $pictures[] = $imageName;
             }
         }
-    
+
         // Handle video file upload
         $videos = json_decode($escort->video, true) ?? [];
         if ($request->hasFile('video')) {
@@ -176,7 +211,7 @@ class AdminEscortsController extends Controller
                 $videos[] = $vdoName;
             }
         }
-    
+
         $validatedData['pictures'] = json_encode($pictures);
         $validatedData['services'] = json_encode($validatedData['services']);
         $validatedData['video'] = json_encode($videos);
@@ -184,12 +219,12 @@ class AdminEscortsController extends Controller
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
         $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
         $validatedData['payment_method'] = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
-    
+
         $escort->update($validatedData);
-    
+
         return redirect()->route('admin.escorts')->with('success', 'Escort updated successfully!');
     }
-    
+
 
     //todo: get escorts to show by it's ID
     public function escorts_by_id($id)

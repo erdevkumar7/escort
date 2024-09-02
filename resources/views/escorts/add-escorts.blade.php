@@ -71,7 +71,7 @@
                                         <select class="form-control" id="city" name="city"
                                             oninput="removeError('cityErr')">
                                             <option value="">Select City</option>
-                                            <option value="city" {{ old('city') == 'city' ? 'selected' : '' }}>city
+                                            <option value="city1" {{ old('city') == 'city1' ? 'selected' : '' }}>city1
                                             </option>
                                             <option value="city2" {{ old('city') == 'city2' ? 'selected' : '' }}>city2
                                             </option>
@@ -192,8 +192,8 @@
                                         <select class="form-control" id="canton" name="canton"
                                             oninput="removeError('cantonErr')">
                                             <option value="">Select Canton</option>
-                                            <option value="canton" {{ old('canton') == 'canton' ? 'selected' : '' }}>
-                                                canton</option>
+                                            <option value="canton1" {{ old('canton') == 'canton1' ? 'selected' : '' }}>
+                                                canton1</option>
                                             <option value="canton2" {{ old('canton') == 'canton2' ? 'selected' : '' }}>
                                                 canton2</option>
                                             <option value="canton3" {{ old('canton') == 'canton3' ? 'selected' : '' }}>
@@ -246,6 +246,7 @@
                                         <label for="pictures">Pictures<span class="required">*</span></label>
                                         <input type="file" class="form-control" id="pictures" name="pictures[]"
                                             multiple oninput="removeError('picturesErr')">
+                                        <input type="hidden" name="image_type" value="image">
                                         @error('pictures')
                                             <span class="text-danger" id="picturesErr">{{ $message }}</span>
                                         @enderror
@@ -270,9 +271,10 @@
                                     {{-- video --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="video">Videos</label>
-                                        <input type="file" class="form-control" id="video" name="video[]"
+                                        <input type="file" class="form-control" id="videos" name="videos[]"
                                             multiple>
-                                        @error('video')
+                                            <input type="hidden" name="video_type" value="video">
+                                        @error('videos')
                                             <span class="text-danger" id="videoErr">{{ $message }}</span>
                                         @enderror
                                     </div>

@@ -20,7 +20,7 @@
                         <h4 class="no-pic">No Pictures Available</h4>
                         <div class="col-lg-3 menu-item escort-add-more-pic">
                             <span onclick="document.getElementById('addImageInput').click();">
-                                <img src="{{ asset('/public/images/static_img/add_more_pic1.png') }}"
+                                <img src="{{ asset('/public/images/static_img/add_more_video1.png') }}"
                                     class="menu-img img-fluid" alt="Add Image">
                                 <p>Add More</p>
                             </span>
@@ -60,7 +60,7 @@
 
                         <div class="col-lg-3 menu-item escort-add-more-pic">
                             <span onclick="document.getElementById('addVideoInput').click();">
-                                <img src="{{ asset('/public/images/static_img/add_more_pic1.png') }}"
+                                <img src="{{ asset('/public/images/static_img/add_more_video1.png') }}"
                                     class="menu-img img-fluid" alt="Add Image">
                                 <p>Add More</p>
                             </span>
