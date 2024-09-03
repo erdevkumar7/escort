@@ -1538,7 +1538,6 @@ i.fa-solid.fa-user {
     span.navbar-toggler-icon i.fa.fa-bars {
         font-size: 30px;
     }
-
     .we-help-growth {
         padding: 40px 40px;
         width: 100%;
@@ -1867,10 +1866,11 @@ i.fa-solid.fa-user {
         width: 100%;
     }
 
-      .footer-escorts {
-        width: 100%;
-        padding: 60px 0;
-    }
+   .footer-escorts {
+    width: 100%;
+    padding: 60px 0;
+    padding-bottom: 1px;
+}
 
     .tab-content .menu-item {
         display: flex;
@@ -1934,12 +1934,23 @@ i.fa-solid.fa-user {
     div#agencies_escort_wrapper {
         overflow-y: scroll;
     }
+  button.navbar-toggler {
+    padding: 8px;
+    padding-bottom: 6px;
+}
+
+.search-input {
+    margin-right: 0;
+}
 
     }
 
 
 @media only screen and (max-width: 767px) {
 
+    .escorts-first-content .icons {
+        margin-bottom: 8px; 
+    }
 
     .form-login .wrap-login100 {
         display: flex;
@@ -1977,10 +1988,11 @@ i.fa-solid.fa-user {
         line-height: 1.9;
     }
 
-    nav.navbar.navbar-expand-lg {
-        width: 100%;
-        margin: auto;
-    }
+   nav.navbar.navbar-expand-lg {
+    width: 100%;
+    margin: auto;
+    padding: 18px 24px;
+}
 
     .slider-section {
         width: 100%;
@@ -2055,11 +2067,12 @@ i.fa-solid.fa-user {
        margin-bottom: 0;
     }
 
-    .footer-escorts {
+     .footer-escorts {
         width: 100%;
         margin: auto;
         margin-top: 0px;
         padding: 40px 0;
+        padding-bottom: 20px;
     }
     .featured-categories .card.card-fourth {
         height: auto;
@@ -2368,7 +2381,7 @@ i.fa-solid.fa-user {
     }
 
     .quick-links {
-        gap: 30px;
+        gap: 18px;
     }
 
     .quick-links h5 {

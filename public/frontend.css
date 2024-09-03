@@ -340,6 +340,9 @@ button.agency-escort-delete-button:hover {
     height: 380px;
     border-radius: 5px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 .escort-add-more-pic img {
     display: flex;
@@ -347,7 +350,6 @@ button.agency-escort-delete-button:hover {
     width: 50px;
     margin: auto;
     align-items: center;
-    padding-top: 42px;
 }
 
 .escort-add-more-pic p {
@@ -407,11 +409,103 @@ button.agency-escort-delete-button:hover {
 
 .menu-item.escort-image button:focus {
     box-shadow: none;
+    cursor: #fff;
+    border: none; 
 }
 
 .menu-item.escort-image button:focus-visible {
     box-shadow: none;
 }
+
+form.add-picture-form {
+    height: 380px;
+    width: 288px;
+    margin-top: -15px;
+    padding-right: 0;
+}
+
+
+.escort-videos button {
+    float: right;
+    margin-bottom: -30px;
+    z-index: 1;
+    position: relative;
+    background-color: #efefef;
+    border: none;
+    border-radius: 2px;
+    color: #232e48;
+    padding: 3px 11px 3px 11px;
+    margin-right: -2px;
+    margin-top: 4px;
+}
+
+.menu-item.escort-videos {
+    max-width: fit-content;
+}
+.escort-pictures {
+    margin-bottom: 90px;
+}
+.escort-videos video {
+    width: 100%;
+    height: 100%;
+}
+.menu-item.escort-image button:hover {
+    background-color: #ec8ccc;
+    color: #fff;
+}
+form.add-video-form {
+    width: 303px;
+    margin-top: 5px;
+}
+.escort-videos button:hover {
+    background-color: #ec8ccc;
+    color: #fff;
+}
+.menu-item.escort-add-more-videos {
+    max-width: 100%;
+    cursor: pointer;
+    border: solid 2px #232e48;
+    border-radius: 5px;
+    height: 213px;
+    display: flex;
+    align-items: center;
+}
+.escort-videos button:focus {
+    box-shadow: none;
+    color: #fff;
+}
+
+.escort-videos .btn-danger.focus, .btn-danger:focus, .btn-danger:hover {
+    color: #fff;
+    background-color: #ec8ccc !important; 
+}
+
+.escort-videos button:focus-visible {
+    box-shadow: none;
+    background-color: #ec8ccc !important;
+    color: #fff;
+}
+
+.escort-add-more-videos p {
+    color: #232e48;
+    text-align: center;
+    margin-bottom: 0;
+    font-family: "Montserrat-Bold";
+}
+.escort-add-more-videos img {
+    width: 20%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+}
+.row.escort-videos {
+    row-gap: 10px;
+    align-items: flex-start;
+}
+
+
+
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .menu-item.escort-image img {
@@ -420,7 +514,7 @@ button.agency-escort-delete-button:hover {
     }
 
     .escort-add-more-pic {
-        max-width: 100%;
+        max-width: 50%;
         height: 300px;
         margin: auto;
         margin-top: 30px;
@@ -441,7 +535,57 @@ button.agency-escort-delete-button:hover {
         display: flex;
         justify-content: center;
     }
+ form.add-picture-form {
+    width: 100%;
+    padding-right: 15px;
 }
+.escort-pictures {
+    margin-bottom: 90px;
+    display: flex;
+    row-gap: 18px;
+}
+.escort-pictures .escort-image {
+    width: 50%;
+    margin: auto;
+}
+
+form.add-video-form {
+    width: 43%;
+    padding: 0;
+    margin: 0;
+    margin-top: 5px;
+    margin-left: 0px;
+}
+
+.row.escort-videos {
+    row-gap: 10px;
+    justify-content: center;
+}
+
+.escort-videos button {
+    float: right;
+    margin-bottom: -29px;
+}
+
+.menu-item.escort-videos {
+    padding-left: 0;
+    max-width: 48%;
+}
+
+.escort-videos {
+    column-gap: 15px;
+}
+.escort-videos video {
+    width: 100%;
+    height: 201px;
+}
+.menu-item.escort-add-more-videos {
+    height: 201px;
+}
+
+
+}
+
 
 @media only screen and (max-width: 767px) {
     .escort-profile .right-content label {
@@ -517,11 +661,12 @@ button.agency-escort-delete-button:hover {
         width: 88%;
         height: 50px;
     }
-    .escort-profile nav.nav.nav-borders {
-        gap: 18px;
-        margin-bottom: 20px;
-        justify-content: center;
-    }
+.escort-profile nav.nav.nav-borders {
+    width: 380px;
+    gap: 0px;
+    margin-bottom: 20px;
+    justify-content: center;
+}
 
     .menu-item.escort-image img {
         border-radius: 5px;
@@ -533,17 +678,59 @@ button.agency-escort-delete-button:hover {
         margin-bottom: -23px;
     }
 
-      .escort-add-more-pic {
-        max-width: 100%;
-        height: 380px;
-        margin-top: 0px;
-    }
+.escort-add-more-pic {
+    max-width: 100%;
+    height: 380px;
+    margin-top: 18px;
+}
 
-    .escort-add-more-pic img {
-        padding-top: 60px;
-    }
+form.add-picture-form {
+    width: 100%;
+    padding-right: 15px;
+}
+.escort-add-more-pic img {
+    padding-top: 60px;
+}
     .escort-pictures .escort-image {
         margin-top: 0;
         margin-bottom: 15px;
     }
+.escort-profile .container-xl {
+    max-width: 100%;
+}
+
+.escort-profile .nav-borders .nav-link {
+    font-size: 14px;
+}
+.escort-profile .escort-videos {
+    max-width: none;
+}
+
+
+.escort-videos button {
+    float: right;
+    margin-bottom: -33px;
+}
+
+form.add-video-form {
+    width: 100%;
+}
+
+.escort-profile .right-content .card-header {
+    display: flex;
+    align-items: center;
+    font-size: 16px;
+    gap: 14px;
+}
+
+.left-content .card-header {
+    text-align: center;
+}
+.escort-profile {
+    margin-bottom: 30px;
+}
+
+
+
+
 }

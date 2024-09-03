@@ -217,6 +217,8 @@ class AgencyController extends Controller
     {
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname',
+            'email' => 'required|email|unique:escorts',
+            'password' => 'required|string|min:8|confirmed',
             'pictures' => 'required|array|min:1',
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
@@ -254,16 +256,44 @@ class AgencyController extends Controller
             'media_type_video' => 'required|string',
         ]);
 
+        // Create a new Escort instance
+        $escort = new Escort();
+        $escort->nickname = $validatedData['nickname'];
+        $escort->email = $validatedData['email'];
+        $escort->password = Hash::make($validatedData['password']); // Hash the password
+        $escort->phone_number = $validatedData['phone_number'];
+        $escort->age = $validatedData['age'];
+        $escort->canton = $validatedData['canton'];
+        $escort->city = $validatedData['city'];
+        $escort->services = json_encode($validatedData['services']);
+        $escort->origin = $validatedData['origin'];
+        $escort->type = $validatedData['type'];
+        $escort->text_description = $validatedData['text_description'];
+        $escort->hair_color = $validatedData['hair_color'] ?? null;
+        $escort->hair_length = $validatedData['hair_length'] ?? null;
+        $escort->breast_size = $validatedData['breast_size'] ?? null;
+        $escort->height = $validatedData['height'] ?? null;
+        $escort->weight = $validatedData['weight'] ?? null;
+        $escort->build = $validatedData['build'] ?? null;
+        $escort->smoker = $validatedData['smoker'] ?? false;
+        $escort->language_spoken = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
+        $escort->address = $validatedData['address'] ?? null;
+        $escort->outcall = $validatedData['outcall'] ?? false;
+        $escort->incall = $validatedData['incall'] ?? false;
+        $escort->whatsapp_number = $validatedData['whatsapp_number'] ?? null;
+        $escort->availability = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
+        $escort->parking = $validatedData['parking'] ?? false;
+        $escort->disabled = $validatedData['disabled'] ?? false;
+        $escort->accepts_couples = $validatedData['accepts_couples'] ?? false;
+        $escort->elderly = $validatedData['elderly'] ?? false;
+        $escort->air_conditioned = $validatedData['air_conditioned'] ?? false;
+        $escort->rates_in_chf = $validatedData['rates_in_chf'] ?? null;
+        $escort->currencies_accepted = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
+        $escort->payment_method = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
+        $escort->agency_id = $agency_id;
 
+        $escort->save();
 
-        $validatedData['agency_id'] = $agency_id;
-        $validatedData['services'] = json_encode($validatedData['services']);
-        $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
-        $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
-        $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
-        $validatedData['payment_method'] = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
-
-        $escort = Escort::create($validatedData);
         $escort_id = $escort->id;
 
         if ($escort_id) {

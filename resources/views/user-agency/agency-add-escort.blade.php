@@ -7,19 +7,20 @@
                 <a class="nav-link ms-0"
                     href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}">Dashboard</a>
                 <a class="nav-link" href="{{ route('agency.profile', Auth::guard('agency')->user()->id) }}">Profile</a>
-                <a class="nav-link active" href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}">My Listing</a>
+                <a class="nav-link active" href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}">My
+                    Listing</a>
 
             </nav>
             <hr class="mt-0 mb-4">
             <div class="row add-agency-escort">
                 <div class="card mb-4">
-                    
-                        <div class="agency-add-escort-title">
-                            <h3>Add Escort</h3>
-                            <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"><button
-                                    type="button" class="btn btn-primary">Back</button></a>
-                        </div>
-                  
+
+                    <div class="agency-add-escort-title">
+                        <h3>Add Escort</h3>
+                        <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"><button
+                                type="button" class="btn btn-primary">Back</button></a>
+                    </div>
+
                     <form class="agency-add-escort"
                         action="{{ route('agency.add.escortFormSubmit', Auth::guard('agency')->user()->id) }}"
                         id="agency-add-escort-form" method="POST" enctype="multipart/form-data">
@@ -48,6 +49,38 @@
                                 <label for="address">Address </label>
                                 <input type="text" class="form-control" id="address" name="address"
                                     value="{{ old('address') }}">
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            {{-- email --}}
+                            <div class="col-md-4 col-sm-4 ">
+                                <label for="email">Email * </label>
+                                <input type="email" class="form-control" name="email" id="email"
+                                    value="{{ old('email') }}" placeholder="Enter escort email"
+                                    oninput="removeError('emailErr')">
+                                @error('email')
+                                    <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- password --}}
+                            <div class="col-md-4 col-sm-4 ">
+                                <label for="password">Password * </label>
+                                <input type="Password" name="password" class="form-control" id="pass"
+                                    placeholder="Enter escort password." oninput="removeError('PasswordErr')">
+                                @error('password')
+                                    <span class="text-danger" id="PasswordErr">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            {{-- confirm_password --}}
+                            <div class="col-md-4 col-sm-4 ">
+                                <label for="password_confirmation">Confirm Password * </label>
+                                <input type="password" name="password_confirmation" id="password_confirmation"
+                                    class="form-control" placeholder="Re-enter password."
+                                    oninput="removeError('C_PasswordErr')">
+                                @error('password_confirmation')
+                                    <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -247,7 +280,7 @@
                                 <label for="pictures">Pictures<span class="required">*</span></label>
                                 <input type="file" class="form-control" id="pictures" name="pictures[]" multiple
                                     oninput="removeError('picturesErr')">
-                                    <input type="hidden" name="media_type_image" value="image">
+                                <input type="hidden" name="media_type_image" value="image">
                                 @error('pictures')
                                     <span class="text-danger" id="picturesErr">{{ $message }}</span>
                                 @enderror
@@ -465,8 +498,8 @@
                         </div>
                         <div class="row cancel-reset-submit-button">
                             <div class="col-md-4 col-sm-4 offset-md-3 route-listing-btn">
-                                <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"> <button
-                                        class="btn btn-one" type="button">Cancel</button></a>
+                                <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}">
+                                    <button class="btn btn-one" type="button">Cancel</button></a>
                                 <button class="btn btn-three" type="reset">Reset</button>
                                 <button type="submit" class="btn btn-two">Submit</button>
                             </div>
