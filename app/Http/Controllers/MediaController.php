@@ -46,7 +46,7 @@ class MediaController extends Controller
         return redirect()->route('escorts.myPictures', $escort_id)->with('success', 'Media uploaded successfully.');
     }
 
-    
+
     public function add_escorts_myVideos(Request $request, $escort_id)
     {
         // Update validation rules to handle array input for 'name'
@@ -68,11 +68,9 @@ class MediaController extends Controller
                     'escort_id' => $escort_id,
                 ]);
             }
-
-          
         } else {
             // Handle single file
-            $vdo = $request->file('name');         
+            $vdo = $request->file('name');
             $originalVdoName = $vdo->getClientOriginalName();
             $vdoName = time() . '_' . $originalVdoName;
             $vdo->move(public_path('videos'), $vdoName);
@@ -93,18 +91,27 @@ class MediaController extends Controller
 
         $validatedData = $request->validate([
             'name' => 'required|string',
+            'type' => 'required|string',
         ]);
 
-        $imageToDelete = $validatedData['name'];
+        $mediaToDelete = $validatedData['name'];
+        $mediaType = $validatedData['type'];
 
-        if ($media) {
+        if ($media && $mediaType === 'image') {
             // Optional: Delete the image file from the server
-            $imagePath = public_path('images/escorts_img') . '/' . $imageToDelete;
+            $imagePath = public_path('images/escorts_img') . '/' . $mediaToDelete;
             if (file_exists($imagePath)) {
                 unlink($imagePath);
             }
             $media->delete();
-            return redirect()->back()->with('success', 'Media deleted successfully.');
+            return redirect()->back()->with('success', 'Picture deleted successfully.');
+        } elseif ($media && $mediaType === 'video') {
+            $videoPath = public_path('videos') . '/' . $mediaToDelete;
+            if (file_exists($videoPath)) {
+                unlink($videoPath);
+            }
+            $media->delete();
+            return redirect()->back()->with('success', 'video deleted successfully.');
         } else {
             // If the media record is not found, return with an error message
             return redirect()->back()->with('error', 'Media record not found or you do not have permission to delete this record.');
