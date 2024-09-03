@@ -29,23 +29,24 @@
         <div class="container">
             <div class="row members-inner-content">
                 <div class="col-md-6 first-members-content">
-                    <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"><i class='fas fa-arrow-left'></i></a>
+                    <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"><i
+                            class='fas fa-arrow-left'></i></a>
                 </div>
 
-         
+
 
                 <div class="col-md-6 three-members-content">
                     <div class="members-count">
-                        @if (!empty($pictures) && is_array($pictures) && count($pictures) > 0)
-                            <p>{{ count($pictures) }} <span>Photos</span></p>
+                        @if ($pictures)
+                            <p> {{ count($pictures) }} <span>Photos</span> </p>
                         @else
-                            <p> 0 <span>Photos</span></p>
+                            <p> 0 <span>Photos</span> </p>
                         @endif
 
-                        @if (!empty($video) && is_array($video) && count($video) > 0)
-                            <p>{{ count($video) }} <span>Videos</span></p>
+                        @if ($videos)
+                            <p> {{ count($videos) }} <span>Videos</span> </p>
                         @else
-                            <p> 0 <span>Videos</span></p>
+                            <p> 0 <span>Videos</span> </p>
                         @endif
 
                         <p> 0 <span>Members</span></p>
@@ -53,11 +54,11 @@
                     </div>
                 </div>
 
-       <div class="col-md-12 second-members-content">
-                    @if (!empty($pictures) && is_array($pictures) && count($pictures) > 0)
-                        <img src="{{ asset('/public/images/escorts_img') . '/' . $pictures[0] }}" alt="" />
+                <div class="col-md-12 second-members-content">
+                    @if ($escort->profile_pic)
+                        <img src="{{ asset('/public/images/escorts_img') . '/' . $escort->profile_pic }}" alt="Profile_pic" />
                     @else
-                        <img src="{{ asset('/public/images/escorts_img') . '/' . 'escort_profile.png' }}"
+                        <img src="{{ asset('/public/images/static_img') . '/' . 'default_profile.png' }}"
                             alt="Default Profile Picture">
                     @endif
 
@@ -120,30 +121,30 @@
                         @if ($pictures)
                             @foreach ($pictures as $picture)
                                 <div class="col-lg-3 menu-item">
-                                    <img src="{{ asset('/public/images/escorts_img') . '/' . $picture }}"
+                                    <img src="{{ asset('/public/images/escorts_img') . '/' . $picture->name }}"
                                         class="menu-img img-fluid" alt="Picture">
                                 </div>
                             @endforeach
                         @else
                             <div class="col-12">
-                                
+
                             </div>
                         @endif
                     </div>
 
                     <!-- Videos Section -->
                     <div class="row gy-5 " id="escort-videos">
-                        @if ($video)
-                            @foreach ($video as $vdo)
+                        @if ($videos)
+                            @foreach ($videos as $vdo)
                                 <div class="col-lg-3 menu-item">
                                     <video controls>
-                                        <source src="{{ asset('/public/videos') . '/' . $vdo }}" type="video/mp4">
+                                        <source src="{{ asset('/public/videos') . '/' . $vdo->name }}" type="video/mp4">
                                     </video>
                                 </div>
                             @endforeach
                         @else
                             <div class="col-12">
-                                
+
                             </div>
                         @endif
                     </div>

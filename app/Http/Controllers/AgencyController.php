@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Mail\WelcomeAgencyMail;
 use App\Models\Agency;
 use App\Models\Escort;
+use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -185,21 +186,21 @@ class AgencyController extends Controller
         if (Auth::guard('agency')->user()->id != $agency_id) {
             return redirect()->route('agency.escort.detail', ['agency_id' => Auth::guard('agency')->user()->id, 'escort_id' => $escort_id])->with('error', 'You are not authorized to access this page.');
         }
-        // $escort = Escort::find($escort_id);
+
         $escort = Escort::where('id', $escort_id)->where('agency_id', $agency->id)->first();
         if (!$escort) {
-            return redirect()->route('agency.escort_listing', Auth::guard('agency')->user()->id)->with('error', 'Escort not found or you are not authorized to edit this escort.');
+            return redirect()->back()->with('error', 'Escort not found.');
         }
 
-        $pictures = json_decode($escort->pictures);
-        $video = json_decode($escort->video);
+        $pictures = Media::where('escort_id', $escort_id)->where('type', 'image')->get();
+        $videos = Media::where('escort_id', $escort_id)->where('type', 'video')->get();
         $services = json_decode($escort->services, true);
         $language_spoken = json_decode($escort->language_spoken, true);
         $availability = json_decode($escort->availability, true);
         $currencies_accepted = json_decode($escort->currencies_accepted, true);
         $payment_method = json_decode($escort->payment_method, true);
 
-        return view('user-agency.agency-escort-detail', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        return view('user-agency.agency-escort-detail', compact('escort', 'language_spoken', 'pictures', 'videos', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 
     public function agency_add_escort_form($agency_id)
@@ -226,8 +227,8 @@ class AgencyController extends Controller
             'origin' => 'required',
             'type' => 'required',
             'text_description' => 'required|min:30',
-            'video' => 'nullable|array',
-            'video.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
+            'videos' => 'nullable|array',
+            'videos.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
             'hair_color' => 'nullable',
             'hair_length' => 'nullable',
             'breast_size' => 'nullable',
@@ -249,42 +250,56 @@ class AgencyController extends Controller
             'rates_in_chf' => 'nullable|numeric',
             'currencies_accepted' => 'nullable|array',
             'payment_method' => 'nullable|array',
+            'media_type_image' => 'required|string',
+            'media_type_video' => 'required|string',
         ]);
 
-        // Handle Image file upload
-        $pictures = [];
-        if ($request->hasFile('pictures')) {
-            foreach ($request->file('pictures') as $image) {
-                $originalImageName = $image->getClientOriginalName();
-                $imageName = time() . '_' . $originalImageName;
-                $image->move(public_path('images/escorts_img'), $imageName);
-                $pictures[] = $imageName;
-            }
-        }
 
-
-        // Handle video file upload
-        $video = [];
-        if ($request->hasFile('video')) {
-            foreach ($request->file('video') as $vdo) {
-                $originalVdoName = $vdo->getClientOriginalName();
-                $vdoName = time() . '_' . $originalVdoName;
-                $vdo->move(public_path('videos'), $vdoName);
-                $video[] = $vdoName;
-            }
-        }
 
         $validatedData['agency_id'] = $agency_id;
-        $validatedData['pictures'] = json_encode($pictures);
         $validatedData['services'] = json_encode($validatedData['services']);
-        $validatedData['video'] = json_encode($video);
         $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
         $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
         $validatedData['payment_method'] = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
 
-        Escort::create($validatedData);
+        $escort = Escort::create($validatedData);
+        $escort_id = $escort->id;
 
+        if ($escort_id) {
+            // Pictures upload in media table
+            if (is_array($request->file('pictures'))) {
+                // Handle multiple files          
+                foreach ($request->file('pictures') as $image) {
+                    $originalImageName = $image->getClientOriginalName();
+                    $imageName = time() . '_' . $originalImageName;
+                    $image->move(public_path('images/escorts_img'), $imageName);
+                    Media::create([
+                        'name' => $imageName,
+                        'type' => $request->media_type_image,
+                        'escort_id' => $escort_id,
+                        'agency_id' => $agency_id,
+                    ]);
+                }
+            }
+
+
+            // Videos upload in media table
+            if (is_array($request->file('videos'))) {
+                // Handle multiple files
+                foreach ($request->file('videos') as $vdo) {
+                    $originalVdoName = $vdo->getClientOriginalName();
+                    $vdoName = time() . '_' . $originalVdoName;
+                    $vdo->move(public_path('videos'), $vdoName);
+                    Media::create([
+                        'name' => $vdoName,
+                        'type' => $request->media_type_video,
+                        'escort_id' => $escort_id,
+                        'agency_id' => $agency_id,
+                    ]);
+                }
+            }
+        }
         return redirect()->route('agency.escort_listing', $agency_id)->with('success', 'Escort added successfully!');
     }
 
@@ -297,23 +312,23 @@ class AgencyController extends Controller
         // $escort = Escort::find($id);
         $escort = Escort::where('id', $id)->where('agency_id', $agency->id)->first();
         if (!$escort) {
-            return redirect()->route('agency.escort_listing', Auth::guard('agency')->user()->id)->with('error', 'Escort not found or you are not authorized to edit this escort.');
+            return redirect()->back()->with('error', 'Escort not found.');
         }
 
-        $pictures = json_decode($escort->pictures);
-        $video = json_decode($escort->video);
+        $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
+        $videos = Media::where('escort_id', $id)->where('type', 'video')->get();
         $language_spoken = json_decode($escort->language_spoken, true);
         $services = json_decode($escort->services, true);
         $availability = json_decode($escort->availability, true);
         $currencies_accepted = json_decode($escort->currencies_accepted, true);
         $payment_method = json_decode($escort->payment_method, true);
 
-        return view('user-agency.agency-edit-escort', compact('escort', 'pictures', 'video', 'services', 'language_spoken', 'availability', 'currencies_accepted', 'payment_method'));
+        return view('user-agency.agency-edit-escort', compact('escort', 'pictures', 'videos', 'services', 'language_spoken', 'availability', 'currencies_accepted', 'payment_method'));
     }
 
-    public function edit_escorts(Request $request, $id)
+    public function edit_escorts_form_submit(Request $request, $escort_id)
     {
-        $escort = Escort::findOrFail($id);
+        $escort = Escort::findOrFail($escort_id);
 
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname,' . $escort->id,
@@ -327,8 +342,8 @@ class AgencyController extends Controller
             'origin' => 'required',
             'type' => 'required',
             'text_description' => 'required|min:30',
-            'video' => 'nullable|array',
-            'video.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
+            'videos' => 'nullable|array',
+            'videos.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
             'hair_color' => 'nullable',
             'hair_length' => 'nullable',
             'breast_size' => 'nullable',
@@ -350,33 +365,12 @@ class AgencyController extends Controller
             'rates_in_chf' => 'nullable|numeric',
             'currencies_accepted' => 'nullable|array',
             'payment_method' => 'nullable|array',
+            'media_type_image' => 'required|string',
+            'media_type_video' => 'required|string',
         ]);
 
-        // Handle Image file upload
-        $pictures = json_decode($escort->pictures, true) ?? [];
-        if ($request->hasFile('pictures')) {
-            foreach ($request->file('pictures') as $image) {
-                $originalImageName = $image->getClientOriginalName();
-                $imageName = time() . '_' . $originalImageName;
-                $image->move(public_path('images/escorts_img'), $imageName);
-                $pictures[] = $imageName;
-            }
-        }
 
-        // Handle video file upload
-        $videos = json_decode($escort->video, true) ?? [];
-        if ($request->hasFile('video')) {
-            foreach ($request->file('video') as $vdo) {
-                $originalVdoName = $vdo->getClientOriginalName();
-                $vdoName = time() . '_' . $originalVdoName;
-                $vdo->move(public_path('videos'), $vdoName);
-                $videos[] = $vdoName;
-            }
-        }
-
-        $validatedData['pictures'] = json_encode($pictures);
         $validatedData['services'] = json_encode($validatedData['services']);
-        $validatedData['video'] = json_encode($videos);
         $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
         $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
@@ -384,36 +378,80 @@ class AgencyController extends Controller
 
         $escort->update($validatedData);
 
+        if ($escort_id) {
+            // Pictures upload in media table
+            if (is_array($request->file('pictures'))) {
+                // Handle multiple files          
+                foreach ($request->file('pictures') as $image) {
+                    $originalImageName = $image->getClientOriginalName();
+                    $imageName = time() . '_' . $originalImageName;
+                    $image->move(public_path('images/escorts_img'), $imageName);
+                    Media::create([
+                        'name' => $imageName,
+                        'type' => $request->media_type_image,
+                        'escort_id' => $escort_id,
+                        'agency_id' => Auth::guard('agency')->user()->id,
+                    ]);
+                }
+            }
+
+
+            // Videos upload in media table
+            if (is_array($request->file('videos'))) {
+                // Handle multiple files
+                foreach ($request->file('videos') as $vdo) {
+                    $originalVdoName = $vdo->getClientOriginalName();
+                    $vdoName = time() . '_' . $originalVdoName;
+                    $vdo->move(public_path('videos'), $vdoName);
+                    Media::create([
+                        'name' => $vdoName,
+                        'type' => $request->media_type_video,
+                        'escort_id' => $escort_id,
+                        'agency_id' => Auth::guard('agency')->user()->id,
+                    ]);
+                }
+            }
+        }
+
         return redirect()->route('agency.escort_listing', Auth::guard('agency')->user()->id)->with('success', 'Escort updated successfully!');
     }
 
     public function deleteEscorts($id)
     {
-        $escorts = Escort::find($id);
-        $pictures = json_decode($escorts->pictures);
-        $video = json_decode($escorts->video);
+        $escort = Escort::find($id);
 
+        if (!$escort) {
+            return redirect()->back()->with('error', 'Escort not found.');
+        }
+
+        // Find and delete all media records related to the escort        
+        $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
+        $videos = Media::where('escort_id', $id)->where('type', 'video')->get();
         //delete escorts pics
         if ($pictures) {
             foreach ($pictures as $picture) {
-                $imagePath = public_path('images/escorts_img') . '/' . $picture;
+                $imagePath = public_path('images/escorts_img') . '/' . $picture->name;
                 if (file_exists($imagePath)) {
                     unlink($imagePath);
                 }
+
+                $picture->delete();
             }
         }
 
         //Delete Escorts videos
-        if ($video) {
-            foreach ($video as $vdo) {
-                $vdoPath = public_path('videos') . '/' . $vdo;
+        if ($videos) {
+            foreach ($videos as $video) {
+                $vdoPath = public_path('videos') . '/' . $video->name;
                 if (file_exists($vdoPath)) {
                     unlink($vdoPath);
                 }
+
+                $video->delete();
             }
         }
 
-        $escorts->delete();
+        $escort->delete();
         return redirect()->route('agency.escort_listing', Auth::guard('agency')->user()->id)->with('success', 'Escorts deleted successfully');
     }
 

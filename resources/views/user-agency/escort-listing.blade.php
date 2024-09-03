@@ -108,7 +108,7 @@
                                         <th>Age</th>
                                         <th>Origin</th>
                                         <th>City</th>
-                                        <th>Type</th>
+                                        <th>Category type</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                         <th>View escort</th>
@@ -155,7 +155,7 @@
                                         <th>Age</th>
                                         <th>Origin</th>
                                         <th>City</th>
-                                        <th>Type</th>
+                                        <th>Category type</th>
                                         <th>Status</th>
                                         <th>Action</th>
                                         <th>View escort</th>

@@ -43,12 +43,12 @@ Route::prefix('agency')->group(function () {
         Route::put('/{agency_id}', [AgencyController::class, 'edit_agency'])->name('agency.edit_agency');        
         Route::put('/profile/{agency_id}/profile-pic-update', [AgencyController::class, 'profile_pic_update'])->name('agency.profilePic.update');
         
-        Route::get('/{agency_id}/escort-detail/{escort_id}/show', [AgencyController::class, 'agency_escort_detail'])->name('agency.escort.detail');
+        Route::get('/{agency_id}/escort-detail/{escort_id}/view', [AgencyController::class, 'agency_escort_detail'])->name('agency.escort.detail');
         Route::get('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form"])->name('agency.add.escortform');
         Route::post('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form_submit"])->name('agency.add.escortFormSubmit');
        
         Route::get('/{agency_id}/escorts/{id}/escort-edit', [AgencyController::class, 'edit_escorts_form'])->name('agency.edit_escorts_form');
-        Route::put('/escorts/{id}', [AgencyController::class, 'edit_escorts'])->name('agency.edit_escorts');
+        Route::put('/escorts/{escort_id}', [AgencyController::class, 'edit_escorts_form_submit'])->name('agency.edit_escorts');
 
         Route::delete('/escorts/{id}', [AgencyController::class, 'deleteEscorts'])->name('agency.delete.escorts');
 

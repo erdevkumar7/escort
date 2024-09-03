@@ -246,7 +246,7 @@ class AdminEscortsController extends Controller
         $escort = Escort::find($id);
 
         if (!$escort) {
-            return redirect()->route('admin.escorts')->with('error', 'Escort not found.');
+             return redirect()->back()->with('error', 'Escort not found.');
         }
 
         // Find and delete all media records related to the escort        
