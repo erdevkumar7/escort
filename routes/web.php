@@ -11,7 +11,9 @@ use App\Http\Controllers\EscortsAuthController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserEscortsController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request;
 
 //Public routes ***************************************************************
 Route::get('/', [UserEscortsController::class, 'index'])->name('index');
@@ -132,6 +134,14 @@ Route::get('/register', [EscortsAuthController::class, 'escort_register_form'])-
 Route::post('/register', [EscortsAuthController::class, 'escort_register_form_submit'])->name('escorts.register_submit');
 Route::get('/login', [EscortsAuthController::class, 'escort_login_form'])->name('login');
 Route::post('/login', [EscortsAuthController::class, 'login'])->name('escorts_login');
+
+//  *************************************************************************
+// Email verification handler
+Route::get('/email/verify/{id}/{hash}', [EscortsAuthController::class, 'verifyEscortEmail'])->name('verification.verify');
+
+Route::get('/email/resend-email-verification', [EscortsAuthController::class, 'resendEmailVerificationForm'] )->name('verification.notice');
+Route::post('/email/verification/resend', [EscortsAuthController::class, 'resendVerificationEmail'])->name('escorts.verification.resend');
+
 
 // Forgot Password
 Route::get('/forgot-password', [EscortsAuthController::class, 'showForgotPasswordForm'])->name('password.request');

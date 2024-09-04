@@ -8,10 +8,11 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 use Illuminate\Auth\Passwords\CanResetPassword;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-class Escort extends Authenticatable implements CanResetPasswordContract
+class Escort extends Authenticatable implements MustVerifyEmail // Changed to MustVerifyEmail
 {
-    use  CanResetPassword, Notifiable;
+    use Notifiable, CanResetPassword;
     // use HasFactory;
     protected $fillable = [
         'nickname',

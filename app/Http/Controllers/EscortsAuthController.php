@@ -4,6 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Mail\WelcomeEscortMail;
 use App\Models\Escort;
+use Illuminate\Auth\Access\AuthorizationException;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -40,11 +43,10 @@ class EscortsAuthController extends Controller
         $escort->city = $validated['city'];
         $escort->save();
 
-        // Send welcome email
-        Mail::to($escort->email)->send(new WelcomeEscortMail($escort));
-        if ($escort) {
-            return redirect()->route('login')->with('success', 'Register successfully!');
-        }
+        // Send verification email
+        $escort->sendEmailVerificationNotification();
+
+        return redirect()->route('login')->with('success', 'Registration successful! Please check your email to verify your account.');
     }
 
     public function escort_login_form(Request $request)
@@ -54,28 +56,44 @@ class EscortsAuthController extends Controller
 
     public function login(Request $request)
     {
+        // Validate the request inputs
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
             'g-recaptcha-response' => 'required|captcha',
         ]);
 
-        $credential = $request->only('email', 'password');
+        // Check if the credentials are correct
+        $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
 
-        if (Auth::guard('escort')->attempt($credential)) {
-            if ($remember) {
-                setcookie('email', $request->email, time() + 3600 * 24 * 3);
-                setcookie('password', $request->password, time() + 3600 * 24 * 3);
+        if (Auth::guard('escort')->attempt($credentials)) {
+            $escort = Auth::guard('escort')->user();
+
+            // Check if the user's email is verified
+            if (is_null($escort->email_verified_at)) {
+                // If email is not verified, log the user out and redirect back with an error
+                Auth::guard('escort')->logout();
+                return redirect()->route('login')->withErrors([
+                    'email' => 'Your email address is not verified. Please verify your email first.',
+                ])->withInput();
             }
-            $escort = Escort::find(Auth::guard('escort')->user()->id);
-            return redirect()->route('escorts.profile', $escort->id)->with('success', 'Login successfully!');;
+
+            // If email is verified, proceed with login
+            if ($remember) {
+                setcookie('email', $request->email, time() + 3600 * 24 * 5);
+                setcookie('password', $request->password, time() + 3600 * 24 * 5);
+            }
+
+            return redirect()->route('escorts.profile', $escort->id)->with('success', 'Login successfully!');
         }
+
         // Authentication failed...
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->withInput();
     }
+
 
     public function showForgotPasswordForm()
     {
@@ -93,6 +111,53 @@ class EscortsAuthController extends Controller
         return $status === Password::RESET_LINK_SENT
             ?  redirect()->route('login')->with('success', __($status))
             : back()->withErrors(['email' => __($status)]);
+    }
+
+    public function verifyEscortEmail(Request $request)
+    {
+        $escort = Escort::findOrFail($request->route('id'));
+
+        if (! hash_equals((string) $request->route('hash'), sha1($escort->getEmailForVerification()))) {
+            throw new AuthorizationException;
+        }
+
+        if ($escort->hasVerifiedEmail()) {
+            return redirect('/login')->with('success', 'Email already verified.');
+        }
+
+        if ($escort->markEmailAsVerified()) {
+            event(new Verified($escort));
+        }
+
+        return redirect('/login')->with('success', 'Email verified!');
+    }
+
+    public function resendEmailVerificationForm()
+    {
+        return view('auth.resend-email-verification');
+    }
+
+    public function resendVerificationEmail(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $escort = Escort::where('email', $validated['email'])->first();
+
+        if (!$escort) {
+            return redirect()->route('verification.notice')->withErrors([
+                'email' => 'We could not find that email address..',
+            ])->withInput();
+        }
+
+        if ($escort->hasVerifiedEmail()) {
+            return redirect()->route('login')->with('success', 'This email is already verified.');
+        }
+        // Resend the verification email
+        event(new Registered($escort));
+
+        return redirect()->route('login')->with('success', 'A new verification link has been sent to your email address.');
     }
 
     public function showResetPasswordForm(Request $request, $token)
