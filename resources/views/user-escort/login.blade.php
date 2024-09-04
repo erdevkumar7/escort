@@ -20,10 +20,19 @@
                             @if (isset($_COOKIE['password'])) value="{{ $_COOKIE['password'] }}" @endif
                             placeholder="Enter your password..." oninput="removeError('emailPasswordErr')">
                     </div>
-                    @if ($errors->has('email') || $errors->has('password'))
-                        <span class="text-danger input100" id="emailPasswordErr">
-                            {{ $errors->first('email') ?: $errors->first('password') }}
-                        </span>
+                    @if ($errors->has('email'))
+                        @foreach ($errors->get('email') as $message)
+                            @if ($message === 'email_not_verify')
+                                <span class="text-danger input100 txt2">Your email address is not verified. Please verify your email first
+                                <a href="{{ route('verification.notice') }}" class="text-primary">resend verification
+                                    email</a>
+                                </span>
+                            @else
+                                <span class="text-danger input100">{{ $message }}</span>
+                            @endif
+                        @endforeach
+                    @elseif ($errors->has('password'))
+                        <span class="text-danger input100">{{ $errors->first('password') }}</span>
                     @endif
 
                     <div class="flex-sb-m w-full p-t-3 p-b-32">
@@ -57,14 +66,6 @@
                                 Sign Up
                             </button></a>
                     </div>
-                    <!--<div class="login100-form-social flex-c-m">
-                                            <a href="#" class="login100-form-social-item flex-c-m bg1 m-r-5">
-                                            <i class="fa fa-facebook-f" aria-hidden="true"></i>
-                                            </a>
-                                            <a href="#" class="login100-form-social-item flex-c-m bg2 m-r-5">
-                                            <i class="fa fa-twitter" aria-hidden="true"></i>
-                                            </a>
-                                            </div>-->
                 </form>
                 <div class="login100-more"
                     style="background-image: url('https://votivelaravel.in/escorts/public/images/static_img/loginform-pic.jpg');">

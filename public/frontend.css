@@ -410,7 +410,7 @@ button.agency-escort-delete-button:hover {
 .menu-item.escort-image button:focus {
     box-shadow: none;
     cursor: #fff;
-    border: none; 
+    border: none;
 }
 
 .menu-item.escort-image button:focus-visible {
@@ -423,7 +423,6 @@ form.add-picture-form {
     margin-top: -15px;
     padding-right: 0;
 }
-
 
 .escort-videos button {
     float: right;
@@ -475,9 +474,11 @@ form.add-video-form {
     color: #fff;
 }
 
-.escort-videos .btn-danger.focus, .btn-danger:focus, .btn-danger:hover {
+.escort-videos .btn-danger.focus,
+.btn-danger:focus,
+.btn-danger:hover {
     color: #fff;
-    background-color: #ec8ccc !important; 
+    background-color: #ec8ccc !important;
 }
 
 .escort-videos button:focus-visible {
@@ -503,9 +504,6 @@ form.add-video-form {
     row-gap: 10px;
     align-items: flex-start;
 }
-
-
-
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .menu-item.escort-image img {
@@ -535,57 +533,54 @@ form.add-video-form {
         display: flex;
         justify-content: center;
     }
- form.add-picture-form {
-    width: 100%;
-    padding-right: 15px;
-}
-.escort-pictures {
-    margin-bottom: 90px;
-    display: flex;
-    row-gap: 18px;
-}
-.escort-pictures .escort-image {
-    width: 50%;
-    margin: auto;
-}
+    form.add-picture-form {
+        width: 100%;
+        padding-right: 15px;
+    }
+    .escort-pictures {
+        margin-bottom: 90px;
+        display: flex;
+        row-gap: 18px;
+    }
+    .escort-pictures .escort-image {
+        width: 50%;
+        margin: auto;
+    }
 
-form.add-video-form {
-    width: 43%;
-    padding: 0;
-    margin: 0;
-    margin-top: 5px;
-    margin-left: 0px;
-}
+    form.add-video-form {
+        width: 43%;
+        padding: 0;
+        margin: 0;
+        margin-top: 5px;
+        margin-left: 0px;
+    }
 
-.row.escort-videos {
-    row-gap: 10px;
-    justify-content: center;
-}
+    .row.escort-videos {
+        row-gap: 10px;
+        justify-content: center;
+    }
 
-.escort-videos button {
-    float: right;
-    margin-bottom: -29px;
-}
+    .escort-videos button {
+        float: right;
+        margin-bottom: -29px;
+    }
 
-.menu-item.escort-videos {
-    padding-left: 0;
-    max-width: 48%;
-}
+    .menu-item.escort-videos {
+        padding-left: 0;
+        max-width: 48%;
+    }
 
-.escort-videos {
-    column-gap: 15px;
+    .escort-videos {
+        column-gap: 15px;
+    }
+    .escort-videos video {
+        width: 100%;
+        height: 201px;
+    }
+    .menu-item.escort-add-more-videos {
+        height: 201px;
+    }
 }
-.escort-videos video {
-    width: 100%;
-    height: 201px;
-}
-.menu-item.escort-add-more-videos {
-    height: 201px;
-}
-
-
-}
-
 
 @media only screen and (max-width: 767px) {
     .escort-profile .right-content label {
@@ -661,12 +656,12 @@ form.add-video-form {
         width: 88%;
         height: 50px;
     }
-.escort-profile nav.nav.nav-borders {
-    width: 380px;
-    gap: 0px;
-    margin-bottom: 20px;
-    justify-content: center;
-}
+    .escort-profile nav.nav.nav-borders {
+        width: 380px;
+        gap: 0px;
+        margin-bottom: 20px;
+        justify-content: center;
+    }
 
     .menu-item.escort-image img {
         border-radius: 5px;
@@ -678,59 +673,54 @@ form.add-video-form {
         margin-bottom: -23px;
     }
 
-.escort-add-more-pic {
-    max-width: 100%;
-    height: 380px;
-    margin-top: 18px;
-}
+    .escort-add-more-pic {
+        max-width: 100%;
+        height: 380px;
+        margin-top: 18px;
+    }
 
-form.add-picture-form {
-    width: 100%;
-    padding-right: 15px;
-}
-.escort-add-more-pic img {
-    padding-top: 60px;
-}
+    form.add-picture-form {
+        width: 100%;
+        padding-right: 15px;
+    }
+    .escort-add-more-pic img {
+        padding-top: 60px;
+    }
     .escort-pictures .escort-image {
         margin-top: 0;
         margin-bottom: 15px;
     }
-.escort-profile .container-xl {
-    max-width: 100%;
-}
+    .escort-profile .container-xl {
+        max-width: 100%;
+    }
 
-.escort-profile .nav-borders .nav-link {
-    font-size: 14px;
-}
-.escort-profile .escort-videos {
-    max-width: none;
-}
+    .escort-profile .nav-borders .nav-link {
+        font-size: 14px;
+    }
+    .escort-profile .escort-videos {
+        max-width: none;
+    }
 
+    .escort-videos button {
+        float: right;
+        margin-bottom: -33px;
+    }
 
-.escort-videos button {
-    float: right;
-    margin-bottom: -33px;
-}
+    form.add-video-form {
+        width: 100%;
+    }
 
-form.add-video-form {
-    width: 100%;
-}
+    .escort-profile .right-content .card-header {
+        display: flex;
+        align-items: center;
+        font-size: 16px;
+        gap: 14px;
+    }
 
-.escort-profile .right-content .card-header {
-    display: flex;
-    align-items: center;
-    font-size: 16px;
-    gap: 14px;
-}
-
-.left-content .card-header {
-    text-align: center;
-}
-.escort-profile {
-    margin-bottom: 30px;
-}
-
-
-
-
+    .left-content .card-header {
+        text-align: center;
+    }
+    .escort-profile {
+        margin-bottom: 30px;
+    }
 }

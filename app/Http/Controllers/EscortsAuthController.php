@@ -75,7 +75,7 @@ class EscortsAuthController extends Controller
                 // If email is not verified, log the user out and redirect back with an error
                 Auth::guard('escort')->logout();
                 return redirect()->route('login')->withErrors([
-                    'email' => 'Your email address is not verified. Please verify your email first.',
+                    'email' => 'email_not_verify',
                 ])->withInput();
             }
 
