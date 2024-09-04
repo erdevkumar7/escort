@@ -20,7 +20,8 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="{{ route('admin.agency.add_escorts', $agency->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.agency.add_escorts', $agency->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 <div class="item form-group">
                                     {{-- nickname --}}
@@ -50,13 +51,43 @@
                                 </div>
 
                                 <div class="item form-group">
+                                    {{-- email --}}
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <label for="email">Email * </label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            value="{{ old('email') }}" oninput="removeError('emailErr')">
+                                        @error('email')
+                                            <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    {{-- password --}}
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <label for="password">Password * </label>
+                                        <input type="Password" name="password" class="form-control" id="pass"
+                                            oninput="removeError('PasswordErr')">
+                                        @error('password')
+                                            <span class="text-danger" id="PasswordErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    {{-- password_confirmation --}}
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <label for="password_confirmation">Confirm Password * </label>
+                                        <input type="password" name="password_confirmation" id="password_confirmation"
+                                            class="form-control" oninput="removeError('C_PasswordErr')">
+                                        @error('password_confirmation')
+                                            <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
                                     {{-- city --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="city">City *</label>
                                         <select class="form-control" id="city" name="city"
                                             oninput="removeError('cityErr')">
                                             <option value="">Select City</option>
-                                            <option value="city" {{ old('city') == 'city' ? 'selected' : '' }}>city
+                                            <option value="city1" {{ old('city') == 'city1' ? 'selected' : '' }}>city1
                                             </option>
                                             <option value="city2" {{ old('city') == 'city2' ? 'selected' : '' }}>city2
                                             </option>
@@ -96,7 +127,8 @@
                                         <select class="form-control" id="origin" name="origin"
                                             oninput="removeError('originErr')">
                                             <option value="">Select Origin</option>
-                                            <option value="Caucasian" {{ old('origin') == 'Caucasian' ? 'selected' : '' }}>
+                                            <option value="Caucasian"
+                                                {{ old('origin') == 'Caucasian' ? 'selected' : '' }}>
                                                 Caucasian</option>
                                             <option value="Latin" {{ old('origin') == 'Latin' ? 'selected' : '' }}>Latin
                                             </option>
@@ -143,8 +175,8 @@
                                         <select class="form-control" id="canton" name="canton"
                                             oninput="removeError('cantonErr')">
                                             <option value="">Select Canton</option>
-                                            <option value="canton" {{ old('canton') == 'canton' ? 'selected' : '' }}>
-                                                canton</option>
+                                            <option value="canton1" {{ old('canton') == 'canton1' ? 'selected' : '' }}>
+                                                canton1</option>
                                             <option value="canton2" {{ old('canton') == 'canton2' ? 'selected' : '' }}>
                                                 canton2</option>
                                             <option value="canton3" {{ old('canton') == 'canton3' ? 'selected' : '' }}>
@@ -245,6 +277,7 @@
                                         <label for="pictures">Pictures<span class="required">*</span></label>
                                         <input type="file" class="form-control" id="pictures" name="pictures[]"
                                             multiple oninput="removeError('picturesErr')">
+                                        <input type="hidden" name="media_type_image" value="image">
                                         @error('pictures')
                                             <span class="text-danger" id="picturesErr">{{ $message }}</span>
                                         @enderror
@@ -267,8 +300,9 @@
 
                                     <div class="col-md-4 col-sm-4">
                                         <label for="video">Videos</label>
-                                        <input type="file" class="form-control" id="video" name="video[]"
+                                        <input type="file" class="form-control" id="video" name="videos[]"
                                             multiple>
+                                        <input type="hidden" name="media_type_video" value="video">
                                         @error('video')
                                             <span class="text-danger" id="videoErr">{{ $message }}</span>
                                         @enderror
@@ -394,7 +428,7 @@
                                     {{-- description --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="description">Description *</label>
-                                        <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')">{{old('text_description')}}</textarea>
+                                        <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')">{{ old('text_description') }}</textarea>
                                         @error('text_description')
                                             <span class="text-danger" id="descriptionErr">{{ $message }}</span>
                                         @enderror
@@ -406,12 +440,24 @@
                                     <div class="col-md-4 col-sm-4">
                                         <label for="availability">Availability</label>
                                         <select class="form-control" id="availability" name="availability[]" multiple>
-                                            <option value="Monday" {{ in_array('Monday', old('availability', [])) ? 'selected' : '' }}>Monday</option>
-                                            <option value="Tuesday" {{ in_array('Tuesday', old('availability', [])) ? 'selected' : '' }}>Tuesday</option>
-                                            <option value="Wednesday" {{ in_array('Wednesday', old('availability', [])) ? 'selected' : '' }}>Wednesday</option>
-                                            <option value="Thursday" {{ in_array('Thursday', old('availability', [])) ? 'selected' : '' }}>Thursday</option>
-                                            <option value="Friday" {{ in_array('Friday', old('availability', [])) ? 'selected' : '' }}>Friday</option>
-                                            <option value="Saturday" {{ in_array('Saturday', old('availability', [])) ? 'selected' : '' }}>Saturday</option>
+                                            <option value="Monday"
+                                                {{ in_array('Monday', old('availability', [])) ? 'selected' : '' }}>Monday
+                                            </option>
+                                            <option value="Tuesday"
+                                                {{ in_array('Tuesday', old('availability', [])) ? 'selected' : '' }}>
+                                                Tuesday</option>
+                                            <option value="Wednesday"
+                                                {{ in_array('Wednesday', old('availability', [])) ? 'selected' : '' }}>
+                                                Wednesday</option>
+                                            <option value="Thursday"
+                                                {{ in_array('Thursday', old('availability', [])) ? 'selected' : '' }}>
+                                                Thursday</option>
+                                            <option value="Friday"
+                                                {{ in_array('Friday', old('availability', [])) ? 'selected' : '' }}>Friday
+                                            </option>
+                                            <option value="Saturday"
+                                                {{ in_array('Saturday', old('availability', [])) ? 'selected' : '' }}>
+                                                Saturday</option>
                                         </select>
                                     </div>
                                     {{-- currencies_accepted --}}
@@ -419,9 +465,15 @@
                                         <label for="currencies_accepted">Currencies Accepted</label>
                                         <select class="form-control" id="currencies_accepted"
                                             name="currencies_accepted[]" multiple>
-                                            <option value="CHF" {{ in_array('CHF', old('currencies_accepted', [])) ? 'selected' : '' }}>CHF</option>
-                                            <option value="EUR" {{ in_array('EUR', old('currencies_accepted', [])) ? 'selected' : '' }}>EUR</option>
-                                            <option value="USD" {{ in_array('USD', old('currencies_accepted', [])) ? 'selected' : '' }}>USD</option>
+                                            <option value="CHF"
+                                                {{ in_array('CHF', old('currencies_accepted', [])) ? 'selected' : '' }}>CHF
+                                            </option>
+                                            <option value="EUR"
+                                                {{ in_array('EUR', old('currencies_accepted', [])) ? 'selected' : '' }}>EUR
+                                            </option>
+                                            <option value="USD"
+                                                {{ in_array('USD', old('currencies_accepted', [])) ? 'selected' : '' }}>USD
+                                            </option>
                                         </select>
                                     </div>
 
@@ -429,8 +481,12 @@
                                         <label for="payment_method">Payment Methods</label>
                                         <select class="form-control" id="payment_method" name="payment_method[]"
                                             multiple>
-                                            <option value="Cash" {{ in_array('Cash', old('payment_method', [])) ? 'selected' : '' }}>Cash</option>
-                                            <option value="Credit Card" {{ in_array('Credit Card', old('payment_method', [])) ? 'selected' : '' }}>Credit Card</option>
+                                            <option value="Cash"
+                                                {{ in_array('Cash', old('payment_method', [])) ? 'selected' : '' }}>Cash
+                                            </option>
+                                            <option value="Credit Card"
+                                                {{ in_array('Credit Card', old('payment_method', [])) ? 'selected' : '' }}>
+                                                Credit Card</option>
                                         </select>
                                     </div>
                                 </div>

@@ -104,7 +104,8 @@ Route::prefix('admin')->group(function () {
         //Agency-escorts Operation
         Route::get('/agency/{id}/show-escorts', [AdminAgencyController::class, 'agency_escorts'])->name('admin.agency.escorts');
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
-        Route::post('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
+        Route::post('/agency/{agency_id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
+        
         //Badges Operations
         Route::get('all-badges', [BadgeController::class, 'allbadges'])->name('admin.allbadges');
         Route::get('/add-badge', [BadgeController::class, 'add_badge_form'])->name('admin.add.badge_form');
