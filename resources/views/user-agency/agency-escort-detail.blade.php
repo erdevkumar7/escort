@@ -68,14 +68,23 @@
 
                     <div class="experience-inner-part">
                         <p>
+                            @if ($escort->type)
+                                Category : {{ $escort->type }} |
+                            @endif
                             @if ($escort->rates_in_chf)
-                                | {{ $escort->rates_in_chf }} Chf |
+                                Rate : {{ $escort->rates_in_chf }} Chf |
+                            @endif
+                            @if ($escort->height)
+                                Height : {{ $escort->height }}Kg |
                             @endif
                             @if ($escort->weight)
-                                {{ $escort->weight }}Kg |
+                                Weight : {{ $escort->weight }}Kg |
                             @endif
-                            @if ($escort->type)
-                                {{ $escort->type }}
+                            @if ($escort->hair_color)
+                                Hair Color : {{ $escort->hair_color }} |
+                            @endif
+                            @if ($escort->hair_length)
+                                Hair Length : {{ $escort->hair_length }} |
                             @endif
                             @if ($escort->text_description)
                                 <div class="escort-dec">

@@ -55,7 +55,8 @@
 
                 <div class="col-md-12 second-members-content">
                     @if ($escort->profile_pic)
-                        <img src="{{ asset('/public/images/escorts_img') . '/' . $escort->profile_pic }}" alt="Profile_pic" />
+                        <img src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}"
+                            alt="Profile_pic" />
                     @else
                         <img src="{{ asset('/public/images/static_img') . '/' . 'default_profile.png' }}"
                             alt="Default Profile Picture">
@@ -67,15 +68,25 @@
 
                     <div class="experience-inner-part">
                         <p>
+                            @if ($escort->type)
+                                Category : {{ $escort->type }} |
+                            @endif
                             @if ($escort->rates_in_chf)
-                                | {{ $escort->rates_in_chf }} Chf |
+                                Rate : {{ $escort->rates_in_chf }} Chf |
+                            @endif
+                            @if ($escort->height)
+                                Height : {{ $escort->height }}Kg |
                             @endif
                             @if ($escort->weight)
-                                {{ $escort->weight }}Kg |
+                                Weight : {{ $escort->weight }}Kg |
                             @endif
-                            @if ($escort->type)
-                                {{ $escort->type }}
+                            @if ($escort->hair_color)
+                                Hair Color : {{ $escort->hair_color }} |
                             @endif
+                            @if ($escort->hair_length)
+                                Hair Length : {{ $escort->hair_length }} |
+                            @endif
+                          
                             @if ($escort->text_description)
                                 <div class="escort-dec">
                                     💃✨
@@ -137,8 +148,9 @@
                             @foreach ($videos as $vdo)
                                 <div class="col-lg-3 menu-item">
                                     <div class="video-thumbnail escort-detail-video">
-                                        <img src="{{ asset('/public/images/static_img/video_play.png') }}" alt="Video Thumbnail"
-                                             onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
+                                        <img src="{{ asset('/public/images/static_img/video_play.png') }}"
+                                            alt="Video Thumbnail"
+                                            onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
                                     </div>
                                     {{-- <video controls>
                                         <source src="{{ asset('/public/videos') . '/' . $vdo->name }}" type="video/mp4">
@@ -156,19 +168,19 @@
         </div>
         <script>
             function loadVideo(element, videoSrc) {
-                const videoContainer = document.createElement('div');  // Container for the video
-                const videoElement = document.createElement('video');  // The video element
+                const videoContainer = document.createElement('div'); // Container for the video
+                const videoElement = document.createElement('video'); // The video element
                 videoElement.setAttribute('controls', '');
-                videoElement.setAttribute('width', '853');  // Set width and height
+                videoElement.setAttribute('width', '853'); // Set width and height
                 videoElement.setAttribute('height', '480');
-                
-                const sourceElement = document.createElement('source');  // Source element for video
+
+                const sourceElement = document.createElement('source'); // Source element for video
                 sourceElement.setAttribute('src', videoSrc);
                 sourceElement.setAttribute('type', 'video/mp4');
-                
-                videoElement.appendChild(sourceElement);  // Add the source to the video element
-                videoContainer.appendChild(videoElement);  // Append video to the container
-        
+
+                videoElement.appendChild(sourceElement); // Add the source to the video element
+                videoContainer.appendChild(videoElement); // Append video to the container
+
                 // Replace the clicked thumbnail with the video player
                 element.parentNode.replaceChild(videoContainer, element);
             }

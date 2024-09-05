@@ -114,8 +114,8 @@ class UserEscortsController extends Controller
         }
         $escort = Escort::find(Auth::guard('escort')->user()->id);
         // $escort = Escort::find(Auth::guard('escort')->user()->id);
-        $pictures = json_decode($escort->pictures, true);
-        $video = json_decode($escort->video, true);
+        $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
+        $video = Media::where('escort_id', $id)->where('type', 'video')->get();
         $services = json_decode($escort->services, true);
         $language_spoken = json_decode($escort->language_spoken, true);
         $availability = json_decode($escort->availability, true);
@@ -149,12 +149,7 @@ class UserEscortsController extends Controller
         if (Auth::guard('escort')->user()->id != $id) {
             return redirect()->route('escorts.myPictures', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
         }
-        // $escort = Escort::find(Auth::guard('escort')->user()->id);
-        // if ($escort->pictures) {
-        //     $pictures = json_decode($escort->pictures, true);
-        // } else {
-        //     $pictures = [];
-        // }
+      
         $pictures = Media::where('type', 'image')
             ->where('escort_id', Auth::guard('escort')->user()->id)
             ->get();
@@ -233,51 +228,50 @@ class UserEscortsController extends Controller
             'payment_method' => 'nullable|array',
         ]);
 
-        // Handle Image file upload
-        $pictures = json_decode($escort->pictures, true) ?? [];
-        if ($request->hasFile('pictures')) {
-            foreach ($request->file('pictures') as $image) {
-                $originalImageName = $image->getClientOriginalName();
-                $imageName = time() . '_' . $originalImageName;
-                $image->move(public_path('images/escorts_img'), $imageName);
-                $pictures[] = $imageName;
-            }
-        }
+     
+        // $pictures = json_decode($escort->pictures, true) ?? [];
+        // if ($request->hasFile('pictures')) {
+        //     foreach ($request->file('pictures') as $image) {
+        //         $originalImageName = $image->getClientOriginalName();
+        //         $imageName = time() . '_' . $originalImageName;
+        //         $image->move(public_path('images/escorts_img'), $imageName);
+        //         $pictures[] = $imageName;
+        //     }
+        // }
 
-        // Handle Profile_pic Image file upload
-        if ($request->hasFile('profile_pic')) {
-            // Delete the old image if it exists
-            if ($escort->profile_pic) {
-                $oldImagePath = public_path('images/profile_img') . '/' . $escort->profile_pic;
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
-            }
+     
+        // if ($request->hasFile('profile_pic')) {
+        //     // Delete the old image if it exists
+        //     if ($escort->profile_pic) {
+        //         $oldImagePath = public_path('images/profile_img') . '/' . $escort->profile_pic;
+        //         if (file_exists($oldImagePath)) {
+        //             unlink($oldImagePath);
+        //         }
+        //     }
 
-            // Upload the new image
-            $image = $request->file('profile_pic');
-            $originalImageName = $image->getClientOriginalName();
-            $profileName = time() . '_' . $originalImageName;
-            $image->move(public_path('images/profile_img'), $profileName);
-        } else {
-            $profileName = null;
-        }
+        //     // Upload the new image
+        //     $image = $request->file('profile_pic');
+        //     $originalImageName = $image->getClientOriginalName();
+        //     $profileName = time() . '_' . $originalImageName;
+        //     $image->move(public_path('images/profile_img'), $profileName);
+        // } else {
+        //     $profileName = null;
+        // }
 
-        // Handle video file upload
-        $videos = json_decode($escort->video, true) ?? [];
-        if ($request->hasFile('video')) {
-            foreach ($request->file('video') as $vdo) {
-                $originalVdoName = $vdo->getClientOriginalName();
-                $vdoName = time() . '_' . $originalVdoName;
-                $vdo->move(public_path('videos'), $vdoName);
-                $videos[] = $vdoName;
-            }
-        }
+        // $videos = json_decode($escort->video, true) ?? [];
+        // if ($request->hasFile('video')) {
+        //     foreach ($request->file('video') as $vdo) {
+        //         $originalVdoName = $vdo->getClientOriginalName();
+        //         $vdoName = time() . '_' . $originalVdoName;
+        //         $vdo->move(public_path('videos'), $vdoName);
+        //         $videos[] = $vdoName;
+        //     }
+        // }
 
-        $validatedData['profile_pic'] = $profileName;
-        $validatedData['pictures'] = json_encode($pictures);
+        // $validatedData['profile_pic'] = $profileName;
+        // $validatedData['pictures'] = json_encode($pictures);
+        // $validatedData['video'] = json_encode($videos);
         $validatedData['services'] = json_encode($validatedData['services']);
-        $validatedData['video'] = json_encode($videos);
         $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
         $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;

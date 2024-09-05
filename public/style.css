@@ -1359,9 +1359,20 @@ section.select-gallary {
 
 div#escort-videos video {
     width: 100%;
-    border: solid 1px #FFBF00;
     height: 340px;
     border-radius: 15px;
+}
+div#escort-videos {
+    gap: 20px;
+}
+
+div#escort-videos .menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: solid 1px #FFBF00;
+    border-radius: 15px;
+    height: 340px;
 }
 
 .container-login100-form-btn a {

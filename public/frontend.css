@@ -501,8 +501,10 @@ form.add-video-form {
     margin: auto;
 }
 .row.escort-videos {
-    row-gap: 10px;
+    gap: 25px;
     align-items: flex-start;
+    justify-content: center;
+    text-align: center;
 }
 
 .video-thumbnail img {
@@ -512,6 +514,44 @@ form.add-video-form {
 
 .video-thumbnail img:hover {
     transform: scale(1.05);  /* Slight zoom effect on hover */
+}
+
+.escort-detail-video img {
+    width: 80px;
+    height: 80px;
+}
+
+
+div#escort-videos .menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    max-width: 23% !important;
+}
+
+div#escort-videos {
+    gap: 15px;
+    max-width: 100%;
+    justify-content: center;
+}
+
+.menu-item.escort-videos {
+    border: solid 2px #232e48;
+    max-width: 23%;
+    height: 219px;
+    border-radius: 5px;
+}   
+
+.video-thumbnail.my-video-img img {
+    width: 80px;
+}
+
+.video-thumbnail.my-video-img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 209px;
+    width: 100%;
 }
 
 @media (min-width: 768px) and (max-width: 1024px) {
@@ -732,4 +772,17 @@ form.add-video-form {
     .escort-profile {
         margin-bottom: 30px;
     }
+div#escort-videos {
+    display: block;
+    max-width: 90%;
+    margin: auto;
+    padding-bottom: 40px;
+}
+
+div#escort-videos .menu-item {
+    max-width: 100% !important;
+}
+
+
+
 }

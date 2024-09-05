@@ -93,7 +93,7 @@
                                     <!-- Form Group (whatsapp_number)-->
                                     <div class="col-md-4">
                                         <label for="whatsapp_number">WhatsApp Number </label>
-                                        <input type="text" class="form-control"
+                                        <input type="text" name="whatsapp_number" class="form-control"
                                             value="{{ $escort->whatsapp_number ?? 'Not Selected' }}">
                                     </div>
                                     <!-- Form Group (canton)-->

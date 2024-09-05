@@ -125,6 +125,7 @@
     <script>
         function loadVideo(element, videoSrc) {
             const videoContainer = document.createElement('div');  // Container for the video
+            videoContainer.classList.add('my-video-player-active');
             const videoElement = document.createElement('video');  // The video element
             videoElement.setAttribute('controls', '');
             videoElement.setAttribute('width', '853');  // Set width and height
