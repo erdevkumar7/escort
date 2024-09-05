@@ -388,14 +388,14 @@ class UserEscortsController extends Controller
     public function escort_detail($id)
     {
         $escort = Escort::find($id);
-        $pictures = json_decode($escort->pictures);
-        $video = json_decode($escort->video);
+        $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
+        $videos = Media::where('escort_id', $id)->where('type', 'video')->get(); 
         $services = json_decode($escort->services, true);
         $language_spoken = json_decode($escort->language_spoken, true);
         $availability = json_decode($escort->availability, true);
         $currencies_accepted = json_decode($escort->currencies_accepted, true);
         $payment_method = json_decode($escort->payment_method, true);
 
-        return view('user-escort.escort-detail', compact('escort', 'language_spoken', 'pictures', 'video', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        return view('user-escort.escort-detail', compact('escort', 'language_spoken', 'pictures', 'videos', 'availability', 'currencies_accepted', 'payment_method', 'services'));
     }
 }

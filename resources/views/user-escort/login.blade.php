@@ -28,11 +28,11 @@
                                     email</a>
                                 </span>
                             @else
-                                <span class="text-danger input100">{{ $message }}</span>
+                                <span class="text-danger input100 txt2">{{ $message }}</span>
                             @endif
                         @endforeach
                     @elseif ($errors->has('password'))
-                        <span class="text-danger input100">{{ $errors->first('password') }}</span>
+                        <span class="text-danger input100 txt2">{{ $errors->first('password') }}</span>
                     @endif
 
                     <div class="flex-sb-m w-full p-t-3 p-b-32">

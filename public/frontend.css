@@ -505,6 +505,15 @@ form.add-video-form {
     align-items: flex-start;
 }
 
+.video-thumbnail img {
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.video-thumbnail img:hover {
+    transform: scale(1.05);  /* Slight zoom effect on hover */
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
     .menu-item.escort-image img {
         height: 380px;
