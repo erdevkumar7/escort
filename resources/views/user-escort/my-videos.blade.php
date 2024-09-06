@@ -19,59 +19,70 @@
                 <a class="nav-link" href="{{ route('escorts.myPictures', Auth::guard('escort')->user()->id) }}">My
                     Pictures</a>
                 <a class="nav-link active" href="#">My Videos</a>
+
+
             </nav>
 
             <div class="row escort-videos">
-                @foreach ($videos as $vdo)
-                    <div class="col-lg-3 menu-item escort-videos">
-                        <!-- Delete video Form-->
-                        <span class="escort-video-delete-from">
-                            <form
-                                action="{{ route('escorts.deleteMedia', ['escort_id' => Auth::guard('escort')->user()->id, 'media_id' => $vdo->id]) }}"
-                                method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <input type="hidden" name="name" value="{{ $vdo->name }}">
-                                <input type="hidden" name="type" value="video">
-                                <button type="submit" class="btn btn-danger">
-                                    <i class="fa-solid fa-xmark"></i></button>
-                            </form>
-                        </span>
-                        <!-- Show-Videos-->
+                <span class="upload-myVideos" onclick="openModal()">Upload Video <i class="fa-solid fa-upload"></i></span>
+                @if ($videos->isEmpty())
+                    <!-- Display this div when no videos are available -->
+                    <div class="col-lg-3 menu-item no-video-available">
+                        <h3>No videos available</h3>
+                    </div>
+                @else
+                    @foreach ($videos as $vdo)
+                        <div class="col-lg-3 menu-item escort-videos">
+                            <!-- Delete video Form-->
+                            <span class="escort-video-delete-from">
+                                <form
+                                    action="{{ route('escorts.deleteMedia', ['escort_id' => Auth::guard('escort')->user()->id, 'media_id' => $vdo->id]) }}"
+                                    method="POST">
+                                    @csrf
+                                    @method('DELETE')
+                                    <input type="hidden" name="name" value="{{ $vdo->name }}">
+                                    <input type="hidden" name="type" value="video">
+                                    <button type="submit" class="btn btn-danger">
+                                        <i class="fa-solid fa-xmark"></i></button>
+                                </form>
+                            </span>
+                            <!-- Show-Videos-->
 
-                        {{-- <iframe width="560" height="315"  src="{{ asset('/public/videos') . '/' . $vdo->name }}"
+                            {{-- <iframe width="560" height="315"  src="{{ asset('/public/videos') . '/' . $vdo->name }}"
                             type="video/mp4" title="escort-videos" frameborder="0"
                             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                         </iframe> --}}
 
 
-                        {{-- <video controls preload="none" poster="{{ asset('/public/images/static_img/nicole.png') }}">
+                            {{-- <video controls preload="none" poster="{{ asset('/public/images/static_img/nicole.png') }}">
                             <source src="{{ asset('/public/videos') . '/' . $vdo->name }}" type="video/mp4">
                             Your browser does not support the video tag.
                         </video> --}}
 
-                        {{-- <iframe src="{{ asset('/public/videos') . '/' . $vdo->name }}"  frameborder="0"
+                            {{-- <iframe src="{{ asset('/public/videos') . '/' . $vdo->name }}"  frameborder="0"
                             allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                             referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
                         </iframe> --}}
 
-                        {{-- <div class="video-thumbnail" id="thumbnail-{{ $vdo->id }}" style="width: 303px; height:213px">
+                            {{-- <div class="video-thumbnail" id="thumbnail-{{ $vdo->id }}" style="width: 303px; height:213px">
                             <img src="{{ asset('/public/images/static_img/video_play.png') }}" alt="Video Thumbnail"
                                 onclick="loadIframe(this, '{{ asset('/public/videos') . '/' . $vdo->name }}', '{{ $vdo->id }}')">
                         </div> --}}
 
-                        <div class="video-thumbnail my-video-img">
-                            <img src="{{ asset('/public/images/static_img/video_play.png') }}" alt="Video Thumbnail"
+                            <div class="video-thumbnail image-video-thumbnail"
                                 onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
+
+                                <img src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
+                                <img src="{{ $vdo->thumb_nail ? asset('/public/images/thumb_nails/' . $vdo->thumb_nail) : asset('/public/images/static_img/default_thumbnail.png') }}"
+                                    alt="Thumbnail">
+
+                            </div>
                         </div>
+                    @endforeach
+                    <!-- Add-Video Form -->
 
-
-
-                    </div>
-                @endforeach
-                <!-- Add-Video Form -->
-                <form class="add-video-form"
+                    {{-- <form class="add-video-form"
                     action="{{ route('escort.add.media.myVideos', Auth::guard('escort')->user()->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
@@ -86,7 +97,8 @@
                         <input type="file" id="addVideoInput" name="videos[]" multiple style="display: none;"
                             onchange="this.form.submit()">
                     </div>
-                </form>
+                </form> --}}
+                @endif
             </div>
         </div>
     </div>
@@ -131,6 +143,47 @@
         }
     </script> --}}
 
+    <!-- Modal Structure -->
+    <div id="uploadModal" class="modal" style="display:none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeModal()">&times;</span>
+            <h2>Upload Video</h2>
+            <form class="add-video-form"
+                action="{{ route('escort.add.media.myVideos', Auth::guard('escort')->user()->id) }}" method="POST"
+                enctype="multipart/form-data">
+                @csrf
+                @method('POST')
+                <!-- Video Upload -->
+                <label for="video">Choose Video:</label>
+                <input type="file" id="video" name="video" accept="video/*" required>
+
+                <!-- Thumbnail Upload -->
+                <label for="thumbnail">Choose Thumbnail Image:</label>
+                <input type="file" id="thumbnail" name="thumb_nail" accept="image/*">
+
+                <input type="hidden" name="media_type_video" value="video">
+                <!-- Submit Button -->
+                <button type="submit">Upload</button>
+            </form>
+        </div>
+    </div>
+    <script>
+        function openModal() {
+            document.getElementById("uploadModal").style.display = "block";
+        }
+
+        function closeModal() {
+            document.getElementById("uploadModal").style.display = "none";
+        }
+
+        // Close modal if the user clicks outside the modal content
+        window.onclick = function(event) {
+            if (event.target === document.getElementById("uploadModal")) {
+                closeModal();
+            }
+        }
+    </script>
+
     <script>
         function loadVideo(element, videoSrc) {
             const videoContainer = document.createElement('div'); // Container for the video
@@ -149,5 +202,6 @@
             element.parentNode.replaceChild(videoContainer, element);
         }
     </script>
+
 
 @endsection

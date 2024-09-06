@@ -9,5 +9,5 @@ class Media extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['name', 'type', 'escort_id','agency_id'];
+    protected $fillable = ['name', 'type', 'escort_id','agency_id, thumb_nail'];
 }

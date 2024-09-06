@@ -62,52 +62,49 @@ class MediaController extends Controller
 
     public function add_escorts_myVideos(Request $request, $escort_id)
     {
-        $currentVideoCount = Media::where('escort_id', $escort_id)
-            ->where('type', $request->media_type_video) // Assuming you store image type in 'type'
-            ->count();
-
-        $newVideoCount = count($request->file('videos'));
-
-        if (($currentVideoCount + $newVideoCount) > 30) {
-            return redirect()->back()->with('error', 'You can only upload a maximum of 30 videos.');
-        }
-        // Update validation rules to handle array input for 'videos'
+        // Update validation rules to handle single video and thumbnail
         $request->validate([
-            'videos' => 'required|array',
-            'videos.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000', // Validate each file in the array         
+            'video' => 'required|file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
+            'thumb_nail' => 'nullable|file|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048', // Thumbnail validation
         ]);
 
         try {
-            // Check if 'videos' is an array (multiple files uploaded)
-            if (is_array($request->file('videos'))) {
-                // Handle multiple files
-                foreach ($request->file('videos') as $vdo) {
-                    $originalVdoName = $vdo->getClientOriginalName();
-                    $vdoName = time() . '_' . $originalVdoName;
-
-                    // Try to move the video to the public path
-                    $uploadSuccess = $vdo->move(public_path('videos'), $vdoName);
-
-                    // Check if the upload succeeded
-                    if ($uploadSuccess) {
-                        // Save the media record if upload is successful
-                        Media::create([
-                            'name' => $vdoName,
-                            'type' => $request->media_type_video,
-                            'escort_id' => $escort_id,
-                        ]);
-                    } else {
-                        return redirect()->back()->withErrors(['error' => 'Failed to upload video: ' . $originalVdoName]);
-                    }
-                }
+            // Handle thumbnail upload
+            if ($request->file('thumb_nail')) {
+                $thumb_nail = $request->file('thumb_nail');
+                $thumb_nailName = time() . '_' . $thumb_nail->getClientOriginalName();
+                $thumb_nail->move(public_path('images/thumb_nails'), $thumb_nailName);
+            } else {
+                $thumb_nailName = null;
+            }
+            // Handle video upload
+            if ($request->file('video')) {
+                $video = $request->file('video');
+                $videoName = time() . '_' . $video->getClientOriginalName();
+                $video->move(public_path('videos'), $videoName);
+            } else {
+                $videoName = null;
             }
 
+            // Create a new instance of Media
+            $media = new Media();
+            $media->name = $videoName;
+            $media->type = 'video';  // Assuming 'video' is the media type
+            $media->escort_id = $escort_id;
+            $media->thumb_nail = $thumb_nailName;
+
+            // Save the media instance
+            $media->save();
+
+            // Redirect with success message
             return redirect()->route('escorts.myVideos', $escort_id)->with('success', 'Video uploaded successfully.');
         } catch (\Exception $e) {
-            // Handle any exception that might occur during the process
-            return redirect()->back()->withErrors(['error' => 'An error occurred while uploading your videos. Please try again.']);
+            // Handle any exception that occurs during the process
+            return redirect()->back()->withErrors(['error' => 'An error occurred while uploading your video and thumbnail. Please try again.']);
         }
     }
+
+
 
 
 
