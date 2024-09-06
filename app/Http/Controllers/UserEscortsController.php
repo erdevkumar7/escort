@@ -382,6 +382,9 @@ class UserEscortsController extends Controller
     public function escort_detail($id)
     {
         $escort = Escort::find($id);
+        if (!$escort) {
+            return redirect()->back()->with('error', 'Escort not found.');
+       }
         $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
         $videos = Media::where('escort_id', $id)->where('type', 'video')->get(); 
         $services = json_decode($escort->services, true);

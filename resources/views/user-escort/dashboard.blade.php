@@ -43,18 +43,41 @@
                     <!-- Billing card 1-->
                     <div class="card h-100 border-start-lg border-start-primary">
                         <div class="card-body">
-                            <div class="small text-muted">Total Photos</div>
+                            <div class="small text-muted"> Total photos</div>
                             <div class="h3">
                                 @if ($pictures)
-                                    <p> <span>Photos</span> {{ count($pictures) }} </p>
+                                    <p> <span>Available photos</span> {{ count($pictures) }} </p>
                                 @else
-                                    <p> <span>Photos</span> 0 </p>
+                                    <p> <span>Available photo</span> 0 </p>
                                 @endif
                                 {{-- <p>Total Images: {{ $pictures }}</p> --}}
                             </div>
                             <a class="text-arrow-icon small"
                                 href="{{ route('escorts.myPictures', Auth::guard('escort')->user()->id) }}">
                                 View all photos
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-lg-4 mb-4">
+                    <!-- Billing card 1-->
+                    <div class="card h-100 border-start-lg border-start-primary">
+                        <div class="card-body">
+                            <div class="small text-muted"> Total videos</div>
+                            <div class="h3">
+                                @if ($pictures)
+                                    <p> <span>Available videos</span> {{ count($videos) }} </p>
+                                @else
+                                    <p> <span>Available videos</span> 0 </p>
+                                @endif
+                                {{-- <p>Total Images: {{ $pictures }}</p> --}}
+                            </div>
+                            <a class="text-arrow-icon small"
+                                href="{{ route('escorts.myVideos', Auth::guard('escort')->user()->id) }}">
+                                View all videos
                             </a>
                         </div>
                     </div>

@@ -1,6 +1,15 @@
 @extends('user.layout-auth')
 @section('auth_content')
     <div class="escort-profile">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
@@ -33,7 +42,8 @@
                     </div>
                 @endforeach
                 <!-- Add Image Form-->
-                <form class="add-picture-form" action="{{ route('escort.add.media.myPictures', Auth::guard('escort')->user()->id) }}" method="POST"
+                <form class="add-picture-form"
+                    action="{{ route('escort.add.media.myPictures', Auth::guard('escort')->user()->id) }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     @method('POST')
@@ -43,8 +53,8 @@
                                 alt="Add Image">
                             <p>Add More</p>
                         </span>
-                        <input type="hidden" name="type" value="image">
-                        <input type="file" id="addImageInput" accept="image/*" name="name[]" multiple
+                        <input type="hidden" name="media_type_image" value="image">
+                        <input type="file" id="addImageInput" accept="image/*" name="pictures[]" multiple
                             style="display: none;" onchange="this.form.submit()">
                     </div>
                 </form>

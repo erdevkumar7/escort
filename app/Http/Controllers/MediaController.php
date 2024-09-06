@@ -10,79 +10,106 @@ class MediaController extends Controller
 {
     public function add_escorts_myPictures(Request $request, $escort_id)
     {
-        // Update validation rules to handle array input for 'name'
+        // Get the current number of pictures the escort has
+        $currentPicturesCount = Media::where('escort_id', $escort_id)
+            ->where('type', $request->media_type_image) // Assuming you store image type in 'type'
+            ->count();
+
+        // Check if adding the new pictures exceeds the limit of 30
+        $newPicturesCount = count($request->file('pictures'));
+        if (($currentPicturesCount + $newPicturesCount) > 30) {
+            return redirect()->back()->with('error', 'You can only upload a maximum of 30 pictures.');
+        }
+        // Update validation rules to handle array input for 'pictures'
         $request->validate([
-            'name' => 'required|array',
-            'name.*' => 'file|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048', // Validate each file in the array         
+            'pictures' => 'required|array',
+            'pictures.*' => 'file|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048', // Validate each file in the array         
         ]);
 
-        // Check if the 'name' field is an array (multiple files uploaded)
-        if (is_array($request->file('name'))) {
-            // Handle multiple files
-            foreach ($request->file('name') as $image) {
-                $originalImageName = $image->getClientOriginalName();
-                $imageName = time() . '_' . $originalImageName;
-                $image->move(public_path('images/escorts_img'), $imageName);
-                Media::create([
-                    'name' => $imageName,
-                    'type' => $request->type,
-                    'escort_id' => $escort_id,
-                ]);
+        try {
+            // Check if the 'pictures' field is an array (multiple files uploaded)
+            if (is_array($request->file('pictures'))) {
+                // Handle multiple files          
+                foreach ($request->file('pictures') as $image) {
+                    $originalImageName = $image->getClientOriginalName();
+                    $imageName = time() . '_' . $originalImageName;
+
+                    // Try moving the image to the public path
+                    $uploadSuccess = $image->move(public_path('images/escorts_img'), $imageName);
+
+                    // Check if the upload succeeded
+                    if ($uploadSuccess) {
+                        // Save the media record if upload is successful
+                        Media::create([
+                            'name' => $imageName,
+                            'type' => $request->media_type_image,
+                            'escort_id' => $escort_id,
+                        ]);
+                    } else {
+                        return redirect()->back()->withErrors(['error' => 'Failed to upload picture ']);
+                    }
+                }
             }
-        } else {
-            // Handle single file
-            $image = $request->file('name');
-            $originalImageName = $image->getClientOriginalName();
-            $imgName = time() . '_' . $originalImageName;
-            $image->move(public_path('images/escorts_img'), $imgName);
 
-            Media::create([
-                'name' => $imgName,
-                'type' => $request->type,
-                'escort_id' => $escort_id,
-            ]);
+            return redirect()->route('escorts.myPictures', $escort_id)->with('success', 'Picture uploaded successfully.');
+        } catch (\Exception $e) {
+            // Handle any exception that might occur during the process
+            return redirect()->back()->withErrors(['error' => 'An error occurred while uploading your pictures. Please try again.']);
         }
-
-        return redirect()->route('escorts.myPictures', $escort_id)->with('success', 'Media uploaded successfully.');
     }
+
 
 
     public function add_escorts_myVideos(Request $request, $escort_id)
     {
-        // Update validation rules to handle array input for 'name'
+        $currentVideoCount = Media::where('escort_id', $escort_id)
+            ->where('type', $request->media_type_video) // Assuming you store image type in 'type'
+            ->count();
+
+        $newVideoCount = count($request->file('videos'));
+
+        if (($currentVideoCount + $newVideoCount) > 30) {
+            return redirect()->back()->with('error', 'You can only upload a maximum of 30 videos.');
+        }
+        // Update validation rules to handle array input for 'videos'
         $request->validate([
-            'name' => 'required|array',
-            'name.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000', // Validate each file in the array         
+            'videos' => 'required|array',
+            'videos.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000', // Validate each file in the array         
         ]);
 
-        // Check if the 'name' field is an array (multiple files uploaded)
-        if (is_array($request->file('name'))) {
-            // Handle multiple files
-            foreach ($request->file('name') as $vdo) {
-                $originalVdoName = $vdo->getClientOriginalName();
-                $vdoName = time() . '_' . $originalVdoName;
-                $vdo->move(public_path('videos'), $vdoName);
-                Media::create([
-                    'name' => $vdoName,
-                    'type' => $request->type,
-                    'escort_id' => $escort_id,
-                ]);
-            }
-        } else {
-            // Handle single file
-            $vdo = $request->file('name');
-            $originalVdoName = $vdo->getClientOriginalName();
-            $vdoName = time() . '_' . $originalVdoName;
-            $vdo->move(public_path('videos'), $vdoName);
-            Media::create([
-                'name' => $vdoName,
-                'type' => $request->type,
-                'escort_id' => $escort_id,
-            ]);
-        }
+        try {
+            // Check if 'videos' is an array (multiple files uploaded)
+            if (is_array($request->file('videos'))) {
+                // Handle multiple files
+                foreach ($request->file('videos') as $vdo) {
+                    $originalVdoName = $vdo->getClientOriginalName();
+                    $vdoName = time() . '_' . $originalVdoName;
 
-        return redirect()->route('escorts.myVideos', $escort_id)->with('success', 'Media uploaded successfully.');
+                    // Try to move the video to the public path
+                    $uploadSuccess = $vdo->move(public_path('videos'), $vdoName);
+
+                    // Check if the upload succeeded
+                    if ($uploadSuccess) {
+                        // Save the media record if upload is successful
+                        Media::create([
+                            'name' => $vdoName,
+                            'type' => $request->media_type_video,
+                            'escort_id' => $escort_id,
+                        ]);
+                    } else {
+                        return redirect()->back()->withErrors(['error' => 'Failed to upload video: ' . $originalVdoName]);
+                    }
+                }
+            }
+
+            return redirect()->route('escorts.myVideos', $escort_id)->with('success', 'Video uploaded successfully.');
+        } catch (\Exception $e) {
+            // Handle any exception that might occur during the process
+            return redirect()->back()->withErrors(['error' => 'An error occurred while uploading your videos. Please try again.']);
+        }
     }
+
+
 
 
     public function delete_media(Request $request, $escort_id, $media_id)

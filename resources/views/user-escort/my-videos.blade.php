@@ -1,6 +1,15 @@
 @extends('user.layout-auth')
 @section('auth_content')
     <div class="escort-profile">
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
@@ -54,9 +63,9 @@
 
                         <div class="video-thumbnail my-video-img">
                             <img src="{{ asset('/public/images/static_img/video_play.png') }}" alt="Video Thumbnail"
-                                 onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
+                                onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
                         </div>
-                        
+
 
 
                     </div>
@@ -73,8 +82,8 @@
                                 class="menu-img img-fluid" alt="Add Image">
                             <p>Add More</p>
                         </span>
-                        <input type="hidden" name="type" value="video">
-                        <input type="file" id="addVideoInput" name="name[]" multiple style="display: none;"
+                        <input type="hidden" name="media_type_video" value="video">
+                        <input type="file" id="addVideoInput" name="videos[]" multiple style="display: none;"
                             onchange="this.form.submit()">
                     </div>
                 </form>
@@ -124,23 +133,21 @@
 
     <script>
         function loadVideo(element, videoSrc) {
-            const videoContainer = document.createElement('div');  // Container for the video
+            const videoContainer = document.createElement('div'); // Container for the video
             videoContainer.classList.add('my-video-player-active');
-            const videoElement = document.createElement('video');  // The video element
+            const videoElement = document.createElement('video'); // The video element
             videoElement.setAttribute('controls', '');
-            videoElement.setAttribute('width', '853');  // Set width and height
-            videoElement.setAttribute('height', '480');
-            
-            const sourceElement = document.createElement('source');  // Source element for video
+
+            const sourceElement = document.createElement('source'); // Source element for video
             sourceElement.setAttribute('src', videoSrc);
             sourceElement.setAttribute('type', 'video/mp4');
-            
-            videoElement.appendChild(sourceElement);  // Add the source to the video element
-            videoContainer.appendChild(videoElement);  // Append video to the container
-    
+
+            videoElement.appendChild(sourceElement); // Add the source to the video element
+            videoContainer.appendChild(videoElement); // Append video to the container
+
             // Replace the clicked thumbnail with the video player
             element.parentNode.replaceChild(videoContainer, element);
         }
     </script>
-    
+
 @endsection
