@@ -86,7 +86,7 @@
                             @if ($escort->hair_length)
                                 Hair Length : {{ $escort->hair_length }} |
                             @endif
-                          
+
                             @if ($escort->text_description)
                                 <div class="escort-dec">
                                     💃✨
@@ -147,10 +147,21 @@
                         @if ($videos)
                             @foreach ($videos as $vdo)
                                 <div class="col-lg-3 menu-item">
-                                    <div class="video-thumbnail escort-detail-video">
+
+                                    {{-- <div class="video-thumbnail escort-detail-video">
                                         <img src="{{ asset('/public/images/static_img/video_play.png') }}"
                                             alt="Video Thumbnail"
                                             onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
+                                    </div> --}}
+                                    <div class="video-thumbnail escort-image-video-thumbnail"
+                                        onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
+
+                                        <img class="vidio-ply-img1"
+                                            src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
+                                        <img class="video-thumb9mg2"
+                                            src="{{ $vdo->thumb_nail ? asset('/public/images/thumb_nails/' . $vdo->thumb_nail) : asset('/public/images/static_img/default_thumbnail.png') }}"
+                                            alt="">
+
                                     </div>
                                     {{-- <video controls>
                                         <source src="{{ asset('/public/videos') . '/' . $vdo->name }}" type="video/mp4">
@@ -170,9 +181,12 @@
             function loadVideo(element, videoSrc) {
                 const videoContainer = document.createElement('div'); // Container for the video
                 const videoElement = document.createElement('video'); // The video element
-                videoElement.setAttribute('controls', '');
-                videoElement.setAttribute('width', '853'); // Set width and height
-                videoElement.setAttribute('height', '480');
+                // Autoplay the video, but remove all controls for interaction
+                videoElement.setAttribute('autoplay', ''); // Automatically play the video
+                // videoElement.setAttribute('muted', ''); // Mute the video to avoid autoplay restrictions
+                // videoElement.setAttribute('playsinline', ''); // Allow playback without full-screen on mobile devices
+                // videoElement.setAttribute('controlsList',
+                // 'nodownload nofullscreen noremoteplayback'); // Disable all video controls
 
                 const sourceElement = document.createElement('source'); // Source element for video
                 sourceElement.setAttribute('src', videoSrc);

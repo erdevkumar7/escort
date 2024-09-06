@@ -446,7 +446,7 @@ form.add-picture-form {
 }
 .escort-videos video {
     width: 100%;
-    height: 100%;
+    height: 230px;
 }
 .menu-item.escort-image button:hover {
     background-color: #ec8ccc;
@@ -500,16 +500,18 @@ form.add-video-form {
     justify-content: center;
     margin: auto;
 }
-.row.escort-videos {
+.escort-videos {
     gap: 25px;
     align-items: flex-start;
-    justify-content: center;
     text-align: center;
+    margin-top: 11px;
 }
 
 .video-thumbnail img {
     cursor: pointer;
     transition: 0.3s ease;
+    height: 260px;
+    width: 100%;
 }
 
 .video-thumbnail img:hover {
@@ -532,15 +534,26 @@ div#escort-videos .menu-item {
 div#escort-videos {
     gap: 15px;
     max-width: 100%;
-    justify-content: center;
+    justify-content: left;
 }
 
 .menu-item.escort-videos {
-    border: solid 2px #232e48;
+    /* border: solid 2px #232e48; */
     max-width: 23%;
-    height: 219px;
     border-radius: 5px;
-}   
+    position: relative;
+} 
+
+img.vidio-ply-img {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    top: 111px;
+    left: 40%;
+    right: 0;
+    z-index: 1;
+}
 
 .video-thumbnail.my-video-img img {
     width: 80px;
@@ -567,7 +580,7 @@ div#escort-videos {
   
   .modal-content {
     background-color: white;
-    margin: 15% auto;
+    margin: 8% auto;
     padding: 20px;
     border-radius: 5px;
     width: 40%;
@@ -583,10 +596,67 @@ div#escort-videos {
   .close:hover {
     color: red;
   }
-  .video-thumbnail.image-video-thumbnail img {
+/*  .video-thumbnail.image-video-thumbnail img {
     width: 100%;
     height: 208px;
+}*/
+
+.video-upload-forms form.add-video-form {
+    width: 100%;
+    margin-top: 5px;
 }
+img.vidio-ply-img1 {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    border-radius: 100%;
+    top: 145px;
+    left: 40%;
+    right: 0;
+    z-index: 1;
+}
+
+span.upload-myVideos {
+    color: #fff;
+    background-color: #232e48;
+    padding: 11px 11px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+span.upload-myVideos:hover {
+    background: #EC8CCC;
+}
+
+.no-video-available h3 {
+    margin-top: 30px;
+}
+.modal-content.video-upload-forms span.close {
+    text-align: right;
+    margin-bottom: -25px;
+}
+
+.modal-content.video-upload-forms .close:hover {
+    color: #232e48;
+}
+.modal-content.video-upload-forms h2 {
+    padding-bottom: 8px;
+}
+
+form.add-video-form button {
+    color: #fff;
+    background-color: #232e48;
+    width: 24%;
+    border: none;
+    border-radius: 5px;
+    padding: 8px 0;
+}
+
+form.add-video-form button:hover {
+    background-color: #ec8ccc;
+}
+
+
 
 @media (min-width: 768px) and (max-width: 1024px) {
     .menu-item.escort-image img {
@@ -638,7 +708,7 @@ div#escort-videos {
         margin-left: 0px;
     }
 
-    .row.escort-videos {
+    .escort-videos {
         row-gap: 10px;
         justify-content: center;
     }
@@ -815,6 +885,23 @@ div#escort-videos {
 
 div#escort-videos .menu-item {
     max-width: 100% !important;
+}
+
+div#escort-detail {
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+.modal-content {
+    margin: 40% auto;
+    width: 98%;
+}
+form.add-video-form button {
+    width: 30%;
+    margin-top: 11px;
+}
+
+form.add-video-form input#video {
+    margin-bottom: 5px;
 }
 
 

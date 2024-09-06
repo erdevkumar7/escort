@@ -23,8 +23,8 @@
 
             </nav>
 
+            <span class="upload-myVideos" onclick="openModal()">Upload Video <i class="fa-solid fa-upload"></i></span>
             <div class="row escort-videos">
-                <span class="upload-myVideos" onclick="openModal()">Upload Video <i class="fa-solid fa-upload"></i></span>
                 @if ($videos->isEmpty())
                     <!-- Display this div when no videos are available -->
                     <div class="col-lg-3 menu-item no-video-available">
@@ -73,9 +73,10 @@
                             <div class="video-thumbnail image-video-thumbnail"
                                 onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
 
-                                <img src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
-                                <img src="{{ $vdo->thumb_nail ? asset('/public/images/thumb_nails/' . $vdo->thumb_nail) : asset('/public/images/static_img/default_thumbnail.png') }}"
-                                    alt="Thumbnail">
+                                <img class="vidio-ply-img" src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
+                                <img class="video-thumb9mg"
+                                    src="{{ $vdo->thumb_nail ? asset('/public/images/thumb_nails/' . $vdo->thumb_nail) : asset('/public/images/static_img/default_thumbnail.png') }}"
+                                    alt="">
 
                             </div>
                         </div>
@@ -145,7 +146,7 @@
 
     <!-- Modal Structure -->
     <div id="uploadModal" class="modal" style="display:none;">
-        <div class="modal-content">
+        <div class="modal-content video-upload-forms">
             <span class="close" onclick="closeModal()">&times;</span>
             <h2>Upload Video</h2>
             <form class="add-video-form"
@@ -189,7 +190,8 @@
             const videoContainer = document.createElement('div'); // Container for the video
             videoContainer.classList.add('my-video-player-active');
             const videoElement = document.createElement('video'); // The video element
-            videoElement.setAttribute('controls', '');
+            // videoElement.setAttribute('controls', '');
+            videoElement.setAttribute('autoplay', ''); // Automatically play the video
 
             const sourceElement = document.createElement('source'); // Source element for video
             sourceElement.setAttribute('src', videoSrc);
