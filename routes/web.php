@@ -175,3 +175,15 @@ Route::group(['middleware' => ['auth:escort']], function () {
 
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
+
+// User-registered
+Route::prefix('user')->group(function(){
+    Route::get('/register', [UserAuthController::class, 'user_register_form'])->name('user.register.form');
+    Route::post('/register', [UserAuthController::class, 'user_register_form_sbmit'])->name('user.register.submit');
+
+    Route::get('/login', [UserAuthController::class, 'user_login_form'])->name('user.login.form');
+    Route::post('/login', [UserAuthController::class, 'user_login_submit'])->name('user.login.submit');
+
+    Route::get('/email/verify/{id}/{hash}', [UserAuthController::class, 'verifyUserEmail'])->name('user.verification.verify');
+
+});

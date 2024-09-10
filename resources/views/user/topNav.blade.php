@@ -125,6 +125,8 @@
                            </a>
 
                            <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
+                            <li><a class="dropdown-item" href="{{ route('user.login.form') }}"> User Login</a>
+                            </li>
                                <li><a class="dropdown-item" href="{{ route('login') }}"> Escort Login</a>
                                </li>
                                <li><a class="dropdown-item" href="{{ route('agency.login') }}"> Agency Login </a>
