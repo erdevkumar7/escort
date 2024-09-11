@@ -24,7 +24,7 @@
                         @foreach ($errors->get('email') as $message)
                             @if ($message === 'email_not_verify')
                                 <span class="text-danger input100 txt2">Your email address is not verified. Please verify your email first
-                                <a href="{{ route('verification.notice') }}" class="text-primary">resend verification
+                                <a href="{{ route('user.verification.notice') }}" class="text-primary">resend verification
                                     email</a>
                                 </span>
                             @else

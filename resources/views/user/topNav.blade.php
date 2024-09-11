@@ -58,8 +58,28 @@
                    <li class="nav-item inner-icons">
                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                    </li>
-
-                   @if (Auth::guard('escort')->user())
+                   @if (Auth::guard('web')->check())
+                       <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               @if (Auth::guard('web')->user()->profile_pic)
+                                   <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('web')->user()->profile_pic }}"
+                                       width="32px" height="32px" alt="" style="border-radius: 50%">
+                               @else
+                                   <img src="{{ asset('/public/images/static_img/default_user_profile.jfif') }}"
+                                       width="32px" height="32px" alt="" style="border-radius: 50%">
+                               @endif
+                           </a>
+                           <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
+                               <li><a class="dropdown-item" href="">Profile</a>
+                               </li>
+                               <li><a class="dropdown-item" href="">Dashboard</a>
+                               </li>
+                               <li><a class="dropdown-item" href="#" onclick="handleLogOut('user')">Logout</a>
+                               </li>
+                           </ul>
+                       </li>
+                   @elseif (Auth::guard('escort')->user())
                        <li class="nav-item dropdown">
                            <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown"
                                role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -70,8 +90,8 @@
                                    <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('escort')->user()->profile_pic }}"
                                        width="32px" height="32px" alt="" style="border-radius: 50%">
                                @else
-                                   <img src="{{ asset('/public/images/profile_img/default_profile.png') }}" width="32px"
-                                       height="32px" alt="" style="border-radius: 50%">
+                                   <img src="{{ asset('/public/images/profile_img/default_profile.png') }}"
+                                       width="32px" height="32px" alt="" style="border-radius: 50%">
                                @endif
                            </a>
                            <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
@@ -81,14 +101,15 @@
                                <li><a class="dropdown-item"
                                        href="{{ route('escorts.dashboard', Auth::guard('escort')->user()->id) }}">Dashboard</a>
                                </li>
-                               <li><a class="dropdown-item" href="#" onclick="handleLogOut('escort')">Logout</a>
+                               <li><a class="dropdown-item" href="#"
+                                       onclick="handleLogOut('escort')">Logout</a>
                                </li>
                            </ul>
                        </li>
                    @elseif (Auth::guard('agency')->check())
                        <li class="nav-item dropdown">
-                           <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown"
-                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                           <a class="nav-link dropdown-toggle active profile-image" href="#"
+                               id="profileDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                {{-- <img src="{{ asset('/public/images/profile_img/avatar.jpg') }}" width="32px" style="border-radius: 50%"
                                    height="32px" alt=""> --}}
 
@@ -125,8 +146,8 @@
                            </a>
 
                            <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
-                            <li><a class="dropdown-item" href="{{ route('user.login.form') }}"> User Login</a>
-                            </li>
+                               <li><a class="dropdown-item" href="{{ route('user.login.form') }}"> User Login</a>
+                               </li>
                                <li><a class="dropdown-item" href="{{ route('login') }}"> Escort Login</a>
                                </li>
                                <li><a class="dropdown-item" href="{{ route('agency.login') }}"> Agency Login </a>
@@ -139,6 +160,10 @@
            </div>
            {{-- logout form --}}
            <div>
+               <form id="user-logout-form" action="{{ route('user.logout') }}" method="POST"
+                   style="display: none;">
+                   @csrf
+               </form>
                <form id="escort-logout-form" action="{{ route('escorts.logout') }}" method="POST"
                    style="display: none;">
                    @csrf

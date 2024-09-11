@@ -37,26 +37,24 @@ Route::prefix('agency')->group(function () {
 
     //Protected Agency Routes
     Route::middleware(['auth:agency'])->group(function () {
-        Route::get('/{agency_id}/profile', [AgencyController::class, 'profile'])->name('agency.profile');      
+        Route::get('/{agency_id}/profile', [AgencyController::class, 'profile'])->name('agency.profile');
         Route::get('/{agency_id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
         Route::get('/{agency_id}/escort-listing', [AgencyController::class, 'escort_listing'])->name('agency.escort_listing');
-        
+
         Route::get('/{agency_id}/profile-edit', [AgencyController::class, 'profileEditForm'])->name('agency.profileEditForm');
-        Route::put('/{agency_id}', [AgencyController::class, 'edit_agency'])->name('agency.edit_agency');        
+        Route::put('/{agency_id}', [AgencyController::class, 'edit_agency'])->name('agency.edit_agency');
         Route::put('/profile/{agency_id}/profile-pic-update', [AgencyController::class, 'profile_pic_update'])->name('agency.profilePic.update');
-        
+
         Route::get('/{agency_id}/escort-detail/{escort_id}/view', [AgencyController::class, 'agency_escort_detail'])->name('agency.escort.detail');
-        Route::get('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form"])->name('agency.add.escortform');
-        Route::post('/{agency_id}/add-escort',[AgencyController::class, "agency_add_escort_form_submit"])->name('agency.add.escortFormSubmit');
-       
+        Route::get('/{agency_id}/add-escort', [AgencyController::class, "agency_add_escort_form"])->name('agency.add.escortform');
+        Route::post('/{agency_id}/add-escort', [AgencyController::class, "agency_add_escort_form_submit"])->name('agency.add.escortFormSubmit');
+
         Route::get('/{agency_id}/escorts/{id}/escort-edit', [AgencyController::class, 'edit_escorts_form'])->name('agency.edit_escorts_form');
         Route::put('/escorts/{escort_id}', [AgencyController::class, 'edit_escorts_form_submit'])->name('agency.edit_escorts');
 
         Route::delete('/escorts/{id}', [AgencyController::class, 'deleteEscorts'])->name('agency.delete.escorts');
 
         Route::post('/logout', [AgencyController::class, 'agency_logout'])->name('agency.logout');
-        
-
     });
 });
 
@@ -107,7 +105,7 @@ Route::prefix('admin')->group(function () {
         Route::get('/agency/{id}/show-escorts', [AdminAgencyController::class, 'agency_escorts'])->name('admin.agency.escorts');
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
         Route::post('/agency/{agency_id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
-        
+
         //Badges Operations
         Route::get('all-badges', [BadgeController::class, 'allbadges'])->name('admin.allbadges');
         Route::get('/add-badge', [BadgeController::class, 'add_badge_form'])->name('admin.add.badge_form');
@@ -139,7 +137,7 @@ Route::post('/login', [EscortsAuthController::class, 'login'])->name('escorts_lo
 // Email verification handler
 Route::get('/email/verify/{id}/{hash}', [EscortsAuthController::class, 'verifyEscortEmail'])->name('verification.verify');
 
-Route::get('/email/resend-email-verification', [EscortsAuthController::class, 'resendEmailVerificationForm'] )->name('verification.notice');
+Route::get('/email/resend-email-verification', [EscortsAuthController::class, 'resendEmailVerificationForm'])->name('verification.notice');
 Route::post('/email/verification/resend', [EscortsAuthController::class, 'resendVerificationEmail'])->name('escorts.verification.resend');
 
 
@@ -155,10 +153,10 @@ Route::group(['middleware' => ['auth:escort']], function () {
     Route::get('/{id}/profile', [UserEscortsController::class, 'profile'])->name('escorts.profile');
     Route::get('/{id}/dashboard', [UserEscortsController::class, 'dashboard'])->name('escorts.dashboard');
     // My-pictures
-    Route::get('/{id}/my-pictures',[UserEscortsController::class, 'escort_myPictures'])->name('escorts.myPictures');
+    Route::get('/{id}/my-pictures', [UserEscortsController::class, 'escort_myPictures'])->name('escorts.myPictures');
     Route::post('/{escort_id}/add-media-myPictures', [MediaController::class, 'add_escorts_myPictures'])->name('escort.add.media.myPictures');
     // my-videos
-    Route::get('/{id}/my-videos',[UserEscortsController::class, 'escort_myVideos'])->name('escorts.myVideos');
+    Route::get('/{id}/my-videos', [UserEscortsController::class, 'escort_myVideos'])->name('escorts.myVideos');
     Route::post('/{escort_id}/add-media-myVideos', [MediaController::class, 'add_escorts_myVideos'])->name('escort.add.media.myVideos');
 
     Route::put('/{id}/pictures-update', [UserEscortsController::class, 'escort_pictures_update'])->name('escorts.pictures.update');
@@ -170,14 +168,14 @@ Route::group(['middleware' => ['auth:escort']], function () {
 
     Route::get('/{id}/profile-edit', [UserEscortsController::class, 'profileEditForm'])->name('escorts.profileEditForm');
     Route::put('/profile/{id}/profile-edit', [UserEscortsController::class, 'update_profile'])->name('escorts.update.profile');
-   
+
     Route::put('/profile/{id}/profile-pic-update', [UserEscortsController::class, 'profile_pic_update'])->name('escorts.profilePic.update');
 
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
 
 // User-registered
-Route::prefix('user')->group(function(){
+Route::prefix('user')->group(function () {
     Route::get('/register', [UserAuthController::class, 'user_register_form'])->name('user.register.form');
     Route::post('/register', [UserAuthController::class, 'user_register_form_sbmit'])->name('user.register.submit');
 
@@ -185,5 +183,10 @@ Route::prefix('user')->group(function(){
     Route::post('/login', [UserAuthController::class, 'user_login_submit'])->name('user.login.submit');
 
     Route::get('/email/verify/{id}/{hash}', [UserAuthController::class, 'verifyUserEmail'])->name('user.verification.verify');
+    Route::get('/email/resend-email-verification', [UserAuthController::class, 'resendEmailVerificationForm'])->name('user.verification.notice');
+    Route::post('/email/verification/resend', [UserAuthController::class, 'resendVerificationEmail'])->name('user.verification.resend');
 
+    Route::middleware(['auth.user'])->group(function () {
+        Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
+    });
 });

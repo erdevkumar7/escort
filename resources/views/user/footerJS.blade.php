@@ -202,7 +202,10 @@
     }
     //handleLogOut
     function handleLogOut(user) {
-        if (user === 'escort') {
+        if( user === 'user') {
+            event.preventDefault();
+            document.getElementById('user-logout-form').submit();
+        } else if (user === 'escort') {
             event.preventDefault();
             document.getElementById('escort-logout-form').submit();
         } else if (user === 'agency') {

@@ -34,9 +34,10 @@ class UserAuthController extends Controller
 
         $user->save();
         // Send verification email
-        // $user->sendEmailVerificationNotification();
+        $user->sendEmailVerificationNotification();
+
         if ($user) {
-            return redirect()->route('user.login.form')->with('success', 'Registration successful!');
+            return redirect()->route('user.login.form')->with('success', 'Registration successful! Please check your email to verify your account.');
         }
     }
 
@@ -61,13 +62,13 @@ class UserAuthController extends Controller
         if (Auth::attempt($credentials)) {
             $user = Auth::user();
 
-            // if (is_null($user->email_verified_at)) {
-            //     // If email is not verified, log the user out and redirect back with an error
-            //     Auth::logout();
-            //     return redirect()->route('user.login.form')->withErrors([
-            //         'email' => 'email_not_verify',
-            //     ])->withInput();
-            // }
+            if (is_null($user->email_verified_at)) {
+                // If email is not verified, log the user out and redirect back with an error
+                Auth::logout();
+                return redirect()->route('user.login.form')->withErrors([
+                    'email' => 'email_not_verify',
+                ])->withInput();
+            }
 
             // If email is verified, proceed with login
             if ($remember) {
@@ -88,17 +89,6 @@ class UserAuthController extends Controller
     {
         return view('user.dashboard');
     }
-
-    // Handle logout
-    public function logout(Request $request)
-    {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('user_login');
-    }
-
-
 
     public function verifyUserEmail($id, $hash)
     {
@@ -123,5 +113,42 @@ class UserAuthController extends Controller
         return redirect()->route('user.login.form')->with('success', 'Your email has been verified successfully.');
     }
 
+    public function resendEmailVerificationForm()
+    {
+        return view('user-registered.resend-email-verification');
+    }
 
+
+    public function resendVerificationEmail(Request $request)
+    {
+        $validated = $request->validate([
+            'email' => 'required|email',
+        ]);
+
+        $user = User::where('email', $validated['email'])->first();
+
+        if (!$user) {
+            return redirect()->route('user.verification.notice')->withErrors([
+                'email' => 'We could not find that email address.',
+            ])->withInput();
+        }
+
+        if ($user->hasVerifiedEmail()) {
+            return redirect()->route('user.login.form')->with('success', 'This email is already verified.');
+        }
+
+        // Resend the verification email
+        $user->sendEmailVerificationNotification(); // Use your custom notification if needed
+
+        return redirect()->route('user.login.form')->with('success', 'A new verification link has been sent to your email address.');
+    }
+
+    // Handle logout
+    public function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        return redirect()->route('user.login.form');
+    }
 }
