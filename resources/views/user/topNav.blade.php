@@ -71,9 +71,9 @@
                                @endif
                            </a>
                            <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
-                               <li><a class="dropdown-item" href="">Profile</a>
+                               <li><a class="dropdown-item" href="{{route('user.profile', Auth::guard('web')->user()->id)}}">Profile</a>
                                </li>
-                               <li><a class="dropdown-item" href="">Dashboard</a>
+                               <li><a class="dropdown-item" href="">My Escorts</a>
                                </li>
                                <li><a class="dropdown-item" href="#" onclick="handleLogOut('user')">Logout</a>
                                </li>

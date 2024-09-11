@@ -187,6 +187,11 @@ Route::prefix('user')->group(function () {
     Route::post('/email/verification/resend', [UserAuthController::class, 'resendVerificationEmail'])->name('user.verification.resend');
 
     Route::middleware(['auth.user'])->group(function () {
+        Route::get('/{user_id}/profile', [UserAuthController::class, 'user_profile'])->name('user.profile');
+        Route::put('/{user_id}/profilePic-update', [UserAuthController::class, 'user_profilePic_update'])->name('user.profilePic.update');
+        Route::get('/{user_id}/profile-edit', [UserAuthController::class, 'profileEditForm'])->name('user.profileEditForm');
+        Route::put('/{user_id}/profile-edit', [UserAuthController::class, 'user_update_profile'])->name('user.update.profile');
+       
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     });
 });

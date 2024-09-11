@@ -76,7 +76,7 @@ class UserAuthController extends Controller
                 setcookie('password', $request->password, time() + 3600 * 24 * 5);
             }
 
-            return redirect()->route('index')->with('success', 'Login successfully!');
+            return redirect()->route('user.profile', $user->id)->with('success', 'Login successfully!');
         }
 
         // Authentication failed...
@@ -85,9 +85,83 @@ class UserAuthController extends Controller
         ])->withInput();
     }
 
-    public function dashboard()
+    public function user_profile($user_id)
     {
-        return view('user.dashboard');
+        if (Auth::guard('web')->user()->id != $user_id) {
+            return redirect()->route('user.profile', Auth::guard('web')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        $user = User::find(Auth::guard('web')->user()->id);
+        return view('user-registered.profile', compact('user'));
+    }
+
+
+    public function user_profilePic_update(Request $request, $user_id)
+    {
+        $user = User::findOrFail($user_id);
+        $validatedData = $request->validate([
+            'profile_pic' => 'required|image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Handle Profile_pic Image file upload
+        if ($request->hasFile('profile_pic')) {
+            // Delete the old image if it exists
+            if ($user->profile_pic) {
+                $oldImagePath = public_path('images/profile_img') . '/' . $user->profile_pic;
+                if (file_exists($oldImagePath)) {
+                    unlink($oldImagePath);
+                }
+            }
+
+            // Upload the new image
+            $image = $request->file('profile_pic');
+            $originalImageName = $image->getClientOriginalName();
+            $profileName = time() . '_' . $originalImageName;
+            $image->move(public_path('images/profile_img'), $profileName);
+        } else {
+            $profileName = null;
+        }
+
+        $validatedData['profile_pic'] = $profileName;
+        $user->update($validatedData);
+
+        return redirect()->route('user.profile', $user->id)->with('success', 'Profile picture update!');
+    }
+
+    public function profileEditForm($user_id)
+    {
+        if (Auth::guard('web')->user()->id != $user_id) {
+            return redirect()->route('user.profileEditForm', Auth::guard('web')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        $user = User::find(Auth::guard('web')->user()->id);
+        return view('user-registered.profile-edit', compact('user'));
+    }
+
+    public function user_update_profile(Request $request, $user_id)
+    {
+        if (Auth::guard('web')->user()->id != $user_id) {
+            return redirect()->route('user.profileEditForm', Auth::guard('web')->user()->id)->with('error', 'You are not authorized to access this page.');
+        }
+
+        $user = User::find($user_id);
+
+        $validatedData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required',
+            'email' => 'required|string|email|max:255|unique:users,email,' . $user->id,
+        ]);
+
+
+        $user->update([
+            'fname' => $validatedData['first_name'],
+            'lname' => $validatedData['last_name'],
+            'gender' => $validatedData['gender'],
+            'email' => $validatedData['email'],
+        ]);
+
+        return redirect()->route('user.profile', $user->id)->with('success', 'User updated successfully!');
     }
 
     public function verifyUserEmail($id, $hash)
