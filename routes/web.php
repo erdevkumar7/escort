@@ -191,7 +191,8 @@ Route::prefix('user')->group(function () {
         Route::put('/{user_id}/profilePic-update', [UserAuthController::class, 'user_profilePic_update'])->name('user.profilePic.update');
         Route::get('/{user_id}/profile-edit', [UserAuthController::class, 'profileEditForm'])->name('user.profileEditForm');
         Route::put('/{user_id}/profile-edit', [UserAuthController::class, 'user_update_profile'])->name('user.update.profile');
-       
+        Route::get('/{user_id}/my-escorts', [UserAuthController::class, 'userGetMyEscorts'])->name('user.myescorts');
+        
         Route::post('/follow-escort/{escort_id}', [UserAuthController::class, 'followEscort'])->name('user.follow.escort');
         Route::post('/unfollow-escort/{escort_id}', [UserAuthController::class, 'unfollowEscort'])->name('user.unfollow.escort');
         

@@ -73,7 +73,7 @@
                            <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
                                <li><a class="dropdown-item" href="{{route('user.profile', Auth::guard('web')->user()->id)}}">Profile</a>
                                </li>
-                               <li><a class="dropdown-item" href="">My Escorts</a>
+                               <li><a class="dropdown-item" href="{{route('user.myescorts', Auth::guard('web')->user()->id)}}">My Escorts</a>
                                </li>
                                <li><a class="dropdown-item" href="#" onclick="handleLogOut('user')">Logout</a>
                                </li>

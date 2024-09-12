@@ -19,7 +19,6 @@
                         <a href="#"><i class='far fa-user-circle'></i></a>
                     </div>
                 </div>
-
             </div>
 
         </div>
@@ -28,11 +27,9 @@
     <section class="members-content">
         <div class="container">
             <div class="row members-inner-content">
-                <div class="col-md-6 first-members-content">
-                    <a href="{{ route('escort.list') }}"><i class='fas fa-arrow-left'></i></a>
+                <div class="col-md-6 first-members-content">                    
+                    <i class="fas fa-arrow-left" onclick="goBack()"></i>
                 </div>
-
-
 
                 <div class="col-md-6 three-members-content">
                     <div class="members-count">
@@ -219,6 +216,18 @@
 
                 // Replace the clicked thumbnail with the video player
                 element.parentNode.replaceChild(videoContainer, element);
+            }
+        </script>
+
+        <script>
+            function goBack() {
+                let previousUrl = "{{ session('previous_url') }}";
+                if (previousUrl) {
+                    window.location.href = previousUrl;
+                } else {
+                    // Default fallback if no previous URL is set
+                    window.location.href = "{{ route('escort.list') }}";
+                }
             }
         </script>
     </section>

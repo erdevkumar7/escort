@@ -6,7 +6,7 @@
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
                 <a class="nav-link active" href="#">Profile</a>
-                <a class="nav-link" href="">My Escorts</a>
+                <a class="nav-link" href="{{route('user.myescorts', Auth::guard('web')->user()->id)}}">My Escorts</a>
             </nav>
 
             <div class="row">

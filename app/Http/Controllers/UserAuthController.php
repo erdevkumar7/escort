@@ -191,6 +191,18 @@ class UserAuthController extends Controller
     return redirect()->back();
     }
 
+    public function userGetMyEscorts($escort_id)
+    {
+        $user = Auth::guard('web')->user();
+        if($user->id != $escort_id){
+             return redirect()->back()->with('error', 'You are not authorized to access this page.');
+        }
+
+        $allescorts = $user->follows()->orderBy('follows.created_at', 'desc')->get();
+
+        return view('user-registered.my-escorts', compact('allescorts'));
+    }
+
 
 
     public function verifyUserEmail($id, $hash)

@@ -387,6 +387,11 @@ class UserEscortsController extends Controller
         if (!$escort) {
             return redirect()->back()->with('error', 'Escort not found.');
        }
+           // Store the previous URL in session for redirection
+        if (url()->previous()) {
+        session(['previous_url' => url()->previous()]);
+        }
+        
         $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
         $videos = Media::where('escort_id', $id)->where('type', 'video')->get(); 
         $services = json_decode($escort->services, true);

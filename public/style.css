@@ -1542,6 +1542,41 @@ i.fa-solid.fa-user {
     margin-bottom: 2px;
 }
 
+button.follows-btn {
+    background-color: #f4f5f6;
+    padding: 9px 33px;
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+    margin-left: 8px;
+    position: relative;
+    top: 31px;
+    left: -124px;
+    font-size: 14px;
+}
+button.follows-btn:hover {
+    background-color: #007bff;
+    color: #fff;
+}
+
+button.unfollows-btn {
+    background-color: #f4f5f6;
+    padding: 9px 33px;
+    border-radius: 4px;
+    color: black;
+    text-decoration: none;
+    margin-left: 8px;
+    position: relative;
+    top: 31px;
+    left: -131px;
+    font-size: 14px;
+}
+
+button.unfollows-btn:hover {
+    background-color: #007bff;
+    color: #fff; 
+}
+
 /*add-escort-css*/
 
 @media (min-width:768px) and (max-width:1024px) {
