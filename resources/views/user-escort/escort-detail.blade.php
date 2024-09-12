@@ -48,7 +48,7 @@
                             <p> 0 <span>Videos</span> </p>
                         @endif
 
-                        <p> 0 <span>Members</span></p>
+                        <p> {{ $escort->followers_count }} <span>Followers</span></p>
 
                     </div>
                 </div>
@@ -97,7 +97,29 @@
                     </div>
 
                     <div class="contact-btn">
-                        <a class="follow-btn" href="#">Follow</a>
+                        @if (Auth::check())
+                            {{-- If the user is authenticated, check if they are following the escort --}}
+                            @if (Auth::guard('web')->user()->follows->contains($escort->id))
+                                {{-- Unfollow button for already following escort --}}
+                                <form action="{{ route('user.unfollow.escort', $escort->id) }}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="unfollows-btn">Unfollow</button>
+                                </form>
+                            @else
+                                {{-- Follow button for not yet following escort --}}
+                                <form action="{{ route('user.follow.escort', $escort->id) }}" method="POST">
+                                    @csrf
+                                    @method('POST')
+                                    <button type="submit" class="follows-btn">Follow</button>
+                                </form>
+                            @endif
+                        @else
+                            {{-- If the user is not authenticated, show the Follow button and redirect to login --}}
+                            <a href="{{ route('user.login.form') }}" class="follow-btn">Follow</a>
+                        @endif
+
+
                         <a class="contact-btn" href="#">Contact</a>
 
                     </div>

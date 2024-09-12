@@ -164,6 +164,35 @@ class UserAuthController extends Controller
         return redirect()->route('user.profile', $user->id)->with('success', 'User updated successfully!');
     }
 
+    public function followEscort($escort_id)
+    {
+        $user = Auth::guard('web')->user();        
+    // Check if the user is already following the escort
+    if ($user->follows()->where('escort_id', $escort_id)->exists()) {
+        return redirect()->back();
+    }
+    // Attach the escort to the user's follows
+    $user->follows()->attach($escort_id);
+
+    return redirect()->back();
+    }
+
+    public function unfollowEscort($escort_id)
+    {
+    $user = Auth::guard('web')->user();  
+    // Check if the user is following the escort
+    if (!$user->follows()->where('escort_id', $escort_id)->exists()) {
+        return redirect()->back();
+    }
+
+    // Detach the escort from the user's follows
+    $user->follows()->detach($escort_id);
+
+    return redirect()->back();
+    }
+
+
+
     public function verifyUserEmail($id, $hash)
     {
         $user = User::findOrFail($id);

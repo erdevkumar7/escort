@@ -55,4 +55,11 @@ class User extends Authenticatable implements MustVerifyEmail // Changed to Must
     {
         $this->notify(new CustomVerifyEmail);
     }
+
+    public function follows()
+    {
+    return $this->belongsToMany(Escort::class, 'follows', 'user_id', 'escort_id')
+    ->withTimestamps();
+    }
+
 }

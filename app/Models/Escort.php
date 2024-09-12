@@ -72,4 +72,11 @@ class Escort extends Authenticatable implements MustVerifyEmail // Changed to Mu
     protected $hidden = [
         'password', 'remember_token',
     ];
-}
+
+    public function followers()
+    {
+    return $this->belongsToMany(User::class, 'follows', 'escort_id', 'user_id')
+    ->withTimestamps();
+    }
+
+ }

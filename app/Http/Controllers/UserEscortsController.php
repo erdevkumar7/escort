@@ -381,7 +381,9 @@ class UserEscortsController extends Controller
 
     public function escort_detail($id)
     {
-        $escort = Escort::find($id);
+        // Fetch the escort along with the count of followers
+        $escort = Escort::withCount('followers')->findOrFail($id);
+        // $escort = Escort::find($id);
         if (!$escort) {
             return redirect()->back()->with('error', 'Escort not found.');
        }

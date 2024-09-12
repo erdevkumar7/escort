@@ -192,6 +192,10 @@ Route::prefix('user')->group(function () {
         Route::get('/{user_id}/profile-edit', [UserAuthController::class, 'profileEditForm'])->name('user.profileEditForm');
         Route::put('/{user_id}/profile-edit', [UserAuthController::class, 'user_update_profile'])->name('user.update.profile');
        
+        Route::post('/follow-escort/{escort_id}', [UserAuthController::class, 'followEscort'])->name('user.follow.escort');
+        Route::post('/unfollow-escort/{escort_id}', [UserAuthController::class, 'unfollowEscort'])->name('user.unfollow.escort');
+        
+
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     });
 });
