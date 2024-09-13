@@ -43,7 +43,7 @@
                     <div class="card h-100 border-start-lg border-start-primary">
                         <div class="card-body">
                             <div class="small text-muted">Total enrolled</div>
-                            <div class="h3">Escort {{ $allescorts->count() }}</div>
+                            <div class="h3">Available Escort {{ $allescorts->count() }}</div>
                             <a class="text-arrow-icon small" href="{{ route('agency.escort_listing', $agency->id) }}">
                                 View All Escorts                          
                             </a>

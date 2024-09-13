@@ -219,7 +219,7 @@ class AgencyController extends Controller
             'nickname' => 'required|unique:escorts,nickname',
             'email' => 'required|email|unique:escorts',
             'password' => 'required|string|min:8|confirmed',
-            'pictures' => 'required|array|min:1',
+            'pictures' => 'required|array|min:1|max:30',
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
             'age' => 'required',
@@ -360,9 +360,32 @@ class AgencyController extends Controller
     {
         $escort = Escort::findOrFail($escort_id);
 
+        if($request->file('pictures')){
+            $currentPicturesCount = Media::where('escort_id', $escort_id)
+                ->where('type', 'image') // Assuming you store image type in 'type'
+                ->count();
+    
+            // Check if adding the new pictures exceeds the limit of 30
+            $newPicturesCount = count($request->file('pictures'));
+            if (($currentPicturesCount + $newPicturesCount) > 30) {
+                return redirect()->back()->withInput()->withErrors(['pictures' => 'You can upload maximum 30 pictures.']);
+            }
+        }
+
+        if($request->file('videos')){
+            $currentVideosCount = Media::where('escort_id', $escort_id)
+            ->where('type','video')
+            ->count();
+
+            $newVideosCount = count($request->file('videos'));
+            if(($currentVideosCount + $newVideosCount) > 30){
+                return redirect()->back()->withInput()->withErrors(['videos' => 'You can upload maximum 30 videos.']);
+            }
+        }
+
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname,' . $escort->id,
-            'pictures' => 'nullable|array|min:1',
+            'pictures' => 'nullable|array|min:1|max:30',
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
             'age' => 'required',
@@ -373,7 +396,7 @@ class AgencyController extends Controller
             'type' => 'required',
             'text_description' => 'required|min:30',
             'videos' => 'nullable|array',
-            'videos.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:20000',
+            'videos.*' => 'file|mimes:mp4,mov,mkv,flv,3gp,avi,mwv,ogg,qt|max:25600',
             'hair_color' => 'nullable',
             'hair_length' => 'nullable',
             'breast_size' => 'nullable',

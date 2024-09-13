@@ -14,7 +14,15 @@
             <hr class="mt-0 mb-4">
             <div class="row add-agency-escort">
                 <div class="card mb-4">
-
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
                     <div class="agency-add-escort-title">
                         <h3>Update Escort</h3>
                         <a href="{{ route('agency.escort_listing', Auth::guard('agency')->user()->id) }}"><button
@@ -236,9 +244,9 @@
                             {{-- pictures --}}
                             <div class="col-md-4 col-sm-4">
                                 <label for="pictures">Pictures<span class="required">*</span></label>
-                                <input type="file" class="form-control" id="pictures" name="pictures[]" multiple
-                                    oninput="removeError('picturesErr')">
-                                    <input type="hidden" name="media_type_image" value="image">
+                                <input type="file" class="form-control" id="pictures" name="pictures[]"
+                                    accept="image/*" multiple oninput="removeError('picturesErr')">
+                                <input type="hidden" name="media_type_image" value="image">
                                 @error('pictures')
                                     <span class="text-danger" id="picturesErr">{{ $message }}</span>
                                 @enderror
@@ -260,10 +268,11 @@
                             </div>
 
                             <div class="col-md-4 col-sm-4">
-                                <label for="video">Videos</label>
-                                <input type="file" class="form-control" id="video" name="videos[]" multiple>
+                                <label for="videos">Videos</label>
+                                <input type="file" class="form-control" id="videos" name="videos[]"
+                                    accept="video/*" oninput="removeError('videoErr')" multiple>
                                 <input type="hidden" name="media_type_video" value="video">
-                                @error('video')
+                                @error('videos')
                                     <span class="text-danger" id="videoErr">{{ $message }}</span>
                                 @enderror
                             </div>
