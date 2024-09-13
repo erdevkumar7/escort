@@ -38,8 +38,8 @@
 
     <!-- Custom Theme Scripts -->
     <script src="{{ asset('/public/build/js/custom.min.js') }}"></script>
-     <!-- jquery -->
-     {{-- This jQuery give side effect on admin toggle for mobile view and i applied for Select2 JS --}}
+    <!-- jquery -->
+    {{-- This jQuery give side effect on admin toggle for mobile view and i applied for Select2 JS --}}
     {{-- <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> --}}
     <!-- Include Select2 JS -->
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
@@ -81,4 +81,33 @@
                 placeholder: "Select Payment Methods"
             });
         });
+    </script>
+
+    {{-- toaster message script --}}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+    <script>
+        // Configure Toastr options
+        toastr.options = {
+            "closeButton": true, // Enable close button
+            "progressBar": true, // Optional: show a progress bar
+            "timeOut": "3000", // Optional: duration in milliseconds
+            "extendedTimeOut": "1000", // Optional: additional time after mouse over
+            "positionClass": "toast-top-right" // Optional: set position
+        };
+
+        @if (Session::has('success'))
+            toastr.success("{{ Session::get('success') }}");
+        @endif
+
+        @if (Session::has('error'))
+            toastr.error("{{ Session::get('error') }}");
+        @endif
+
+        @if (Session::has('info'))
+            toastr.info("{{ Session::get('info') }}");
+        @endif
+
+        @if (Session::has('warning'))
+            toastr.warning("{{ Session::get('warning') }}");
+        @endif
     </script>

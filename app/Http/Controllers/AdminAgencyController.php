@@ -86,7 +86,7 @@ class AdminAgencyController extends Controller
         if (!$agency) {
             return redirect()->back()->with('error', 'Agency not found.');
        }
-        return view("agency.show-escorts", compact('allescorts','agency'));
+        return view("agency.all-escorts", compact('allescorts','agency'));
     }
     // agency_add_escorts_form
     public function agency_add_escorts_form($id){

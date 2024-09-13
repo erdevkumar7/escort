@@ -102,7 +102,7 @@ Route::prefix('admin')->group(function () {
         Route::delete('/agency/{id}', [AdminAgencyController::class, 'delete_agency'])->name('admin.delete.agency');
         Route::get('/agency/{id}/show', [AdminAgencyController::class, 'agency'])->name('admin.agency');
         //Agency-escorts Operation
-        Route::get('/agency/{id}/show-escorts', [AdminAgencyController::class, 'agency_escorts'])->name('admin.agency.escorts');
+        Route::get('/agency/{id}/all-escorts', [AdminAgencyController::class, 'agency_escorts'])->name('admin.agency.escorts');
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
         Route::post('/agency/{agency_id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
 

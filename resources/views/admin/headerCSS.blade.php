@@ -18,7 +18,8 @@
 <link href="{{ asset('/public/vendors/iCheck/skins/flat/green.css') }}" rel="stylesheet">
 
 <!-- bootstrap-progressbar -->
-<link href="{{ asset('/public/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}" rel="stylesheet">
+<link href="{{ asset('/public/vendors/bootstrap-progressbar/css/bootstrap-progressbar-3.3.4.min.css') }}"
+    rel="stylesheet">
 <!-- JQVMap -->
 <link href="{{ asset('/public/vendors/jqvmap/dist/jqvmap.min.css') }}" rel="stylesheet" />
 <!-- bootstrap-daterangepicker -->
@@ -31,3 +32,5 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
 <!-- Bootstrap CSS -->
 {{-- <link href="//cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"> --}}
+{{-- toaster CSS --}}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">

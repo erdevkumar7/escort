@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Escorts <small>registered</small></h3>
+                    <h3>All Escorts <small>(registered)</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -20,7 +20,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="clearfix"></div>
 
             <div class="row">
@@ -49,6 +48,7 @@
                                             width="100%">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>Nickname</th>
                                                     <th>Phone number</th>
                                                     <th>age</th>
@@ -63,6 +63,7 @@
                                             <tbody>
                                                 @foreach ($allescorts as $escorts)
                                                     <tr id="escorts-row-{{ $escorts->id }}">
+                                                        <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $escorts->nickname ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->phone_number ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->age ?? 'Not Available' }}</td>
@@ -91,7 +92,6 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-
                                         </table>
                                     </div>
                                 </div>
