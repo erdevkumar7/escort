@@ -19,6 +19,7 @@ class Escort extends Authenticatable implements MustVerifyEmail // Changed to Mu
         'pictures',
         'phone_number',
         'email',
+        'password',
         'age',
         'canton',
         'city',

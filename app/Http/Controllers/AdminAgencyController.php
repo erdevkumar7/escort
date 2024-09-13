@@ -29,18 +29,18 @@ class AdminAgencyController extends Controller
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:agencies,email',
+            'password' => 'required|string|min:8|confirmed',
             'phone_number' => 'required|numeric',
             'address' => 'nullable|string',
-            'counter' => 'nullable|string'
         ]);
 
         $agency = new Agency();
 
         $agency->name = $request->name;
         $agency->email = $request->email;
+        $agency->password = Hash::make($request->password);
         $agency->address = $request->address;
-        $agency->phone_number = $request->phone_number;
-        $agency->counter = $request->counter;
+        $agency->phone_number = $request->phone_number;        
         $agency->save();
 
         return redirect()->route('admin.allagencies')->with('success', 'Agency added successfully');
@@ -73,7 +73,6 @@ class AdminAgencyController extends Controller
             ],
             'phone_number' => 'required|numeric',
             'address' => 'nullable|string',
-            'counter' => 'nullable|string'
         ]);
 
         $agency->update($valideData);

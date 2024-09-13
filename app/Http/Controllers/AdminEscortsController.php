@@ -6,6 +6,7 @@ use App\Models\Escort;
 use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class AdminEscortsController extends Controller
 {
@@ -31,6 +32,7 @@ class AdminEscortsController extends Controller
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
             'email' => 'required|email|unique:escorts',
+            'password' => 'required|string|min:8|confirmed',
             'age' => 'required',
             'canton' => 'required',
             'city' => 'required',
@@ -65,7 +67,7 @@ class AdminEscortsController extends Controller
             'video_type' => 'nullable|string',
         ]);
 
-
+        $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['services'] = json_encode($validatedData['services']);
         $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;

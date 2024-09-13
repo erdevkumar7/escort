@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Edit Agency:  {{$agency->name}}</h3>
+                    <h3>Update Agency Details</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -26,37 +26,25 @@
                                 @method('PUT')
                                 {{-- Agency name --}}
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Agency name
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Agency Name
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="name" name="name" class="form-control " value="{{$agency->name}}"
-                                            oninput="removeError('nameErr')">
+                                        <input type="text" id="name" name="name" class="form-control "
+                                            value="{{ $agency->name }}" oninput="removeError('nameErr')">
                                     </div>
                                     @error('name')
                                         <span class="text-danger" id="nameErr">{{ $message }}</span>
                                     @enderror
                                 </div>
-                                {{-- Email --}}
-                                <div class="item form-group">
-                                    <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">email
-                                        <span class="required">*</span>
-                                    </label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input type="text" class="form-control" id="email" name="email" value="{{$agency->email}}"
-                                            oninput="removeError('emailErr')">
-                                    </div>
-                                    @error('email')
-                                        <span class="text-danger" id="emailErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
+
                                 {{-- phone number --}}
                                 <div class="item form-group">
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone_number">Phone
                                         Number<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" class="form-control" id="phone_number" name="phone_number" value="{{$agency->phone_number}}"
-                                            oninput="removeError('phoneErr')">
+                                        <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                            value="{{ $agency->phone_number }}" oninput="removeError('phoneErr')">
                                     </div>
                                     @error('phone_number')
                                         <span class="text-danger" id="phoneErr">{{ $message }}</span>
@@ -67,16 +55,23 @@
                                     <label for="address"
                                         class="col-form-label col-md-3 col-sm-3 label-align">Address</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="text" class="form-control" id="address" name="address" value="{{$agency->address}}">
+                                        <input type="text" class="form-control" id="address" name="address"
+                                            value="{{ $agency->address }}">
                                     </div>
                                 </div>
-                                {{-- counter --}}
+
+                                {{-- Email --}}
                                 <div class="item form-group">
-                                    <label for="counter"
-                                        class="col-form-label col-md-3 col-sm-3 label-align">Counter</label>
+                                    <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Email
+                                        <span class="required">*</span>
+                                    </label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="number" class="form-control" id="counter" name="counter" value="{{$agency->counter}}">
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            value="{{ $agency->email }}" oninput="removeError('emailErr')">
                                     </div>
+                                    @error('email')
+                                        <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                    @enderror
                                 </div>
                                 {{-- Submit button --}}
                                 <div class="item form-group">

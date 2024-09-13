@@ -26,24 +26,15 @@
                                 <!-- Mandatory Fields -->
                                 {{-- Agency name --}}
                                 <div class="item form-group">
-                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Agency name
+                                    <label class="col-form-label col-md-3 col-sm-3 label-align" for="name">Agency Name
                                         <span class="required">*</span>
                                     </label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" id="name" name="name" class="form-control " oninput="removeError('nameErr')">
+                                        <input type="text" id="name" name="name" class="form-control "
+                                            oninput="removeError('nameErr')">
                                     </div>
                                     @error('name')
                                         <span class="text-danger" id="nameErr">{{ $message }}</span>
-                                    @enderror
-                                </div>
-                                {{-- Email --}}
-                                <div class="item form-group">
-                                    <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">email</label>
-                                    <div class="col-md-6 col-sm-6">
-                                        <input type="text" class="form-control" id="email" name="email" oninput="removeError('emailErr')">
-                                    </div>
-                                    @error('email')
-                                        <span class="text-danger" id="emailErr">{{ $message }}</span>
                                     @enderror
                                 </div>
                                 {{-- phone number --}}
@@ -51,7 +42,8 @@
                                     <label class="col-form-label col-md-3 col-sm-3 label-align" for="phone_number">Phone
                                         Number<span class="required">*</span></label>
                                     <div class="col-md-6 col-sm-6 ">
-                                        <input type="text" class="form-control" id="phone_number" name="phone_number" oninput="removeError('phoneErr')">
+                                        <input type="text" class="form-control" id="phone_number" name="phone_number"
+                                            oninput="removeError('phoneErr')">
                                     </div>
                                     @error('phone_number')
                                         <span class="text-danger" id="phoneErr">{{ $message }}</span>
@@ -65,14 +57,43 @@
                                         <input type="text" class="form-control" id="address" name="address">
                                     </div>
                                 </div>
-                                {{-- counter --}}
+                                {{-- Email --}}
                                 <div class="item form-group">
-                                    <label for="counter"
-                                        class="col-form-label col-md-3 col-sm-3 label-align">Counter</label>
+                                    <label for="email" class="col-form-label col-md-3 col-sm-3 label-align">Email
+                                        *</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="number" class="form-control" id="counter" name="counter">
+                                        <input type="text" class="form-control" id="email" name="email"
+                                            oninput="removeError('emailErr')">
                                     </div>
+                                    @error('email')
+                                        <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                    @enderror
                                 </div>
+
+                                <div class="item form-group">
+                                    <label for="password" class="col-form-label col-md-3 col-sm-3 label-align">Password
+                                        *</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="password" id="password" name="password" class="form-control"
+                                            oninput="removeError('passErr')">
+                                    </div>
+                                    @error('password')
+                                        <span class="text-danger" id="passErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="item form-group">
+                                    <label for="password_confirmation" class="col-form-label col-md-3 col-sm-3 label-align">Password Confirm
+                                        *</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
+                                            oninput="removeError('passConErr')">
+                                    </div>
+                                    @error('password_confirmation')
+                                        <span class="text-danger" id="passConErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
                                 {{-- Submit button --}}
                                 <div class="item form-group">
                                     <div class="col-md-6 col-sm-6 offset-md-3">
@@ -90,5 +111,4 @@
         </div>
     </div>
     <!-- /page content -->
-
 @endsection
