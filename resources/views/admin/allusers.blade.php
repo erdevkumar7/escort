@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>User <small>that recently register</small></h3>
+                    <h3>All Users <small>(registered)</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -27,7 +27,7 @@
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
                         <div class="x_title">
-                            <h2>All Users<small>Details</small></h2>
+                            <h2>User's<small>Details</small></h2>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -41,10 +41,7 @@
                                                 <tr>
                                                     <th>First name</th>
                                                     <th>Last name</th>
-                                                    <th>Phone</th>
-                                                    <th>Address</th>
                                                     <th>Gender</th>
-                                                    <th>DOB</th>
                                                     <th>E-mail</th>
                                                     <th>Action</th>
                                                 </tr>
@@ -54,10 +51,7 @@
                                                     <tr id="user-row-{{ $user->id }}">
                                                         <td class="editable">{{ $user->fname }}</td>
                                                         <td class="editable">{{ $user->lname }}</td>
-                                                        <td class="editable">{{ $user->phone }}</td>
-                                                        <td class="editable">{{ $user->address }}</td>
                                                         <td class="editable">{{ $user->gender }}</td>
-                                                        <td class="editable">{{ $user->dob }}</td>
                                                         <td class="editable">{{ $user->email }}</td>
                                                         <td style="display: flex">
 

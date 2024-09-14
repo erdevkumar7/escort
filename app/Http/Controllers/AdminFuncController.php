@@ -12,7 +12,9 @@ class AdminFuncController extends Controller
     //todo: get all users
     public function allusers()
     {
-        $allusers = DB::table("users")->get();
+        $allusers = DB::table("users")
+            ->orderBy('created_at', 'desc')
+            ->get();
         // return response()->json($allusers);
         return view("admin.allusers", compact('allusers'));
     }
@@ -33,9 +35,6 @@ class AdminFuncController extends Controller
             'fname' => 'required|string|max:255',
             'lname' => 'required|string|max:255',
             'gender' => 'required',
-            'phone' => 'required',
-            'dob' => 'required',
-            'address' => 'required',
             'email' => [
                 'required',
                 'string',
@@ -48,14 +47,11 @@ class AdminFuncController extends Controller
         $user->fname = $request->input('fname');
         $user->lname = $request->input('lname');
         $user->gender = $request->input('gender');
-        $user->phone = $request->input('phone');
-        $user->dob = $request->input('dob');
-        $user->address = $request->input('address');
         $user->email = $request->input('email');
 
         $user->save();
 
-        return redirect()->route('admin_allusers')->with('success', 'User Updated');
+        return redirect()->route('admin_allusers')->with('success', 'User Update Successfully!');
     }
 
     //todo:: delete user
@@ -67,5 +63,4 @@ class AdminFuncController extends Controller
         };
         return redirect()->back()->with('error', 'user not Deleted');
     }
-
 }

@@ -38,6 +38,11 @@
                     <li><a href="{{ route('admin.allagencies') }}"><i class="fa fa-sitemap"></i> Agencies <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
+                    {{-- Users --}}
+                    <li><a href="{{route('admin_allusers')}}"><i class="fa fa-user" aria-hidden="true"></i> Users <span
+                        class="fa fa-chevron-right"></span></a>
+                    </li>
+
                     {{-- badges --}}
                     <li><a href="{{ route('admin.allbadges') }}"><i class="fa fa-certificate"></i> Badges <span
                                 class="fa fa-chevron-right"></span></a>
@@ -46,8 +51,6 @@
                     <li><a href="{{route('admin.allAds')}}"><i class="fa fa-diamond" aria-hidden="true"></i> Manage Ads <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
-                    {{-- <i class="fa fa-briefcase" aria-hidden="true"></i> --}}
-
                 </ul>
             </div>
         </div>

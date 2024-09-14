@@ -76,9 +76,9 @@ Route::prefix('admin')->group(function () {
 Route::prefix('admin')->group(function () {
     Route::middleware('auth.admin')->group(function () {
         //User Operations
-        Route::get('/allusers', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
-        Route::get('/user/{id}/edit', [AdminFuncController::class, 'edit_user_form'])->name('admin_edit_user_form');
-        Route::put('/user/{id}', [AdminFuncController::class, 'update_user'])->name('admin_update_user');
+        Route::get('/all-users', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
+        Route::get('/user/{id}/edit-user', [AdminFuncController::class, 'edit_user_form'])->name('admin_edit_user_form');
+        Route::put('/user/{id}/edit-user', [AdminFuncController::class, 'update_user'])->name('admin_update_user');
         Route::delete('/user/{id}', [AdminFuncController::class, 'delete_user'])->name('admin_delete_user');
         //Escorts Operations
         Route::get('/all-escorts', [AdminEscortsController::class, 'allescorts'])->name('admin.escorts');
