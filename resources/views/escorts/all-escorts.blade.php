@@ -51,8 +51,7 @@
                                                     <th>#</th>
                                                     <th>Nickname</th>
                                                     <th>Phone number</th>
-                                                    <th>age</th>
-                                                    <th>Canton</th>
+                                                    <th>email</th>
                                                     <th>City</th>
                                                     <th>Origin</th>
                                                     <th>Type</th>
@@ -63,14 +62,13 @@
                                             <tbody>
                                                 @foreach ($allescorts as $escorts)
                                                     <tr id="escorts-row-{{ $escorts->id }}">
-                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td>{{ $loop->iteration + ($allescorts->currentPage() - 1) * $allescorts->perPage() }}</td>
                                                         <td>{{ $escorts->nickname ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->phone_number ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->age ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->canton ?? 'Not Available'}}</td>
-                                                        <td>{{ $escorts->city ?? 'Not Available'}}</td>
+                                                        <td>{{ $escorts->email ?? 'Not Available' }}</td>
+                                                        <td>{{ $escorts->city ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->origin ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->type ?? 'Not Available'}}</td>
+                                                        <td>{{ $escorts->type ?? 'Not Available' }}</td>
                                                         <td style="display: flex">
                                                             <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
@@ -93,6 +91,10 @@
                                                 @endforeach
                                             </tbody>
                                         </table>
+                                        <!-- Pagination Links -->
+                                        <div class="d-flex justify-content-center all-pagination">
+                                            {{ $allescorts->links() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

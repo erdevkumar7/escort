@@ -15,7 +15,7 @@ class AdminAgencyController extends Controller
     //todo: Get All agency
     public function allagencies()
     {
-        $allagencies = DB::table("agencies")->orderBy('created_at', 'desc')->get();
+        $allagencies = DB::table("agencies")->orderBy('created_at', 'desc')->paginate(10);
         return view("agency.all-agency", compact("allagencies"));
     }
     // addagency_form

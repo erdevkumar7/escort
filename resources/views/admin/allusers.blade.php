@@ -39,6 +39,7 @@
                                             width="100%">
                                             <thead>
                                                 <tr>
+                                                    <th>#</th>
                                                     <th>First name</th>
                                                     <th>Last name</th>
                                                     <th>Gender</th>
@@ -49,6 +50,7 @@
                                             <tbody>
                                                 @foreach ($allusers as $user)
                                                     <tr id="user-row-{{ $user->id }}">
+                                                        <td>{{ $loop->iteration + ($allusers->currentPage() - 1) * $allusers->perPage() }}</td>
                                                         <td class="editable">{{ $user->fname }}</td>
                                                         <td class="editable">{{ $user->lname }}</td>
                                                         <td class="editable">{{ $user->gender }}</td>
@@ -75,9 +77,14 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-
                                         </table>
+                                         <!-- Pagination Links -->
+                                         <div class="d-flex justify-content-center all-pagination">
+                                            {{ $allusers->links() }}
+                                        </div>
+                                        
                                     </div>
+
                                 </div>
                             </div>
                         </div>
@@ -85,6 +92,7 @@
                 </div>
             </div>
         </div>
+    </div>
     </div>
     <!-- /page content -->
 @endsection

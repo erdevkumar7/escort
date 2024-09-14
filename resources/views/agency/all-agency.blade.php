@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Agency <small>registered</small></h3>
+                    <h3>All Agency <small>(registered)</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -49,10 +49,10 @@
                                             width="100%">
                                             <thead>
                                                 <tr>
-                                                    <th>Agencyname</th>
+                                                    <th>#</th>
+                                                    <th>Agency Name</th>
+                                                    <th>Phone Number</th>
                                                     <th>Email</th>
-                                                    <th>Phone number</th>
-                                                    <th>Address</th>
                                                     <th>Counter</th>
                                                     <th>Action</th>
                                                     <th>Agency View</th>
@@ -61,10 +61,11 @@
                                             <tbody>
                                                 @foreach ($allagencies as $agency)
                                                     <tr id="agency-row-{{ $agency->id }}">
+                                                        <th>{{ $loop->iteration + ($allagencies->currentPage() - 1) * $allagencies->perPage() }}
+                                                        </th>
                                                         <td>{{ $agency->name }}</td>
-                                                        <td>{{ $agency->email }}</td>
                                                         <td>{{ $agency->phone_number }}</td>
-                                                        <td>{{ $agency->address ? $agency->address : 'Not Available' }}</td>
+                                                        <td>{{ $agency->email }}</td>
                                                         <td>{{ $agency->counter ? $agency->counter : 'Not Available' }}</td>
                                                         <td style="display: flex">
                                                             <a href="{{ route('admin.edit_agency_form', $agency->id) }}">
@@ -87,8 +88,11 @@
                                                     </tr>
                                                 @endforeach
                                             </tbody>
-
                                         </table>
+                                        <!-- Pagination Links -->
+                                        <div class="d-flex justify-content-center all-pagination">
+                                            {{ $allagencies->links() }}
+                                        </div>
                                     </div>
                                 </div>
                             </div>

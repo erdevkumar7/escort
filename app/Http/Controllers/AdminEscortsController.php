@@ -7,14 +7,19 @@ use App\Models\Media;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Yajra\DataTables\Facades\DataTables;
 
 class AdminEscortsController extends Controller
 {
     public function allescorts()
     {
-        $allescorts = DB::table("escorts")->orderBy("created_at", "desc")->get();
-        // $services = json_decode($allescorts->services, true);
+        $allescorts = DB::table("escorts")
+            ->orderBy("created_at", "desc")
+            ->paginate(10);
         return view("escorts.all-escorts", compact('allescorts',));
+
+        // $allescorts = Escort::select(['id', 'nickname', 'phone_number', 'email', 'city', 'origin', 'type']);
+        //  return DataTables::of($allescorts)->make(true);
     }
 
 
@@ -248,7 +253,7 @@ class AdminEscortsController extends Controller
         $escort = Escort::find($id);
 
         if (!$escort) {
-             return redirect()->back()->with('error', 'Escort not found.');
+            return redirect()->back()->with('error', 'Escort not found.');
         }
 
         // Find and delete all media records related to the escort        

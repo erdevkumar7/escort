@@ -14,8 +14,8 @@ class AdminFuncController extends Controller
     {
         $allusers = DB::table("users")
             ->orderBy('created_at', 'desc')
-            ->get();
-        // return response()->json($allusers);
+            ->paginate(10);
+
         return view("admin.allusers", compact('allusers'));
     }
 

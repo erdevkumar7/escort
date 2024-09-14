@@ -14,7 +14,7 @@
                         {{-- nickname --}}
                         <div class="col-sm-6 form-group">
                             <input type="text" class="form-control" name="nickname" id="nickname"
-                                value="{{ old('nickname') }}" placeholder="Enter your name"
+                                value="{{ old('nickname') }}" placeholder="Enter your nickname"
                                 oninput="removeError('nicknameErr')">
                             @error('nickname')
                                 <span class="text-danger" id="nicknameErr">{{ $message }}</span>
