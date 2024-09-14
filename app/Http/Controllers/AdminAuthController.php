@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class AdminAuthController extends Controller
 {
@@ -54,7 +55,11 @@ class AdminAuthController extends Controller
          ])->withInput();
     }
     public function dashboard(){
-        return view('admin.dashboard');
+        $totalEscorts = DB::table('escorts')->count();
+        $totalAgencies = DB::table('agencies')->count();
+        $totalUsers = DB::table('users')->count();
+        
+        return view('admin.dashboard', compact('totalEscorts','totalAgencies','totalUsers'));
     }  
     public function logout(Request $request)
     {

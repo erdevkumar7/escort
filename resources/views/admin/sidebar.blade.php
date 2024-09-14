@@ -27,7 +27,7 @@
                 <h3>General</h3>
                 <ul class="nav side-menu">
                     {{-- home --}}
-                    <li><a href="{{ route('admin_dashboard') }}"><i class="fa fa-home"></i> Home <span
+                    <li><a href="{{ route('admin_dashboard') }}"><i class="fa fa-dashboard"></i> Dashboard <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
                     {{-- Escorts --}}
