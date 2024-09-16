@@ -6,6 +6,8 @@ use App\Models\User;
 use Illuminate\Auth\Events\Verified;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
 
 class UserAuthController extends Controller
 {
@@ -30,7 +32,7 @@ class UserAuthController extends Controller
         $user->lname = $request->last_name;
         $user->gender = $request->gender;
         $user->email = $request->email;
-        $user->password = $request->password;
+        $user->password = Hash::make($request->password);
 
         $user->save();
         // Send verification email
@@ -85,6 +87,54 @@ class UserAuthController extends Controller
         ])->withInput();
     }
 
+    public function showForgotPasswordForm()
+    {
+        return view('auth.user-forgot-password');
+    }
+
+    public function sendResetLinkEmail(Request $request)
+    {
+        $request->validate(['email' => 'required|email']);
+
+        $status = Password::broker('users')->sendResetLink(
+            $request->only('email')
+        );
+        // 
+        return $status === Password::RESET_LINK_SENT
+            ? redirect()->route('user.login.form')->with('success', __($status))
+            : back()->withErrors(['email' => __($status)]);
+
+    }
+
+    public function showResetPasswordForm(Request $request, $token)
+    {
+        return view('auth.user-reset-password', [
+            'token' => $token,
+            'email' => $request->email
+        ]);
+    }
+
+    public function resetPassword(Request $request)
+    {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+
+        $status = Password::broker('users')->reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->password = Hash::make($password);
+                $user->save();
+            }
+        );
+
+        return $status === Password::PASSWORD_RESET
+            ? redirect()->route('user.login.form')->with('success', __($status))
+            : back()->withErrors(['email' => [__($status)]]);
+    }
+
     public function user_profile($user_id)
     {
         if (Auth::guard('web')->user()->id != $user_id) {
@@ -94,7 +144,6 @@ class UserAuthController extends Controller
         $user = User::find(Auth::guard('web')->user()->id);
         return view('user-registered.profile', compact('user'));
     }
-
 
     public function user_profilePic_update(Request $request, $user_id)
     {
@@ -166,36 +215,36 @@ class UserAuthController extends Controller
 
     public function followEscort($escort_id)
     {
-        $user = Auth::guard('web')->user();        
-    // Check if the user is already following the escort
-    if ($user->follows()->where('escort_id', $escort_id)->exists()) {
-        return redirect()->back();
-    }
-    // Attach the escort to the user's follows
-    $user->follows()->attach($escort_id);
+        $user = Auth::guard('web')->user();
+        // Check if the user is already following the escort
+        if ($user->follows()->where('escort_id', $escort_id)->exists()) {
+            return redirect()->back();
+        }
+        // Attach the escort to the user's follows
+        $user->follows()->attach($escort_id);
 
-    return redirect()->back();
+        return redirect()->back();
     }
 
     public function unfollowEscort($escort_id)
     {
-    $user = Auth::guard('web')->user();  
-    // Check if the user is following the escort
-    if (!$user->follows()->where('escort_id', $escort_id)->exists()) {
+        $user = Auth::guard('web')->user();
+        // Check if the user is following the escort
+        if (!$user->follows()->where('escort_id', $escort_id)->exists()) {
+            return redirect()->back();
+        }
+
+        // Detach the escort from the user's follows
+        $user->follows()->detach($escort_id);
+
         return redirect()->back();
-    }
-
-    // Detach the escort from the user's follows
-    $user->follows()->detach($escort_id);
-
-    return redirect()->back();
     }
 
     public function userGetMyEscorts($escort_id)
     {
         $user = Auth::guard('web')->user();
-        if($user->id != $escort_id){
-             return redirect()->back()->with('error', 'You are not authorized to access this page.');
+        if ($user->id != $escort_id) {
+            return redirect()->back()->with('error', 'You are not authorized to access this page.');
         }
 
         $allescorts = $user->follows()->orderBy('follows.created_at', 'desc')->get();

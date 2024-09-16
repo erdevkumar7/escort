@@ -186,16 +186,23 @@ Route::prefix('user')->group(function () {
     Route::get('/email/resend-email-verification', [UserAuthController::class, 'resendEmailVerificationForm'])->name('user.verification.notice');
     Route::post('/email/verification/resend', [UserAuthController::class, 'resendVerificationEmail'])->name('user.verification.resend');
 
+    // User Forgot Password
+    Route::get('/forgot-password', [UserAuthController::class, 'showForgotPasswordForm'])->name('user.password.request');
+    Route::post('/forgot-password', [UserAuthController::class, 'sendResetLinkEmail'])->name('user.password.email');
+    
+    Route::get('/reset-password/{token}', [UserAuthController::class, 'showResetPasswordForm'])->name('user.password.reset');
+    Route::post('/reset-password', [UserAuthController::class, 'resetPassword'])->name('user.password.update');
+
     Route::middleware(['auth.user'])->group(function () {
         Route::get('/{user_id}/profile', [UserAuthController::class, 'user_profile'])->name('user.profile');
         Route::put('/{user_id}/profilePic-update', [UserAuthController::class, 'user_profilePic_update'])->name('user.profilePic.update');
         Route::get('/{user_id}/profile-edit', [UserAuthController::class, 'profileEditForm'])->name('user.profileEditForm');
         Route::put('/{user_id}/profile-edit', [UserAuthController::class, 'user_update_profile'])->name('user.update.profile');
         Route::get('/{user_id}/my-escorts', [UserAuthController::class, 'userGetMyEscorts'])->name('user.myescorts');
-        
+
         Route::post('/follow-escort/{escort_id}', [UserAuthController::class, 'followEscort'])->name('user.follow.escort');
         Route::post('/unfollow-escort/{escort_id}', [UserAuthController::class, 'unfollowEscort'])->name('user.unfollow.escort');
-        
+
 
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     });

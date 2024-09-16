@@ -44,7 +44,7 @@
                             </label>
                         </div>
                         <div>
-                            <a href="{{ route('password.request') }}" class="txt1">
+                            <a href="{{ route('user.password.request') }}" class="txt1">
                                 Forgot Password?
                             </a>
                         </div>
