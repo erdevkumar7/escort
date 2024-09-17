@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Hash;
 
 class AdminFuncController extends Controller
 {
@@ -19,10 +20,50 @@ class AdminFuncController extends Controller
         return view("admin.allusers", compact('allusers'));
     }
 
+    public function viewUser($user_id){
+        $user = User::find($user_id);
+        if(!$user){
+            return redirect()->back()->with('error', 'No User Found!');
+        }
+
+        return view('admin.view-user', compact('user'));
+    }
+
+    public function addUserForm()
+    {
+        return view('admin.add-user');
+    }
+
+    public function addUserFormSubmit(Request $request)
+    {
+        $validateData = $request->validate([
+            'first_name' => 'required|string|max:255',
+            'last_name' => 'required|string|max:255',
+            'gender' => 'required',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8|confirmed',
+        ]);
+
+        $validateData['password'] = Hash::make($validateData['password']);
+        $validateData['fname'] = $validateData['first_name'];
+        $validateData['lname'] = $validateData['last_name'];
+
+        $user = User::create($validateData);
+
+        if ($user) {
+            return redirect()->route('admin_allusers')->with('success', 'User Added Successfully!');
+        } else {
+            return redirect()->back()->with('error', 'Failed to add User. Please try again.');
+        }
+    }
+
     //todo: admin edit_user_form
     public function edit_user_form($id)
     {
         $user = User::find($id);
+        if(!$user){
+            return redirect()->back()->with('error', 'No User Found!');
+        }
         return view('admin.edituser', compact('user'));
     }
 

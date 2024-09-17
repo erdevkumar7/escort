@@ -28,6 +28,14 @@
                     <div class="x_panel">
                         <div class="x_title">
                             <h2>User's<small>Details</small></h2>
+                            <div class="nav navbar-right panel_toolbox">
+                                <a href="{{route('admin.addUserForm')}}">
+                                    <button class="btn btn-success" data-toggle="tooltip" data-placement="top"
+                                        title="Add User">
+                                        Add User
+                                    </button>
+                                </a>
+                            </div>
                             <div class="clearfix"></div>
                         </div>
                         <div class="x_content">
@@ -42,19 +50,21 @@
                                                     <th>#</th>
                                                     <th>First name</th>
                                                     <th>Last name</th>
-                                                    <th>Gender</th>
                                                     <th>E-mail</th>
+                                                    <th>Gender</th>
                                                     <th>Action</th>
+                                                    <th>View User</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
                                                 @foreach ($allusers as $user)
                                                     <tr id="user-row-{{ $user->id }}">
-                                                        <td>{{ $loop->iteration + ($allusers->currentPage() - 1) * $allusers->perPage() }}</td>
+                                                        <td>{{ $loop->iteration + ($allusers->currentPage() - 1) * $allusers->perPage() }}
+                                                        </td>
                                                         <td class="editable">{{ $user->fname }}</td>
                                                         <td class="editable">{{ $user->lname }}</td>
-                                                        <td class="editable">{{ $user->gender }}</td>
                                                         <td class="editable">{{ $user->email }}</td>
+                                                        <td class="editable">{{ $user->gender }}</td>
                                                         <td style="display: flex">
 
                                                             <a href="{{ route('admin_edit_user_form', $user->id) }}">
@@ -63,26 +73,26 @@
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
-                                                            <form id="delete-user"
-                                                                action="{{ route('admin_delete_user', $user->id) }}"
-                                                                method="POST" style="display:inline">
-                                                                @csrf
-                                                                @method('DELETE')
-                                                                <button type="submit" data-toggle="tooltip"
-                                                                    data-placement="top" title="Delete">
-                                                                    <i class="fa fa-minus-circle"></i>
-                                                                </button>
-                                                            </form>
+                                                            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
+                                                                data-toggle="tooltip" data-placement="top" title="Delete"
+                                                                data-deleted-id="{{ $user->id }}">
+                                                                <i class="fa fa-minus-circle"></i>
+                                                            </button>
+                                                        </td>
+                                                        <td>
+                                                            <a href="{{route('admin.viewUser', $user->id)}}">
+                                                                <button type="button"
+                                                                    class="btn btn-primary">view</button></a>
                                                         </td>
                                                     </tr>
                                                 @endforeach
                                             </tbody>
                                         </table>
-                                         <!-- Pagination Links -->
-                                         <div class="d-flex justify-content-center all-pagination">
+                                        <!-- Pagination Links -->
+                                        <div class="d-flex justify-content-center all-pagination">
                                             {{ $allusers->links() }}
                                         </div>
-                                        
+
                                     </div>
 
                                 </div>
@@ -93,6 +103,21 @@
             </div>
         </div>
     </div>
-    </div>
+
+    {{-- delete confirm modal script --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll(
+                '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
+            const deleteForm = document.getElementById('deleteConfirmForm');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const deleteId = this.getAttribute('data-deleted-id');
+                    deleteForm.action = `/escorts/admin/delete-user/${deleteId}`;
+                });
+            });
+        });
+    </script>
     <!-- /page content -->
 @endsection

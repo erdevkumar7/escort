@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Edit escort</h3>
+                    <h3>Update Escort</h3>
                 </div>
             </div>
             <div class="clearfix"></div>

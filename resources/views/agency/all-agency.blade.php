@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>All Agency <small>(registered)</small></h3>
+                    <h3>All Agencies <small>(registered)</small></h3>
                 </div>
 
                 <div class="title_right">
@@ -112,7 +112,7 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/my_project/escorts/admin/agency/${deleteId}`;
+                    deleteForm.action = `/escorts/admin/agency/${deleteId}`;
                 });
             });
         });
