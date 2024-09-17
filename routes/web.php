@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminFuncController;
 use App\Http\Controllers\AdvertiseController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\EscortsAuthController;
 use App\Http\Controllers\MediaController;
 use App\Http\Controllers\UserAuthController;
@@ -189,7 +190,7 @@ Route::prefix('user')->group(function () {
     // User Forgot Password
     Route::get('/forgot-password', [UserAuthController::class, 'showForgotPasswordForm'])->name('user.password.request');
     Route::post('/forgot-password', [UserAuthController::class, 'sendResetLinkEmail'])->name('user.password.email');
-    
+
     Route::get('/reset-password/{token}', [UserAuthController::class, 'showResetPasswordForm'])->name('user.password.reset');
     Route::post('/reset-password', [UserAuthController::class, 'resetPassword'])->name('user.password.update');
 
@@ -205,5 +206,27 @@ Route::prefix('user')->group(function () {
 
 
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
+    });
+});
+
+// Contributors-section
+Route::prefix('contributor')->group(function () {
+    Route::get('/login', [ContributorController::class, 'showLoginForm'])->name('contributor.login.form');
+    Route::post('/login', [ContributorController::class, 'contributor_login_submit'])->name('contributor.login.submit');
+});
+
+//todo: Admin-Contributors Functionality
+Route::prefix('admin')->group(function () {
+    Route::middleware('auth.admin')->group(function () {  
+        Route::get('/all-contributors', [ContributorController::class, 'getAllContributors'])->name('admin.getAllContributors');        
+        Route::get('/{contributor_id}/view', [ContributorController::class, 'viewContributor'])->name('admin.viewContirbutor');
+        
+        Route::get('/add-contributor', [ContributorController::class, 'addContributorForm'])->name('admin.addContributorForm');
+        Route::post('/add-contributor', [ContributorController::class, 'addContributorFormSubmit'])->name('admin.addContributorFormSubmit');
+
+        Route::get('/{contributor_id}/edit', [ContributorController::class, 'editContributorForm'])->name('admin.editContirbutorForm');
+        Route::put('/{contributor_id}/edit', [ContributorController::class, 'editContributorFormSubmit'])->name('admin.editContirbutorFormSubmit');
+
+        Route::delete('/delete-contributor/{contributor_id}', [ContributorController::class, 'deleteContributor'])->name('admin.deleteContributor');
     });
 });
