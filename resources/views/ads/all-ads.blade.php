@@ -56,7 +56,7 @@
                                                         <td>{{ $ads->time_duration }}</td>
                                                         <td>{{ $ads->description }}</td>
 
-                                                        <td>
+                                                        <td class="ads-actions">
                                                             <a href="{{route('admin.ads_edit', $ads->id)}}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">

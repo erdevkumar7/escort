@@ -10,7 +10,7 @@ return [
 
 
 
-    'guards' => [
+    'guards' => [        
         'agency' => [
             'driver' => 'session',
             'provider' => 'agencies',
@@ -27,6 +27,10 @@ return [
         'admin' => [
             'driver' => 'session',
             'provider' => 'admins',
+        ],
+        'contributor' => [
+            'driver' => 'session',
+            'provider' => 'contributors',
         ],
 
         'api' => [
@@ -54,6 +58,10 @@ return [
         'admins' => [
             'driver' => 'eloquent',
             'model' => App\Models\Admin::class,
+        ],
+        'contributors' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\Contributor::class,
         ],
     ],
 

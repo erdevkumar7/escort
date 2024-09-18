@@ -6,3 +6,47 @@
 .form-control:disabled{
     background-color: #ffff;
 }
+
+table#datatable-responsive button.btn.btn-primary {
+    padding: 4px 11px;
+}
+
+.all-pagination .flex.justify-between.flex-1 {
+    text-align: center;
+    padding-bottom: 11px;
+    display: none;
+}
+
+.all-pagination p.text-sm{
+    text-align: center;
+}
+
+.all-pagination span.relative.inline-flex.items-center.px-4.py-2.-ml-px.text-sm.font-medium.leading-5 {
+    background-color: #007bff !important;
+    color: #fff;
+    border-radius: 4px;
+    border: none !important;
+    padding: 8px 11px !important;
+}
+
+tr.all-detail-table-content td img {
+    height: auto;
+}
+
+td.badges-actions {
+    width: 100px;
+}
+
+td.ads-actions {
+    width: 100px;
+}
+
+@media only screen and (max-width: 767px) {
+
+.page-title .title_left h3 {
+    margin: 9px 0;
+    font-size: 20px;
+}
+
+
+}

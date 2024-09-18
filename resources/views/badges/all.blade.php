@@ -55,7 +55,7 @@
                                                         <td>{{ $badge->description }}</td>
                                                         <td><img src="{{ asset('/public/images/badge_icons') . '/' . $badge->icon }}"
                                                                 width="40px" height="30px" alt="Icon"></td>
-                                                        <td>
+                                                        <td class="badges-actions">
                                                             <a href="{{ route('admin.badge_edit', $badge->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">

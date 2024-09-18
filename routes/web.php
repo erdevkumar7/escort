@@ -218,7 +218,15 @@ Route::prefix('user')->group(function () {
 // Contributors-section
 Route::prefix('contributor')->group(function () {
     Route::get('/login', [ContributorController::class, 'showLoginForm'])->name('contributor.login.form');
-    Route::post('/login', [ContributorController::class, 'contributor_login_submit'])->name('contributor.login.submit');
+    Route::post('/login', [ContributorController::class, 'contributor_login_submit'])->name('contributor.login.submit');    
+   
+});
+
+
+Route::middleware('auth.contributor')->group(function(){
+    Route::get('/contributor/my-dashboard', [ContributorController::class, 'contributorMyDashboard'])->name('contributor.myDashboard');
+    Route::post('contributor/logout', [ContributorController::class, 'logout'])->name('contributor.logout');
+    
 });
 
 //todo: Admin-Contributors Functionality

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rule;
+use Illuminate\Support\Facades\Auth;
 
 class ContributorController extends Controller
 {
@@ -131,13 +132,27 @@ class ContributorController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-        dd($credential);
-        //  if (Auth::guard('admin')->attempt($credential)) {
-        //     return redirect()->intended('/admin/dashboard');
-        //  }
+        // dd($credential);
+         if (Auth::guard('contributor')->attempt($credential)) {
+            // dd(Auth::guard('contributor')->user());
+            return redirect()->intended('/contributor/my-dashboard');
+         }
         // Authentication failed...
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
         ])->withInput();
+    }
+
+    public function contributorMyDashboard()
+    {
+        return view('contributor-user.my-dashboard');
+    }
+
+    public function logout(Request $request)
+    {
+        Auth::guard('contributor')->logout();    
+        $request->session()->invalidate();    
+        $request->session()->regenerateToken();    
+        return redirect('/contributor/login');
     }
 }
