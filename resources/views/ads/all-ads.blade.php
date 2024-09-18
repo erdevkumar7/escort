@@ -49,14 +49,14 @@
                                             </thead>
                                             <tbody>                                                                                        
                                                 @foreach ($advertises as $ads)
-                                                    <tr>
+                                                    <tr class="all-detail-table-content">
                                                         <td>{{ $loop->iteration }}</td>
                                                         <td>{{ $ads->name }}</td>
                                                         <td>{{ $ads->price }}</td>
                                                         <td>{{ $ads->time_duration }}</td>
                                                         <td>{{ $ads->description }}</td>
 
-                                                        <td style="display: flex">
+                                                        <td>
                                                             <a href="{{route('admin.ads_edit', $ads->id)}}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
@@ -99,7 +99,7 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/my_project/escorts/admin/ads/${deleteId}`;
+                    deleteForm.action = `/escorts/admin/ads/${deleteId}`;
                 });
             });
         });

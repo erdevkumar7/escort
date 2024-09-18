@@ -64,7 +64,7 @@
                                                     </tr>
                                                 @else
                                                     @foreach ($allContributors as $contributor)
-                                                        <tr id="contributor-row-{{ $contributor->id }}">
+                                                        <tr id="contributor-row-{{ $contributor->id }}" class="all-detail-table-content">
                                                             <th>{{ $loop->iteration + ($allContributors->currentPage() - 1) * $allContributors->perPage() }}
                                                             </th>
                                                             <td>{{ $contributor->name }}</td>
@@ -72,7 +72,7 @@
                                                             <td>{{ $contributor->email }}</td>
                                                             <td>{{ $contributor->role ? $contributor->role : 'Not Available' }}
                                                             </td>
-                                                            <td style="display: flex">
+                                                            <td>
                                                                 <a
                                                                     href="{{ route('admin.editContirbutorForm', $contributor->id) }}">
                                                                     <button data-toggle="tooltip" data-placement="top"

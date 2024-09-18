@@ -60,14 +60,14 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($allagencies as $agency)
-                                                    <tr id="agency-row-{{ $agency->id }}">
+                                                    <tr id="agency-row-{{ $agency->id }}" class="all-detail-table-content">
                                                         <th>{{ $loop->iteration + ($allagencies->currentPage() - 1) * $allagencies->perPage() }}
                                                         </th>
                                                         <td>{{ $agency->name }}</td>
                                                         <td>{{ $agency->phone_number }}</td>
                                                         <td>{{ $agency->email }}</td>
                                                         <td>{{ $agency->counter ? $agency->counter : 'Not Available' }}</td>
-                                                        <td style="display: flex">
+                                                        <td>
                                                             <a href="{{ route('admin.edit_agency_form', $agency->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">

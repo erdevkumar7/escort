@@ -58,14 +58,14 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($allusers as $user)
-                                                    <tr id="user-row-{{ $user->id }}">
+                                                    <tr id="user-row-{{ $user->id }}" class="all-detail-table-content">
                                                         <td>{{ $loop->iteration + ($allusers->currentPage() - 1) * $allusers->perPage() }}
                                                         </td>
                                                         <td class="editable">{{ $user->fname }}</td>
                                                         <td class="editable">{{ $user->lname }}</td>
                                                         <td class="editable">{{ $user->email }}</td>
                                                         <td class="editable">{{ $user->gender }}</td>
-                                                        <td style="display: flex">
+                                                        <td>
 
                                                             <a href="{{ route('admin_edit_user_form', $user->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"

@@ -61,7 +61,7 @@
                                             </thead>
                                             <tbody>
                                                 @foreach ($allescorts as $escorts)
-                                                    <tr id="escorts-row-{{ $escorts->id }}">
+                                                    <tr class="all-detail-table-content" id="escorts-row-{{ $escorts->id }}">
                                                         <td>{{ $loop->iteration + ($allescorts->currentPage() - 1) * $allescorts->perPage() }}</td>
                                                         <td>{{ $escorts->nickname ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->phone_number ?? 'Not Available' }}</td>
@@ -69,7 +69,7 @@
                                                         <td>{{ $escorts->city ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->origin ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->type ?? 'Not Available' }}</td>
-                                                        <td style="display: flex">
+                                                        <td>
                                                             <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
@@ -114,7 +114,7 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/my_project/escorts/admin/escorts/${deleteId}`;
+                    deleteForm.action = `/escorts/admin/escorts/${deleteId}`;
                 });
             });
         });
