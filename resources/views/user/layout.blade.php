@@ -9,7 +9,9 @@
     @include('user.topNav')
 
     <!-- page content -->
-    @yield('page_content')
+    <div id="partial-escort">
+        @yield('page_content')
+    </div>
     <!-- /page content -->
     
     @include('user.disclaimer')

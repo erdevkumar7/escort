@@ -9,9 +9,11 @@
     @include('user.topNav')
 
     <!-- page content -->
-    @yield('auth_content')
+    <div id="partial-escort">
+        @yield('auth_content')
+    </div>
     <!-- /page content -->
-    
+
     @include('user.footer')
     @include('user.footerJS')
 </body>

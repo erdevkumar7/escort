@@ -47,12 +47,11 @@
                    </li>
                </ul>
                <div class="d-flex search-input profile-login-logout">
+                   {{-- Search for escots --}}
                    <div class="input-group">
                        <i class="fa fa-search"></i>
                        <input class="form-control" type="search" placeholder="Search for escots"
-                           id="example-search-input">
-                       {{-- <input type="text" id="search" class="form-control" placeholder="Search escort"
-                           value="{{ request()->input('search') }}"> --}}
+                           id="example-search-input" value="{{ request()->input('search') }}">
                        <span class="input-group-append"></span>
                    </div>
                    <li class="nav-item inner-icons">
@@ -66,14 +65,17 @@
                                    <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('web')->user()->profile_pic }}"
                                        width="32px" height="32px" alt="" style="border-radius: 50%">
                                @else
-                                   <img src="{{ asset('/public/images/static_img/avatar.jpg') }}"
-                                       width="32px" height="32px" alt="" style="border-radius: 50%">
+                                   <img src="{{ asset('/public/images/static_img/avatar.jpg') }}" width="32px"
+                                       height="32px" alt="" style="border-radius: 50%">
                                @endif
                            </a>
                            <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
-                               <li><a class="dropdown-item" href="{{route('user.profile', Auth::guard('web')->user()->id)}}">Profile</a>
+                               <li><a class="dropdown-item"
+                                       href="{{ route('user.profile', Auth::guard('web')->user()->id) }}">Profile</a>
                                </li>
-                               <li><a class="dropdown-item" href="{{route('user.myescorts', Auth::guard('web')->user()->id)}}">My Escorts</a>
+                               <li><a class="dropdown-item"
+                                       href="{{ route('user.myescorts', Auth::guard('web')->user()->id) }}">My
+                                       Escorts</a>
                                </li>
                                <li><a class="dropdown-item" href="#" onclick="handleLogOut('user')">Logout</a>
                                </li>
@@ -175,5 +177,24 @@
                </form>
            </div>
        </div>
+
+       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+       <script>
+           $(document).ready(function() {
+               $('#example-search-input').on('keyup', function() {
+                   let query = $(this).val();
+                   $.ajax({
+                       url: '{{ route('index') }}',
+                       type: 'GET',
+                       data: {
+                           search: query
+                       },
+                       success: function(data) {
+                           $('#partial-escort').html(data);
+                       }
+                   });
+               });
+           });
+       </script>
    </nav>
    <!-- nav section end -->
