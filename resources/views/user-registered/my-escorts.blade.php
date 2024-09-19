@@ -12,7 +12,8 @@
             <div class="row my-escorts-followed">
                 @if ($allescorts->isEmpty())
                     <div class="col-12">
-                        <p>No Data Available</p>
+                        <p>No Data Available, <a href="{{route('escort.list')}}">Follow </a> favourite Escort </p>
+                        <p></p>
                     </div>
                 @else
                     @foreach ($allescorts as $escort)

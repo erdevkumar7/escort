@@ -3,7 +3,7 @@
     <div class="form-login register-form">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form class="login100-form validate-form" action="{{ route('escorts.register_submit') }}" method="POST"
+                <form class="login100-form validate-form" id="loginRegisterForm" action="{{ route('escorts.register_submit') }}" method="POST"
                     enctype="multipart/form-data">
                     @csrf
                     <span class="login100-form-title p-b-43">
@@ -117,7 +117,7 @@
                         <span class="text-danger" id="g_recaptcha_id">{{ $message }}</span>
                     @enderror
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn signup-btn">
+                        <button class="login100-form-btn signup-btn" id="loginSignup_btn">
                             Sign Up
                         </button>
                     </div>

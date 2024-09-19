@@ -3,10 +3,11 @@
     <div class="form-login register-form">
         <div class="container-login100">
             <div class="wrap-login100">
-                <form class="login100-form validate-form" action="{{route('user.register.submit')}}" method="POST" enctype="multipart/form-data">
+                <form class="login100-form validate-form" id="loginRegisterForm" action="{{ route('user.register.submit') }}" method="POST"
+                    enctype="multipart/form-data">
                     @csrf
                     <span class="login100-form-title p-b-43">
-                        User-Register
+                        User-Registers
                     </span>
 
                     <div class="row">
@@ -73,12 +74,11 @@
                             <input type="password" name="password_confirmation" id="password_confirmation"
                                 class="form-control" placeholder="Re-enter your password."
                                 oninput="removeError('C_PasswordErr')">
+                            @error('password_confirmation')
+                                <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
+                            @enderror
                         </div>
                     </div>
-
-                    @error('password_confirmation')
-                        <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
-                    @enderror
 
                     <div class="g-recaptcha" data-sitekey="6LepGisqAAAAAHoBrq14Bfdc9Zn81TrSv6M-5iST"
                         data-callback="removeRecaptchaError"></div>
@@ -87,22 +87,22 @@
                         <span class="text-danger" id="g_recaptcha_id">{{ $message }}</span>
                     @enderror
                     <div class="container-login100-form-btn">
-                        <button class="login100-form-btn signup-btn">
+                        <button class="login100-form-btn signup-btn" id="loginSignup_btn" type="submit">
                             Sign Up
                         </button>
                     </div>
 
                     <div class="col-sm-12 already-account">
-                        <p class="text-center text-muted mt-3 mb-0">Have already an account? <a href="{{ route('user.login.form') }}"
-                                class="fw-bold text-body"><u>Login here</u></a></p>
+                        <p class="text-center text-muted mt-3 mb-0">Have already an account? <a
+                                href="{{ route('user.login.form') }}" class="fw-bold text-body"><u>Login here</u></a></p>
                     </div>
-
-                </form>
+                </form>             
+                
                 <div class="login100-more"
                     style="background-image: url('https://votivelaravel.in/escorts/public/images/static_img/loginform-pic.jpg');">
                 </div>
             </div>
-        </div>
-
+        </div>   
+        
     </div>
 @endsection

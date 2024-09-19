@@ -202,7 +202,7 @@
     }
     //handleLogOut
     function handleLogOut(user) {
-        if( user === 'user') {
+        if (user === 'user') {
             event.preventDefault();
             document.getElementById('user-logout-form').submit();
         } else if (user === 'escort') {
@@ -270,4 +270,23 @@
             recaptchaErrorElement.style.display = 'none';
         }
     }
+</script>
+
+<!-- Script to disable button after form submit -->
+<!-- for this add Button id="loginSignup_btn" -->
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('loginRegisterForm').addEventListener('submit', function(e) {
+            // Disable the default form submission temporarily
+            e.preventDefault();
+
+            // Disable the submit button
+            var submitButton = document.getElementById('loginSignup_btn');
+            submitButton.disabled = true;
+            submitButton.innerText = 'Wait...';
+
+            // After disabling the button, submit the form
+            this.submit();
+        });
+    });
 </script>
