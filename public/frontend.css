@@ -724,7 +724,23 @@ h4.my-escort-nm-sec {
     text-align: center; 
     z-index: 1000;
 }
+#deleteConfirmationModal .modal-content {
+    background-color: white;
+    margin: 8% auto;
+    padding: 20px;
+    border-radius: 5px;
+    width: 100%;
+    top: 80px;
+}
+#deleteConfirmationModal .modal-backdrop.fade.show {
+    height: 100px !important;
+}
 
+ .modal-backdrop.show {
+    opacity: 0 !important;
+    height: 100px !important;
+
+}
 
 @media (min-width: 768px) and (max-width: 1024px) {
     

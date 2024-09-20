@@ -119,6 +119,7 @@ class MediaController extends Controller
         ]);
 
         $mediaToDelete = $validatedData['name'];
+
         $mediaType = $validatedData['type'];
 
         if ($media && $mediaType === 'image') {
@@ -130,10 +131,20 @@ class MediaController extends Controller
             $media->delete();
             return redirect()->back()->with('success', 'Picture deleted successfully.');
         } elseif ($media && $mediaType === 'video') {
+
             $videoPath = public_path('videos') . '/' . $mediaToDelete;
+            // video delete
             if (file_exists($videoPath)) {
                 unlink($videoPath);
             }
+            // thumbnail delete   
+            if($media->thumb_nail !== null){
+                $thumbNailPath = public_path('images/thumb_nails') . '/' . $media->thumb_nail;
+                if (file_exists($thumbNailPath)) {
+                    unlink($thumbNailPath);
+                }
+            }      
+
             $media->delete();
             return redirect()->back()->with('success', 'video deleted successfully.');
         } else {
