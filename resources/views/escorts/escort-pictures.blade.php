@@ -34,7 +34,7 @@
                             <div class="item form-group">
                                 <div class="col-md-12 col-sm-12 admin-escortPictures">
                                     @if ($pictures->isEmpty())
-                                        <div>No Data Available</div>
+                                    <h4>No Photos available</h4>
                                     @else
                                         <div>
                                             @foreach ($pictures as $picture)

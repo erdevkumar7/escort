@@ -51,6 +51,7 @@ Route::prefix('admin')->group(function () {
         Route::post('/escort/{escort_id}/add-pictures', [MediaController::class, 'add_escorts_myPictures'])->name('admin.add_escortPictures');
 
         Route::get('/escort/{escort_id}/videos', [AdminEscortsController::class, 'getAdminEscortsVideos'])->name('admin.getAdminEscortsVideos');
+        Route::post('/escort/{escort_id}/add-videos', [MediaController::class, 'add_escorts_myVideos'])->name('admin.add_escortVideos');
 
         Route::delete('/{escort_id}/delete-media/{media_id}', [MediaController::class, 'delete_media'])->name('admin.escorts.deleteMedia');
 

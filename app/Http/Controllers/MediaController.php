@@ -97,15 +97,12 @@ class MediaController extends Controller
             $media->save();
 
             // Redirect with success message
-            return redirect()->route('escorts.myVideos', $escort_id)->with('success', 'Video uploaded successfully.');
+            return redirect()->back()->with('success', 'Video uploaded successfully.');
         } catch (\Exception $e) {
             // Handle any exception that occurs during the process
             return redirect()->back()->withErrors(['error' => 'An error occurred while uploading your video and thumbnail. Please try again.']);
         }
     }
-
-
-
 
 
 
