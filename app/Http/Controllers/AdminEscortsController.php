@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Escort;
 use App\Models\Media;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
@@ -227,7 +228,6 @@ class AdminEscortsController extends Controller
         return redirect()->route('admin.escorts')->with('success', 'Escort updated successfully!');
     }
 
-
     //todo: get escorts to show by it's ID
     public function escorts_by_id($id)
     {
@@ -245,6 +245,32 @@ class AdminEscortsController extends Controller
         $currencies_accepted = json_decode($escorts->currencies_accepted, true);
         $payment_method = json_decode($escorts->payment_method, true);
         return view('escorts.escorts-by-id', compact('escorts', 'language_spoken', 'pictures', 'videos', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+    }
+
+    public function getAdminEscortsPictures($escort_id)
+    {
+        $escort = Escort::find($escort_id);
+        if (!$escort) {
+            return redirect()->back()->with('error', 'Escort not found.');
+        }
+        $pictures = Media::where('type', 'image')
+            ->where('escort_id', $escort_id)
+            ->get();
+
+        return view('escorts.escort-pictures', compact('pictures', 'escort'));
+    }
+
+    public function getAdminEscortsVideos($escort_id)
+    {
+        $escort = Escort::find($escort_id);
+        if (!$escort) {
+            return redirect()->back()->with('error', 'Escort not found.');
+        }
+        $videos = Media::where('type', 'video')
+            ->where('escort_id', $escort_id)
+            ->get();
+
+        return view('escorts.escort-videos', compact('videos', 'escort'));
     }
 
     //todo: Delete Escorts

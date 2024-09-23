@@ -56,39 +56,66 @@
                                                     <th>Origin</th>
                                                     <th>Type</th>
                                                     <th>Action</th>
-                                                    <th>Escort View</th>
+                                                    <th>Media View</th>
+                                                    <th>Escort View </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                @foreach ($allescorts as $escorts)
-                                                    <tr class="all-detail-table-content" id="escorts-row-{{ $escorts->id }}">
-                                                        <td>{{ $loop->iteration + ($allescorts->currentPage() - 1) * $allescorts->perPage() }}</td>
-                                                        <td>{{ $escorts->nickname ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->phone_number ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->email ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->city ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->origin ?? 'Not Available' }}</td>
-                                                        <td>{{ $escorts->type ?? 'Not Available' }}</td>
-                                                        <td>
-                                                            <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
-                                                                <button data-toggle="tooltip" data-placement="top"
-                                                                    title="Edit">
-                                                                    <i class="fa fa-edit"></i>
-                                                                </button>
-                                                            </a>
-                                                            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                                data-toggle="tooltip" data-placement="top" title="Delete"
-                                                                data-deleted-id="{{ $escorts->id }}">
-                                                                <i class="fa fa-minus-circle"></i>
-                                                            </button>
-                                                        </td>
-                                                        <td>
-                                                            <a href="{{ route('admin.get.scorts', $escorts->id) }}">
-                                                                <button type="button"
-                                                                    class="btn btn-primary">view</button></a>
-                                                        </td>
+                                                @if ($allescorts->isEmpty())
+                                                    <tr>
+                                                        <td colspan="9" class="text-center">No data available</td>
                                                     </tr>
-                                                @endforeach
+                                                @else
+                                                    @foreach ($allescorts as $escorts)
+                                                        <tr class="all-detail-table-content"
+                                                            id="escorts-row-{{ $escorts->id }}">
+                                                            <td>{{ $loop->iteration + ($allescorts->currentPage() - 1) * $allescorts->perPage() }}
+                                                            </td>
+                                                            <td>{{ $escorts->nickname ?? 'Not Available' }}</td>
+                                                            <td>{{ $escorts->phone_number ?? 'Not Available' }}</td>
+                                                            <td>{{ $escorts->email ?? 'Not Available' }}</td>
+                                                            <td>{{ $escorts->city ?? 'Not Available' }}</td>
+                                                            <td>{{ $escorts->origin ?? 'Not Available' }}</td>
+                                                            <td>{{ $escorts->type ?? 'Not Available' }}</td>
+                                                            <td>
+                                                                <a
+                                                                    href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
+                                                                    <button data-toggle="tooltip" data-placement="top"
+                                                                        title="Edit">
+                                                                        <i class="fa fa-edit"></i>
+                                                                    </button>
+                                                                </a>
+                                                                <button data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete"
+                                                                    data-deleted-id="{{ $escorts->id }}">
+                                                                    <i class="fa fa-minus-circle"></i>
+                                                                </button>
+                                                            </td>
+                                                            <td>
+                                                                <a
+                                                                    href="{{ route('admin.getAdminEscortsPictures', $escorts->id) }}">
+                                                                    <button data-toggle="tooltip" data-placement="top"
+                                                                        title="Photo">
+                                                                        <i class="fa fa-photo"></i>
+                                                                    </button>
+                                                                </a>
+                                                                <a
+                                                                    href="{{ route('admin.getAdminEscortsVideos', $escorts->id) }}">
+                                                                    <button data-toggle="tooltip" data-placement="top"
+                                                                        title="Video">
+                                                                        <i class="fa fa-video-camera"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </td>
+                                                            <td>
+                                                                <a href="{{ route('admin.get.scorts', $escorts->id) }}">
+                                                                    <button type="button"
+                                                                        class="btn btn-primary">view</button></a>
+                                                            </td>
+                                                        </tr>
+                                                    @endforeach
+                                                @endif
                                             </tbody>
                                         </table>
                                         <!-- Pagination Links -->
@@ -114,7 +141,7 @@
             deleteButtons.forEach(button => {
                 button.addEventListener('click', function() {
                     const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/escorts/admin/escorts/${deleteId}`;
+                    deleteForm.action = `/escorts/admin/escort/${deleteId}/delete`;
                 });
             });
         });

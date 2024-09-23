@@ -16,13 +16,13 @@ use Illuminate\Foundation\Auth\EmailVerificationRequest;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-//Public routes ***************************************************************
+// todo: Public routes ***************************************************************
 Route::get('/', [UserEscortsController::class, 'index'])->name('index');
 Route::get('escort-list', [UserEscortsController::class, 'escort_list'])->name('escort.list');
 Route::get('/{id}/escort-detail', [UserEscortsController::class, 'escort_detail'])->name('escort.detail_by_id');
 
 
-// todo: Admin Auth *************************************************************************
+// todo: Admin-Auth Functionality ***********************************************************
 Route::prefix('admin')->group(function () {
     Route::get('/register', [AdminAuthController::class, 'showRegistrationForm'])->name('admin_register_form');
     Route::post('/register', [AdminAuthController::class, 'register'])->name('admin_register');
@@ -36,10 +36,32 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-//todo: Admin Functionality
+// todo: Admin Escorts-Operations
 Route::prefix('admin')->group(function () {
     Route::middleware('auth.admin')->group(function () {
-        //User Operations
+        Route::get('/all-escort', [AdminEscortsController::class, 'allescorts'])->name('admin.escorts');
+
+        Route::get('/add-escort', [AdminEscortsController::class, 'addescorts'])->name('admin.add.escorts');
+        Route::post('/post-escort', [AdminEscortsController::class, 'postescorts'])->name('admin.post.escorts');
+
+        Route::get('/escort/{id}/edit', [AdminEscortsController::class, 'edit_escorts_form'])->name('admin.edit_escorts_form');
+        Route::put('/escort/{id}/edit', [AdminEscortsController::class, 'edit_escorts'])->name('admin.edit_escorts');
+
+        Route::get('/escort/{escort_id}/pictures', [AdminEscortsController::class, 'getAdminEscortsPictures'])->name('admin.getAdminEscortsPictures');
+        Route::post('/escort/{escort_id}/add-pictures', [MediaController::class, 'add_escorts_myPictures'])->name('admin.add_escortPictures');
+
+        Route::get('/escort/{escort_id}/videos', [AdminEscortsController::class, 'getAdminEscortsVideos'])->name('admin.getAdminEscortsVideos');
+
+        Route::delete('/{escort_id}/delete-media/{media_id}', [MediaController::class, 'delete_media'])->name('admin.escorts.deleteMedia');
+
+        Route::get('/escort/{id}/view', [AdminEscortsController::class, 'escorts_by_id'])->name('admin.get.scorts');
+        Route::delete('/escort/{id}/delete', [AdminEscortsController::class, 'deleteEscorts'])->name('admin.delete.escorts');
+    });
+});
+
+// todo: Admin User-Operations
+Route::prefix('admin')->group(function () {
+    Route::middleware('auth.admin')->group(function () {
         Route::get('/all-users', [AdminFuncController::class, 'allusers'])->name('admin_allusers');
         Route::get('/user/{user_id}/view', [AdminFuncController::class, 'viewUser'])->name('admin.viewUser');
 
@@ -50,18 +72,12 @@ Route::prefix('admin')->group(function () {
         Route::put('/user/{id}/edit-user', [AdminFuncController::class, 'update_user'])->name('admin_update_user');
 
         Route::delete('/delete-user/{id}', [AdminFuncController::class, 'delete_user'])->name('admin_delete_user');
-        //Escorts Operations
-        Route::get('/all-escorts', [AdminEscortsController::class, 'allescorts'])->name('admin.escorts');
+    });
+});
 
-        Route::get('/add-escorts', [AdminEscortsController::class, 'addescorts'])->name('admin.add.escorts');
-        Route::post('/post-escorts', [AdminEscortsController::class, 'postescorts'])->name('admin.post.escorts');
-
-        Route::get('/escorts/{id}/edit', [AdminEscortsController::class, 'edit_escorts_form'])->name('admin.edit_escorts_form');
-        Route::put('/escorts/{id}/edit', [AdminEscortsController::class, 'edit_escorts'])->name('admin.edit_escorts');
-
-        Route::get('/escorts/{id}/view', [AdminEscortsController::class, 'escorts_by_id'])->name('admin.get.scorts');
-        Route::delete('/escorts/{id}', [AdminEscortsController::class, 'deleteEscorts'])->name('admin.delete.escorts');
-        //Agency Operations
+// todo: Admin Agency-Operations
+Route::prefix('admin')->group(function () {
+    Route::middleware('auth.admin')->group(function () {
         Route::get('/all-agencies', [AdminAgencyController::class, 'allagencies'])->name('admin.allagencies');
 
         Route::get('/add-agency', [AdminAgencyController::class, 'addagency_form'])->name('admin.addagency_form');
@@ -75,7 +91,12 @@ Route::prefix('admin')->group(function () {
         Route::get('/agency/{id}/all-escorts', [AdminAgencyController::class, 'agency_escorts'])->name('admin.agency.escorts');
         Route::get('/agency/{id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts_form'])->name('admin.agency.add_escorts_form');
         Route::post('/agency/{agency_id}/add-escorts', [AdminAgencyController::class, 'agency_add_escorts'])->name('admin.agency.add_escorts');
+    });
+});
 
+// todo: Admin Badges-Ads Operations
+Route::prefix('admin')->group(function () {
+    Route::middleware('auth.admin')->group(function () {
         //Badges Operations
         Route::get('all-badges', [BadgeController::class, 'allbadges'])->name('admin.allbadges');
         Route::get('/add-badge', [BadgeController::class, 'add_badge_form'])->name('admin.add.badge_form');
@@ -97,12 +118,12 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-//todo: Admin-Contributors Functionality
+// todo: Admin Contributors-Operations
 Route::prefix('admin')->group(function () {
-    Route::middleware('auth.admin')->group(function () {  
-        Route::get('/all-contributors', [ContributorController::class, 'getAllContributors'])->name('admin.getAllContributors');        
+    Route::middleware('auth.admin')->group(function () {
+        Route::get('/all-contributors', [ContributorController::class, 'getAllContributors'])->name('admin.getAllContributors');
         Route::get('/{contributor_id}/view', [ContributorController::class, 'viewContributor'])->name('admin.viewContirbutor');
-        
+
         Route::get('/add-contributor', [ContributorController::class, 'addContributorForm'])->name('admin.addContributorForm');
         Route::post('/add-contributor', [ContributorController::class, 'addContributorFormSubmit'])->name('admin.addContributorFormSubmit');
 
@@ -113,21 +134,22 @@ Route::prefix('admin')->group(function () {
     });
 });
 
-// Contributors-section
+// Contributors Functionality
 Route::prefix('contributor')->group(function () {
     Route::get('/login', [ContributorController::class, 'showLoginForm'])->name('contributor.login.form');
-    Route::post('/login', [ContributorController::class, 'contributor_login_submit'])->name('contributor.login.submit');    
-   
-    Route::middleware('auth.contributor')->group(function(){
+    Route::post('/login', [ContributorController::class, 'contributor_login_submit'])->name('contributor.login.submit');
+
+    Route::middleware('auth.contributor')->group(function () {
         Route::get('/my-dashboard', [ContributorController::class, 'contributorMyDashboard'])->name('contributor.myDashboard');
-       
-       
-        Route::post('/logout', [ContributorController::class, 'logout'])->name('contributor.logout');        
+
+
+        Route::post('/logout', [ContributorController::class, 'logout'])->name('contributor.logout');
     });
 });
 
-//Agency routes ****************************************************************
+// Agency Functionality ****************************************************************
 Route::prefix('agency')->group(function () {
+    // Agency Auth
     Route::get('/register', [AgencyController::class, 'agency_regiser_from'])->name('agency.register_form');
     Route::post('/register', [AgencyController::class, 'agency_regiser_from_submit'])->name('agency.register.form_submit');
 
@@ -141,7 +163,7 @@ Route::prefix('agency')->group(function () {
     Route::get('/reset-password/{token}', [AgencyController::class, 'showResetPasswordForm'])->name('agency.password.reset');
     Route::post('/reset-password', [AgencyController::class, 'resetPassword'])->name('agency.password.update');
 
-    //Protected Agency Routes
+    // Protected Agency-Routes
     Route::middleware(['auth:agency'])->group(function () {
         Route::get('/{agency_id}/profile', [AgencyController::class, 'profile'])->name('agency.profile');
         Route::get('/{agency_id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
@@ -182,7 +204,7 @@ Route::post('/forgot-password', [EscortsAuthController::class, 'sendResetLinkEma
 Route::get('/reset-password/{token}', [EscortsAuthController::class, 'showResetPasswordForm'])->name('password.reset');
 Route::post('/reset-password', [EscortsAuthController::class, 'resetPassword'])->name('password.update');
 
-//todo: Escort Operation-Functionality
+//todo: Escort Functionality
 Route::group(['middleware' => ['auth:escort']], function () {
     Route::get('/{id}/profile', [UserEscortsController::class, 'profile'])->name('escorts.profile');
     Route::get('/{id}/dashboard', [UserEscortsController::class, 'dashboard'])->name('escorts.dashboard');
@@ -208,7 +230,7 @@ Route::group(['middleware' => ['auth:escort']], function () {
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
 
-// User-registered
+// todo: User-registered
 Route::prefix('user')->group(function () {
     Route::get('/register', [UserAuthController::class, 'user_register_form'])->name('user.register.form');
     Route::post('/register', [UserAuthController::class, 'user_register_form_sbmit'])->name('user.register.submit');
@@ -219,14 +241,13 @@ Route::prefix('user')->group(function () {
     Route::get('/email/verify/{id}/{hash}', [UserAuthController::class, 'verifyUserEmail'])->name('user.verification.verify');
     Route::get('/email/resend-email-verification', [UserAuthController::class, 'resendEmailVerificationForm'])->name('user.verification.notice');
     Route::post('/email/verification/resend', [UserAuthController::class, 'resendVerificationEmail'])->name('user.verification.resend');
-
-    // User Forgot Password
+    // User Forgot-Password
     Route::get('/forgot-password', [UserAuthController::class, 'showForgotPasswordForm'])->name('user.password.request');
     Route::post('/forgot-password', [UserAuthController::class, 'sendResetLinkEmail'])->name('user.password.email');
 
     Route::get('/reset-password/{token}', [UserAuthController::class, 'showResetPasswordForm'])->name('user.password.reset');
     Route::post('/reset-password', [UserAuthController::class, 'resetPassword'])->name('user.password.update');
-
+    // registered-user Functionality
     Route::middleware(['auth.user'])->group(function () {
         Route::get('/{user_id}/profile', [UserAuthController::class, 'user_profile'])->name('user.profile');
         Route::put('/{user_id}/profilePic-update', [UserAuthController::class, 'user_profilePic_update'])->name('user.profilePic.update');
@@ -236,7 +257,6 @@ Route::prefix('user')->group(function () {
 
         Route::post('/follow-escort/{escort_id}', [UserAuthController::class, 'followEscort'])->name('user.follow.escort');
         Route::post('/unfollow-escort/{escort_id}', [UserAuthController::class, 'unfollowEscort'])->name('user.unfollow.escort');
-
 
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     });

@@ -51,7 +51,7 @@ class MediaController extends Controller
                 }
             }
 
-            return redirect()->route('escorts.myPictures', $escort_id)->with('success', 'Picture uploaded successfully.');
+            return redirect()->back()->with('success', 'Picture uploaded successfully.');
         } catch (\Exception $e) {
             // Handle any exception that might occur during the process
             return redirect()->back()->withErrors(['error' => 'An error occurred while uploading your pictures. Please try again.']);

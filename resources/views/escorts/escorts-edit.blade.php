@@ -388,7 +388,21 @@
                                                 </option>
                                             </select>
                                         @else
-                                            <input type="text" class="form-control" value="Not Selected" readonly>
+                                            <select class="form-control" id="services" name="services[]" multiple
+                                                oninput="removeError('servicesErr')">
+                                                <option value="service1"
+                                                    {{ in_array('service1', old('services', [])) ? 'selected' : '' }}>One
+                                                    Option</option>
+                                                <option value="service2"
+                                                    {{ in_array('service2', old('services', [])) ? 'selected' : '' }}>Two
+                                                    Option</option>
+                                                <option value="service3"
+                                                    {{ in_array('service3', old('services', [])) ? 'selected' : '' }}>Third
+                                                    Option</option>
+                                            </select>
+                                            @error('services')
+                                                <span class="text-danger" id="servicesErr">{{ $message }}</span>
+                                            @enderror
                                         @endif
                                     </div>
                                     {{-- availability --}}
@@ -480,8 +494,7 @@
                                     </div>
                                 </div>
 
-                                <div class="item form-group">
-                                    {{-- pictures --}}
+                                {{-- <div class="item form-group">                               
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="pictures">Pictures *</label></div>
                                         @if ($pictures)
@@ -499,7 +512,7 @@
                                             <span class="text-danger" id="picturesErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- video --}}
+                                   
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="video">Videos</label></div>
                                         @if ($videos)
@@ -517,12 +530,11 @@
                                             <span class="text-danger" id="videoErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-
-                                </div>
+                                </div> --}}
 
                                 {{-- submit button  --}}
                                 <div class="item form-group">
-                                    <div class="col-md-4 col-sm-4 offset-md-3">
+                                    <div class="col-md-4 col-sm-4 offset-md-5 mt-3">
                                         <a href="{{ route('admin.escorts') }}"> <button class="btn btn-primary"
                                                 type="button">Cancel</button></a>
                                         <button type="submit" class="btn btn-success">Submit</button>

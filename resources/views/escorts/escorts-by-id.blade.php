@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>Escorts details</h3>
+                    <h3>Escort details</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -333,9 +333,7 @@
                                     </div>
                                 </div>
 
-                                <div class="item form-group">
-                                    {{-- pictures --}}
-
+                                {{-- <div class="item form-group">
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="pictures">Pictures *</label></div>
                                        
@@ -349,7 +347,6 @@
                                         @endif
                                     </div>
 
-                                    {{-- video --}}
                                     <div class="col-md-6 col-sm-6">
                                         <div><label for="video">Videos</label></div>
                                         @if ($videos)
@@ -363,7 +360,7 @@
                                             <div></div>
                                         @endif
                                     </div>
-                                </div>
+                                </div> --}}
                             </form>
                         </div>
                     </div>

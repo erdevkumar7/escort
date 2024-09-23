@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>New escort</h3>
+                    <h3>Add New escort</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -502,7 +502,7 @@
                                 </div>
                                 {{-- submit --}}
                                 <div class="item form-group">
-                                    <div class="col-md-4 col-sm-4 offset-md-4">
+                                    <div class="col-md-4 col-sm-4 offset-md-5 mt-3">
                                         <a href="{{ route('admin.escorts') }}"> <button class="btn btn-primary"
                                                 type="button">Cancel</button></a>
                                         <button class="btn btn-primary" type="reset">Reset</button>
