@@ -269,7 +269,7 @@ class AdminEscortsController extends Controller
         }
         $videos = Media::where('type', 'video')
             ->where('escort_id', $escort_id)
-            ->orderBy('created_at','desc')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('escorts.escort-videos', compact('videos', 'escort'));
@@ -307,12 +307,20 @@ class AdminEscortsController extends Controller
                     unlink($vdoPath);
                 }
 
+                // thumbnail delete   
+                if ($video->thumb_nail !== null) {
+                    $thumbNailPath = public_path('images/thumb_nails') . '/' . $video->thumb_nail;
+                    if (file_exists($thumbNailPath)) {
+                        unlink($thumbNailPath);
+                    }
+                }
+
                 $video->delete();
             }
         }
 
 
         $escort->delete();
-        return redirect()->route('admin.escorts')->with('success', 'Escorts deleted successfully');
+        return redirect()->back()->with('success', 'Escorts deleted successfully');
     }
 }

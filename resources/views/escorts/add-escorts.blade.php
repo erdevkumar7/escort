@@ -234,7 +234,7 @@
                                     {{-- pictures --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="pictures">Pictures<span class="required">*</span></label>
-                                        <input type="file" class="form-control" id="pictures" name="pictures[]"
+                                        <input type="file" class="form-control" id="pictures" name="pictures[]" accept="image/*"
                                             multiple oninput="removeError('picturesErr')">
                                         <input type="hidden" name="image_type" value="image">
                                         @error('pictures')
@@ -281,7 +281,7 @@
                                     {{-- video --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="video">Videos</label>
-                                        <input type="file" class="form-control" id="videos" name="videos[]"
+                                        <input type="file" class="form-control" id="videos" name="videos[]" accept="video/*"
                                             multiple>
                                         <input type="hidden" name="video_type" value="video">
                                         @error('videos')

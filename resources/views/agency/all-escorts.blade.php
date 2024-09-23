@@ -52,7 +52,7 @@
                                                     <th>#</th>
                                                     <th>Nickname</th>
                                                     <th>Phone number</th>
-                                                    <th>Email</th>                                                
+                                                    <th>Email</th>
                                                     <th>City</th>
                                                     <th>Type</th>
                                                     <th>Action</th>
@@ -88,16 +88,12 @@
                                                                     </button>
                                                                 </a>
 
-                                                                <form id="delete-escorts"
-                                                                    action="{{ route('admin.delete.escorts', $escorts->id) }}"
-                                                                    method="POST" style="display:inline">
-                                                                    @csrf
-                                                                    @method('DELETE')
-                                                                    <button type="submit" data-toggle="tooltip"
-                                                                        data-placement="top" title="Delete">
-                                                                        <i class="fa fa-minus-circle"></i>
-                                                                    </button>
-                                                                </form>
+                                                                <button data-bs-toggle="modal"
+                                                                    data-bs-target="#staticBackdrop" data-toggle="tooltip"
+                                                                    data-placement="top" title="Delete"
+                                                                    data-deleted-id="{{ $escorts->id }}">
+                                                                    <i class="fa fa-minus-circle"></i>
+                                                                </button>
                                                             </td>
                                                             <td>
                                                                 <a
@@ -130,5 +126,20 @@
             </div>
         </div>
     </div>
+    {{-- delete confirm modal script --}}
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const deleteButtons = document.querySelectorAll(
+                '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
+            const deleteForm = document.getElementById('deleteConfirmForm');
+
+            deleteButtons.forEach(button => {
+                button.addEventListener('click', function() {
+                    const deleteId = this.getAttribute('data-deleted-id');
+                    deleteForm.action = `/escorts/admin/escort/${deleteId}/delete`;
+                });
+            });
+        });
+    </script>
     <!-- /page content -->
 @endsection

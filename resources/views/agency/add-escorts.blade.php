@@ -6,20 +6,14 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>New escort</h3>
+                    <h3>Add New escort</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
             <div class="row">
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
-                        <div class="x_content">
-                            <br />
-                            @if (session('success'))
-                                <div>
-                                    {{ session('success') }}
-                                </div>
-                            @endif
+                        <div class="x_content">                        
                             <form action="{{ route('admin.agency.add_escorts', $agency->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -275,7 +269,7 @@
                                     {{-- pictures --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="pictures">Pictures<span class="required">*</span></label>
-                                        <input type="file" class="form-control" id="pictures" name="pictures[]"
+                                        <input type="file" class="form-control" id="pictures" name="pictures[]" accept="image/*"
                                             multiple oninput="removeError('picturesErr')">
                                         <input type="hidden" name="media_type_image" value="image">
                                         @error('pictures')
@@ -300,7 +294,7 @@
 
                                     <div class="col-md-4 col-sm-4">
                                         <label for="video">Videos</label>
-                                        <input type="file" class="form-control" id="video" name="videos[]"
+                                        <input type="file" class="form-control" id="video" name="videos[]" accept="video/*"
                                             multiple>
                                         <input type="hidden" name="media_type_video" value="video">
                                         @error('video')
@@ -491,7 +485,7 @@
                                     </div>
                                 </div>
                                 <div class="item form-group">
-                                    <div class="col-md-4 col-sm-4 offset-md-3">
+                                    <div class="col-md-4 col-sm-4 offset-md-5 mt-3">
                                         <a href="{{ route('admin.escorts') }}"> <button class="btn btn-primary"
                                                 type="button">Cancel</button></a>
                                         <button class="btn btn-primary" type="reset">Reset</button>
