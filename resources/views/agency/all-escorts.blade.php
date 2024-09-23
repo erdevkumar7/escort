@@ -52,13 +52,11 @@
                                                     <th>#</th>
                                                     <th>Nickname</th>
                                                     <th>Phone number</th>
-                                                    <th>age</th>
-                                                    <th>Canton</th>
+                                                    <th>Email</th>                                                
                                                     <th>City</th>
-                                                    {{-- <th>Services</th> --}}
-                                                    <th>Origin</th>
                                                     <th>Type</th>
                                                     <th>Action</th>
+                                                    <th>Media View</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -72,11 +70,8 @@
                                                             <td>{{ $loop->iteration }}</td>
                                                             <td>{{ $escorts->nickname }}</td>
                                                             <td>{{ $escorts->phone_number }}</td>
-                                                            <td>{{ $escorts->age }}</td>
-                                                            <td>{{ $escorts->canton }}</td>
+                                                            <td>{{ $escorts->email }}</td>
                                                             <td>{{ $escorts->city }}</td>
-                                                            {{-- <td>{{ $escorts->services }}</td> --}}
-                                                            <td>{{ $escorts->origin }}</td>
                                                             <td>{{ $escorts->type }}</td>
                                                             <td style="display: flex">
                                                                 <a href="{{ route('admin.get.scorts', $escorts->id) }}">
@@ -103,6 +98,22 @@
                                                                         <i class="fa fa-minus-circle"></i>
                                                                     </button>
                                                                 </form>
+                                                            </td>
+                                                            <td>
+                                                                <a
+                                                                    href="{{ route('admin.getAdminEscortsPictures', $escorts->id) }}">
+                                                                    <button data-toggle="tooltip" data-placement="top"
+                                                                        title="Photo">
+                                                                        <i class="fa fa-photo"></i>
+                                                                    </button>
+                                                                </a>
+                                                                <a
+                                                                    href="{{ route('admin.getAdminEscortsVideos', $escorts->id) }}">
+                                                                    <button data-toggle="tooltip" data-placement="top"
+                                                                        title="Video">
+                                                                        <i class="fa fa-video-camera"></i>
+                                                                    </button>
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                     @endforeach

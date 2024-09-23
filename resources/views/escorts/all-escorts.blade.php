@@ -53,7 +53,6 @@
                                                     <th>Phone number</th>
                                                     <th>email</th>
                                                     <th>City</th>
-                                                    <th>Origin</th>
                                                     <th>Type</th>
                                                     <th>Action</th>
                                                     <th>Media View</th>
@@ -75,7 +74,6 @@
                                                             <td>{{ $escorts->phone_number ?? 'Not Available' }}</td>
                                                             <td>{{ $escorts->email ?? 'Not Available' }}</td>
                                                             <td>{{ $escorts->city ?? 'Not Available' }}</td>
-                                                            <td>{{ $escorts->origin ?? 'Not Available' }}</td>
                                                             <td>{{ $escorts->type ?? 'Not Available' }}</td>
                                                             <td>
                                                                 <a

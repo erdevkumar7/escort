@@ -41,6 +41,126 @@ td.ads-actions {
     width: 100px;
 }
 
+.adminEscort-videos {
+    position: relative;
+    row-gap: 40px;
+}
+.adminEscort-videos .my-video-player-active video {
+    width: 250px;
+    height: 250px;
+}
+
+.adminEscort-video-thumbnail img.vidio-ply-img {
+    width: 50px;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    cursor: pointer;
+    bottom: 80px;
+}
+
+.adminEscort-videos span.adminEscort-video-delete-from {
+    float: right;
+    margin-bottom: -42px;
+    margin-right: -5px;
+    position: relative;
+}
+
+.admin-escort-pics .menu-item.inener-pic-data img {
+    width: 100%;
+    height: 350px;
+}
+
+div#AdminUploadModal .modal-content.video-upload-forms {
+    width: 33%;
+    margin: auto;
+    padding: 25px;
+    margin-top: 25px;
+    padding-right: 0;
+    padding-bottom: 25px;
+    padding-top: 25px;
+}
+
+div#AdminUploadModal button {
+    width: 24%;
+    height: 40px;
+    border: none;
+    background-color: #2a3f54;
+    color: #fff;
+    font-weight: 500;
+    font-size: 15px;
+    border-radius: 3px;
+    margin-top: 8px;
+}
+
+div#AdminUploadModal input#thumbnail {
+    margin-top: 11px;
+}
+
+div#AdminUploadModal button:hover {
+    background: #EC8CCC;
+}
+
+div#AdminUploadModal span.close {
+    background-color: #dc3545;
+    width: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    height: 25px;
+    opacity: inherit;
+    padding-bottom: 2px;
+}
+div#AdminUploadModal span.close:hover {
+    background: #dc3545;
+}
+
+.adminEscort-videos img.video-thumb9mg {
+    width: 100%;
+    height: 250px;
+}
+
+.admin-escort-pics button.btn.btn-danger {
+    float: right;
+    margin-bottom: -38px;
+    margin-right: 0px;
+    position: relative;
+}
+
+.admin-escort-pics {
+    row-gap: 40px;
+}
+
+div#AdminUploadModal button:focus {
+    outline: none;
+}
+
+p.modal-open-for-addvideo {
+    width: 25%;
+    border: solid 2px;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+}
+
+.adminAdd-add-more-pic p.add-photo-admin {
+    width: 100%;
+    border: solid 2px;
+    text-align: center;
+    padding: 8px;
+    cursor: pointer;
+}
+.adminAdd-add-more-pic {
+    padding-left: 2px;
+}
+
+.adminEscort-videos span.adminEscort-video-delete-from .btn-danger:focus {
+    box-shadow: none;
+}
+
 @media only screen and (max-width: 767px) {
 
 .page-title .title_left h3 {

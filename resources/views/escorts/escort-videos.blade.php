@@ -3,61 +3,60 @@
 @section('page_content')
     <!-- page content -->
     <div class="right_col" role="main">
-        <div class="">
-            <div class="page-title">
-                <div class="title_left">
-                    <h3>Escort Videos</h3>
-                    {{-- <span class="upload-myVideos" onclick="openModal()">Upload Video </span> --}}
-                    <p onclick="openModal()">Add Video <i class="fa fa-upload" aria-hidden="true"></i></p>
-                </div>
+        <div class="page-title">
+            <div class="title_left">
+                <h3>Escort Videos</h3>
+                {{-- <span class="upload-myVideos" onclick="openModal()">Upload Video </span> --}}
+                <p class="modal-open-for-addvideo" onclick="openModal()">Add Video <i class="fa fa-upload" aria-hidden="true"></i></p>
             </div>
-            <div class="clearfix"></div>
-            <div class="row">
-                <div class="col-md-12 col-sm-12 ">
-                    <div class="x_panel">
-                        <div class="x_content">
-                            <div class="row adminEscort-videos">
-                                @if ($videos->isEmpty())
-                                    <!-- Display this div when no videos are available -->
-                                    <div class="col-lg-3 menu-item no-video-available">
-                                        <h4>No videos available</h4>
-                                    </div>
-                                @else
-                                    @foreach ($videos as $vdo)
-                                        <div class="col-lg-3 menu-item adminEscort-videos">
-                                            <!-- Delete video Form-->
-                                            <span class="adminEscort-video-delete-from">
-                                                <form
-                                                    action="{{ route('admin.escorts.deleteMedia', ['escort_id' => $escort->id, 'media_id' => $vdo->id]) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('DELETE')
-                                                    <input type="hidden" name="name" value="{{ $vdo->name }}">
-                                                    <input type="hidden" name="type" value="video">
-                                                    <button type="submit" class="btn btn-danger">
-                                                        <i class="fa fa-times" aria-hidden="true"></i></button>
-                                                </form>
-                                            </span>
-                                            <!-- Show-Videos-->
-                                            <div class="video-thumbnail adminEscort-video-thumbnail"
-                                                onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
+        </div>
+        <div class="clearfix"></div>
+        <div class="row adminVideo-content">
+            <div class="col-md-12 col-sm-12 ">
+                <div class="x_panel">
+                    <div class="x_content">
+                        <div class="row adminEscort-videos">
+                            @if ($videos->isEmpty())
+                                <!-- Display this div when no videos are available -->
+                                <div class="col-lg-3 menu-item no-video-available">
+                                    <h4>No videos available</h4>
+                                </div>
+                            @else
+                                @foreach ($videos as $vdo)
+                                    <div class="col-lg-3 menu-item adminEscort-videos">
+                                        <!-- Delete video Form-->
+                                        <span class="adminEscort-video-delete-from">
+                                            <form
+                                                action="{{ route('admin.escorts.deleteMedia', ['escort_id' => $escort->id, 'media_id' => $vdo->id]) }}"
+                                                method="POST">
+                                                @csrf
+                                                @method('DELETE')
+                                                <input type="hidden" name="name" value="{{ $vdo->name }}">
+                                                <input type="hidden" name="type" value="video">
+                                                <button type="submit" class="btn btn-danger">
+                                                    <i class="fa fa-times" aria-hidden="true"></i></button>
+                                            </form>
+                                        </span>
+                                        <!-- Show-Videos-->
+                                        <div class="video-thumbnail adminEscort-video-thumbnail"
+                                            onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
 
-                                                <img class="vidio-ply-img"
-                                                    src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
-                                                <img class="video-thumb9mg"
-                                                    src="{{ $vdo->thumb_nail ? asset('/public/images/thumb_nails/' . $vdo->thumb_nail) : asset('/public/images/static_img/default_thumbnail.png') }}"
-                                                    alt="">
+                                            <img class="vidio-ply-img"
+                                                src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
+                                            <img class="video-thumb9mg"
+                                                src="{{ $vdo->thumb_nail ? asset('/public/images/thumb_nails/' . $vdo->thumb_nail) : asset('/public/images/static_img/default_thumbnail.png') }}"
+                                                alt="">
 
-                                            </div>
                                         </div>
-                                    @endforeach
-                                @endif
-                            </div>
+                                    </div>
+                                @endforeach
+                            @endif
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
     <script>
         function loadVideo(element, videoSrc) {

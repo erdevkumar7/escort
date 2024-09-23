@@ -255,6 +255,7 @@ class AdminEscortsController extends Controller
         }
         $pictures = Media::where('type', 'image')
             ->where('escort_id', $escort_id)
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return view('escorts.escort-pictures', compact('pictures', 'escort'));
@@ -268,6 +269,7 @@ class AdminEscortsController extends Controller
         }
         $videos = Media::where('type', 'video')
             ->where('escort_id', $escort_id)
+            ->orderBy('created_at','desc')
             ->get();
 
         return view('escorts.escort-videos', compact('videos', 'escort'));
