@@ -39,6 +39,10 @@
 
                                 </div>
                             @endforeach
+                            <!-- Pagination Links -->
+                            <div class="d-flex justify-content-center escort-listing-all-pagination">
+                                {{ $allescorts->links() }}
+                            </div>
                         @endif
                     </div>
                 </div>

@@ -10,56 +10,99 @@ use Illuminate\Support\Facades\DB;
 
 class UserEscortsController extends Controller
 {
+    // public function index(Request $request)
+    // {
+    //     $query = DB::table("escorts")->orderBy("created_at", "desc");
+
+    //     if ($request->has('search')) {
+    //         $search = $request->input('search');
+    //         $query->where('nickname', 'like', '%' . $search . '%');
+    //     }
+
+    //     $allescorts = $query->paginate(12);
+
+    //     foreach ($allescorts as $escort) {
+    //         // Fetch images for the current escort
+    //         $escort->pictures = Media::where('escort_id', $escort->id)
+    //             ->where('type', 'image')
+    //             ->get();
+
+    //         // Fetch videos for the current escort
+    //         $escort->video = Media::where('escort_id', $escort->id)
+    //             ->where('type', 'video')
+    //             ->get();
+    //     }
+
+    //     // Two time Decode must for data endcoding
+    //     foreach ($allescorts as $escort) {
+    //         $escort->services = json_decode($escort->services, true);
+    //         $escort->language_spoken = json_decode($escort->language_spoken, true);
+    //         $escort->availability = json_decode($escort->availability, true);
+    //         $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
+    //         $escort->payment_method = json_decode($escort->payment_method, true);
+    //     }
+
+    //     // foreach ($allescorts as $escort) {
+    //     //     $escort->services = json_decode($escort->services, true);
+    //     //     $escort->language_spoken = json_decode($escort->language_spoken, true);
+    //     //     $escort->availability = json_decode($escort->availability, true);
+    //     //     $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
+    //     //     $escort->payment_method = json_decode($escort->payment_method, true);
+    //     // }
+
+    //     if ($request->ajax()) {
+    //         return view('user-escort.partials-escort-list', compact('allescorts'))->render();
+    //     }
+
+    //     return view("user-escort.index", compact('allescorts'));
+    // }
+
     public function index(Request $request)
     {
+        // Define your base route
+        $baseUrl = url('/escort-list');
+
+        // Start the query to fetch escorts
         $query = DB::table("escorts")->orderBy("created_at", "desc");
 
+        // Check if there's a search query
         if ($request->has('search')) {
             $search = $request->input('search');
             $query->where('nickname', 'like', '%' . $search . '%');
         }
 
-        $allescorts = $query->get();
+        // Paginate the results, appending search parameters to the pagination links
+        $allescorts = $query->paginate(12)->withPath($baseUrl)->appends($request->except('page'));
 
+        // Fetch pictures and videos for each escort
         foreach ($allescorts as $escort) {
-            // Fetch images for the current escort
             $escort->pictures = Media::where('escort_id', $escort->id)
                 ->where('type', 'image')
                 ->get();
 
-            // Fetch videos for the current escort
             $escort->video = Media::where('escort_id', $escort->id)
                 ->where('type', 'video')
                 ->get();
         }
 
-        // Two time Decode must for data endcoding
+        // Decode JSON-encoded fields for each escort
         foreach ($allescorts as $escort) {
             $escort->services = json_decode($escort->services, true);
-            // $escort->pictures = json_decode($escort->pictures, true);
-            // $escort->video = json_decode($escort->video, true);
             $escort->language_spoken = json_decode($escort->language_spoken, true);
             $escort->availability = json_decode($escort->availability, true);
             $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
             $escort->payment_method = json_decode($escort->payment_method, true);
         }
 
-        foreach ($allescorts as $escort) {
-            $escort->services = json_decode($escort->services, true);
-            // $escort->pictures = json_decode($escort->pictures, true);
-            // $escort->video = json_decode($escort->video, true);
-            $escort->language_spoken = json_decode($escort->language_spoken, true);
-            $escort->availability = json_decode($escort->availability, true);
-            $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
-            $escort->payment_method = json_decode($escort->payment_method, true);
-        }
-
+        // If the request is made via AJAX, return a partial view
         if ($request->ajax()) {
             return view('user-escort.partials-escort-list', compact('allescorts'))->render();
         }
 
+        // Return the main view with the paginated escorts
         return view("user-escort.index", compact('allescorts'));
     }
+
 
     public function escort_list(Request $request)
     {
@@ -82,25 +125,19 @@ class UserEscortsController extends Controller
         // Two time Decode must for data endcoding
         foreach ($allescorts as $escort) {
             $escort->services = json_decode($escort->services, true);
-            // $escort->pictures = json_decode($escort->pictures, true);
-            // $escort->video = json_decode($escort->video, true);
             $escort->language_spoken = json_decode($escort->language_spoken, true);
             $escort->availability = json_decode($escort->availability, true);
             $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
             $escort->payment_method = json_decode($escort->payment_method, true);
         }
 
-        foreach ($allescorts as $escort) {
-            $escort->services = json_decode($escort->services, true);
-            // $escort->pictures = json_decode($escort->pictures, true);
-            // $escort->video = json_decode($escort->video, true);
-            $escort->language_spoken = json_decode($escort->language_spoken, true);
-            $escort->availability = json_decode($escort->availability, true);
-            $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
-            $escort->payment_method = json_decode($escort->payment_method, true);
-        }
-
-
+        // foreach ($allescorts as $escort) {
+        //     $escort->services = json_decode($escort->services, true);
+        //     $escort->language_spoken = json_decode($escort->language_spoken, true);
+        //     $escort->availability = json_decode($escort->availability, true);
+        //     $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
+        //     $escort->payment_method = json_decode($escort->payment_method, true);
+        // }
 
         return view('user-escort.escort-list', compact('allescorts'));
     }
@@ -134,7 +171,7 @@ class UserEscortsController extends Controller
         $escort = Escort::find(Auth::guard('escort')->user()->id);
 
         $pictures = Media::where('escort_id', $escort->id)->where('type', 'image')->get();
-        $videos = Media::where('escort_id', $escort->id)->where('type', 'video')->get();    
+        $videos = Media::where('escort_id', $escort->id)->where('type', 'video')->get();
         $services = json_decode($escort->services, true);
         $language_spoken = json_decode($escort->language_spoken, true);
         $availability = json_decode($escort->availability, true);
@@ -149,7 +186,7 @@ class UserEscortsController extends Controller
         if (Auth::guard('escort')->user()->id != $id) {
             return redirect()->route('escorts.myPictures', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
         }
-      
+
         $pictures = Media::where('type', 'image')
             ->where('escort_id', Auth::guard('escort')->user()->id)
             ->get();
@@ -228,7 +265,7 @@ class UserEscortsController extends Controller
             'payment_method' => 'nullable|array',
         ]);
 
-     
+
         // $pictures = json_decode($escort->pictures, true) ?? [];
         // if ($request->hasFile('pictures')) {
         //     foreach ($request->file('pictures') as $image) {
@@ -239,7 +276,7 @@ class UserEscortsController extends Controller
         //     }
         // }
 
-     
+
         // if ($request->hasFile('profile_pic')) {
         //     // Delete the old image if it exists
         //     if ($escort->profile_pic) {
@@ -386,14 +423,14 @@ class UserEscortsController extends Controller
         // $escort = Escort::find($id);
         if (!$escort) {
             return redirect()->back()->with('error', 'Escort not found.');
-       }
-           // Store the previous URL in session for redirection
-        if (url()->previous()) {
-        session(['previous_url' => url()->previous()]);
         }
-        
+        // Store the previous URL in session for redirection
+        if (url()->previous()) {
+            session(['previous_url' => url()->previous()]);
+        }
+
         $pictures = Media::where('escort_id', $id)->where('type', 'image')->get();
-        $videos = Media::where('escort_id', $id)->where('type', 'video')->get(); 
+        $videos = Media::where('escort_id', $id)->where('type', 'video')->get();
         $services = json_decode($escort->services, true);
         $language_spoken = json_decode($escort->language_spoken, true);
         $availability = json_decode($escort->availability, true);

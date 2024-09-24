@@ -741,7 +741,58 @@ h4.my-escort-nm-sec {
     height: 100px !important;
 
 }
+.escort-listing-all-pagination span.relative.inline-flex.items-center.cursor-default.leading-5.rounded-md {
+    background-color: #111624 !important;
+    border: none !important;    
+    color: #fff;
+}
+.escort-listing-all-pagination a.relative.inline-flex.items-center.px-4.transition.ease-in-out.duration-150 {
+    background-color: #111624 !important;
+    border: none !important;
+    color: #fff;
+    text-decoration: none;
+    font-weight: 500;
+    font-family: 'Montserrat-SemiBold';
+}
 
+.escort-listing-all-pagination a.relative.inline-flex.items-center.px-4.transition.ease-in-out.duration-150:hover {
+    color: #ec8ccc;
+    font-weight: 500;
+}
+
+.escort-listing-all-pagination p.text-sm.text-gray-700.leading-5 {
+    margin-top: 28px;
+    text-align: center;
+    display: none;
+}
+
+.escort-listing-all-pagination span.relative.inline-flex.items-center.px-2.py-2.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.rounded-l-md.leading-5 {
+    background: none !important;
+    border: none !important;
+    color: #fff;
+}
+.escort-listing-all-pagination a.relative.inline-flex.items-center.px-2.py-2.-ml-px.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.rounded-r-md.leading-5.hover\:text-gray-400.focus\:z-10.focus\:outline-none.focus\:ring.ring-gray-300.focus\:border-blue-300.active\:bg-gray-100.active\:text-gray-500.transition.ease-in-out.duration-150 {
+    background: none !important;
+    border: none !important;
+    color: #fff;
+}
+.escort-listing-all-pagination .flex.justify-between.flex-1.sm\:hidden {
+    text-align: center;
+}
+
+
+.escort-listing-all-pagination span.relative.z-0.inline-flex.shadow-sm.rounded-md {
+    display: none;
+}
+
+.loginSignup_btn_disabled {
+    border: none !important;
+    background-color: #232e48 !important;
+}
+
+.disclaimer-inner-text {
+    padding-top: 0;
+}
 @media (min-width: 768px) and (max-width: 1024px) {
     
 
@@ -826,7 +877,10 @@ h4.my-escort-nm-sec {
 }
 
 @media only screen and (max-width: 767px) {
-
+    
+.escort-listing-all-pagination {
+    margin-top: 25px;
+}
 
 	button.unfollows-btn {
     top: 0px;

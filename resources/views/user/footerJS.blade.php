@@ -284,7 +284,7 @@
             var submitButton = document.getElementById('loginSignup_btn');
             submitButton.disabled = true;
             submitButton.innerText = 'Wait...';
-
+            submitButton.classList.add('loginSignup_btn_disabled'); // Add your class
             // After disabling the button, submit the form
             this.submit();
         });
