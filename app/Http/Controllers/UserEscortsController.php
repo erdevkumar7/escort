@@ -65,7 +65,7 @@ class UserEscortsController extends Controller
     {
         $query = DB::table("escorts")->orderBy("created_at", "desc");
 
-        $allescorts = $query->get();
+        $allescorts = $query->paginate(12);
         foreach ($allescorts as $escort) {
             // Fetch images for the current escort
             $escort->pictures = Media::where('escort_id', $escort->id)
