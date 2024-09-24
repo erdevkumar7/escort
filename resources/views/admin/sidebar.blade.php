@@ -9,8 +9,13 @@
         <!-- menu profile quick info -->
         <div class="profile clearfix">
             <div class="profile_pic">
-                <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('admin')->user()->image }}"
-                    alt="..." class="img-circle profile_img">
+                @if (Auth::guard('admin')->user()->image !== null)
+                    <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('admin')->user()->image }}"
+                        alt="..." class="img-circle profile_img">
+                @else
+                    <img src="{{ asset('/public/images/static_img/admin.jpg') }}" alt="..."
+                        class="img-circle profile_img">
+                @endif
             </div>
             <div class="profile_info">
                 <span>Welcome,</span>
@@ -39,20 +44,20 @@
                                 class="fa fa-chevron-right"></span></a>
                     </li>
                     {{-- Users --}}
-                    <li><a href="{{route('admin_allusers')}}"><i class="fa fa-users" aria-hidden="true"></i> Users <span
-                        class="fa fa-chevron-right"></span></a>
+                    <li><a href="{{ route('admin_allusers') }}"><i class="fa fa-users" aria-hidden="true"></i> Users
+                            <span class="fa fa-chevron-right"></span></a>
                     </li>
-                    <li><a href="{{route('admin.getAllContributors')}}"><i class="fa fa-columns" aria-hidden="true"></i> Contributors <span
-                        class="fa fa-chevron-right"></span></a>
-                    </li>                    
+                    <li><a href="{{ route('admin.getAllContributors') }}"><i class="fa fa-columns"
+                                aria-hidden="true"></i> Contributors <span class="fa fa-chevron-right"></span></a>
+                    </li>
 
                     {{-- badges --}}
                     <li><a href="{{ route('admin.allbadges') }}"><i class="fa fa-certificate"></i> Badges <span
                                 class="fa fa-chevron-right"></span></a>
                     </li>
                     {{-- ads --}}
-                    <li><a href="{{route('admin.allAds')}}"><i class="fa fa-diamond" aria-hidden="true"></i> Manage Ads <span
-                                class="fa fa-chevron-right"></span></a>
+                    <li><a href="{{ route('admin.allAds') }}"><i class="fa fa-diamond" aria-hidden="true"></i> Manage
+                            Ads <span class="fa fa-chevron-right"></span></a>
                     </li>
                 </ul>
             </div>

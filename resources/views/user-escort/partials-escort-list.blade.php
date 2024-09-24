@@ -18,7 +18,7 @@
                                             <img src="{{ asset('/public/images/profile_img/' . $escort->profile_pic) }}"
                                                 class="menu-img img-fluid" alt="Profile_Picture">
                                         @else
-                                            <img src="{{ asset('/public/images/profile_img/default_profile.png') }}"
+                                            <img src="{{ asset('/public/images/static_img/default_profile.png') }}"
                                                 class="menu-img img-fluid" alt="Profile_Picture">
                                         @endif
                                         <h4>{{ $escort->nickname }}</h4>
