@@ -161,6 +161,14 @@ p.modal-open-for-addvideo {
     box-shadow: none;
 }
 
+.welcome-admin {
+    max-width: 100% !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+
+
+
 @media only screen and (max-width: 767px) {
 
 .page-title .title_left h3 {

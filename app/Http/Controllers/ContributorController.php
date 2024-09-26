@@ -40,13 +40,13 @@ class ContributorController extends Controller
             'description' => 'required|min:30',
             'phone_number' => 'required|string'
         ]);
-    
+        //original_password
+        $validated['original_password'] = $validated['password'];
         // Hash the password before saving
         $validated['password'] = Hash::make($validated['password']);
-    
         // Create the contributor
         $contributor = Contributor::create($validated);
-    
+
         // Check if the contributor is created successfully
         if ($contributor) {
             return redirect()->route('admin.getAllContributors')->with('success', 'Contributor Added Successfully!');
@@ -54,7 +54,7 @@ class ContributorController extends Controller
             return redirect()->back()->with('error', 'Failed to add contributor. Please try again.');
         }
     }
-    
+
 
     public function viewContributor($contributor_id)
     {
@@ -80,7 +80,7 @@ class ContributorController extends Controller
     {
         // Find the contributor by ID
         $contributor = Contributor::findOrFail($contributor_id);
-    
+
         // Validation
         $validated = $request->validate([
             'name' => 'required|string',
@@ -91,18 +91,20 @@ class ContributorController extends Controller
             'description' => 'required|min:30',
             'phone_number' => 'required|string'
         ]);
-    
+
         // Check if password field is filled, if yes, hash it
         if ($request->filled('password')) {
+            //original_password
+            $validated['original_password'] = $validated['password'];
             $validated['password'] = Hash::make($request->password);
         } else {
             // If password is not filled, remove it from the validated data so it won't be updated
             unset($validated['password']);
         }
-    
+
         // Update contributor details
         $contributor->update($validated);
-    
+
         // Return with success message
         return redirect()->route('admin.getAllContributors')->with('success', 'Contributor Updated Successfully!');
     }
@@ -111,15 +113,15 @@ class ContributorController extends Controller
     {
         // Find the contributor by ID, or fail if not found
         $contributor = Contributor::findOrFail($contributor_id);
-    
+
         // Delete the contributor
         $contributor->delete();
-    
+
         // Redirect back with success message
         return redirect()->route('admin.getAllContributors')->with('success', 'Contributor Deleted Successfully!');
     }
-    
-    
+
+
 
     public function showLoginForm()
     {
@@ -133,10 +135,10 @@ class ContributorController extends Controller
             'password' => 'required'
         ]);
         // dd($credential);
-         if (Auth::guard('contributor')->attempt($credential)) {
+        if (Auth::guard('contributor')->attempt($credential)) {
             // dd(Auth::guard('contributor')->user());
             return redirect()->intended('/contributor/my-dashboard');
-         }
+        }
         // Authentication failed...
         return back()->withErrors([
             'email' => 'The provided credentials do not match our records.',
@@ -150,9 +152,9 @@ class ContributorController extends Controller
 
     public function logout(Request $request)
     {
-        Auth::guard('contributor')->logout();    
-        $request->session()->invalidate();    
-        $request->session()->regenerateToken();    
+        Auth::guard('contributor')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
         return redirect('/contributor/login');
     }
 }

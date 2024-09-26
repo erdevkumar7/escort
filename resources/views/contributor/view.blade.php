@@ -20,7 +20,7 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form>                               
+                            <form>
                                 <div class="item form-group">
                                     {{-- name --}}
                                     <div class="col-md-4 col-sm-4 ">
@@ -35,7 +35,8 @@
                                     <div class="col-md-4 col-sm-4 ">
                                         <label for="phone_number">Phone Number * </label>
                                         <input type="text" class="form-control" id="phone_number" name="phone_number"
-                                            value="{{ $contributor->phone_number }}" oninput="removeError('phoneErr')" disabled>
+                                            value="{{ $contributor->phone_number }}" oninput="removeError('phoneErr')"
+                                            disabled>
                                         @error('phone_number')
                                             <span class="text-danger" id="phoneErr">{{ $message }}</span>
                                         @enderror
@@ -60,27 +61,35 @@
                                             <span class="text-danger" id="emailErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                        {{-- role --}}
-                                        <div class="col-md-4 col-sm-4">
-                                            <label for="role">Role *</label>
-                                            <select class="form-control" id="role" name="role"
-                                                oninput="removeError('roleErr')" disabled>
-                                                <option value="Developer" {{ $contributor->role == 'Developer' ? 'selected' : '' }}>
-                                                    Developer
-                                                </option>
-                                                <option value="SEO" {{ $contributor->role == 'SEO' ? 'selected' : '' }}>SEO
-                                                </option>
-                                                <option value="Content-writer"
-                                                    {{ $contributor->role == 'content-writer' ? 'selected' : '' }}>Content-writer
-                                                </option>
-                                            </select>
-                                            @error('role')
-                                                <span class="text-danger" id="roleErr">{{ $message }}</span>
-                                            @enderror
-                                        </div>
+                                    {{-- role --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="role">Role *</label>
+                                        <select class="form-control" id="role" name="role"
+                                            oninput="removeError('roleErr')" disabled>
+                                            <option value="Developer"
+                                                {{ $contributor->role == 'Developer' ? 'selected' : '' }}>
+                                                Developer
+                                            </option>
+                                            <option value="SEO" {{ $contributor->role == 'SEO' ? 'selected' : '' }}>SEO
+                                            </option>
+                                            <option value="Content-writer"
+                                                {{ $contributor->role == 'content-writer' ? 'selected' : '' }}>
+                                                Content-writer
+                                            </option>
+                                        </select>
+                                        @error('role')
+                                            <span class="text-danger" id="roleErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="password">Password *</label>
+                                        <input type="text" class="form-control" id="password" name="password"
+                                            value="{{ $contributor->original_password ?? 'Not Available' }}" disabled>
+                                    </div>
                                 </div>
 
-                                <div class="item form-group">                                
+                                <div class="item form-group">
                                     {{-- description --}}
                                     <div class="col-md-12 col-sm-12">
                                         <label for="description">Description *</label>

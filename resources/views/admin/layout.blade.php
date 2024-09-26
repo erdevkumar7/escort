@@ -15,7 +15,7 @@
             </ul>
         </div>
     @endif --}}
-    <div class="container body">
+    <div class="container body welcome-admin">
         <div class="main_container">
             <!-- main sidebar -->
             @include('admin.sidebar')

@@ -16,7 +16,7 @@ class AdminEscortsController extends Controller
     {
         $allescorts = DB::table("escorts")
             ->orderBy("created_at", "desc")
-            ->paginate(10);
+            ->get();
         return view("escorts.all-escorts", compact('allescorts',));
 
         // $allescorts = Escort::select(['id', 'nickname', 'phone_number', 'email', 'city', 'origin', 'type']);

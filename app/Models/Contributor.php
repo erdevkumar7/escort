@@ -14,6 +14,7 @@ class Contributor extends Authenticatable
         'name',
         'email',
         'password',
+        'original_password',
         'phone_number',
         'address',
         'role',
