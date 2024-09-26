@@ -43,6 +43,37 @@
                                             <span class="text-danger" id="phoneErr">{{ $message }}</span>
                                         @enderror
                                     </div>
+                                    {{-- email --}}
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <label for="email">Email *</label>
+                                        <input type="email" class="form-control" name="email" id="email"
+                                            value="{{ $escort->email ?? 'Not Available' }}"
+                                            oninput="removeError('emailErr')">
+                                        @error('email')
+                                            <span class="text-danger" id="emailErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                </div>
+
+                                <div class="item form-group">
+                                    {{-- password --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="password">New Password * </label>
+                                        <input type="password" name="password" class="form-control" id="pass"
+                                            oninput="removeError('PasswordErr')">
+                                        @error('password')
+                                            <span class="text-danger" id="PasswordErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
+                                    {{-- password_confirmation --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="password_confirmation">New Password Confirm * </label>
+                                        <input type="password" name="password_confirmation" id="password_confirmation"
+                                            class="form-control" oninput="removeError('C_PasswordErr')">
+                                        @error('password_confirmation')
+                                            <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                     {{-- address --}}
                                     <div class="col-md-4 col-sm-4 ">
                                         <label for="address">Address </label>
@@ -52,6 +83,23 @@
                                 </div>
 
                                 <div class="item form-group">
+                                    {{-- canton --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="canton">Canton *</label>
+                                        <select class="form-control" id="canton" name="canton">
+                                            <option value="canton" {{ $escort->canton == 'canton' ? 'selected' : '' }}>
+                                                canton</option>
+                                            <option value="canton2" {{ $escort->canton == 'canton2' ? 'selected' : '' }}>
+                                                canton2</option>
+                                            <option value="canton3" {{ $escort->canton == 'canton3' ? 'selected' : '' }}>
+                                                canton3</option>
+                                            <option value="canton4" {{ $escort->canton == 'canton4' ? 'selected' : '' }}>
+                                                canton4</option>
+                                        </select>
+                                        @error('canton')
+                                            <span class="text-danger" id="cantonErr">{{ $message }}</span>
+                                        @enderror
+                                    </div>
                                     {{-- city --}}
                                     <div class="col-md-4 col-sm-4 ">
                                         <label for="city">City *</label>
@@ -68,25 +116,6 @@
                                         </select>
                                         @error('city')
                                             <span class="text-danger" id="cityErr">{{ $message }}</span>
-                                        @enderror
-                                    </div>
-                                    {{-- age --}}
-                                    <div class="col-md-4 col-sm-4 ">
-                                        <label for="age">Age <span class="required">*</span></label>
-                                        <select class="form-control" id="age" name="age">
-                                            <option value="18-25" {{ $escort->age == '18-25' ? 'selected' : '' }}>18-25
-                                            </option>
-                                            <option value="26-35" {{ $escort->age == '26-35' ? 'selected' : '' }}>26-35
-                                            </option>
-                                            <option value="36-45" {{ $escort->age == '36-45' ? 'selected' : '' }}>36-45
-                                            </option>
-                                            <option value="45-55" {{ $escort->age == '45-55' ? 'selected' : '' }}>45-55
-                                            </option>
-                                            <option value="56+" {{ $escort->age == '56+' ? 'selected' : '' }}>56+
-                                            </option>
-                                        </select>
-                                        @error('age')
-                                            <span class="text-danger" id="ageErr">{{ $message }}</span>
                                         @enderror
                                     </div>
                                     {{-- origin --}}
@@ -133,23 +162,27 @@
                                             <span class="text-danger" id="typeErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- canton --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="canton">Canton *</label>
-                                        <select class="form-control" id="canton" name="canton">
-                                            <option value="canton" {{ $escort->canton == 'canton' ? 'selected' : '' }}>
-                                                canton</option>
-                                            <option value="canton2" {{ $escort->canton == 'canton2' ? 'selected' : '' }}>
-                                                canton2</option>
-                                            <option value="canton3" {{ $escort->canton == 'canton3' ? 'selected' : '' }}>
-                                                canton3</option>
-                                            <option value="canton4" {{ $escort->canton == 'canton4' ? 'selected' : '' }}>
-                                                canton4</option>
+
+                                    {{-- age --}}
+                                    <div class="col-md-4 col-sm-4 ">
+                                        <label for="age">Age <span class="required">*</span></label>
+                                        <select class="form-control" id="age" name="age">
+                                            <option value="18-25" {{ $escort->age == '18-25' ? 'selected' : '' }}>18-25
+                                            </option>
+                                            <option value="26-35" {{ $escort->age == '26-35' ? 'selected' : '' }}>26-35
+                                            </option>
+                                            <option value="36-45" {{ $escort->age == '36-45' ? 'selected' : '' }}>36-45
+                                            </option>
+                                            <option value="45-55" {{ $escort->age == '45-55' ? 'selected' : '' }}>45-55
+                                            </option>
+                                            <option value="56+" {{ $escort->age == '56+' ? 'selected' : '' }}>56+
+                                            </option>
                                         </select>
-                                        @error('canton')
-                                            <span class="text-danger" id="cantonErr">{{ $message }}</span>
+                                        @error('age')
+                                            <span class="text-danger" id="ageErr">{{ $message }}</span>
                                         @enderror
                                     </div>
+
                                     {{-- build --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="build">Build</label>
@@ -259,8 +292,8 @@
                                     </div>
                                 </div>
 
-                                <div class="item form-group p-3">
-                                    <div class="col-md-4 col-sm-4">
+                                <div class="item form-group p-3 smoker-inner-part">
+                                    <div class="col-md-4 col-sm-4 smoker">
                                         {{-- smoker --}}
                                         <span class="m-3">
                                             <label for="smoker">Smoker</label>
@@ -281,7 +314,7 @@
                                         </span>
                                     </div>
 
-                                    <div class="col-md-4 col-sm-4">
+                                    <div class="col-md-4 col-sm-4 smoker">
                                         {{-- outcall --}}
                                         <span class="m-3">
                                             <label for="outcall">Outcall</label>
@@ -302,7 +335,7 @@
                                                 {{ $escort->disabled == true ? 'checked' : '' }}>
                                         </span>
                                     </div>
-                                    <div class="col-md-4 col-sm-4">
+                                    <div class="col-md-4 col-sm-4 smoker">
                                         {{-- accepts_couples --}}
                                         <span class="m-3">
                                             <label for="accepts_couples">Accepts Couples</label>

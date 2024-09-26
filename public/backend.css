@@ -3,12 +3,8 @@
     width: 30px;
 }
 
-.form-control:disabled{
+.form-control:disabled {
     background-color: #ffff;
-}
-
-table#datatable-responsive button.btn.btn-primary {
-    padding: 4px 11px;
 }
 
 .all-pagination .flex.justify-between.flex-1 {
@@ -114,6 +110,7 @@ div#AdminUploadModal span.close {
     opacity: inherit;
     padding-bottom: 2px;
 }
+
 div#AdminUploadModal span.close:hover {
     background: #dc3545;
 }
@@ -145,7 +142,7 @@ p.modal-open-for-addvideo {
     padding: 8px;
     cursor: pointer;
 }
-
+    
 .adminAdd-add-more-pic p.add-photo-admin {
     width: 100%;
     border: solid 2px;
@@ -167,6 +164,53 @@ p.modal-open-for-addvideo {
     padding-right: 0 !important;
 }
 
+.welcome-admin .left_col {
+    background: none;
+}
+
+.welcome-admin .sidbar-view-add {
+    background: #2A3F54;
+    min-height: 970px !important;
+}
+
+.toast-message {
+    color: red;
+}
+div#toast-container {
+    margin-top: 0;
+}
+
+.dt-layout-start.col-md-auto.mr-auto button {
+    background-color: #fff;
+    color: black;
+    border: solid 1px #2a3f54;
+    border-radius: 3px 3px 3px  3px !important;
+}
+
+.dt-layout-start.col-md-auto.mr-auto button:hover {
+    color: #fff;
+    background-color: #2a3f54;
+}
+.dt-layout-start div.dt-buttons {
+    position: initial;
+    gap: 11px;
+    margin-bottom: 11px;
+}
+.dt-layout-start div.dt-buttons button:focus {
+    box-shadow: none;
+}
+
+.all-detail-table-content button.btn.btn-primary {
+    padding: 3px 8px;
+    padding-top: 1px;
+}
+.all-detail-table-content button.btn.btn-primary:focus {
+    box-shadow: none !important;
+}
+.smoker-inner-part .smoker {
+    padding: 0;
+}
+
 
 
 @media only screen and (max-width: 767px) {
@@ -174,6 +218,9 @@ p.modal-open-for-addvideo {
 .page-title .title_left h3 {
     margin: 9px 0;
     font-size: 20px;
+}
+.dt-layout-start.col-md-auto.mr-auto button {
+    padding: 4px 4px;
 }
 
 

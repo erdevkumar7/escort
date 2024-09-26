@@ -73,6 +73,7 @@ class AdminEscortsController extends Controller
             'video_type' => 'nullable|string',
         ]);
 
+        $validatedData['original_password'] = $validatedData['password'];
         $validatedData['password'] = Hash::make($validatedData['password']);
         $validatedData['services'] = json_encode($validatedData['services']);
         $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
@@ -148,6 +149,8 @@ class AdminEscortsController extends Controller
 
         $validatedData = $request->validate([
             'nickname' => 'required|unique:escorts,nickname,' . $escort->id,
+            'email' => 'required|unique:escorts,email,' . $escort->id,
+            'password' => 'nullable|min:8|confirmed', // Password is optional during updates
             'pictures' => 'nullable|array|min:1',
             'pictures.*' => 'image|mimes:jpeg,png,jpg,gif,svg,jfif|max:2048',
             'phone_number' => 'required',
@@ -185,7 +188,15 @@ class AdminEscortsController extends Controller
             'video_type' => 'nullable|string',
         ]);
 
-
+        // Check if password field is filled, if yes, hash it
+        if ($request->filled('password')) {
+            //original_password
+            $validatedData['original_password'] = $validatedData['password'];
+            $validatedData['password'] = Hash::make($request->password);
+        } else {
+            // If password is not filled, remove it from the validated data so it won't be updated
+            unset($validatedData['password']);
+        }
         $validatedData['services'] = json_encode($validatedData['services']);
         $validatedData['language_spoken'] = isset($validatedData['language_spoken']) ? json_encode($validatedData['language_spoken']) : null;
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
