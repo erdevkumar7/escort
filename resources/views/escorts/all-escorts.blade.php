@@ -59,9 +59,10 @@
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
-                                                            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                                data-toggle="tooltip" data-placement="top" title="Delete"
-                                                                data-deleted-id="{{ $escorts->id }}">
+                                                            <button data-bs-toggle="modal"
+                                                                data-bs-target="#deleteConfirmModal"
+                                                                data-deleted-id="{{ $escorts->id }}"
+                                                                class="delete-escort-btn" title="Delete">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
                                                         </td>
@@ -99,21 +100,52 @@
             </div>
         </div>
     </div>
-    {{-- delete confirm modal script --}}
-
+    {{-- delete confirm modal script --}}   
+    {{-- sweetalert2 JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const deleteButtons = document.querySelectorAll(
-                '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
-            const deleteForm = document.getElementById('deleteConfirmForm');
+            document.body.addEventListener('click', function(event) {
+                if (event.target.closest('.delete-escort-btn')) {
+                    const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
+                        'data-deleted-id');
+                    const deleteForm = document.getElementById('deleteConfirmForm');
+                    deleteForm.action = `/my_project/escorts/admin/escort/${deleteId}/delete`;
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/escorts/admin/escort/${deleteId}/delete`;
-                });
+                    // Open the modal (Bootstrap automatically opens it due to the data-bs attributes)
+                    const deleteConfirmModal = new bootstrap.Modal(document.getElementById(
+                        'deleteConfirmModal'));
+                    deleteConfirmModal.show();
+                }
             });
         });
+        // document.addEventListener('DOMContentLoaded', function() {
+        //     document.body.addEventListener('click', function(event) {
+        //         if (event.target.closest('.delete-escort-btn')) {
+        //             const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
+        //                 'data-deleted-id');
+
+        //             // Show SweetAlert confirmation dialog
+        //             Swal.fire({
+        //                 title: 'Are you sure?',
+        //                 text: "You won't be able to revert this!",
+        //                 icon: 'warning',
+        //                 showCancelButton: true,
+        //                 confirmButtonColor: '#d33',
+        //                 cancelButtonColor: '#3085d6',
+        //                 confirmButtonText: 'Yes, delete it!'
+        //             }).then((result) => {
+        //                 if (result.isConfirmed) {
+        //                     // If confirmed, submit the delete form
+        //                     const deleteForm = document.getElementById('deleteConfirmForm');
+        //                     deleteForm.action =
+        //                         `/my_project/escorts/admin/escort/${deleteId}/delete`;
+        //                     deleteForm.submit();
+        //                 }
+        //             });
+        //         }
+        //     });
+        // });
     </script>
 
     {{-- datatables --}}
