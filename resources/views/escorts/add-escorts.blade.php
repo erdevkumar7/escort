@@ -64,7 +64,7 @@
                                     <label for="password">Password * </label>
                                     <input type="Password" name="password" class="form-control" id="password"
                                         oninput="removeError('PasswordErr')">
-                                        <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
+                                    <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
                                     @error('password')
                                         <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                     @enderror
@@ -74,7 +74,7 @@
                                     <label for="password_confirmation">Confirm Password * </label>
                                     <input type="password" name="password_confirmation" id="password_confirmation"
                                         class="form-control" oninput="removeError('C_PasswordErr')">
-                                        <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
+                                    <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
                                     @error('password_confirmation')
                                         <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
                                     @enderror
@@ -512,5 +512,39 @@
             </div>
         </div>
     </div>
+    <script>
+        // Password field toggle
+        document.getElementById('eyeIcon').addEventListener('click', function() {
+            var passwordField = document.getElementById('password');
+            var icon = document.getElementById('eyeIcon');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Confirm password field toggle
+        document.getElementById('eyeIconConfirm').addEventListener('click', function() {
+            var confirmPasswordField = document.getElementById('password_confirmation');
+            var icon = document.getElementById('eyeIconConfirm');
+
+            if (confirmPasswordField.type === 'password') {
+                confirmPasswordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                confirmPasswordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>   
     <!-- /page content -->
 @endsection
+

@@ -117,5 +117,38 @@
             </div>
         </div>
     </div>
+    <script>
+        // Password field toggle
+        document.getElementById('eyeIcon').addEventListener('click', function() {
+            var passwordField = document.getElementById('password');
+            var icon = document.getElementById('eyeIcon');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Confirm password field toggle
+        document.getElementById('eyeIconConfirm').addEventListener('click', function() {
+            var confirmPasswordField = document.getElementById('password_confirmation');
+            var icon = document.getElementById('eyeIconConfirm');
+
+            if (confirmPasswordField.type === 'password') {
+                confirmPasswordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                confirmPasswordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
     <!-- /page content -->
 @endsection
