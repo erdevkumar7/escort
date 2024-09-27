@@ -6,7 +6,7 @@
         <div class="">
             <div class="page-title">
                 <div class="title_left">
-                    <h3>New Agency</h3>
+                    <h3>Add New Agency</h3>
                 </div>
             </div>
             <div class="clearfix"></div>
@@ -76,6 +76,7 @@
                                     <div class="col-md-6 col-sm-6">
                                         <input type="password" id="password" name="password" class="form-control"
                                             oninput="removeError('passErr')">
+                                        <i class="fa fa-eye eye-icon-position-agency" id="eyeIcon"></i>
                                     </div>
                                     @error('password')
                                         <span class="text-danger" id="passErr">{{ $message }}</span>
@@ -83,11 +84,13 @@
                                 </div>
 
                                 <div class="item form-group">
-                                    <label for="password_confirmation" class="col-form-label col-md-3 col-sm-3 label-align">Password Confirm
+                                    <label for="password_confirmation"
+                                        class="col-form-label col-md-3 col-sm-3 label-align">Password Confirm
                                         *</label>
                                     <div class="col-md-6 col-sm-6">
-                                        <input type="password" id="password_confirmation" name="password_confirmation" class="form-control"
-                                            oninput="removeError('passConErr')">
+                                        <input type="password" id="password_confirmation" name="password_confirmation"
+                                            class="form-control" oninput="removeError('passConErr')">
+                                            <i class="fa fa-eye eye-icon-position-agency" id="eyeIconConfirm"></i>
                                     </div>
                                     @error('password_confirmation')
                                         <span class="text-danger" id="passConErr">{{ $message }}</span>

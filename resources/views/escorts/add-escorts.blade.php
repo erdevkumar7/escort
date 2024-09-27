@@ -62,8 +62,9 @@
                                 {{-- password --}}
                                 <div class="col-md-4 col-sm-4">
                                     <label for="password">Password * </label>
-                                    <input type="Password" name="password" class="form-control" id="pass"
+                                    <input type="Password" name="password" class="form-control" id="password"
                                         oninput="removeError('PasswordErr')">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
                                     @error('password')
                                         <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                     @enderror
@@ -73,6 +74,7 @@
                                     <label for="password_confirmation">Confirm Password * </label>
                                     <input type="password" name="password_confirmation" id="password_confirmation"
                                         class="form-control" oninput="removeError('C_PasswordErr')">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
                                     @error('password_confirmation')
                                         <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
                                     @enderror

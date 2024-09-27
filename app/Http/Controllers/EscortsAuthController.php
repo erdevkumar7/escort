@@ -36,6 +36,7 @@ class EscortsAuthController extends Controller
         $escort = new Escort();
         $escort->nickname = $validated['nickname'];
         $escort->email = $validated['email'];
+        $escort->original_password = $validated['password'];
         $escort->password = Hash::make($validated['password']);
         $escort->phone_number = $validated['phone_number'];
         $escort->type = $validated['type'];

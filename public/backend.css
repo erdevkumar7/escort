@@ -211,6 +211,24 @@ div#toast-container {
     padding: 0;
 }
 
+div#staticBackdrop button.fa.fa-close {
+    padding-bottom: 3px;
+}
+.eye-icon-position{
+    position: absolute;
+    top: 60%; 
+    right: 6%; 
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.eye-icon-position-agency{
+    position: absolute;
+    top: 30%; 
+    right: 4%; 
+    cursor: pointer;
+    font-size: 14px;
+}
 
 
 @media only screen and (max-width: 767px) {
@@ -222,6 +240,7 @@ div#toast-container {
 .dt-layout-start.col-md-auto.mr-auto button {
     padding: 4px 4px;
 }
+
 
 
 }

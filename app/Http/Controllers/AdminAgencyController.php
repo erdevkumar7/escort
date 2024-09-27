@@ -38,9 +38,10 @@ class AdminAgencyController extends Controller
 
         $agency->name = $request->name;
         $agency->email = $request->email;
+        $agency->original_password = $request->password;
         $agency->password = Hash::make($request->password);
         $agency->address = $request->address;
-        $agency->phone_number = $request->phone_number;        
+        $agency->phone_number = $request->phone_number;
         $agency->save();
 
         return redirect()->route('admin.allagencies')->with('success', 'Agency added successfully');
@@ -73,28 +74,41 @@ class AdminAgencyController extends Controller
             ],
             'phone_number' => 'required|numeric',
             'address' => 'nullable|string',
+            'password' => 'nullable|min:8|confirmed', // Password is optional during updates
         ]);
+
+        // Check if password field is filled, if yes, hash it
+        if ($request->filled('password')) {
+            //original_password
+            $valideData['original_password'] = $valideData['password'];
+            $valideData['password'] = Hash::make($request->password);
+        } else {
+            // If password is not filled, remove it from the validated data so it won't be updated
+            unset($valideData['password']);
+        }
 
         $agency->update($valideData);
 
         return redirect()->route('admin.allagencies')->with('success', 'Agancy Updated');
     }
     //todo: All escorts of agency
-    public function agency_escorts($id){
-        $allescorts = DB::table("escorts")->where('agency_id',$id)->orderBy("created_at", "desc")->get();
+    public function agency_escorts($id)
+    {
+        $allescorts = DB::table("escorts")->where('agency_id', $id)->orderBy("created_at", "desc")->get();
         $agency = Agency::find($id);
         if (!$agency) {
             return redirect()->back()->with('error', 'Agency not found.');
-       }
-        return view("agency.all-escorts", compact('allescorts','agency'));
+        }
+        return view("agency.all-escorts", compact('allescorts', 'agency'));
     }
     // agency_add_escorts_form
-    public function agency_add_escorts_form($id){
+    public function agency_add_escorts_form($id)
+    {
         $agency = Agency::find($id);
 
         if (!$agency) {
             return redirect()->back()->with('error', 'Agency not found.');
-       }
+        }
         return view('agency.add-escorts', compact('agency'));
     }
     // agency_add_escorts

@@ -42,75 +42,75 @@
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
 <!-- Latest Bootstrap -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <!--- custome JS -->
-    <script>
-        //handleLogOut
-        function handleLogOut() {
-            event.preventDefault();
-            document.getElementById('logout-form').submit();
+<!--- custome JS -->
+<script>
+    //handleLogOut
+    function handleLogOut() {
+        event.preventDefault();
+        document.getElementById('logout-form').submit();
+    }
+    // removeError
+    function removeError(id) {
+        var errElement = document.getElementById(id);
+        if (errElement) {
+            errElement.style.display = 'none'
         }
-        // removeError
-        function removeError(id) {
-            var errElement = document.getElementById(id);
-            if (errElement) {
-                errElement.style.display = 'none'
-            }
-        }
-        // select2
-        $(document).ready(function() {
-            $('#services').select2({
-                placeholder: "Select Services"
-            });
-
-            $('#language_spoken').select2({
-                placeholder: "Select Language"
-            });
-
-            $('#availability').select2({
-                placeholder: "Select Availability"
-            });
-
-            $('#currencies_accepted').select2({
-                placeholder: "Select Currencies"
-            });
-
-            $('#payment_method').select2({
-                placeholder: "Select Payment Methods"
-            });
+    }
+    // select2
+    $(document).ready(function() {
+        $('#services').select2({
+            placeholder: "Select Services"
         });
-    </script>
 
-    {{-- toaster message script --}}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
-    <script>
-        // Configure Toastr options
-        toastr.options = {
-            "closeButton": true, // Enable close button
-            "progressBar": true, // Optional: show a progress bar
-            "timeOut": "3000", // Optional: duration in milliseconds
-            "extendedTimeOut": "1000", // Optional: additional time after mouse over
-            "positionClass": "toast-top-right" // Optional: set position
-        };
+        $('#language_spoken').select2({
+            placeholder: "Select Language"
+        });
 
-        @if (Session::has('success'))
-            toastr.success("{{ Session::get('success') }}");
-        @endif
+        $('#availability').select2({
+            placeholder: "Select Availability"
+        });
 
-        @if (Session::has('error'))
-            toastr.error("{{ Session::get('error') }}");
-        @endif
+        $('#currencies_accepted').select2({
+            placeholder: "Select Currencies"
+        });
 
-        @if (Session::has('info'))
-            toastr.info("{{ Session::get('info') }}");
-        @endif
+        $('#payment_method').select2({
+            placeholder: "Select Payment Methods"
+        });
+    });
+</script>
 
-        @if (Session::has('warning'))
-            toastr.warning("{{ Session::get('warning') }}");
-        @endif
-    </script>
+{{-- toaster message script --}}
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+<script>
+    // Configure Toastr options
+    toastr.options = {
+        "closeButton": true, // Enable close button
+        "progressBar": true, // Optional: show a progress bar
+        "timeOut": "3000", // Optional: duration in milliseconds
+        "extendedTimeOut": "1000", // Optional: additional time after mouse over
+        "positionClass": "toast-top-right" // Optional: set position
+    };
+
+    @if (Session::has('success'))
+        toastr.success("{{ Session::get('success') }}");
+    @endif
+
+    @if (Session::has('error'))
+        toastr.error("{{ Session::get('error') }}");
+    @endif
+
+    @if (Session::has('info'))
+        toastr.info("{{ Session::get('info') }}");
+    @endif
+
+    @if (Session::has('warning'))
+        toastr.warning("{{ Session::get('warning') }}");
+    @endif
+</script>
 
 
-    {{-- datatables --}}
+{{-- datatables --}}
 
 
 <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
@@ -132,6 +132,40 @@
             topStart: {
                 buttons: ['copy', 'excel', 'pdf', 'colvis']
             }
+        }
+    });
+</script>
+
+<script>
+    // Password field toggle
+    document.getElementById('eyeIcon').addEventListener('click', function() {
+        var passwordField = document.getElementById('password');
+        var icon = document.getElementById('eyeIcon');
+
+        if (passwordField.type === 'password') {
+            passwordField.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            passwordField.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+    });
+
+    // Confirm password field toggle
+    document.getElementById('eyeIconConfirm').addEventListener('click', function() {
+        var confirmPasswordField = document.getElementById('password_confirmation');
+        var icon = document.getElementById('eyeIconConfirm');
+
+        if (confirmPasswordField.type === 'password') {
+            confirmPasswordField.type = 'text';
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        } else {
+            confirmPasswordField.type = 'password';
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
         }
     });
 </script>

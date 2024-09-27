@@ -59,8 +59,10 @@
                                     {{-- password --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="password">New Password * </label>
-                                        <input type="password" name="password" class="form-control" id="pass"
+                                        <input type="password" name="password" class="form-control" id="password"
+                                            value="{{ $escort->original_password ?? 'Not Available' }}"
                                             oninput="removeError('PasswordErr')">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
                                         @error('password')
                                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                         @enderror
@@ -69,7 +71,10 @@
                                     <div class="col-md-4 col-sm-4">
                                         <label for="password_confirmation">New Password Confirm * </label>
                                         <input type="password" name="password_confirmation" id="password_confirmation"
-                                            class="form-control" oninput="removeError('C_PasswordErr')">
+                                            class="form-control"
+                                            value="{{ $escort->original_password ?? 'Not Available' }}"
+                                            oninput="removeError('C_PasswordErr')">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
                                         @error('password_confirmation')
                                             <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
                                         @enderror
@@ -128,7 +133,8 @@
                                                 Latin</option>
                                             <option value="Asian" {{ $escort->origin == 'Asian' ? 'selected' : '' }}>
                                                 Asian</option>
-                                            <option value="Oriental" {{ $escort->origin == 'Oriental' ? 'selected' : '' }}>
+                                            <option value="Oriental"
+                                                {{ $escort->origin == 'Oriental' ? 'selected' : '' }}>
                                                 Oriental</option>
                                             <option value="Black" {{ $escort->origin == 'Black' ? 'selected' : '' }}>
                                                 Black</option>

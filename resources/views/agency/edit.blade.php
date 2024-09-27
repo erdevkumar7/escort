@@ -73,6 +73,35 @@
                                         <span class="text-danger" id="emailErr">{{ $message }}</span>
                                     @enderror
                                 </div>
+
+                                <div class="item form-group">
+                                    <label for="password" class="col-form-label col-md-3 col-sm-3 label-align">New Password
+                                        *</label>
+                                    <div class="col-md-6 col-sm-6 position-relative">
+                                        <input type="password" id="password" name="password" class="form-control"
+                                            oninput="removeError('passErr')" value="{{ $agency->original_password ?? '' }}">
+                                        <i class="fa fa-eye eye-icon-position-agency" id="eyeIcon"></i>
+                                    </div>
+
+                                    @error('password')
+                                        <span class="text-danger" id="passErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
+
+                                <div class="item form-group">
+                                    <label for="password_confirmation"
+                                        class="col-form-label col-md-3 col-sm-3 label-align">New Password Confirm
+                                        *</label>
+                                    <div class="col-md-6 col-sm-6">
+                                        <input type="password" id="password_confirmation" name="password_confirmation"
+                                            class="form-control" oninput="removeError('passConErr')"
+                                            value="{{ $agency->original_password ?? '' }}">
+                                        <i class="fa fa-eye eye-icon-position-agency" id="eyeIconConfirm"></i>
+                                    </div>
+                                    @error('password_confirmation')
+                                        <span class="text-danger" id="passConErr">{{ $message }}</span>
+                                    @enderror
+                                </div>
                                 {{-- Submit button --}}
                                 <div class="item form-group">
                                     <div class="col-md-6 col-sm-6 offset-md-3">

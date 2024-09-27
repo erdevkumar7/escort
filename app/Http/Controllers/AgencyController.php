@@ -39,6 +39,7 @@ class AgencyController extends Controller
         $agency->email = $request->email;
         $agency->address = $request->address;
         $agency->phone_number = $request->phone_number;
+        $agency->original_password = $validated['password'];
         $agency->password = Hash::make($validated['password']);
         $agency->save();
 
