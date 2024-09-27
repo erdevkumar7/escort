@@ -62,6 +62,11 @@
                                                                 class="delete-escort-btn" title="Delete">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
+                                                            <form id="deleteConfirmForm" method="POST"
+                                                                style="display: none">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
                                                         </td>
                                                         <td>
                                                             <a href="{{ route('admin.viewUser', $user->id) }}">
@@ -87,21 +92,35 @@
             </div>
         </div>
     </div>
+    {{-- sweetalert2 JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    {{-- delete confirm modal script --}}
-    <script>
+    {{-- delete confirm  script --}}
+    <script>     
         document.addEventListener('DOMContentLoaded', function() {
             document.body.addEventListener('click', function(event) {
                 if (event.target.closest('.delete-escort-btn')) {
                     const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
                         'data-deleted-id');
-                    const deleteForm = document.getElementById('deleteConfirmForm');
-                    deleteForm.action = `/my_project/escorts/admin/delete-user/${deleteId}`;
 
-                    // Open the modal (Bootstrap automatically opens it due to the data-bs attributes)
-                    const deleteConfirmModal = new bootstrap.Modal(document.getElementById(
-                        'deleteConfirmModal'));
-                    deleteConfirmModal.show();
+                    // Show SweetAlert confirmation dialog
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        console.log('rrrrrr', result)
+                        if (result.isConfirmed) {
+                            // If confirmed, submit the delete form
+                            const deleteForm = document.getElementById('deleteConfirmForm');
+                            deleteForm.action = `/escorts/admin/delete-user/${deleteId}`;
+                            deleteForm.submit();
+                        }
+                    });
                 }
             });
         });

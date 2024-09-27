@@ -65,6 +65,11 @@
                                                                 class="delete-escort-btn" title="Delete">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
+                                                            <form id="deleteConfirmForm" method="POST"
+                                                                style="display: none">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
                                                         </td>
                                                         <td>
                                                             <a
@@ -100,52 +105,39 @@
             </div>
         </div>
     </div>
-    {{-- delete confirm modal script --}}   
+
     {{-- sweetalert2 JS --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- delete confirm  script --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             document.body.addEventListener('click', function(event) {
                 if (event.target.closest('.delete-escort-btn')) {
                     const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
                         'data-deleted-id');
-                    const deleteForm = document.getElementById('deleteConfirmForm');
-                    deleteForm.action = `/my_project/escorts/admin/escort/${deleteId}/delete`;
 
-                    // Open the modal (Bootstrap automatically opens it due to the data-bs attributes)
-                    const deleteConfirmModal = new bootstrap.Modal(document.getElementById(
-                        'deleteConfirmModal'));
-                    deleteConfirmModal.show();
+                    // Show SweetAlert confirmation dialog
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If confirmed, submit the delete form
+                            const deleteForm = document.getElementById('deleteConfirmForm');
+                            deleteForm.action =
+                                `/escorts/admin/escort/${deleteId}/delete`;
+                            deleteForm.submit();
+                        }
+                    });
                 }
             });
         });
-        // document.addEventListener('DOMContentLoaded', function() {
-        //     document.body.addEventListener('click', function(event) {
-        //         if (event.target.closest('.delete-escort-btn')) {
-        //             const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
-        //                 'data-deleted-id');
-
-        //             // Show SweetAlert confirmation dialog
-        //             Swal.fire({
-        //                 title: 'Are you sure?',
-        //                 text: "You won't be able to revert this!",
-        //                 icon: 'warning',
-        //                 showCancelButton: true,
-        //                 confirmButtonColor: '#d33',
-        //                 cancelButtonColor: '#3085d6',
-        //                 confirmButtonText: 'Yes, delete it!'
-        //             }).then((result) => {
-        //                 if (result.isConfirmed) {
-        //                     // If confirmed, submit the delete form
-        //                     const deleteForm = document.getElementById('deleteConfirmForm');
-        //                     deleteForm.action =
-        //                         `/my_project/escorts/admin/escort/${deleteId}/delete`;
-        //                     deleteForm.submit();
-        //                 }
-        //             });
-        //         }
-        //     });
-        // });
     </script>
 
     {{-- datatables --}}
