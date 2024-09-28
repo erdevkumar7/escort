@@ -50,11 +50,11 @@
                                             <tbody>                                                                                        
                                                 @foreach ($advertises as $ads)
                                                     <tr class="all-detail-table-content">
-                                                        <td>{{ $loop->iteration }}</td>
+                                                        <td style="text-align:left;">{{ $loop->iteration }}</td>
                                                         <td>{{ $ads->name }}</td>
-                                                        <td>{{ $ads->price }}</td>
-                                                        <td>{{ $ads->time_duration }}</td>
-                                                        <td>{{ $ads->description }}</td>
+                                                        <td style="text-align:left;">{{ $ads->price }}</td>
+                                                        <td style="text-align:left;">{{ $ads->time_duration }}</td>
+                                                        <td class="all-desc-content">{{ $ads->description }}</td>
 
                                                         <td class="ads-actions">
                                                             <a href="{{route('admin.ads_edit', $ads->id)}}">

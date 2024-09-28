@@ -27,6 +27,7 @@
                                         width="100%">
                                         <thead>
                                             <tr>
+                                                <th>#</th>
                                                 <th>Badge Name</th>
                                                 <th>Applied</th>
                                                 <th>Color</th>
@@ -39,10 +40,11 @@
                                         <tbody>
                                             @foreach ($allbadges as $badge)
                                                 <tr class="all-detail-table-content">
+                                                    <td style="text-align:left;">{{ $loop->iteration }}</td>
                                                     <td>{{ $badge->name }}</td>
                                                     <td>{{ $badge->how_is_it_applied }}</td>
                                                     <td>{{ $badge->hexa_color }}</td>
-                                                    <td>{{ $badge->description }}</td>
+                                                    <td class="all-desc-content">{{ $badge->description }}</td>
                                                     <td><img src="{{ asset('/public/images/badge_icons') . '/' . $badge->icon }}"
                                                             width="40px" height="30px" alt="Icon"></td>
                                                     <td class="badges-actions">
