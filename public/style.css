@@ -101,7 +101,7 @@ ul.dropdown-menu.show .dropdown-item.active, .dropdown-item:active {
 }
 
 .profile-login-logout .logout-user.show {
-    left: -30px;
+    left: -50px;
     top: 35px;
 }
 
@@ -1588,7 +1588,9 @@ button.unfollows-btn:hover {
         padding: 40px 40px;
         width: 100%;
     }
-
+    nav.navbar img.img-fluid {
+        width: 90%;
+    }
     .we-help-growth h1.your-growth-text {
         font-size: 50px;
         width: 100%;
@@ -1740,126 +1742,127 @@ button.unfollows-btn:hover {
         font-size: 10px;
     }
 
-    .disclaimer-inner-text {
-        width: 95%;
-        padding: 40px 30px;
-    }
+.disclaimer-inner-text {
+    width: 95%;
+    padding: 40px 30px;
+    margin-bottom: 0px;
+    margin-top: -29px;
+}
+.stay-upto-date {
+    width: 95%;
+    display: block;
+}
 
-    .stay-upto-date {
-        width: 95%;
-        display: block;
-    }
+.stay-upto-left {
+    width: 100%;
+}
 
-    .stay-upto-left {
-        width: 100%;
-    }
+.stay-upto-left h2 {
+    width: 100%;
+    font-size: 38px;
+    line-height: 1.4;
+}
 
-    .stay-upto-left h2 {
-        width: 100%;
-        font-size: 38px;
-        line-height: 1.4;
-    }
+.stay-upto-right input#InputEmail1 {
+    width: 100%;
+    margin-top: 21px;
+}
 
-    .stay-upto-right input#InputEmail1 {
-        width: 100%;
-        margin-top: 21px;
-    }
+.stay-upto-right button {
+    width: 100%;
+}
 
-    .stay-upto-right button {
-        width: 100%;
-    }
+.form-group img {
+    position: absolute;
+    margin: 12px 15px;
+}
 
-    .form-group img {
-        position: absolute;
-        margin: 12px 15px;
-    }
+.quick-links {
+    gap: 28px;
+}
 
-    .quick-links {
-        gap: 28px;
-    }
+.escorts-first-content {
+    margin-left: 19px;
+}
 
-    .escorts-first-content {
-        margin-left: 19px;
-    }
+.reserved-text {
+    width: 100%;
+    margin-top: 0;
+}
 
-    .reserved-text {
-        width: 100%;
-        margin-top: 0;
-    }
+.quick-links h5 {
+    font-size: 14px;
+}
 
-    .quick-links h5 {
-        font-size: 14px;
-    }
+.premium-ads h1 {
+    font-size: 40px;
+    padding-bottom: 0;
+}
 
-    .premium-ads h1 {
-        font-size: 40px;
-        padding-bottom: 0;
-    }
+nav.navbar ul.navbar-nav {
+    line-height: 3.5;
+    align-items: flex-start;
+}
 
-    nav.navbar ul.navbar-nav {
-        line-height: 3.5;
-        align-items: flex-start;
-    }
+button.navbar-toggler.collapsed {
+    background-color: #fff;
+}
 
-    button.navbar-toggler.collapsed {
-        background-color: #fff;
-    }
+button.navbar-toggler {
+    background-color: #fff;
+}
 
-    button.navbar-toggler {
-        background-color: #fff;
-    }
+.we-help-img img {
+    width: inherit;
+}
 
-    .we-help-img img {
-        width: inherit;
-    }
+div#navbarScroll a.nav-link {
+    padding-left: 11px;
+}
 
-    div#navbarScroll a.nav-link {
-        padding-left: 11px;
-    }
+.new-escorts .col-carousel {
+    padding-left: 0;
+    margin-top: 40px;
+}
 
-    .new-escorts .col-carousel {
-        padding-left: 0;
-        margin-top: 40px;
-    }
+.premium-ads .owl-carousel {
+    margin-top: 50px;
+}
 
-    .premium-ads .owl-carousel {
-        margin-top: 50px;
-    }
+.premium-ads p {
+    width: 100%;
+}
 
-    .premium-ads p {
-        width: 100%;
-    }
+.premium-ads .owl-next:before {
+    width: 65px;
+    right: 80px;
+    top: -100px;
+}
 
-    .premium-ads .owl-next:before {
-        width: 65px;
-        right: 80px;
-        top: -100px;
-    }
+.premium-ads .owl-prev:after {
+    width: 60px;
+    right: 5px;
+    top: -101px;
+}
 
-    .premium-ads .owl-prev:after {
-        width: 60px;
-        right: 5px;
-        top: -101px;
-    }
+.services-offer-card p {
+    width: 85%;
+    margin: auto;
+    padding-bottom: 18px;
+}
 
-    .services-offer-card p {
-        width: 85%;
-        margin: auto;
-        padding-bottom: 18px;
-    }
+nav.navbar .show:before {
+    right: 62px !important;
+}
 
-    nav.navbar .show:before {
-        right: 62px !important;
-    }
+nav.navbar a#categoriesDropdown:before {
+    right: -12px;
+    margin-top: 22px;
+}
 
-    nav.navbar a#categoriesDropdown:before {
-        right: -12px;
-        margin-top: 22px;
-    }
-
-    .premium-ads a.btn.btn-primary.btn-block {
-        padding: 8px 0px;
-    }
+.premium-ads a.btn.btn-primary.btn-block {
+    padding: 8px 0px;
+}
 
     .profile-moment .owl-next:after {
         width: 60px;
@@ -1960,10 +1963,11 @@ button.unfollows-btn:hover {
     display: block !important;
     }
 
-    .form-login .login100-form {
-        width: 100% !important;
-        min-height: 0px !important;
-    }
+div#partial-escort .form-login .login100-form {
+    width: 100% !important;
+    min-height: 0px !important;
+    padding: 122px 55px 55px 55px;
+}
 
     .form-login .login100-more {
         height: 500px !important;
@@ -1989,12 +1993,19 @@ button.unfollows-btn:hover {
     margin-right: 0;
 }
 
-    }
+.escort-listing-all-pagination {
+    margin-top: 14px;
+}
 
+.inner-disc {
+    padding-bottom: 60px;
+}
+
+}
 
 @media only screen and (max-width: 767px) {
 
-    .escorts-first-content .icons {
+.escorts-first-content .icons {
         margin-bottom: 8px; 
     }
 
@@ -2010,12 +2021,16 @@ button.unfollows-btn:hover {
         width: 20px;
     }
 
+    .first-details-content a {
+        font-size: 18px;
+        font-family: 'Montserrat-SemiBold';
+    }
     nav.navbar.navbar-expand-lg button.navbar-toggler {
         height: 45px;
     }
     
     .profile-login-logout .logout-user.show {
-        left: -90px;
+        left: -111px;
         top: 40px;
     }
 
@@ -2035,11 +2050,10 @@ button.unfollows-btn:hover {
     }
 
    nav.navbar.navbar-expand-lg {
-    width: 100%;
-    margin: auto;
-    padding: 18px 24px;
-}
-
+        width: 100%;
+        margin: auto;
+        padding: 18px 24px;
+    }
     .slider-section {
         width: 100%;
         margin: auto;
@@ -2091,10 +2105,11 @@ button.unfollows-btn:hover {
         margin: auto;
     }
 
-    section.disclaimer {
-        width: 100%;
-        margin: auto;
-    }
+section.disclaimer {
+    width: 100%;
+    margin: auto;
+    padding-bottom: 30px;
+}   
 
     .featured-categories {
         width: 100%;
@@ -2201,7 +2216,7 @@ button.unfollows-btn:hover {
     }
 
       .top-text p {
-        font-size: 19px;
+        font-size: 17px;
         padding-left: 0px;
         width: 92%;
         margin: auto;
@@ -2296,7 +2311,7 @@ button.unfollows-btn:hover {
 
     .profile-moment {
         padding: 40px 24px;
-        padding-bottom: 100px;
+        padding-bottom: 25px;
         text-align: center;
     }
 
@@ -2370,7 +2385,8 @@ button.unfollows-btn:hover {
         padding: 40px 25px;
         text-align: center;
         padding-bottom: 8px;
-        padding-top: 0;
+        margin-top: -29px;
+        margin-bottom: 29px;
     }
 
     .stay-upto-date {
@@ -2437,6 +2453,7 @@ button.unfollows-btn:hover {
     .reserved-text {
         width: 100%;
         margin-top: 0;
+        border-top: solid 1px #C9C9C9;
     }
 
     .disclaimer-inner-text p {
@@ -2638,6 +2655,8 @@ button.unfollows-btn:hover {
     }
 
     }
+
+
 
     /*Dashboard Login*/
 

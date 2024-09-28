@@ -230,6 +230,49 @@ div#staticBackdrop button.fa.fa-close {
     font-size: 14px;
 }
 
+.nav.navbar-right.panel_toolbox .btn-success {
+    color: #fff;
+    background-color: #2a3f54;
+    border-color: #2a3f54;
+}
+
+.nav.navbar-right.panel_toolbox .btn-success:focus {
+    box-shadow: none;
+}
+.nav.navbar-right.panel_toolbox .btn-success:hover {
+    background-color: #EC8CCC;
+    border: solid 1px #EC8CCC;
+}
+
+.nav.navbar-right.panel_toolbox .btn-success:not(:disabled):not(.disabled):active, .btn-success:not(:disabled):not(.disabled).active, .show > .btn-success.dropdown-toggle {
+    color: #fff;
+    background-color: #EC8CCC;
+    border-color: #EC8CCC;
+}
+.swal2-actions button.swal2-confirm.swal2-styled.swal2-default-outline {
+    border: solid 1px #dd3333 !important;
+    outline: none !important;
+    width: 35%;
+}
+
+.swal2-actions button.swal2-cancel.swal2-styled.swal2-default-outline {
+    outline: none !important;
+    width: 35%;
+}
+
+h2#swal2-title {
+    padding-top: 0;
+}
+
+.swal2-popup.swal2-modal.swal2-icon-warning.swal2-show {
+    padding-bottom: 38px;
+    width: 468px;
+}
+
+.swal2-actions {
+    width: 100%;
+}
+
 
 @media only screen and (max-width: 767px) {
 
@@ -239,6 +282,14 @@ div#staticBackdrop button.fa.fa-close {
 }
 .dt-layout-start.col-md-auto.mr-auto button {
     padding: 4px 4px;
+}
+
+.swal2-actions button.swal2-confirm.swal2-styled.swal2-default-outline {
+    width: 40%;
+}
+
+.swal2-actions button.swal2-cancel.swal2-styled.swal2-default-outline {
+    width: 40%;
 }
 
 

@@ -10,7 +10,7 @@
                         <h2>All Agencies<small>(registered)</small></h2>
                         <div class="nav navbar-right panel_toolbox">
                             <a href="{{ route('admin.addagency_form') }}">
-                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add agency">
+                                <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add">
                                     Add agency
                                 </button>
                             </a>
@@ -39,9 +39,9 @@
                                         <tbody>
                                             @foreach ($allagencies as $agency)
                                                 <tr id="agency-row-{{ $agency->id }}" class="all-detail-table-content">
-                                                    <th>{{ $loop->iteration }}</th>
+                                                    <th style="text-align:left;">{{ $loop->iteration }}</th>
                                                     <td>{{ $agency->name }}</td>
-                                                    <td>{{ $agency->phone_number }}</td>
+                                                    <td style="text-align:left;">{{ $agency->phone_number }}</td>
                                                     <td>{{ $agency->email }}</td>
                                                     <td>{{ $agency->counter ? $agency->counter : 'Not Available' }}</td>
                                                     <td>
@@ -102,7 +102,7 @@
                         if (result.isConfirmed) {
                             // If confirmed, submit the delete form
                             const deleteForm = document.getElementById('deleteConfirmForm');
-                            deleteForm.action = `/escorts/admin/agency/${deleteId}`;
+                            deleteForm.action = `/my_project/escorts/admin/agency/${deleteId}`;
                             deleteForm.submit();
                         }
                     });
@@ -110,29 +110,6 @@
             });
         });
     </script>
-
-    {{-- datatables --}}
-    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.2/js/bootstrap.min.js"></script>
-    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.js"></script>
-    <script src="https://cdn.datatables.net/2.1.7/js/dataTables.bootstrap4.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/dataTables.buttons.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.bootstrap4.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.html5.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.print.min.js"></script>
-    <script src="https://cdn.datatables.net/buttons/3.1.2/js/buttons.colVis.min.js"></script>
-    <script>
-        new DataTable('#all_datatables_id', {
-            layout: {
-                topStart: {
-                    buttons: ['copy', 'excel', 'pdf', 'colvis']
-                }
-            }
-        });
-    </script>
+ 
     <!-- /page content -->
 @endsection

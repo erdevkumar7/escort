@@ -794,20 +794,17 @@ h4.my-escort-nm-sec {
     padding-top: 0;
 }
 @media (min-width: 768px) and (max-width: 1024px) {
-    
 
     .menu-item.escort-image img {
         height: 380px;
         width: 100%;
     }
-
     .escort-add-more-pic {
         max-width: 50%;
         height: 300px;
         margin: auto;
         margin-top: 30px;
     }
-
     .escort-pictures .escort-image {
         width: 100%;
         margin: auto;
