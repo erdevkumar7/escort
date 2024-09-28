@@ -98,11 +98,10 @@
                         cancelButtonColor: '#3085d6',
                         confirmButtonText: 'Yes, delete it!'
                     }).then((result) => {
-                        console.log('rrrrrr', result)
                         if (result.isConfirmed) {
                             // If confirmed, submit the delete form
                             const deleteForm = document.getElementById('deleteConfirmForm');
-                            deleteForm.action = `/my_project/escorts/admin/agency/${deleteId}`;
+                            deleteForm.action = `/escorts/admin/agency/${deleteId}`;
                             deleteForm.submit();
                         }
                     });
