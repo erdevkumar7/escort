@@ -13,12 +13,8 @@ class ContributorController extends Controller
 {
     public function getAllContributors(Request $request)
     {
-        $query = DB::table('contributors')->orderBy('created_at', 'desc');
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where('name', 'like', '%' . $search . '%');
-        }
-        $allContributors = $query->paginate(10);
+        $query = DB::table('contributors')->orderBy('created_at', 'desc');     
+        $allContributors = $query->get();
         // dd($allContributors);
         return view('contributor.all', compact('allContributors'));
     }

@@ -45,7 +45,7 @@
                                                 @foreach ($allContributors as $contributor)
                                                     <tr id="contributor-row-{{ $contributor->id }}"
                                                         class="all-detail-table-content">
-                                                        <th>{{ $loop->iteration + ($allContributors->currentPage() - 1) * $allContributors->perPage() }}
+                                                        <th>{{ $loop->iteration }}
                                                         </th>
                                                         <td>{{ $contributor->name }}</td>
                                                         <td>{{ $contributor->phone_number }}</td>
@@ -60,11 +60,17 @@
                                                                     <i class="fa fa-edit"></i>
                                                                 </button>
                                                             </a>
-                                                            <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                                data-toggle="tooltip" data-placement="top" title="Delete"
-                                                                data-deleted-id="{{ $contributor->id }}">
+                                                            <button data-bs-toggle="modal"
+                                                                data-bs-target="#deleteConfirmModal"
+                                                                data-deleted-id="{{ $contributor->id }}"
+                                                                class="delete-escort-btn" title="Delete">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
+                                                            <form id="deleteConfirmForm" method="POST"
+                                                                style="display: none">
+                                                                @csrf
+                                                                @method('DELETE')
+                                                            </form>
                                                         </td>
                                                         <td>
                                                             <a
@@ -77,10 +83,6 @@
                                             @endif
                                         </tbody>
                                     </table>
-                                    <!-- Pagination Links -->
-                                    <div class="d-flex justify-content-center all-pagination">
-                                        {{ $allContributors->links() }}
-                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -89,18 +91,36 @@
             </div>
         </div>
     </div>
-    {{-- delete confirm modal script --}}
+    {{-- sweetalert2 JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- delete confirm  script --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const deleteButtons = document.querySelectorAll(
-                '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
-            const deleteForm = document.getElementById('deleteConfirmForm');
+            document.body.addEventListener('click', function(event) {
+                if (event.target.closest('.delete-escort-btn')) {
+                    const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
+                        'data-deleted-id');
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/my_project/escorts/admin/delete-contributor/${deleteId}`;
-                });
+                    // Show SweetAlert confirmation dialog
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If confirmed, submit the delete form
+                            const deleteForm = document.getElementById('deleteConfirmForm');
+                            deleteForm.action =
+                                `/escorts/admin/delete-contributor/${deleteId}`;
+                            deleteForm.submit();
+                        }
+                    });
+                }
             });
         });
     </script>

@@ -13,7 +13,7 @@
             <div class="row">
                 <div class="col-md-12 col-sm-12 ">
                     <div class="x_panel">
-                        <div class="x_content">                        
+                        <div class="x_content">
                             <form action="{{ route('admin.agency.add_escorts', $agency->id) }}" method="POST"
                                 enctype="multipart/form-data">
                                 @csrf
@@ -57,8 +57,9 @@
                                     {{-- password --}}
                                     <div class="col-md-4 col-sm-4 ">
                                         <label for="password">Password * </label>
-                                        <input type="Password" name="password" class="form-control" id="pass"
+                                        <input type="Password" name="password" class="form-control" id="password"
                                             oninput="removeError('PasswordErr')">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
                                         @error('password')
                                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                         @enderror
@@ -68,6 +69,7 @@
                                         <label for="password_confirmation">Confirm Password * </label>
                                         <input type="password" name="password_confirmation" id="password_confirmation"
                                             class="form-control" oninput="removeError('C_PasswordErr')">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
                                         @error('password_confirmation')
                                             <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
                                         @enderror
@@ -109,7 +111,8 @@
                                             </option>
                                             <option value="45-55" {{ old('age') == '45-55' ? 'selected' : '' }}>45-55
                                             </option>
-                                            <option value="56+" {{ old('age') == '56+' ? 'selected' : '' }}>56+</option>
+                                            <option value="56+" {{ old('age') == '56+' ? 'selected' : '' }}>56+
+                                            </option>
                                         </select>
                                         @error('age')
                                             <span class="text-danger" id="ageErr">{{ $message }}</span>
@@ -269,8 +272,8 @@
                                     {{-- pictures --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="pictures">Pictures<span class="required">*</span></label>
-                                        <input type="file" class="form-control" id="pictures" name="pictures[]" accept="image/*"
-                                            multiple oninput="removeError('picturesErr')">
+                                        <input type="file" class="form-control" id="pictures" name="pictures[]"
+                                            accept="image/*" multiple oninput="removeError('picturesErr')">
                                         <input type="hidden" name="media_type_image" value="image">
                                         @error('pictures')
                                             <span class="text-danger" id="picturesErr">{{ $message }}</span>
@@ -294,8 +297,8 @@
 
                                     <div class="col-md-4 col-sm-4">
                                         <label for="video">Videos</label>
-                                        <input type="file" class="form-control" id="video" name="videos[]" accept="video/*"
-                                            multiple>
+                                        <input type="file" class="form-control" id="video" name="videos[]"
+                                            accept="video/*" multiple>
                                         <input type="hidden" name="media_type_video" value="video">
                                         @error('video')
                                             <span class="text-danger" id="videoErr">{{ $message }}</span>
@@ -499,5 +502,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Password field toggle
+        document.getElementById('eyeIcon').addEventListener('click', function() {
+            var passwordField = document.getElementById('password');
+            var icon = document.getElementById('eyeIcon');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Confirm password field toggle
+        document.getElementById('eyeIconConfirm').addEventListener('click', function() {
+            var confirmPasswordField = document.getElementById('password_confirmation');
+            var icon = document.getElementById('eyeIconConfirm');
+
+            if (confirmPasswordField.type === 'password') {
+                confirmPasswordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                confirmPasswordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
     <!-- /page content -->
 @endsection

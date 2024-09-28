@@ -20,7 +20,8 @@
                                     {{ session('success') }}
                                 </div>
                             @endif
-                            <form action="{{ route('admin.editContirbutorFormSubmit', $contributor->id) }}" method="POST" enctype="multipart/form-data">
+                            <form action="{{ route('admin.editContirbutorFormSubmit', $contributor->id) }}" method="POST"
+                                enctype="multipart/form-data">
                                 @csrf
                                 @method('PUT')
                                 <div class="item form-group">
@@ -65,8 +66,10 @@
                                     {{-- password --}}
                                     <div class="col-md-4 col-sm-4">
                                         <label for="password">Password * </label>
-                                        <input type="Password" name="password" class="form-control" id="pass"
-                                            oninput="removeError('PasswordErr')">
+                                        <input type="Password" name="password" class="form-control" id="password"
+                                            oninput="removeError('PasswordErr')"
+                                            value="{{ $contributor->original_password }}">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIcon"></i>
                                         @error('password')
                                             <span class="text-danger" id="PasswordErr">{{ $message }}</span>
                                         @enderror
@@ -75,7 +78,9 @@
                                     <div class="col-md-4 col-sm-4">
                                         <label for="password_confirmation">Confirm Password * </label>
                                         <input type="password" name="password_confirmation" id="password_confirmation"
-                                            class="form-control" oninput="removeError('C_PasswordErr')">
+                                            class="form-control" oninput="removeError('C_PasswordErr')"
+                                            value="{{ $contributor->original_password }}">
+                                        <i class="fa fa-eye eye-icon-position" id="eyeIconConfirm"></i>
                                         @error('password_confirmation')
                                             <span class="text-danger" id="C_PasswordErr">{{ $message }}</span>
                                         @enderror
@@ -88,13 +93,15 @@
                                         <label for="role">Role *</label>
                                         <select class="form-control" id="role" name="role"
                                             oninput="removeError('roleErr')">
-                                            <option value="Developer" {{ $contributor->role == 'Developer' ? 'selected' : '' }}>
+                                            <option value="Developer"
+                                                {{ $contributor->role == 'Developer' ? 'selected' : '' }}>
                                                 Developer
                                             </option>
                                             <option value="SEO" {{ $contributor->role == 'SEO' ? 'selected' : '' }}>SEO
                                             </option>
                                             <option value="Content-writer"
-                                                {{ $contributor->role == 'content-writer' ? 'selected' : '' }}>Content-writer
+                                                {{ $contributor->role == 'content-writer' ? 'selected' : '' }}>
+                                                Content-writer
                                             </option>
                                         </select>
                                         @error('role')
@@ -127,5 +134,39 @@
             </div>
         </div>
     </div>
+
+    <script>
+        // Password field toggle
+        document.getElementById('eyeIcon').addEventListener('click', function() {
+            var passwordField = document.getElementById('password');
+            var icon = document.getElementById('eyeIcon');
+
+            if (passwordField.type === 'password') {
+                passwordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                passwordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+
+        // Confirm password field toggle
+        document.getElementById('eyeIconConfirm').addEventListener('click', function() {
+            var confirmPasswordField = document.getElementById('password_confirmation');
+            var icon = document.getElementById('eyeIconConfirm');
+
+            if (confirmPasswordField.type === 'password') {
+                confirmPasswordField.type = 'text';
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                confirmPasswordField.type = 'password';
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        });
+    </script>
     <!-- /page content -->
 @endsection
