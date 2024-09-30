@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminFuncController;
 use App\Http\Controllers\AdvertiseController;
 use App\Http\Controllers\AgencyController;
 use App\Http\Controllers\BadgeController;
+use App\Http\Controllers\CantonCityController;
 use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\EscortsAuthController;
 use App\Http\Controllers\MediaController;
@@ -132,6 +133,26 @@ Route::prefix('admin')->group(function () {
         Route::put('/{contributor_id}/edit', [ContributorController::class, 'editContributorFormSubmit'])->name('admin.editContirbutorFormSubmit');
 
         Route::delete('/delete-contributor/{contributor_id}', [ContributorController::class, 'deleteContributor'])->name('admin.deleteContributor');
+    });
+});
+
+// todo: Admin Canton-City Operation
+Route::prefix('admin')->group(function(){
+    Route::middleware('auth.admin')->group(function () {
+        // Canton-Operation
+        Route::get('/all-canton', [CantonCityController::class, 'getAllCanton'])->name('admin.getAllCanton');
+        Route::get('/{canton_id}/view-canton', [CantonCityController::class, 'viewCantonDetail'])->name('admin.viewCantonDetail');
+
+        Route::get('/add-canton', [CantonCityController::class, 'addCantonForm'])->name('admin.addCantonForm');
+        Route::post('/add-canton', [CantonCityController::class, 'addCantonFormSubmit'])->name('admin.addCantonFormSubmit');
+
+        Route::get('/{canton_id}/edit-canton', [CantonCityController::class, 'editCantonForm'])->name('admin.editCantonForm');
+        Route::put('/{canton_id}/edit-canton', [CantonCityController::class, 'editCantonFormSubmit'])->name('admin.editCantonFormSubmit');
+        Route::delete('/delete-conton/{conton_id}', [CantonCityController::class, 'deleteConton'])->name('admin.deleteConton');
+
+        // City Operation
+        Route::get('/add-city', [CantonCityController::class, 'addCityForm'])->name('admin.addCityForm');
+        Route::post('/add-city', [CantonCityController::class, 'addCityFormSubmit'])->name('admin.addCityFormSubmit');
     });
 });
 

@@ -5,7 +5,7 @@
     <div class="right_col" role="main">
         <div class="page-title">
             <div class="title_left">
-                <h3>Add New Canton</h3>
+                <h3>Update Canton</h3>
             </div>
         </div>
         <div class="clearfix"></div>
@@ -13,14 +13,15 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_content">
-                        <form action="{{ route('admin.addCantonFormSubmit') }}" method="POST"
+                        <form action="{{ route('admin.editCantonFormSubmit', $canton->id) }}" method="POST"
                             enctype="multipart/form-data">
                             @csrf
+                            @method('PUT')
                             <div class="item form-group">
                                 {{-- name --}}
                                 <div class="col-md-4 col-sm-4 ">
                                     <label for="name">Conton Name * </label>
-                                    <input type="text" id="name" name="name" value="{{ old('name') }}"
+                                    <input type="text" id="name" name="name" value="{{$canton->name}}"
                                         class="form-control" oninput="removeError('nameErr')">
                                     @error('name')
                                         <span class="text-danger" id="nameErr">{{ $message }}</span>
@@ -28,9 +29,9 @@
                                 </div>
                                 {{-- short_name --}}
                                 <div class="col-md-4 col-sm-4 ">
-                                    <label for="short_name">Short Name(Code) *</label>
+                                    <label for="short_name">Short Name *</label>
                                     <input type="text" id="short_name" name="short_name"
-                                        value="{{ old('short_name') }}" class="form-control"
+                                        value="{{ $canton->short_name }}" class="form-control"
                                         oninput="removeError('short_nameErr')">
                                     @error('short_name')
                                         <span class="text-danger" id="short_nameErr">{{ $message }}</span>
@@ -40,7 +41,7 @@
                                 {{-- description --}}
                                 <div class="col-md-4 col-sm-4">
                                     <label for="description">Description(optional)</label>
-                                    <textarea class="form-control" id="description" name="description">{{ old('description') }}</textarea>
+                                    <textarea class="form-control" id="description" name="description">{{ $canton->description }}</textarea>
                                 </div>
 
                             </div>
