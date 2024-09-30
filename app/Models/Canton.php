@@ -14,4 +14,9 @@ class Canton extends Model
         "short_name",
         "description",
     ];
+
+    public function cities()
+    {
+        return $this->hasMany(City::class, 'canton_id');
+    }
 }

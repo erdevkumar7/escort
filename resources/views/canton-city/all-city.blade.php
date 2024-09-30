@@ -6,11 +6,11 @@
             <div class="col-md-12 col-sm-12 ">
                 <div class="x_panel">
                     <div class="x_title">
-                        <h2>All Cantons<small>(Detail)</small></h2>
+                        <h2>All City<small>(Detail)</small></h2>
                         <div class="nav navbar-right panel_toolbox">
-                            <a href="{{ route('admin.addCantonForm') }}">
+                            <a href="{{ route('admin.addCityForm') }}">
                                 <button class="btn btn-success" data-toggle="tooltip" data-placement="top" title="Add">
-                                    Add Canton
+                                    Add City
                                 </button>
                             </a>
                         </div>
@@ -27,29 +27,34 @@
                                             <tr>
                                                 <th>#</th>
                                                 <th>Name</th>
-                                                <th>Canton Code</th>
+                                                <th>Canton Name</th>
                                                 <th>Description</th>
                                                 <th>Action</th>
                                                 <th>View Details</th>
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            @if ($allcanton->isEmpty())
+                                            @if ($allcity->isEmpty())
                                                 <tr>
                                                     <td colspan="6" class="text-center">No data available</td>
                                                 </tr>
                                             @else
-                                                @foreach ($allcanton as $canton)
-                                                    <tr id="canton-row-{{ $canton->id }}"
-                                                        class="all-detail-table-content">
+                                                @foreach ($allcity as $city)
+                                                    <tr id="city-row-{{ $city->id }}" class="all-detail-table-content">
                                                         <th style="text-align: center;">{{ $loop->iteration }}
                                                         </th>
-                                                        <td>{{ $canton->name }}</td>
-                                                        <td>{{ $canton->short_name }}</td>
-                                                        <td>{{ $canton->description ?? 'Not Available' }}</td>
+                                                        <td>{{ $city->name }}</td>
+                                                        <td>
+                                                            @if ($city->canton)
+                                                                {{ $city->canton->name }}
+                                                            @else
+                                                                <span>Not Available</span>
+                                                            @endif
+                                                        </td>
+                                                        <td>{{ $city->description ?? 'Not Available' }}</td>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.editCantonForm', $canton->id) }}">
+                                                            <a href="{{ route('admin.editCityForm', $city->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
                                                                     title="Edit">
                                                                     <i class="fa fa-edit"></i>
@@ -57,7 +62,7 @@
                                                             </a>
                                                             <button data-bs-toggle="modal"
                                                                 data-bs-target="#deleteConfirmModal"
-                                                                data-deleted-id="{{ $canton->id }}"
+                                                                data-deleted-id="{{ $city->id }}"
                                                                 class="delete-escort-btn" title="Delete">
                                                                 <i class="fa fa-minus-circle"></i>
                                                             </button>
@@ -68,7 +73,7 @@
                                                             </form>
                                                         </td>
                                                         <td>
-                                                            <a href="{{ route('admin.viewCantonDetail', $canton->id) }}">
+                                                            <a href="{{ route('admin.viewCityDetail', $city->id) }}">
                                                                 <button type="button"
                                                                     class="btn btn-primary">view</button></a>
                                                         </td>
@@ -110,7 +115,7 @@
                             // If confirmed, submit the delete form
                             const deleteForm = document.getElementById('deleteConfirmForm');
                             deleteForm.action =
-                                `/escorts/admin/delete-conton/${deleteId}`;
+                                `/escorts/admin/delete-city/${deleteId}`;
                             deleteForm.submit();
                         }
                     });

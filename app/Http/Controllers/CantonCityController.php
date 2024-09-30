@@ -14,7 +14,7 @@ class CantonCityController extends Controller
         return view('canton-city.all-canton', compact('allcanton'));
     }
 
-    
+
     public function viewCantonDetail($canton_id)
     {
         $canton = Canton::find($canton_id);
@@ -62,6 +62,22 @@ class CantonCityController extends Controller
         $canton->update($validateData);
         return redirect()->route('admin.getAllCanton')->with('success', 'Canton Updated Successfully!');
     }
+    //*****************City Operation *********************//
+
+    public function getAllCity()
+    {
+        $allcity = City::with('canton')->get();
+        return view('canton-city.all-city', ['allcity' => $allcity]);
+    }
+
+    public function viewCityDetail($city_id)
+    {
+        $city = City::find($city_id);
+        if (!$city) {
+            return redirect()->back()->with('error', 'No Conton Found!');
+        }
+        return view('canton-city.view-city', compact('city'));
+    }
 
     public function addCityForm()
     {
@@ -78,15 +94,47 @@ class CantonCityController extends Controller
         ]);
 
         $city = City::create($validateData);
-        return redirect()->back()->with('success', 'City created Successfully!');
+        return redirect()->route('admin.getAllCity')->with('success', 'City created Successfully!');
+    }
+
+    public function editCityForm($city_id)
+    {
+        $city = City::with('canton')->find($city_id);
+        $allcanton = Canton::orderBy('name', 'asc')->get();
+        if (!$city) {
+            return redirect()->back()->with('error', 'No City Found!');
+        }
+        return view('canton-city.edit-city', compact('city', 'allcanton'));
+    }
+
+    public function editCityFormSubmit(Request $request, $city_id)
+    {
+        $city = City::findOrFail($city_id);
+        $validateData =  $request->validate([
+            "name" => "required|string",
+            "canton_id" => "required|string",
+            "description" => "nullable|string"
+        ]);
+
+        $city->update($validateData);
+        return redirect()->route('admin.getAllCity')->with('success', 'City Updated Successfully!');
+    }
+
+
+    public function deleteCity($city_id)
+    {
+        $city = City::findOrFail($city_id);
+        $city->delete();
+        return redirect()->route('admin.getAllCity')->with('success', 'City Deleted Successfully!');
     }
 
     public function deleteConton($conton_id)
-    {
-        // Find the contributor by ID, or fail if not found
-        $conton = Canton::findOrFail($conton_id);
-
-        $conton->delete();
-        return redirect()->route('admin.getAllCanton')->with('success', 'Conton Deleted Successfully!');
+    { 
+        $canton = Canton::findOrFail($conton_id);
+        
+        $canton->cities()->delete(); 
+        $canton->delete();
+ 
+        return redirect()->route('admin.getAllCanton')->with('success', 'Canton Deleted Successfully!');
     }
 }

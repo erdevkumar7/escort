@@ -151,8 +151,15 @@ Route::prefix('admin')->group(function(){
         Route::delete('/delete-conton/{conton_id}', [CantonCityController::class, 'deleteConton'])->name('admin.deleteConton');
 
         // City Operation
+        Route::get('/all-city', [CantonCityController::class, 'getAllCity'])->name('admin.getAllCity');
+        Route::get('/{city_id}/view-city', [CantonCityController::class, 'viewCityDetail'])->name('admin.viewCityDetail');
+
         Route::get('/add-city', [CantonCityController::class, 'addCityForm'])->name('admin.addCityForm');
         Route::post('/add-city', [CantonCityController::class, 'addCityFormSubmit'])->name('admin.addCityFormSubmit');
+
+        Route::get('/{city_id}/edit-city', [CantonCityController::class, 'editCityForm'])->name('admin.editCityForm');
+        Route::put('/{city_id}/edit-city', [CantonCityController::class, 'editCityFormSubmit'])->name('admin.editCityFormSubmit');
+        Route::delete('/delete-city/{city_id}', [CantonCityController::class, 'deleteCity'])->name('admin.deleteCity');
     });
 });
 
