@@ -27,7 +27,7 @@
                                     {{-- Ads Name --}}
                                     <div class="col-md-6 col-sm-6 ">
                                         <label for="name">Advertise Name * </label>
-                                        <input type="text" id="name" name="name" class="form-control"
+                                        <input type="text" id="name" name="name" class="form-control" value="{{old('name')}}"
                                             oninput="removeError('nameErr')">
                                         @error('name')
                                             <span class="text-danger" id="nameErr">{{ $message }}</span>
@@ -36,7 +36,7 @@
                                     {{-- time_duration --}}
                                     <div class="col-md-6 col-sm-6 ">
                                         <label for="time_duration">Time Duration (In-Days) * </label>
-                                        <input type="text" id="time_duration" name="time_duration" class="form-control"
+                                        <input type="text" id="time_duration" name="time_duration" class="form-control" value="{{old('time_duration')}}"
                                             oninput="removeError('time_durationErr')">
                                         @error('time_duration')
                                             <span class="text-danger" id="time_durationErr">{{ $message }}</span>
@@ -48,7 +48,7 @@
                                     {{-- Price --}}
                                     <div class="col-md-6 col-sm-6 ">
                                         <label for="price">Price (In-CHF) *</label>
-                                        <input type="text" id="price" name="price" class="form-control"
+                                        <input type="text" id="price" name="price" class="form-control" value="{{old('price')}}"
                                             oninput="removeError('priceErr')">
                                         @error('price')
                                             <span class="text-danger" id="priceErr">{{ $message }}</span>
@@ -57,7 +57,7 @@
                                     {{-- remark --}}
                                     <div class="col-md-6 col-sm-6 ">
                                         <label for="Remark">Remark</label>
-                                        <input type="text" id="remark" name="remark" class="form-control"
+                                        <input type="text" id="remark" name="remark" value="{{old('remark')}}" class="form-control"
                                             oninput="removeError('remarkErr')">
                                         @error('remark')
                                             <span class="text-danger" id="remarkErr">{{ $message }}</span>

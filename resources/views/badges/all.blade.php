@@ -54,11 +54,15 @@
                                                                 <i class="fa fa-edit"></i>
                                                             </button>
                                                         </a>
-                                                        <button data-bs-toggle="modal" data-bs-target="#staticBackdrop"
-                                                            data-toggle="tooltip" data-placement="top" title="Delete"
-                                                            data-deleted-id="{{ $badge->id }}">
+                                                        <button data-bs-toggle="modal" data-bs-target="#deleteConfirmModal"
+                                                            data-deleted-id="{{ $badge->id }}" class="delete-escort-btn"
+                                                            title="Delete">
                                                             <i class="fa fa-minus-circle"></i>
                                                         </button>
+                                                        <form id="deleteConfirmForm" method="POST" style="display: none">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                        </form>
                                                     </td>
                                                     <td>
                                                         <a href="{{ route('admin.badge.show', $badge->id) }}">
@@ -78,18 +82,35 @@
         </div>
     </div>
 
-    {{-- delete confirm modal script --}}
+    {{-- sweetalert2 JS --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    {{-- delete confirm  script --}}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            const deleteButtons = document.querySelectorAll(
-                '[data-bs-toggle="modal"][data-bs-target="#staticBackdrop"]');
-            const deleteForm = document.getElementById('deleteConfirmForm');
+            document.body.addEventListener('click', function(event) {
+                if (event.target.closest('.delete-escort-btn')) {
+                    const deleteId = event.target.closest('.delete-escort-btn').getAttribute(
+                        'data-deleted-id');
 
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', function() {
-                    const deleteId = this.getAttribute('data-deleted-id');
-                    deleteForm.action = `/escorts/admin/badge/${deleteId}`;
-                });
+                    // Show SweetAlert confirmation dialog
+                    Swal.fire({
+                        title: 'Are you sure?',
+                        text: "You won't be able to revert this!",
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonColor: '#d33',
+                        cancelButtonColor: '#3085d6',
+                        confirmButtonText: 'Yes, delete it!'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            // If confirmed, submit the delete form
+                            const deleteForm = document.getElementById('deleteConfirmForm');
+                            deleteForm.action = `/escorts/admin/badge/${deleteId}`;
+                            deleteForm.submit();
+                        }
+                    });
+                }
             });
         });
     </script>
