@@ -28,10 +28,14 @@
                            Categories
                        </a>
                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                           <li><a class="dropdown-item" href="#">Action</a></li>
-                           <li><a class="dropdown-item" href="#">Another action</a></li>
-                           <li><a class="dropdown-item" href="#">Something else here</a></li>
+                           <li><a class="dropdown-item categoty-type-select"
+                                   data-category="Independent Escort">Independent Escort</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="Escort">Escort</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="Trans">Trans</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="SM">SM</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="Salon">Salon</a></li>
                        </ul>
+
                    </li>
                    <li class="nav-item">
                        <a class="nav-link" href="{{ route('escort.list') }}">Escorts</a>
@@ -112,5 +116,28 @@
                });
            });
        </script>
+       <script>
+           $(document).ready(function() {
+               $('.categoty-type-select').on('click', function(e) {
+                   e.preventDefault();
+                   var category = $(this).data('category');
+                   $.ajax({
+                       url: '{{ route('index') }}', // Your route for getting category data
+                       type: 'GET',
+                       data: {
+                           category: category
+                       },
+                       success: function(data) {
+                           $('#partial-escort').html(data);
+                       },
+                       error: function(xhr, status, error) {
+                           // Handle errors here
+                           console.log("Error: " + error);
+                       }
+                   });
+               });
+           });
+       </script>
+
    </nav>
    <!-- nav section end -->

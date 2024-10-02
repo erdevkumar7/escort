@@ -28,9 +28,12 @@
                            Categories
                        </a>
                        <ul class="dropdown-menu" aria-labelledby="categoriesDropdown">
-                           <li><a class="dropdown-item" href="#">Action</a></li>
-                           <li><a class="dropdown-item" href="#">Another action</a></li>
-                           <li><a class="dropdown-item" href="#">Something else here</a></li>
+                           <li><a class="dropdown-item categoty-type-select"
+                                   data-category="Independent Escort">Independent Escort</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="Escort">Escort</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="Trans">Trans</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="SM">SM</a></li>
+                           <li><a class="dropdown-item categoty-type-select" data-category="Salon">Salon</a></li>
                        </ul>
                    </li>
                    <li class="nav-item">
@@ -60,7 +63,7 @@
                    @if (Auth::guard('escort')->user())
                        <li class="nav-item dropdown">
                            <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown"
-                               role="button" data-bs-toggle="dropdown" aria-expanded="false">                       
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
                                @if (Auth::guard('escort')->user()->profile_pic)
                                    <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('escort')->user()->profile_pic }}"
@@ -77,12 +80,11 @@
                                <li><a class="dropdown-item"
                                        href="{{ route('escorts.dashboard', Auth::guard('escort')->user()->id) }}">Dashboard</a>
                                </li>
-                               <li><a class="dropdown-item" href="#"
-                                       onclick="handleLogOut('escort')">Logout</a>
+                               <li><a class="dropdown-item" href="#" onclick="handleLogOut('escort')">Logout</a>
                                </li>
                            </ul>
                        </li>
-                   @else                   
+                   @else
                        <li class="nav-item dropdown">
                            <a class="nav-link dropdown-toggle active escort-agency-menu" href="#"
                                id="escortAgencyDropdown" role="button" data-bs-toggle="dropdown"
@@ -134,6 +136,29 @@
                        },
                        success: function(data) {
                            $('#partial-escort').html(data);
+                       }
+                   });
+               });
+           });
+       </script>
+
+       <script>
+           $(document).ready(function() {
+               $('.categoty-type-select').on('click', function(e) {
+                   e.preventDefault();
+                   var category = $(this).data('category');
+                   $.ajax({
+                       url: '{{ route('index') }}', // Your route for getting category data
+                       type: 'GET',
+                       data: {
+                           category: category
+                       },
+                       success: function(data) {
+                           $('#partial-escort').html(data);
+                       },
+                       error: function(xhr, status, error) {
+                           // Handle errors here
+                           console.log("Error: " + error);
                        }
                    });
                });

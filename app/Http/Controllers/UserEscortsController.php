@@ -71,6 +71,12 @@ class UserEscortsController extends Controller
             $query->where('nickname', 'like', '%' . $search . '%');
         }
 
+         // Get the selected category from the AJAX request
+         if($request->input('category')){
+             $category = $request->input('category');
+             $query->where('type', $category);
+         }       
+     
         // Paginate the results, appending search parameters to the pagination links
         $allescorts = $query->paginate(12)->withPath($baseUrl)->appends($request->except('page'));
 

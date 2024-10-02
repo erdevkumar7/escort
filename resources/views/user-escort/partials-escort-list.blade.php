@@ -8,7 +8,7 @@
                     <div class="row gy-5" id="escort-list">
                         @if ($allescorts->isEmpty())
                             <div class="col-12">
-                                <p>No Data Available</p>
+                                <p>No Escort Available</p>
                             </div>
                         @else
                             @foreach ($allescorts as $escort)
