@@ -1,4 +1,4 @@
-@extends('user.layout-auth')
+@extends('user.layout-agency')
 @section('auth_content')
     <div class="escort-profile">
 

@@ -61,7 +61,7 @@ class UserAuthController extends Controller
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
 
-        if (Auth::attempt($credentials)) {
+        if (Auth::guard('web')->attempt($credentials))  {
             $user = Auth::user();
 
             if (is_null($user->email_verified_at)) {
@@ -310,9 +310,7 @@ class UserAuthController extends Controller
     // Handle logout
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
+        Auth::guard('web')->logout();
         return redirect()->route('user.login.form');
     }
 }

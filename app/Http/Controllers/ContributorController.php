@@ -149,8 +149,6 @@ class ContributorController extends Controller
     public function logout(Request $request)
     {
         Auth::guard('contributor')->logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
         return redirect('/contributor/login');
     }
 }

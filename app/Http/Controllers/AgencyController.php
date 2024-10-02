@@ -581,10 +581,8 @@ class AgencyController extends Controller
 
     public function agency_logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('agency.login')->with('success', 'Logged out successfully!');
+        Auth::guard('agency')->logout();
+        return redirect()->route('agency.login');
     }
 
     //Agency Auth Functionality End **********************************************************

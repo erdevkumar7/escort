@@ -193,9 +193,7 @@ class EscortsAuthController extends Controller
     // Handle logout
     public function logout(Request $request)
     {
-        Auth::logout();
-        $request->session()->invalidate();
-        $request->session()->regenerateToken();
-        return redirect()->route('login')->with('success', 'Logged out successfully!');
+        Auth::guard('escort')->logout();
+        return redirect()->route('login');
     }
 }

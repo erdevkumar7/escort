@@ -1,4 +1,4 @@
-@extends('user.layout')
+@extends('user.agency')
 @section('page_content')
     <section class="escort-details">
         <div class="container">

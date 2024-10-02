@@ -1,5 +1,5 @@
    <!-- nav section start -->
-   @if (!Auth::guard()->user())
+   @if (!Auth::guard('agency')->user())
        <div class="top-text">
            <div class="first-order">
                <p>Sign up and get 20% off to your first order. <a href="{{ route('escorts.register_form') }}">Sign Up
@@ -57,29 +57,56 @@
                    <li class="nav-item inner-icons">
                        <a class="nav-link" href="#"><i class="fa-solid fa-cart-shopping"></i></a>
                    </li>
+                   @if (Auth::guard('agency')->check())
+                       <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle active profile-image" href="#" id="profileDropdown"
+                               role="button" data-bs-toggle="dropdown" aria-expanded="false">
 
-                   <li class="nav-item dropdown">
-                       <a class="nav-link dropdown-toggle active escort-agency-menu" href="#"
-                           id="escortAgencyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                           <i class="fa-solid fa-user"></i>
-                       </a>
 
-                       <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
-                           <li><a class="dropdown-item" href="{{ route('user.login.form') }}"> User Login</a>
-                           </li>
-                           <li><a class="dropdown-item" href="{{ route('login') }}"> Escort Login</a>
-                           </li>
-                           <li><a class="dropdown-item" href="{{ route('agency.login') }}"> Agency Login </a>
-                           </li>
-                       </ul>
-                   </li>
+                               @if (Auth::guard('agency')->user()->profile_pic)
+                                   <img src="{{ asset('/public/images/profile_img') . '/' . Auth::guard('agency')->user()->profile_pic }}"
+                                       width="32px" height="32px" alt="" style="border-radius: 50%">
+                               @else
+                                   <img src="{{ asset('/public/images/profile_img/avatar.jpg') }}" width="32px"
+                                       height="32px" alt="" style="border-radius: 50%">
+                               @endif
+                           </a>
 
+                           <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
+                               <li><a class="dropdown-item"
+                                       href="{{ route('agency.profile', Auth::guard('agency')->user()->id) }}">Profile</a>
+                               </li>
+                               <li><a class="dropdown-item"
+                                       href="{{ route('agency.dashboard', Auth::guard('agency')->user()->id) }}">Dashboard</a>
+                               </li>
+                               <li><a class="dropdown-item" href="#" onclick="handleLogOut('agency')">Logout</a>
+                               </li>
+                           </ul>
+                       </li>
+                   @else
+                       <li class="nav-item dropdown">
+                           <a class="nav-link dropdown-toggle active escort-agency-menu" href="#"
+                               id="escortAgencyDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                               <i class="fa-solid fa-user"></i>
+                           </a>
+
+                           <ul class="dropdown-menu logout-user" aria-labelledby="profileDropdown">
+                               <li><a class="dropdown-item" href="{{ route('user.login.form') }}"> User Login</a>
+                               </li>
+                               <li><a class="dropdown-item" href="{{ route('login') }}"> Escort Login</a>
+                               </li>
+                               <li><a class="dropdown-item" href="{{ route('agency.login') }}"> Agency Login </a>
+                               </li>
+                           </ul>
+                       </li>
+                   @endif
 
                </div>
            </div>
            {{-- logout form --}}
            <div>
-               <form id="user-logout-form" action="{{ route('user.logout') }}" method="POST" style="display: none;">
+               <form id="user-logout-form" action="{{ route('user.logout') }}" method="POST"
+                   style="display: none;">
                    @csrf
                </form>
                <form id="escort-logout-form" action="{{ route('escorts.logout') }}" method="POST"
