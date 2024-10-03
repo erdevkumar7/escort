@@ -62,11 +62,11 @@ class UserAuthController extends Controller
         $remember = $request->has('remember');
 
         if (Auth::guard('web')->attempt($credentials))  {
-            $user = Auth::user();
+            $user = Auth::guard('web')->user();
 
             if (is_null($user->email_verified_at)) {
                 // If email is not verified, log the user out and redirect back with an error
-                Auth::logout();
+                Auth::guard('web')->logout();
                 return redirect()->route('user.login.form')->withErrors([
                     'email' => 'email_not_verify',
                 ])->withInput();
