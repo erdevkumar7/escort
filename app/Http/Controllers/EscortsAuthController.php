@@ -52,11 +52,17 @@ class EscortsAuthController extends Controller
 
     public function escort_login_form(Request $request)
     {
+        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
+            return redirect()->route('index')->with('error', 'You have already logged-in');
+        }
         return view('user-escort.login');
     }
 
     public function login(Request $request)
     {
+        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
+            return redirect()->route('index')->with('error', 'You have already logged-in');
+        }
         // Validate the request inputs
         $request->validate([
             'email' => 'required|email',

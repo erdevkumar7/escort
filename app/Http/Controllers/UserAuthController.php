@@ -45,11 +45,17 @@ class UserAuthController extends Controller
 
     public function user_login_form()
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'You have already logged-in');
+        }
         return view('user-registered.login');
     }
 
     public function user_login_submit(Request $request)
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'You have already logged-in');
+        }
         // Validate the request inputs
         $request->validate([
             'email' => 'required|email',
@@ -61,7 +67,7 @@ class UserAuthController extends Controller
         $credentials = $request->only('email', 'password');
         $remember = $request->has('remember');
 
-        if (Auth::guard('web')->attempt($credentials))  {
+        if (Auth::guard('web')->attempt($credentials)) {
             $user = Auth::guard('web')->user();
 
             if (is_null($user->email_verified_at)) {
@@ -103,7 +109,6 @@ class UserAuthController extends Controller
         return $status === Password::RESET_LINK_SENT
             ? redirect()->route('user.login.form')->with('success', __($status))
             : back()->withErrors(['email' => __($status)]);
-
     }
 
     public function showResetPasswordForm(Request $request, $token)

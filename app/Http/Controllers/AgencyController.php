@@ -51,11 +51,17 @@ class AgencyController extends Controller
 
     public function agency_login_form()
     {
+        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
+            return redirect()->route('index')->with('error', 'You have already logged-in');
+        }
         return view('user-agency.login');
     }
 
     public function agency_login_form_submit(Request $request)
     {
+        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
+            return redirect()->route('index')->with('error', 'You have already logged-in');
+        }
         $request->validate([
             'email' => 'required|email',
             'password' => 'required',
