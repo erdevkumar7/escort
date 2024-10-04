@@ -286,6 +286,20 @@ class AdminEscortsController extends Controller
         return view('escorts.escort-videos', compact('videos', 'escort'));
     }
 
+    //todo: updateEscortStatus
+    public function updateEscortStatus(Request $request)
+    {
+        $escort = Escort::find($request->id);       
+        if ($escort) {
+            $escort->status = $request->status;
+            $escort->save();
+            return response()->json(['success' => true, 'message' => 'Status updated successfully.']);
+        }
+
+        return response()->json(['success' => false, 'message' => 'Escort not found.'], 404);
+    }
+
+
     //todo: Delete Escorts
     public function deleteEscorts($id)
     {

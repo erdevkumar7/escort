@@ -76,9 +76,9 @@ class BadgeController extends Controller
             $originalImageName = $image->getClientOriginalName();
             $imageName = time() . '_' . $originalImageName;
             $image->move(public_path('images/badge_icons'), $imageName);
+            $data['icon'] = $imageName;
         }
 
-        $data['icon'] = $imageName;
         $badge->update($data);
 
         return redirect()->route('admin.allbadges')->with('success', 'Badge Update successfully.');

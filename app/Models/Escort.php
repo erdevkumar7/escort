@@ -52,6 +52,7 @@ class Escort extends Authenticatable implements MustVerifyEmail // Changed to Mu
         'agency_id',
         'profile_pic',
         'original_password',
+        'status',
     ];
 
     protected $casts = [

@@ -32,6 +32,7 @@
                                                 <th>email</th>
                                                 <th>City</th>
                                                 <th>Type</th>
+                                                <th>Status</th>
                                                 <th>Action</th>
                                                 <th>Media View</th>
                                                 <th>Escort View </th>
@@ -52,6 +53,11 @@
                                                         <td>{{ $escorts->email ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->city ?? 'Not Available' }}</td>
                                                         <td>{{ $escorts->type ?? 'Not Available' }}</td>
+                                                        <td>
+                                                            <input type="checkbox" class="escort-status"
+                                                                data-id="{{ $escorts->id }}"
+                                                                {{ $escorts->status ? 'checked' : '' }}>                                                       
+                                                        </td>
                                                         <td>
                                                             <a href="{{ route('admin.edit_escorts_form', $escorts->id) }}">
                                                                 <button data-toggle="tooltip" data-placement="top"
@@ -131,7 +137,7 @@
                             // If confirmed, submit the delete form
                             const deleteForm = document.getElementById('deleteConfirmForm');
                             deleteForm.action =
-                                `/escorts/admin/escort/${deleteId}/delete`;
+                                `/my_project/escorts/admin/escort/${deleteId}/delete`;
                             deleteForm.submit();
                         }
                     });
@@ -139,6 +145,36 @@
             });
         });
     </script>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Delegate event from a static parent (like the document or the table)
+            $(document).on('change', '.escort-status', function(e) {
+                e.preventDefault();
+                var escortId = $(this).data('id');
+                var status = $(this).is(':checked') ? 1 : 0;
+
+                $.ajax({
+                    url: '{{ route('admin.updateEscortStatus') }}',
+                    type: 'POST',
+                    data: {
+                        _token: '{{ csrf_token() }}',
+                        id: escortId,
+                        status: status
+                    },
+                    success: function(response) {
+                        alert('Status updated successfully');
+                    },
+                    error: function(error) {
+                        console.log('error', error);
+                        alert('Error updating status');
+                    }
+                });
+            });
+        });
+    </script>
+
 
     <!-- /page content -->
 @endsection

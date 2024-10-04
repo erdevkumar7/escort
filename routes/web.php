@@ -58,6 +58,8 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/escort/{id}/view', [AdminEscortsController::class, 'escorts_by_id'])->name('admin.get.scorts');
         Route::delete('/escort/{id}/delete', [AdminEscortsController::class, 'deleteEscorts'])->name('admin.delete.escorts');
+
+        Route::post('/escort/update-status', [AdminEscortsController::class, 'updateEscortStatus'])->name('admin.updateEscortStatus');
     });
 });
 
