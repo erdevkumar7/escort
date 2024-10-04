@@ -13,11 +13,19 @@ class UserAuthController extends Controller
 {
     public function user_register_form()
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
+        }
+
         return view('user-registered.register');
     }
 
     public function user_register_form_sbmit(Request $request)
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
+        }
+
         $request->validate([
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
@@ -46,7 +54,7 @@ class UserAuthController extends Controller
     public function user_login_form()
     {
         if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
-            return redirect()->route('index')->with('error', 'You have already logged-in');
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
         }
         return view('user-registered.login');
     }
@@ -54,7 +62,7 @@ class UserAuthController extends Controller
     public function user_login_submit(Request $request)
     {
         if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
-            return redirect()->route('index')->with('error', 'You have already logged-in');
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
         }
         // Validate the request inputs
         $request->validate([

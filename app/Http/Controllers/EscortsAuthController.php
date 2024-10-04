@@ -18,10 +18,16 @@ class EscortsAuthController extends Controller
     //todo: Register Escort
     public function escort_register_form()
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
+        }
         return view("user-escort.register");
     }
     public function escort_register_form_submit(Request $request)
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
+        }
         $validated = $request->validate([
             'nickname' => 'required|unique:escorts',
             'email' => 'required|email|unique:escorts',
@@ -52,16 +58,16 @@ class EscortsAuthController extends Controller
 
     public function escort_login_form(Request $request)
     {
-        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
-            return redirect()->route('index')->with('error', 'You have already logged-in');
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
         }
         return view('user-escort.login');
     }
 
     public function login(Request $request)
     {
-        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
-            return redirect()->route('index')->with('error', 'You have already logged-in');
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
         }
         // Validate the request inputs
         $request->validate([

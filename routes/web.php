@@ -193,7 +193,7 @@ Route::prefix('agency')->group(function () {
     Route::post('/reset-password', [AgencyController::class, 'resetPassword'])->name('agency.password.update');
 
     // Protected Agency-Routes
-    Route::middleware(['auth:agency'])->group(function () {
+    Route::middleware(['auth.agency'])->group(function () {
         Route::get('/{agency_id}/profile', [AgencyController::class, 'profile'])->name('agency.profile');
         Route::get('/{agency_id}/dashboard', [AgencyController::class, 'dashboard'])->name('agency.dashboard');
         Route::get('/{agency_id}/escort-listing', [AgencyController::class, 'escort_listing'])->name('agency.escort_listing');

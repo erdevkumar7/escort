@@ -19,11 +19,17 @@ class AgencyController extends Controller
 {
     public function agency_regiser_from()
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
+        }
         return view('user-agency.register');
     }
 
     public function agency_regiser_from_submit(Request $request)
     {
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
+        }
         $validated = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|unique:agencies,email',
@@ -51,16 +57,16 @@ class AgencyController extends Controller
 
     public function agency_login_form()
     {
-        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
-            return redirect()->route('index')->with('error', 'You have already logged-in');
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
         }
         return view('user-agency.login');
     }
 
     public function agency_login_form_submit(Request $request)
     {
-        if(Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()){
-            return redirect()->route('index')->with('error', 'You have already logged-in');
+        if (Auth::guard('web')->check() || Auth::guard('escort')->check() || Auth::guard('agency')->check()) {
+            return redirect()->route('index')->with('error', 'Already logged-in with another User!');
         }
         $request->validate([
             'email' => 'required|email',
@@ -367,11 +373,11 @@ class AgencyController extends Controller
     {
         $escort = Escort::findOrFail($escort_id);
 
-        if($request->file('pictures')){
+        if ($request->file('pictures')) {
             $currentPicturesCount = Media::where('escort_id', $escort_id)
                 ->where('type', 'image') // Assuming you store image type in 'type'
                 ->count();
-    
+
             // Check if adding the new pictures exceeds the limit of 30
             $newPicturesCount = count($request->file('pictures'));
             if (($currentPicturesCount + $newPicturesCount) > 30) {
@@ -379,13 +385,13 @@ class AgencyController extends Controller
             }
         }
 
-        if($request->file('videos')){
+        if ($request->file('videos')) {
             $currentVideosCount = Media::where('escort_id', $escort_id)
-            ->where('type','video')
-            ->count();
+                ->where('type', 'video')
+                ->count();
 
             $newVideosCount = count($request->file('videos'));
-            if(($currentVideosCount + $newVideosCount) > 30){
+            if (($currentVideosCount + $newVideosCount) > 30) {
                 return redirect()->back()->withInput()->withErrors(['videos' => 'You can upload maximum 30 videos.']);
             }
         }
