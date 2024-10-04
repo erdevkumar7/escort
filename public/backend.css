@@ -273,6 +273,13 @@ h2#swal2-title {
     width: 100%;
 }
 
+.adminAdd-add-more-pic p.add-photo-admin {
+    width: 148px;
+}
+/*td.all-desc-content {
+    white-space: normal !important;
+}
+*/
 
 @media only screen and (max-width: 767px) {
 
@@ -291,7 +298,8 @@ h2#swal2-title {
 .swal2-actions button.swal2-cancel.swal2-styled.swal2-default-outline {
     width: 40%;
 }
-
-
+form.adminAdd-picture-form .adminAdd-add-more-pic {
+    padding-left: 2px;
+}
 
 }

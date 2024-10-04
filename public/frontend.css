@@ -755,16 +755,41 @@ h4.my-escort-nm-sec {
     font-family: 'Montserrat-SemiBold';
 }
 
+.escort-listing-all-pagination .border-gray-300.cursor-default.leading-5 {
+    padding: 8px 18px !important;
+    border-radius: 2px;
+}
+
 .escort-listing-all-pagination a.relative.inline-flex.items-center.px-4.transition.ease-in-out.duration-150:hover {
     color: #ec8ccc;
     font-weight: 500;
 }
-
 .escort-listing-all-pagination p.text-sm.text-gray-700.leading-5 {
     margin-top: 28px;
     text-align: center;
-    display: none;
+    color: #fff;
+    padding-bottom: 5px;
 }
+
+.escort-listing-all-pagination span.relative.z-0.inline-flex.shadow-sm.rounded-md svg.w-5.h-5 {
+    width: 25px;
+}
+.escort-listing-all-pagination {
+    margin-top: 9px;
+}
+
+.escort-listing-all-pagination .ease-in-out.duration-150 {
+    background-color: #111624 !important;
+    color: #fff;
+    border: none !important;
+}
+
+.escort-listing-all-pagination .border-gray-300.cursor-default.rounded-r-md.leading-5 {
+    background-color: #111624 !important;
+    color: #fff;
+    border: none !important;
+}
+
 
 .escort-listing-all-pagination span.relative.inline-flex.items-center.px-2.py-2.text-sm.font-medium.text-gray-500.bg-white.border.border-gray-300.cursor-default.rounded-l-md.leading-5 {
     background: none !important;
@@ -781,9 +806,9 @@ h4.my-escort-nm-sec {
 }
 
 
-.escort-listing-all-pagination span.relative.z-0.inline-flex.shadow-sm.rounded-md {
+/*.escort-listing-all-pagination span.relative.z-0.inline-flex.shadow-sm.rounded-md {
     display: none;
-}
+}*/
 
 .loginSignup_btn_disabled {
     border: none !important;
@@ -793,6 +818,11 @@ h4.my-escort-nm-sec {
 .disclaimer-inner-text {
     padding-top: 0;
 }
+
+.escort-listing-all-pagination .flex.justify-between.flex-1.sm\:hidden {
+    display: none;
+}
+
 @media (min-width: 768px) and (max-width: 1024px) {
 
     .menu-item.escort-image img {

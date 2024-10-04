@@ -123,6 +123,8 @@ nav.navbar ul.dropdown-menu.show .dropdown-item:hover {
     height: 38px;
     font-family: Montserrat;
     font-weight: bold;
+    width: 1349px;
+    margin: auto;
 }
 
 .top-text p {
@@ -152,6 +154,7 @@ nav.navbar.navbar-expand-lg {
     top: 0;
     z-index: 999;
     margin: auto;
+    width: 1349px;
 }
 ul.dropdown-menu.show li a {
     font-size: 15px;
@@ -297,6 +300,10 @@ nav.navbar img.img-fluid {
     font-weight: 500;
     font-family: 'Montserrat-Bold';
 }
+div#partial-escort {
+    width: 1349px;
+    margin: auto;
+}
 
 /* section second css */
 
@@ -305,6 +312,7 @@ nav.navbar img.img-fluid {
     padding: 60px 90px;
     padding-bottom: 80px;
     margin: auto;
+    width: 1349px;
 }
 
 .we-help-growth h1.your-growth-text {
@@ -380,6 +388,7 @@ section.we-help-growth .container {
     position: relative;
     padding-bottom: 90px;
     margin: auto;
+    width: 1349px;
 }
 
 .premium-ads .owl-prev:after {
@@ -419,11 +428,12 @@ section.we-help-growth .container {
 }
 
 .premium-ads p {
-    font-size: 16px;
-    color: #999999;
-    margin-bottom: 0px;
-    width: 70%;
-    font-family: 'Montserrat-Regular';
+font-size: 16px;
+color: #fff;
+margin-bottom: 0px;
+width: 80%;
+font-family: 'Montserrat-Regular';
+line-height: 1.8;
 }
 
 p.featured-text {
@@ -441,8 +451,15 @@ p.featured-text {
 
 .premium-ads .owl-carousel .owl-item img {
     display: block;
-    width: 100%;
-    margin-bottom: 8px;
+    width: 232px !important;
+    margin-bottom: 10px;
+}
+
+.premium-ads .owl-carousel .owl-item .caption img {
+    width: 50px !important;
+}
+.premium-ads .owl-item.active {
+    width: auto !important;
 }
 
 /* Equal Heights for OwlCarousel 2 */
@@ -465,6 +482,8 @@ p.featured-text {
             display: flex;
             flex: 1 0 auto;
             flex-direction: column;
+            height: 260px;
+            width: 224px;
 
             .flex-text {
                 flex-grow: 1;
@@ -473,11 +492,14 @@ p.featured-text {
     }
 }
 
+.caption img {
+    width: 40px !important;
+}
+
 .premium-ads .caption h3 {
     display: flex;
     align-items: center;
-    width: 100px;
-    font-size: 21px;
+    font-size: 20px;
     padding-top: 9px;
     margin-bottom: 0;
     gap: 8px;
@@ -500,11 +522,12 @@ p.featured-text {
 
 .premium-ads article.thumbnail.item {
     background-color: #232E48;
-    padding: 28px;
-    margin-left: 0;
+    padding: 21px;
+    margin: 8px;
     border: solid 2px #FFBF00;
     border-radius: 15px;
 }
+
 
 .premium-ads .container-fluid {
     padding-left: 0;
@@ -535,6 +558,7 @@ p.featured-text {
     padding-top: 60px;
     padding-bottom: 90px;
     margin: auto;
+    width: 1349px;
 }
 
 .services-offer h1 {
@@ -665,6 +689,7 @@ section.services-offer .container-fluid {
     padding: 60px 75px;
     position: relative;
     margin: auto;
+    width: 1349px;
 }
 
 .profile-moment p.featured-text {
@@ -716,6 +741,7 @@ section.services-offer .container-fluid {
     padding: 60px 0;
     padding-bottom: 90px;
     margin: auto;
+    width: 1349px;
 }
 
 .featured-categories h1 {
@@ -764,6 +790,9 @@ section.services-offer .container-fluid {
     border-radius: 50px;
     font-family: 'Urbanist-Medium';
 }
+.featured-categories button:hover {
+    background-color: #111624 !important;
+}
 
 /* seven section css */
 
@@ -808,7 +837,7 @@ section.services-offer .container-fluid {
 
 .new-escorts .card p {
     margin-bottom: 5px;
-    color: #999999;
+    color: #fff;
     font-family: 'Montserrat-Regular';
 }
 
@@ -830,6 +859,7 @@ section.services-offer .container-fluid {
     position: relative;
     padding-bottom: 90px;
     margin: auto;
+    width: 1349px;
 }
 
 .new-escorts .col-carousel {
@@ -871,6 +901,7 @@ section.services-offer .container-fluid {
 section.disclaimer {
     background: url('./images/static_img/disclaimer-bg.png');
     margin: auto;
+    width: 1349px;
 }
 
 .disclaimer-inner-text {
@@ -945,11 +976,14 @@ section.disclaimer {
     font-family: 'Montserrat-Regular';
 }
 
-.form-group img {
+.stay-upto-right .form-group img {
     position: absolute;
-    margin: 12px 115px;
+    left: -14px;
+    right: -22%;
+    margin: auto;
+    margin-top: 13px;
+    width: 20px;
 }
-
 .stay-upto-right a {
     text-decoration: none;
 }
@@ -963,6 +997,7 @@ section.disclaimer {
     padding-bottom: 5px;
     margin: auto;
     margin-top: -24px;
+    width: 1349px;
 }
 
 .quick-links ul {
@@ -1140,9 +1175,10 @@ div#navbarScroll button {
 
 .table-list p.ingredients {
     font-family: 'Montserrat-Regular';
-    padding-top: 11px;
+    padding-top: 8px;
     margin-bottom: 0;
     font-size: 14px;
+    color: #fff;
 }
 
 .table-list h4 {
@@ -1172,7 +1208,7 @@ div#navbarScroll button {
 
 .table-list .menu-item {
     background-color: #232E48;
-    padding: 25px;
+    padding: 20px;
     border: solid 2px #FFBF00;
     border-radius: 15px;
     margin: 9px;
@@ -1581,6 +1617,14 @@ button.unfollows-btn:hover {
 
 @media (min-width:768px) and (max-width:1024px) {
 
+.top-text {
+    width: 100%;
+}
+
+div#partial-escort {
+    width: 100%;
+    margin: auto;
+}
     span.navbar-toggler-icon i.fa.fa-bars {
         font-size: 30px;
     }
@@ -2008,6 +2052,9 @@ div#partial-escort .form-login .login100-form {
 .escorts-first-content .icons {
         margin-bottom: 8px; 
     }
+    div#partial-escort {
+    width: 100%;
+}
 
     .form-login .wrap-login100 {
         display: flex;
@@ -2049,6 +2096,7 @@ div#partial-escort .form-login .login100-form {
         line-height: 1.9;
     }
 
+
    nav.navbar.navbar-expand-lg {
         width: 100%;
         margin: auto;
@@ -2066,6 +2114,7 @@ div#partial-escort .form-login .login100-form {
     .we-help-growth {
         width: 100%;
         margin: auto;
+        padding: 40px 24px;
     }
 
     .premium-ads {
@@ -2182,10 +2231,11 @@ section.disclaimer {
     }
 
     .top-text {
-        height: 68px;
-        gap: 25px;
-        text-align: left;
-    }
+       height: 68px;
+       gap: 25px;
+       text-align: left;
+       width: 100%;
+   }
 
     .forgot-agency-form .container-login100 {
         width: 100%;
@@ -2226,9 +2276,7 @@ section.disclaimer {
         padding-bottom: 25px;
     }
 
-    .we-help-growth {
-        padding: 40px 24px;
-    }
+   
 
     .we-help-growth h1.your-growth-text {
         font-size: 45px;
@@ -2311,7 +2359,7 @@ section.disclaimer {
 
     .profile-moment {
         padding: 40px 24px;
-        padding-bottom: 25px;
+        padding-bottom: 109px;
         text-align: center;
     }
 
@@ -2367,7 +2415,7 @@ section.disclaimer {
     }
 
     .new-escorts h1 {
-        font-size: 36px;
+        font-size: 32px;
         text-align: center;
     }
 
@@ -2517,10 +2565,12 @@ section.disclaimer {
         text-align: center;
     }
 
-    .premium-ads .caption h3 {
-        width: 44%;
-        margin: auto;
-    }
+   .premium-ads .caption h3 {
+    width: 100%;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+}
 
     .slider-section h3.card-title {
         justify-content: center;
