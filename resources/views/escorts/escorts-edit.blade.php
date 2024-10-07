@@ -290,12 +290,51 @@
                                             <span class="text-danger" id="descriptionErr">{{ $message }}</span>
                                         @enderror
                                     </div>
-                                    {{-- rates_in_chf --}}
-                                    <div class="col-md-4 col-sm-4">
-                                        <label for="rates_in_chf">Rates in CHF</label>
-                                        <input type="text" class="form-control" id="rates_in_chf" name="rates_in_chf"
-                                            value="{{ $escort->rates_in_chf }}">
+
+                                    {{-- <div class="col-md-4 col-sm-4 p-4 smoker">
+                                        <span class="m-3">
+                                            <label for="certified">Certified</label>
+                                            <input type="checkbox" id="certified" name="is_certified" 
+                                                {{ $escort->is_certified == true ? 'checked' : '' }}>
+                                        </span>
+
+                                        <span class="m-3">
+                                            <label for="caution">Caution</label>
+                                            <input type="checkbox" id="caution" name="is_caution" 
+                                                {{ $escort->is_caution == true ? 'checked' : '' }}>
+                                        </span>
+
+                                        <span class="m-3">
+                                            <label for="premium">Premium</label>
+                                            <input type="checkbox" id="premium" name="is_premium" 
+                                                {{ $escort->is_premium == true ? 'checked' : '' }}>
+                                        </span>
+                                    </div> --}}
+
+                                    <div class="col-md-4 col-sm-4 p-4 smoker">
+                                        <span class="m-3">
+                                            <label for="certified">Certified</label>
+                                            <input type="hidden" name="is_certified" value="0"> <!-- Hidden input for unchecked -->
+                                            <input type="checkbox" id="certified" name="is_certified" value="1"
+                                                {{ $escort->is_certified ? 'checked' : '' }}>
+                                        </span>
+                                    
+                                        <span class="m-3">
+                                            <label for="caution">Caution</label>
+                                            <input type="hidden" name="is_caution" value="0"> <!-- Hidden input for unchecked -->
+                                            <input type="checkbox" id="caution" name="is_caution" value="1"
+                                                {{ $escort->is_caution ? 'checked' : '' }}>
+                                        </span>
+                                    
+                                        <span class="m-3">
+                                            <label for="premium">Premium</label>
+                                            <input type="hidden" name="is_premium" value="0"> <!-- Hidden input for unchecked -->
+                                            <input type="checkbox" id="premium" name="is_premium" value="1"
+                                                {{ $escort->is_premium ? 'checked' : '' }}>
+                                        </span>
                                     </div>
+                                    
+
                                 </div>
 
                                 <div class="item form-group p-3 smoker-inner-part">
@@ -303,18 +342,21 @@
                                         {{-- smoker --}}
                                         <span class="m-3">
                                             <label for="smoker">Smoker</label>
+                                            <input type="hidden" name="smoker" value="0">
                                             <input type="checkbox" id="smoker" name="smoker" value="1"
                                                 {{ $escort->smoker == true ? 'checked' : '' }}>
                                         </span>
                                         {{-- elderly --}}
                                         <span class="m-3">
                                             <label for="elderly">Elderly</label>
+                                            <input type="hidden" name="elderly" value="0">
                                             <input type="checkbox" id="elderly" name="elderly" value="1"
                                                 {{ $escort->elderly == true ? 'checked' : '' }}>
                                         </span>
                                         {{-- parking --}}
                                         <span class="m-3">
                                             <label for="parking">Parking</label>
+                                            <input type="hidden" name="parking" value="0">
                                             <input type="checkbox" id="parking" name="parking" value="1"
                                                 {{ $escort->parking == true ? 'checked' : '' }}>
                                         </span>
@@ -324,6 +366,7 @@
                                         {{-- outcall --}}
                                         <span class="m-3">
                                             <label for="outcall">Outcall</label>
+                                            <input type="hidden" name="outcall" value="0">
                                             <input type="checkbox" id="outcall"
                                                 {{ $escort->outcall == true ? 'checked' : '' }} name="outcall"
                                                 value="1">
@@ -331,12 +374,14 @@
                                         {{-- incall --}}
                                         <span class="m-3">
                                             <label for="incall"> Incall </label>
+                                            <input type="hidden" name="incall" value="0">
                                             <input type="checkbox" id="incall" name="incall" value="1"
                                                 {{ $escort->incall == true ? 'checked' : '' }}>
                                         </span>
                                         {{-- disabled --}}
                                         <span class="m-3">
                                             <label for="disabled">Disabled</label>
+                                            <input type="hidden" name="disabled" value="0">
                                             <input type="checkbox" id="disabled" name="disabled" value="1"
                                                 {{ $escort->disabled == true ? 'checked' : '' }}>
                                         </span>
@@ -345,12 +390,14 @@
                                         {{-- accepts_couples --}}
                                         <span class="m-3">
                                             <label for="accepts_couples">Accepts Couples</label>
+                                            <input type="hidden" name="accepts_couples" value="0">
                                             <input type="checkbox" id="accepts_couples" name="accepts_couples"
                                                 value="1" {{ $escort->accepts_couples == true ? 'checked' : '' }}>
                                         </span>
                                         {{-- air_conditioned --}}
                                         <span class="m-3">
                                             <label for="air_conditioned">Air Conditioned</label>
+                                            <input type="hidden" name="air_conditioned" value="0">
                                             <input type="checkbox" id="air_conditioned" name="air_conditioned"
                                                 {{ $escort->air_conditioned == true ? 'checked' : '' }} value="1">
                                         </span>
@@ -530,6 +577,13 @@
                                                 <option value="Credit Card">Credit Card</option>
                                             </select>
                                         @endif
+                                    </div>
+
+                                    {{-- rates_in_chf --}}
+                                    <div class="col-md-4 col-sm-4">
+                                        <label for="rates_in_chf">Rates in CHF</label>
+                                        <input type="text" class="form-control" id="rates_in_chf" name="rates_in_chf"
+                                            value="{{ $escort->rates_in_chf }}">
                                     </div>
                                 </div>
 

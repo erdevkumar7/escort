@@ -317,12 +317,32 @@
                             <div class="item form-group">
 
                                 {{-- description --}}
-                                <div class="col-md-12 col-sm-12">
+                                <div class="col-md-8 col-sm-8">
                                     <label for="description">Description *</label>
                                     <textarea class="form-control" id="description" name="text_description" oninput="removeError('descriptionErr')">{{ old('text_description') }}</textarea>
                                     @error('text_description')
                                         <span class="text-danger" id="descriptionErr">{{ $message }}</span>
                                     @enderror
+                                </div>
+
+                                <div class="col-md-4 col-sm-4 p-4 smoker">
+                                    <span class="m-3">
+                                        <label for="certified">Certified</label>
+                                        <input type="checkbox" id="certified" name="is_certified" value="1"
+                                            {{ old('is_certified') ? 'checked' : '' }}>
+                                    </span>
+
+                                    <span class="m-3">
+                                        <label for="caution">Caution</label>
+                                        <input type="checkbox" id="caution" name="is_caution" value="1"
+                                            {{ old('is_caution') ? 'checked' : '' }}>
+                                    </span>
+
+                                    <span class="m-3">
+                                        <label for="premium">Premium</label>
+                                        <input type="checkbox" id="premium" name="is_premium" value="1"
+                                            {{ old('is_premium') ? 'checked' : '' }}>
+                                    </span>
                                 </div>
                             </div>
 
@@ -544,7 +564,6 @@
                 icon.classList.add('fa-eye');
             }
         });
-    </script>   
+    </script>
     <!-- /page content -->
 @endsection
-

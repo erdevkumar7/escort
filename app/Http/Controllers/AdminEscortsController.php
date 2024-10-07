@@ -54,6 +54,9 @@ class AdminEscortsController extends Controller
             'height' => 'nullable|integer',
             'weight' => 'nullable|integer',
             'build' => 'nullable',
+            'is_certified' => 'boolean',
+            'is_caution' => 'boolean',
+            'is_premium' => 'boolean',
             'smoker' => 'boolean',
             'language_spoken' => 'nullable|array',
             'address' => 'nullable',
@@ -169,6 +172,9 @@ class AdminEscortsController extends Controller
             'height' => 'nullable|integer',
             'weight' => 'nullable|integer',
             'build' => 'nullable',
+            'is_certified' => 'boolean',
+            'is_caution' => 'boolean',
+            'is_premium' => 'boolean',
             'smoker' => 'boolean',
             'language_spoken' => 'nullable|array',
             'address' => 'nullable',
@@ -202,7 +208,9 @@ class AdminEscortsController extends Controller
         $validatedData['availability'] = isset($validatedData['availability']) ? json_encode($validatedData['availability']) : null;
         $validatedData['currencies_accepted'] = isset($validatedData['currencies_accepted']) ? json_encode($validatedData['currencies_accepted']) : null;
         $validatedData['payment_method'] = isset($validatedData['payment_method']) ? json_encode($validatedData['payment_method']) : null;
-
+        // $validatedData['is_certified'] = $request->has('is_certified') ? 1 : 0;
+        // $validatedData['is_caution'] = $request->has('is_caution') ? 1 : 0;
+        // $validatedData['is_premium'] = $request->has('is_premium') ? 1 : 0;
         // Pictures upload in media table
         if (is_array($request->file('pictures'))) {
             // Handle multiple files
