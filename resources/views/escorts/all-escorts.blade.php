@@ -164,7 +164,8 @@
                         status: status
                     },
                     success: function(response) {
-                        alert('Status updated successfully');
+                        // alert('Status updated successfully');
+                        toastr.success("Status updated successfully");
                     },
                     error: function(error) {
                         console.log('error', error);

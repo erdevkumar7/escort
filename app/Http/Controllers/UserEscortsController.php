@@ -63,7 +63,9 @@ class UserEscortsController extends Controller
         $baseUrl = url('/escort-list');
 
         // Start the query to fetch escorts
-        $query = DB::table("escorts")->orderBy("created_at", "desc");
+        $query = DB::table("escorts")
+            ->orderBy("updated_at", "desc")
+            ->where('status', true);
 
         // Check if there's a search query
         if ($request->has('search')) {
@@ -71,12 +73,12 @@ class UserEscortsController extends Controller
             $query->where('nickname', 'like', '%' . $search . '%');
         }
 
-         // Get the selected category from the AJAX request
-         if($request->input('category')){
-             $category = $request->input('category');
-             $query->where('type', $category);
-         }       
-     
+        // Get the selected category from the AJAX request
+        if ($request->input('category')) {
+            $category = $request->input('category');
+            $query->where('type', $category);
+        }
+
         // Paginate the results, appending search parameters to the pagination links
         $allescorts = $query->paginate(12)->withPath($baseUrl)->appends($request->except('page'));
 
@@ -112,7 +114,9 @@ class UserEscortsController extends Controller
 
     public function escort_list(Request $request)
     {
-        $query = DB::table("escorts")->orderBy("created_at", "desc");
+        $query = DB::table("escorts")
+            ->orderBy("updated_at", "desc")
+            ->where('status', true);
 
         $allescorts = $query->paginate(12);
         foreach ($allescorts as $escort) {
