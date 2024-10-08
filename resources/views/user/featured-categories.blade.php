@@ -10,28 +10,28 @@
             <img class="card-img-top" src="{{asset('/public/images/static_img/card-one.png')}}" alt="Card image cap">
             <div class="card-body">
                 <h3 class="card-title text-white">Escort Girl</h3>
-                <a href="#"><button>VIEW DETAILS</button></a>
+                <a href="{{route('escort.getEscortByCategory', 'Escort')}}"><button>VIEW DETAILS</button></a>
             </div>
         </div>
         <div class="card card-second">
             <img class="card-img-top" src="{{asset('/public/images/static_img/card-two.png')}}" alt="Card image cap">
             <div class="card-body">
                 <h3 class="card-title text-white">Men</h3>
-                <a href="#"><button>VIEW DETAILS</button></a>
+                <a href="{{route('escort.getEscortByCategory', 'SM')}}"><button>VIEW DETAILS</button></a>
             </div>
         </div>
         <div class="card card-third">
             <img class="card-img-top" src="{{asset('/public/images/static_img/card-three.png')}}" alt="Card image cap">
             <div class="card-body">
                 <h3 class="card-title text-white">Salon</h3>
-                <a href="#"><button>VIEW DETAILS</button></a>
+                <a href="{{route('escort.getEscortByCategory', 'Salon')}}"><button>VIEW DETAILS</button></a>
             </div>
         </div>
         <div class="card card-fourth">
             <img class="card-img-top" src="{{asset('/public/images/static_img/card-four.png')}}" alt="Card image cap">
             <div class="card-body">
                 <h3 class="card-title text-white">Trans</h3>
-                <a href="#"><button>VIEW DETAILS</button></a>
+                <a href="{{route('escort.getEscortByCategory', 'Trans')}}"><button>VIEW DETAILS</button></a>
             </div>
         </div>
     </div>

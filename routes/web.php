@@ -18,10 +18,10 @@ use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
 // todo: Public routes ***************************************************************
-Route::get('/', [UserEscortsController::class, 'index'])->name('index');
+Route::get('/index', [UserEscortsController::class, 'index'])->name('index');
 Route::get('escort-list', [UserEscortsController::class, 'escort_list'])->name('escort.list');
 Route::get('/{id}/escort-detail', [UserEscortsController::class, 'escort_detail'])->name('escort.detail_by_id');
-
+Route::get('/{category}/escort-category-list', [UserEscortsController::class, 'getEscortByCategory'])->name('escort.getEscortByCategory');
 
 // todo: Admin-Auth Functionality ***********************************************************
 Route::prefix('admin')->group(function () {

@@ -17,7 +17,6 @@ class UserEscortsController extends Controller
         // Define your base route
         $baseUrl = url('/escort-list');
 
-        // Start the query to fetch escorts
         $query = DB::table("escorts")
             ->orderBy("updated_at", "desc")
             ->where('status', true);
@@ -27,35 +26,13 @@ class UserEscortsController extends Controller
             $search = $request->input('search');
             $query->where('nickname', 'like', '%' . $search . '%');
         }
-
         // Get the selected category from the AJAX request
         if ($request->input('category')) {
             $category = $request->input('category');
             $query->where('type', $category);
         }
-
         // Paginate the results, appending search parameters to the pagination links
-        $allescorts = $query->paginate(12)->withPath($baseUrl)->appends($request->except('page'));
-
-        // Fetch pictures and videos for each escort
-        foreach ($allescorts as $escort) {
-            $escort->pictures = Media::where('escort_id', $escort->id)
-                ->where('type', 'image')
-                ->get();
-
-            $escort->video = Media::where('escort_id', $escort->id)
-                ->where('type', 'video')
-                ->get();
-        }
-
-        // Decode JSON-encoded fields for each escort
-        foreach ($allescorts as $escort) {
-            $escort->services = json_decode($escort->services, true);
-            $escort->language_spoken = json_decode($escort->language_spoken, true);
-            $escort->availability = json_decode($escort->availability, true);
-            $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
-            $escort->payment_method = json_decode($escort->payment_method, true);
-        }
+        $allescorts = $query->paginate(12)->withPath($baseUrl)->appends($request->except('page'));  
 
         // If the request is made via AJAX, return a partial view
         if ($request->ajax()) {
@@ -78,39 +55,16 @@ class UserEscortsController extends Controller
 
         $premimBadgeDetail = Badge::where('name', 'Premium')->first();
         $newBadgeDetail = Badge::where('name', 'New')->first();
-        // dd($newBadgeDetail);
-        // Return the main view with the paginated escorts
+       
         return view("user-escort.index", compact('allescorts', 'allNewEscort', 'newBadgeDetail', 'allPremiumEscort', 'premimBadgeDetail'));
     }
 
     public function escort_list(Request $request)
     {
-        $query = DB::table("escorts")
+        $allescorts = DB::table("escorts")
             ->orderBy("updated_at", "desc")
-            ->where('status', true);
-
-        $allescorts = $query->paginate(12);
-        foreach ($allescorts as $escort) {
-            // Fetch images for the current escort
-            $escort->pictures = Media::where('escort_id', $escort->id)
-                ->where('type', 'image')
-                ->get();
-
-            // Fetch videos for the current escort
-            $escort->video = Media::where('escort_id', $escort->id)
-                ->where('type', 'video')
-                ->get();
-        }
-
-        // Two time Decode must for data endcoding
-        foreach ($allescorts as $escort) {
-            $escort->services = json_decode($escort->services, true);
-            $escort->language_spoken = json_decode($escort->language_spoken, true);
-            $escort->availability = json_decode($escort->availability, true);
-            $escort->currencies_accepted = json_decode($escort->currencies_accepted, true);
-            $escort->payment_method = json_decode($escort->payment_method, true);
-        }
-
+            ->where('status', true)
+            ->paginate(12);
         return view('user-escort.escort-list', compact('allescorts'));
     }
 
@@ -410,5 +364,17 @@ class UserEscortsController extends Controller
         $payment_method = json_decode($escort->payment_method, true);
 
         return view('user-escort.escort-detail', compact('escort', 'language_spoken', 'pictures', 'videos', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+    }
+
+    public function getEscortByCategory(Request $request, $category)
+    {
+        $allescorts = DB::table('escorts')
+            ->where([
+                ['status', true],
+                ['type', $category]
+            ])
+            ->orderBy("updated_at", "desc")
+            ->paginate(12);
+        return view('user-escort.escort-list', compact('allescorts'));
     }
 }
