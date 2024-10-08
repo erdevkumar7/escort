@@ -1,4 +1,4 @@
-@extends('user.layout-user')
+@extends('user.layout-auth')
 @section('auth_content')  
     <div class="form-login forgot-escort-form" id="forgot-escort-form-id">
         <div class="container-login100">

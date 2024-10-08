@@ -1,4 +1,4 @@
-@extends('user.layout-agency')
+@extends('user.layout-auth')
 @section('auth_content')
     {{-- <div class="container" style="margin-top:10px; margin-bottom:100px;">
         <div class="add-agency-escort">

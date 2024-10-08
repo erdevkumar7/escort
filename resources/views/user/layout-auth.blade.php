@@ -6,7 +6,7 @@
 </head>
 
 <body>
-    @include('user.regLogNav')
+    @include('user.topNav')
 
     <!-- page content -->
     <div id="partial-escort">

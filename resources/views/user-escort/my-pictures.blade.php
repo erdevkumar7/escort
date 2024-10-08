@@ -1,4 +1,4 @@
-@extends('user.layout-escort')
+@extends('user.layout-auth')
 @section('auth_content')
     <div class="escort-profile">
         @if ($errors->any())
