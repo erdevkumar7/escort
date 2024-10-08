@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Badge;
 use App\Models\Escort;
 use App\Models\Media;
 use Illuminate\Http\Request;
@@ -107,8 +108,15 @@ class UserEscortsController extends Controller
             return view('user-escort.partials-escort-list', compact('allescorts'))->render();
         }
 
+        $allPremiumEscort = DB::table('escorts')
+            ->orderBy("updated_at", "desc")
+            ->where('status', true)
+            ->where('is_premium', true)
+            ->get();
+
+        $premimBadgeDetail = Badge::where('name', 'Premium')->first();
         // Return the main view with the paginated escorts
-        return view("user-escort.index", compact('allescorts'));
+        return view("user-escort.index", compact('allescorts', 'allPremiumEscort', 'premimBadgeDetail'));
     }
 
 
