@@ -28,7 +28,7 @@
                                         alt="avatar">
                                 @else
                                     <img class="img-account-profile rounded-circle mb-2"
-                                        src="{{ asset('/public/images/profile_img/default_profile.png') }}"
+                                        src="{{ asset('/public/images/static_img/default_profile.png') }}"
                                         alt="avatar">
                                 @endif
                                 {{-- <i class="fa-regular fa-pen-to-square"></i> --}}

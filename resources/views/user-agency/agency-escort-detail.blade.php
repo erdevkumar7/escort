@@ -57,7 +57,7 @@
 
                 <div class="col-md-12 second-members-content">
                     @if ($escort->profile_pic)
-                        <img src="{{ asset('/public/images/escorts_img') . '/' . $escort->profile_pic }}" alt="Profile_pic" />
+                        <img src="{{ asset('/public/images/profile_img') . '/' . $escort->profile_pic }}" alt="Profile_pic" />
                     @else
                         <img src="{{ asset('/public/images/static_img') . '/' . 'default_profile.png' }}"
                             alt="Default Profile Picture">
