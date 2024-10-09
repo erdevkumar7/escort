@@ -55,8 +55,9 @@ class UserEscortsController extends Controller
 
         $premimBadgeDetail = Badge::where('name', 'Premium')->first();
         $newBadgeDetail = Badge::where('name', 'New')->first();
+        $certifiedBadgeDetail = Badge::where('name', 'Certified')->first();
        
-        return view("user-escort.index", compact('allescorts', 'allNewEscort', 'newBadgeDetail', 'allPremiumEscort', 'premimBadgeDetail'));
+        return view("user-escort.index", compact('allescorts', 'allNewEscort', 'newBadgeDetail', 'allPremiumEscort', 'premimBadgeDetail', 'certifiedBadgeDetail'));
     }
 
     public function escort_list(Request $request)
