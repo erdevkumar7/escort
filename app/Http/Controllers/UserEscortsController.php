@@ -18,8 +18,7 @@ class UserEscortsController extends Controller
         $baseUrl = url('/escort-list');
 
         $query = DB::table("escorts")
-            ->orderBy("updated_at", "desc")
-            ->where('status', true);
+            ->orderBy("updated_at", "desc");
 
         // Check if there's a search query
         if ($request->has('search')) {
@@ -32,7 +31,7 @@ class UserEscortsController extends Controller
             $query->where('type', $category);
         }
         // Paginate the results, appending search parameters to the pagination links
-        $allescorts = $query->paginate(12)->withPath($baseUrl)->appends($request->except('page'));  
+        $allescorts = $query->paginate(12)->withPath($baseUrl)->appends($request->except('page'));
 
         // If the request is made via AJAX, return a partial view
         if ($request->ajax()) {
@@ -40,31 +39,45 @@ class UserEscortsController extends Controller
         }
 
         $allPremiumEscort = DB::table('escorts')
-            ->where([
-                ['status', true],
-                ['is_premium', true]
-            ])
+            ->where('is_premium', true)
             ->orderBy("updated_at", "desc")
             ->get();
 
         $allNewEscort = DB::table('escorts')
-            ->where('status', true)
             ->where('created_at', '>=', Carbon::now()->subDays(5)) // 5 days ago
             ->orderBy("created_at", "desc")
+            ->get();
+
+        $allNewActiveEscort = DB::table('escorts')
+            ->where('status', true)
+            ->orderBy('created_at', "desc")
+            ->get();
+
+        $escortWithMaxFollowers = Escort::withCount('followers')
+            ->orderBy('followers_count', 'desc')  // Order by the number of followers
+            ->take(10)
             ->get();
 
         $premimBadgeDetail = Badge::where('name', 'Premium')->first();
         $newBadgeDetail = Badge::where('name', 'New')->first();
         $certifiedBadgeDetail = Badge::where('name', 'Certified')->first();
-       
-        return view("user-escort.index", compact('allescorts', 'allNewEscort', 'newBadgeDetail', 'allPremiumEscort', 'premimBadgeDetail', 'certifiedBadgeDetail'));
+
+        return view("user-escort.index", compact(
+            'allescorts',
+            'allNewActiveEscort',
+            'escortWithMaxFollowers',
+            'allNewEscort',
+            'newBadgeDetail',
+            'allPremiumEscort',
+            'premimBadgeDetail',
+            'certifiedBadgeDetail'
+        ));
     }
 
     public function escort_list(Request $request)
     {
         $allescorts = DB::table("escorts")
             ->orderBy("updated_at", "desc")
-            ->where('status', true)
             ->paginate(12);
         return view('user-escort.escort-list', compact('allescorts'));
     }

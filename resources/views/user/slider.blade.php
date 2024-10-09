@@ -94,7 +94,7 @@
           </div>
       @else
           <div id="card-carousel" class="owl-carousel pmd-card-carousel outside-dots owl-theme text-center">
-              @foreach ($allescorts as $escort)
+              @foreach ($allNewActiveEscort as $escort)
                   <div class="item">
                       <div class="card pmd-card">
                           <div class="pmd-card-media">
@@ -114,7 +114,7 @@
                                       {{-- <img src="{{ asset('/public/images/static_img/right-check.png') }}"> --}}
                                   @endif
                               </h3>
-                              <p class="card-text">{{ $escort->canton }}</p>
+                              <p class="card-text">{{ $escort->city }}</p>
                           </div>
 
                       </div>

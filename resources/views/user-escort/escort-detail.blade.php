@@ -27,7 +27,7 @@
     <section class="members-content">
         <div class="container">
             <div class="row members-inner-content">
-                <div class="col-md-6 first-members-content">                    
+                <div class="col-md-6 first-members-content">
                     <i class="fas fa-arrow-left" onclick="goBack()"></i>
                 </div>
 
@@ -94,31 +94,27 @@
                     </div>
 
                     <div class="contact-btn">
-                        @if (Auth::check())
-                            {{-- If the user is authenticated, check if they are following the escort --}}
+                        @if (Auth::guard('agency')->check() || Auth::guard('escort')->check())
+                            <a class="contact-btn" href="#">Contact</a>
+                        @elseif (Auth::guard('web')->check())
                             @if (Auth::guard('web')->user()->follows->contains($escort->id))
-                                {{-- Unfollow button for already following escort --}}
                                 <form action="{{ route('user.unfollow.escort', $escort->id) }}" method="POST">
                                     @csrf
                                     @method('POST')
                                     <button type="submit" class="unfollows-btn">Unfollow</button>
                                 </form>
                             @else
-                                {{-- Follow button for not yet following escort --}}
                                 <form action="{{ route('user.follow.escort', $escort->id) }}" method="POST">
                                     @csrf
                                     @method('POST')
                                     <button type="submit" class="follows-btn">Follow</button>
                                 </form>
                             @endif
+                            <a class="contact-btn" href="#">Contact</a>
                         @else
-                            {{-- If the user is not authenticated, show the Follow button and redirect to login --}}
                             <a href="{{ route('user.login.form') }}" class="follow-btn">Follow</a>
+                            <a class="contact-btn" href="#">Contact</a>
                         @endif
-
-
-                        <a class="contact-btn" href="#">Contact</a>
-
                     </div>
                 </div>
 

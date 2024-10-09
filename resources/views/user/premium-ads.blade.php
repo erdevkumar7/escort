@@ -17,14 +17,14 @@
                     @foreach ($allPremiumEscort as $escort)
                         <article class="thumbnail item">
                             <a href="{{ route('escort.detail_by_id', $escort->id) }}">
-                                {{-- @if ($escort->profile_pic)
+                                @if ($escort->profile_pic)
                                     <img src="{{ asset('/public/images/profile_img/' . $escort->profile_pic) }}"
-                                        alt="Profile_Picture">
+                                        alt="Profile_Picture" class="img-responsive" width="229" height="235">
                                 @else
                                     <img src="{{ asset('/public/images/static_img/adrina.png') }}"
                                         class="img-responsive" />
-                                @endif --}}
-                                <img src="{{ asset('/public/images/static_img/adrina.png') }}" class="img-responsive" />
+                                @endif
+                                {{-- <img src="{{ asset('/public/images/static_img/adrina.png') }}" class="img-responsive" /> --}}
                             </a>
                             <div class="caption">
                                 <h3 class="text-white">{{ $escort->nickname }}
