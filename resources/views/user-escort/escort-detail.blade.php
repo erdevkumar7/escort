@@ -97,12 +97,10 @@
                             <a class="contact-btn" href="#">Contact</a>
                         @elseif (Auth::guard('web')->check())
                             @if (Auth::guard('web')->user()->follows->contains($escort->id))
-                                <button type="submit" class="unfollows-btn"
-                                    data-escort-id="{{ $escort->id }}">Unfollow</button>
+                                <a class="follow-btn unfollow-escort" data-escort-id="{{ $escort->id }}">Unfollow</a>
                                 <a class="contact-btn" href="#">Contact</a>
                             @else
-                                <button type="submit" class="follows-btn"
-                                    data-escort-id="{{ $escort->id }}">Follow</button>
+                                <a class="follow-btn follow-escort" data-escort-id="{{ $escort->id }}">Follow</a>
                                 <a class="contact-btn" href="#">Contact</a>
                             @endif
                         @else
@@ -224,7 +222,7 @@
         {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
         <script>
             $(document).ready(function() {
-                $(document).on('click', '.follows-btn', function() {
+                $(document).on('click', '.follow-escort', function() {
                     let escortId = $(this).data('escort-id');
                     let button = $(this);
 
@@ -236,7 +234,7 @@
                             escort_id: escortId,
                         },
                         success: function(response) {
-                            button.removeClass('follows-btn').addClass('unfollows-btn').text(
+                            button.removeClass('follow-escort').addClass('unfollow-escort').text(
                                 'Unfollow');
                         },
                         error: function(xhr) {
@@ -246,7 +244,7 @@
                 });
 
                 // Handle unfollow button click
-                $(document).on('click', '.unfollows-btn', function() {
+                $(document).on('click', '.unfollow-escort', function() {
                     let escortId = $(this).data('escort-id');
                     let button = $(this);
 
@@ -258,7 +256,7 @@
                             escort_id: escortId,
                         },
                         success: function(response) {
-                            button.removeClass('unfollows-btn').addClass('follows-btn').text(
+                            button.removeClass('unfollow-escort').addClass('follow-escort').text(
                                 'Follow');
                         },
                         error: function(xhr) {
