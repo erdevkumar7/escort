@@ -8,7 +8,6 @@
                 </div>
 
                 <div class="col-md-4 second-details-content">
-                    {{-- <h1 class="bemy-text">BeMyGirl</h1> --}}
                 </div>
 
                 <div class="col-md-4 threee-details-content">
@@ -98,19 +97,14 @@
                             <a class="contact-btn" href="#">Contact</a>
                         @elseif (Auth::guard('web')->check())
                             @if (Auth::guard('web')->user()->follows->contains($escort->id))
-                                <form action="{{ route('user.unfollow.escort', $escort->id) }}" method="POST">
-                                    @csrf
-                                    @method('POST')
-                                    <button type="submit" class="unfollows-btn">Unfollow</button>
-                                </form>
+                                <button type="submit" class="unfollows-btn"
+                                    data-escort-id="{{ $escort->id }}">Unfollow</button>
+                                <a class="contact-btn" href="#">Contact</a>
                             @else
-                                <form action="{{ route('user.follow.escort', $escort->id) }}" method="POST">
-                                    @csrf
-                                    @method('POST')
-                                    <button type="submit" class="follows-btn">Follow</button>
-                                </form>
+                                <button type="submit" class="follows-btn"
+                                    data-escort-id="{{ $escort->id }}">Follow</button>
+                                <a class="contact-btn" href="#">Contact</a>
                             @endif
-                            <a class="contact-btn" href="#">Contact</a>
                         @else
                             <a href="{{ route('user.login.form') }}" class="follow-btn">Follow</a>
                             <a class="contact-btn" href="#">Contact</a>
@@ -226,5 +220,54 @@
                 }
             }
         </script>
+
+        {{-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> --}}
+        <script>
+            $(document).ready(function() {
+                $(document).on('click', '.follows-btn', function() {
+                    let escortId = $(this).data('escort-id');
+                    let button = $(this);
+
+                    $.ajax({
+                        url: '{{ route('user.follow.escort') }}',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            escort_id: escortId,
+                        },
+                        success: function(response) {
+                            button.removeClass('follows-btn').addClass('unfollows-btn').text(
+                                'Unfollow');
+                        },
+                        error: function(xhr) {
+                            alert(xhr.responseJSON.message);
+                        }
+                    });
+                });
+
+                // Handle unfollow button click
+                $(document).on('click', '.unfollows-btn', function() {
+                    let escortId = $(this).data('escort-id');
+                    let button = $(this);
+
+                    $.ajax({
+                        url: '{{ route('user.unfollow.escort') }}',
+                        type: 'POST',
+                        data: {
+                            _token: '{{ csrf_token() }}',
+                            escort_id: escortId,
+                        },
+                        success: function(response) {
+                            button.removeClass('unfollows-btn').addClass('follows-btn').text(
+                                'Follow');
+                        },
+                        error: function(xhr) {
+                            alert(xhr.responseJSON.message);
+                        }
+                    });
+                });
+            });
+        </script>
+
     </section>
 @endsection

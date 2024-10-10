@@ -145,7 +145,9 @@ class UserEscortsController extends Controller
             ->where('escort_id', Auth::guard('escort')->user()->id)
             ->get();
 
-        return view('user-escort.my-videos', compact('videos'));
+        $videodBadgeDetail = Badge::where('name', 'Video')->first();
+
+        return view('user-escort.my-videos', compact('videos', 'videodBadgeDetail'));
     }
 
     // profileEditForm

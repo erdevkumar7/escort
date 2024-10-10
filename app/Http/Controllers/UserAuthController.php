@@ -226,31 +226,39 @@ class UserAuthController extends Controller
         return redirect()->route('user.profile', $user->id)->with('success', 'User updated successfully!');
     }
 
-    public function followEscort($escort_id)
+    public function followEscort(Request $request)
     {
+        $escort_id = $request->escort_id;
         $user = Auth::guard('web')->user();
-        // Check if the user is already following the escort
-        if ($user->follows()->where('escort_id', $escort_id)->exists()) {
-            return redirect()->back();
-        }
-        // Attach the escort to the user's follows
-        $user->follows()->attach($escort_id);
+        // if ($user->follows()->where('escort_id', $escort_id)->exists()) {
+        //     return redirect()->back();
+        // }
+        // $user->follows()->attach($escort_id);
+        // return redirect()->back();            
 
-        return redirect()->back();
+        if ($user->follows()->where('escort_id', $escort_id)->exists()) {
+            return response()->json(['message' => 'Already following'], 400);
+        }
+
+        $user->follows()->attach($escort_id);
+        return response()->json(['message' => 'Escort followed successfully']);
     }
 
-    public function unfollowEscort($escort_id)
+    public function unfollowEscort(Request $request)
     {
+        $escort_id = $request->escort_id;
         $user = Auth::guard('web')->user();
-        // Check if the user is following the escort
+        // if (!$user->follows()->where('escort_id', $escort_id)->exists()) {
+        //     return redirect()->back();
+        // }
+        // $user->follows()->detach($escort_id);
+        // return redirect()->back();
+
         if (!$user->follows()->where('escort_id', $escort_id)->exists()) {
-            return redirect()->back();
+            return response()->json(['message' => 'Not following'], 400);
         }
-
-        // Detach the escort from the user's follows
         $user->follows()->detach($escort_id);
-
-        return redirect()->back();
+        return response()->json(['message' => 'Escort unfollowed successfully']);
     }
 
     public function userGetMyEscorts($escort_id)

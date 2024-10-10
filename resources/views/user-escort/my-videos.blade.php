@@ -72,8 +72,14 @@
 
                             <div class="video-thumbnail image-video-thumbnail"
                                 onclick="loadVideo(this, '{{ asset('/public/videos') . '/' . $vdo->name }}')">
+                                @if ($videodBadgeDetail->icon)
+                                    <img class="vidio-ply-img"
+                                        src="{{ asset('/public/images/badge_icons') . '/' . $videodBadgeDetail->icon }}">
+                                @else
+                                    <img class="vidio-ply-img"
+                                        src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
+                                @endif
 
-                                <img class="vidio-ply-img" src="{{ asset('/public/images/static_img/video_play4.jfif') }}">
                                 <img class="video-thumb9mg"
                                     src="{{ $vdo->thumb_nail ? asset('/public/images/thumb_nails/' . $vdo->thumb_nail) : asset('/public/images/static_img/default_thumbnail.png') }}"
                                     alt="">

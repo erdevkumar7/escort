@@ -286,8 +286,8 @@ Route::prefix('user')->group(function () {
         Route::put('/{user_id}/profile-edit', [UserAuthController::class, 'user_update_profile'])->name('user.update.profile');
         Route::get('/{user_id}/my-escorts', [UserAuthController::class, 'userGetMyEscorts'])->name('user.myescorts');
 
-        Route::post('/follow-escort/{escort_id}', [UserAuthController::class, 'followEscort'])->name('user.follow.escort');
-        Route::post('/unfollow-escort/{escort_id}', [UserAuthController::class, 'unfollowEscort'])->name('user.unfollow.escort');
+        Route::post('/follow-escort', [UserAuthController::class, 'followEscort'])->name('user.follow.escort');
+        Route::post('/unfollow-escort', [UserAuthController::class, 'unfollowEscort'])->name('user.unfollow.escort');
 
         Route::post('/logout', [UserAuthController::class, 'logout'])->name('user.logout');
     });
