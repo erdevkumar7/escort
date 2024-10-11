@@ -393,4 +393,14 @@ class UserEscortsController extends Controller
             ->paginate(12);
         return view('user-escort.escort-list', compact('allescorts'));
     }
+
+    public function getAllAdvrtise()
+    {
+        $advertises = DB::table('advertises')
+                      ->orderBy('price', 'asc')
+                      ->get();
+
+        return view('user-escort.all-advertise', compact('advertises'));
+                    
+    }
 }

@@ -258,6 +258,7 @@ Route::group(['middleware' => ['auth:escort']], function () {
 
     Route::put('/profile/{id}/profile-pic-update', [UserEscortsController::class, 'profile_pic_update'])->name('escorts.profilePic.update');
 
+    Route::get('/all-adverise', [UserEscortsController::class, 'getAllAdvrtise'])->name('escorts.getAllAdvrtise');
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
 

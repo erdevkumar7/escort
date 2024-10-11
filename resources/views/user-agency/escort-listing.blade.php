@@ -57,16 +57,14 @@
     </div> --}}
 
     <div class="escort-profile">
-
         <div class="container-xl px-4 mt-4">
             <!-- Account page navigation-->
             <nav class="nav nav-borders">
                 <a class="nav-link ms-0" href="{{ route('agency.dashboard', $agency->id) }}">Dashboard</a>
                 <a class="nav-link" href="{{ route('agency.profile', $agency->id) }}">Profile</a>
                 <a class="nav-link active" href="#">My Listing</a>
-
-            </nav>
-            <hr class="mt-0 mb-4">
+            </nav>   
+              
             <div class="row agency-escort-list">
                 <div class="card mb-4">
                     <div class="agency-add-escort-title">
@@ -128,39 +126,26 @@
                                             <td>
                                                 <a
                                                     href="{{ route('agency.edit_escorts_form', ['agency_id' => Auth::guard('agency')->user()->id, 'id' => $escort->id]) }}">
-                                                    <button class="agency-escort-edit-button" data-toggle="tooltip" data-placement="top" title="Edit">
+                                                    <button class="agency-escort-edit-button" data-toggle="tooltip"
+                                                        data-placement="top" title="Edit">
                                                         <i class="fa-solid fa-pen-to-square"></i>
                                                     </button>
                                                 </a>
-                                                <button class="agency-escort-delete-button" type="button" onclick="confirmDelete({{ $escort->id }})"
-                                                    data-toggle="tooltip" data-placement="top" title="Delete">
+                                                <button class="agency-escort-delete-button" type="button"
+                                                    onclick="confirmDelete({{ $escort->id }})" data-toggle="tooltip"
+                                                    data-placement="top" title="Delete">
                                                     <i class="fa-solid fa-trash"></i>
                                                 </button>
                                             </td>
                                             <td>
                                                 <a
                                                     href="{{ route('agency.escort.detail', ['agency_id' => Auth::guard('agency')->user()->id, 'escort_id' => $escort->id]) }}">
-                                                    <button type="button" class="btn btn-primary agency-escort-view-button">view</button></a>
+                                                    <button type="button"
+                                                        class="btn btn-primary agency-escort-view-button">view</button></a>
                                             </td>
                                         </tr>
                                     @endforeach
-
-
                                 </tbody>
-                                <tfoot>
-                                    <tr>
-                                        <th>#</th>
-                                        <th>Nick Name</th>
-                                        <th>Phone number</th>
-                                        <th>Age</th>
-                                        <th>Origin</th>
-                                        <th>City</th>
-                                        <th>Category type</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                        <th>View escort</th>
-                                    </tr>
-                                </tfoot>
                             </table>
                         </div>
                     </div>

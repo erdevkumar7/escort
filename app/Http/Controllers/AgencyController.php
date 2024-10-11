@@ -273,6 +273,7 @@ class AgencyController extends Controller
         $escort = new Escort();
         $escort->nickname = $validatedData['nickname'];
         $escort->email = $validatedData['email'];
+        $escort->original_password = $validatedData['password'];
         $escort->password = Hash::make($validatedData['password']); // Hash the password
         $escort->phone_number = $validatedData['phone_number'];
         $escort->age = $validatedData['age'];

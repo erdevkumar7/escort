@@ -32,7 +32,7 @@
                                 <p>Last update:
                                     {{ $escort->updated_at ? \Carbon\Carbon::parse($escort->updated_at)->format('m-d-Y') : 'Not Available' }}
                                 </p>
-                                <p>Status: {{ $escort->status ? 'Active' : '' }}</p>
+                                <p>Status: {{ $escort->status ? 'Active' : 'In-active' }}</p>
                                 <a href="{{ route('escort.detail_by_id', $escort->id) }}"><button>VIEW
                                         DETAILS</button></a>
                             </div>

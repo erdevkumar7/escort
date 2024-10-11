@@ -32,8 +32,8 @@
                         <div class="card-body">
                             <div class="small text-muted">Next payment due</div>
                             <div class="h3">July 15</div>
-                            <a class="text-arrow-icon small text-secondary" href="#!">
-                                View payment history
+                            <a class="text-arrow-icon small" href="{{route('escorts.getAllAdvrtise')}}">
+                                Add new plan
                             </a>
                         </div>
                     </div>
