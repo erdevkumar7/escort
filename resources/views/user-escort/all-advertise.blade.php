@@ -38,7 +38,7 @@
                                             <td>{{ $ads->time_duration ?? 'Not Available' }}</td>
                                             <td>{{ $ads->description ?? 'Not Available' }}</td>
                                             <td>
-                                                <a href="">
+                                                <a href="{{route('escorts.showPaymentForm', $ads->id)}}">
                                                     <button type="button"
                                                         class="btn btn-primary agency-escort-view-button">Add</button>
                                                 </a>

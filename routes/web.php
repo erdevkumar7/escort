@@ -11,6 +11,7 @@ use App\Http\Controllers\CantonCityController;
 use App\Http\Controllers\ContributorController;
 use App\Http\Controllers\EscortsAuthController;
 use App\Http\Controllers\MediaController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserAuthController;
 use App\Http\Controllers\UserEscortsController;
 use Illuminate\Foundation\Auth\EmailVerificationRequest;
@@ -259,6 +260,10 @@ Route::group(['middleware' => ['auth:escort']], function () {
     Route::put('/profile/{id}/profile-pic-update', [UserEscortsController::class, 'profile_pic_update'])->name('escorts.profilePic.update');
 
     Route::get('/all-adverise', [UserEscortsController::class, 'getAllAdvrtise'])->name('escorts.getAllAdvrtise');
+
+    Route::get('/payment/{ads_id}/advertise', [PaymentController::class, 'showPaymentForm'])->name('escorts.showPaymentForm');
+    Route::post('/payment/{ads_id}/advertise', [PaymentController::class, 'paymentFormSubmit'])->name('escorts.paymentFormSubmit');
+
     Route::post('/logout', [EscortsAuthController::class, 'logout'])->name('escorts.logout');
 });
 
