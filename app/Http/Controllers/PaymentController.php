@@ -30,6 +30,7 @@ class PaymentController extends Controller
         // Get payment token from the form (sent from Stripe JS)
         $token = $request->stripeToken;
         // Charge the user
+    
         try {
             $charge = Charge::create([
                 'amount' => $advertisement->price * 100, // Convert to cents
