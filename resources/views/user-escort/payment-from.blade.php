@@ -83,7 +83,7 @@
                             <div class="d-flex justify-content-between p-3">
                                 <div class="d-flex flex-column">
                                     <span>Pro(Billed Monthly) <i class="fa fa-caret-down"></i></span>
-                                    <a href="#" class="billing">Save 20% with annual billing</a>
+                                    {{-- <a href="#" class="billing">Save 20% with annual billing</a> --}}
                                 </div>
                                 <div class="mt-1">
                                     <sup class="super-price">{{$ads->price}} chf</sup>
