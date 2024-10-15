@@ -17,11 +17,22 @@
                     <!-- Billing card 3-->
                     <div class="card h-100 border-start-lg border-start-success">
                         <div class="card-body">
-                            <div class="small text-muted">Current monthly bill</div>
-                            <div class="h3">$20.00</div>
-                            <a class="text-arrow-icon small" href="#!">
-                                Switch to yearly billing
-                            </a>
+                            <div class="small text-muted">Active advertise plan</div>
+                            @if ($adsDetailsOfMaxEndDatePlan)
+                                <div class="h3"> {{ $adsDetailsOfMaxEndDatePlan->price }} chf /
+                                    {{ $adsDetailsOfMaxEndDatePlan->time_duration }} days</div>
+                                <a class="text-arrow-icon small" href="#!">
+                                    View plan details
+                                </a>
+                            @else
+                                <div class="h3">
+                                    No active plan
+                                </div>
+                                <a class="text-arrow-icon small" href="{{ route('escorts.getAllAdvrtise') }}">
+                                    Select plan
+                                </a>
+                            @endif
+
                         </div>
                     </div>
                 </div>
@@ -31,8 +42,10 @@
                     <div class="card h-100 border-start-lg border-start-secondary">
                         <div class="card-body">
                             <div class="small text-muted">Next payment due</div>
-                            <div class="h3">July 15</div>
-                            <a class="text-arrow-icon small" href="{{route('escorts.getAllAdvrtise')}}">
+                            <div class="h3">
+                                {{ $paymentMaxEndDate ? \Carbon\Carbon::parse($paymentMaxEndDate->end_date)->format('d M Y') : 'Today' }}
+                            </div>
+                            <a class="text-arrow-icon small" href="{{ route('escorts.getAllAdvrtise') }}">
                                 Add new plan
                             </a>
                         </div>

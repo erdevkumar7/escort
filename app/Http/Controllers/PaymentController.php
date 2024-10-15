@@ -43,7 +43,8 @@ class PaymentController extends Controller
             // Store payment details in the database
             PaymentDetail::create([
                 'escort_id' => auth()->id(),
-                'ads_id' => $ads_id,
+                'ads_id' => $advertisement->id,
+                'time_duration' =>$advertisement->time_duration,
                 'payment_id' => $charge->id,
                 'payment_method' => $charge->payment_method,
                 'amount' => $charge->amount / 100, // amount in dollars

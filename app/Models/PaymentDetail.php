@@ -12,6 +12,7 @@ class PaymentDetail extends Model
     protected $fillable = [
         'escort_id',
         'ads_id',
+        'time_duration',
         'payment_id',
         'payment_method',
         'amount',

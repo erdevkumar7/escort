@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Advertise;
 use App\Models\Badge;
 use App\Models\Escort;
 use App\Models\Media;
+use App\Models\PaymentDetail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -104,22 +106,34 @@ class UserEscortsController extends Controller
 
     public function dashboard($id)
     {
+        // Check if the authenticated escort matches the ID
         if (Auth::guard('escort')->user()->id != $id) {
             return redirect()->route('escorts.dashboard', Auth::guard('escort')->user()->id)->with('error', 'You are not authorized to access this page.');
         }
 
         $escort = Escort::find(Auth::guard('escort')->user()->id);
 
+        // Fetch pictures and videos for the escort
         $pictures = Media::where('escort_id', $escort->id)->where('type', 'image')->get();
         $videos = Media::where('escort_id', $escort->id)->where('type', 'video')->get();
-        $services = json_decode($escort->services, true);
-        $language_spoken = json_decode($escort->language_spoken, true);
-        $availability = json_decode($escort->availability, true);
-        $currencies_accepted = json_decode($escort->currencies_accepted, true);
-        $payment_method = json_decode($escort->payment_method, true);
 
-        return view('user-escort.dashboard', compact('escort', 'language_spoken', 'pictures', 'videos', 'availability', 'currencies_accepted', 'payment_method', 'services'));
+        // Get the latest succeeded payment for the escort
+        $paymentMaxEndDate = PaymentDetail::where('escort_id', $escort->id)
+            ->where('status', 'succeeded')
+            ->select('*', DB::raw('DATE_ADD(created_at, INTERVAL time_duration DAY) as end_date'))
+            ->orderBy('end_date', 'desc')
+            ->first();
+
+        // Check if paymentMaxEndDate is found
+        $adsDetailsOfMaxEndDatePlan = null;
+        if ($paymentMaxEndDate) {
+            $adsDetailsOfMaxEndDatePlan = Advertise::find($paymentMaxEndDate->ads_id);
+        }
+
+        // Pass variables to the view
+        return view('user-escort.dashboard', compact('escort', 'pictures', 'videos', 'paymentMaxEndDate', 'adsDetailsOfMaxEndDatePlan'));
     }
+
 
     public function escort_myPictures($id)
     {
@@ -397,10 +411,9 @@ class UserEscortsController extends Controller
     public function getAllAdvrtise()
     {
         $advertises = DB::table('advertises')
-                      ->orderBy('price', 'asc')
-                      ->get();
+            ->orderBy('price', 'asc')
+            ->get();
 
         return view('user-escort.all-advertise', compact('advertises'));
-                    
     }
 }
